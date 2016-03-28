@@ -1,0 +1,276 @@
+diff -rNu src.origin/main/java/cn/edu/sjtu/CompilationUnitVisitor.java src/main/java/cn/edu/sjtu/CompilationUnitVisitor.java
+--- src.origin/main/java/cn/edu/sjtu/CompilationUnitVisitor.java	1970-01-01 08:00:00.000000000 +0800
++++ src/main/java/cn/edu/sjtu/CompilationUnitVisitor.java	2015-05-14 07:32:28.000000000 +0800
+@@ -0,0 +1,113 @@
++/**
++ * 
++ */
++package cn.edu.sjtu;
++
++import java.util.ArrayList;
++import java.util.Iterator;
++import java.util.List;
++
++import org.eclipse.jdt.core.dom.*;
++
++/**
++ * @author Yu Peng
++ *
++ */
++class CompilationUnitVisitor extends ASTVisitor {
++	private String packageName;
++	private String className;
++	private String methodName;
++	private String annotationTypeName;
++	private List<TestMethod> testMethods;
++	private boolean newTestAnnotation;
++	
++	public CompilationUnitVisitor() {
++		packageName = "";
++		className = "";
++		methodName = "";
++		annotationTypeName = "";
++		testMethods = new ArrayList<TestMethod>();
++		newTestAnnotation = false;
++	}
++	
++	@Override
++	public boolean visit(CompilationUnit node) {
++		if (node.getPackage() != null) {
++			node.getPackage().accept(this);
++		}
++		for (Iterator it = node.types().iterator(); it.hasNext(); ) {
++			AbstractTypeDeclaration d = (AbstractTypeDeclaration) it.next();
++			d.accept(this);
++		}
++		return false;
++	}
++	
++	@Override
++	public boolean visit(PackageDeclaration node) {
++		this.packageName = node.getName().toString();
++		return false;
++	}
++	
++	private String getClassName(MethodDeclaration node) {
++		ASTNode parent = node.getParent();
++		while(!(parent instanceof AnnotationTypeDeclaration || parent instanceof TypeDeclaration)){
++			parent = parent.getParent();
++		}
++		
++		if(parent instanceof AnnotationTypeDeclaration) {
++			className = ((AnnotationTypeDeclaration)parent).getName().toString();
++		}
++		else {
++			className = ((TypeDeclaration)parent).getName().toString();
++		}
++		return className;
++	}
++	
++	@Override
++	public boolean visit(MethodDeclaration node) {
++		newTestAnnotation = false;
++		
++		for (Iterator it = node.modifiers().iterator(); it.hasNext(); ) {
++			ASTNode p = (ASTNode) it.next();
++			p.accept(this);
++		}
++		
++		methodName = node.getName().toString();
++		if(newTestAnnotation) {
++			String className = getClassName(node);
++			testMethods.add(new TestMethod(0, packageName, className, methodName));
++		}
++		return false;
++	}
++	
++	@Override
++	public boolean visit(MarkerAnnotation node) {
++		annotationTypeName = node.getTypeName().toString();
++		if("Test".equals(annotationTypeName)){
++			newTestAnnotation = true;
++		}
++		return false;
++	}
++	
++	@Override
++	public boolean visit(NormalAnnotation node) {
++		annotationTypeName = node.getTypeName().toString();
++		if("Test".equals(annotationTypeName)){
++			newTestAnnotation = true;
++		}
++		return false;
++	}
++	
++	@Override
++	public boolean visit(SingleMemberAnnotation node) {
++		annotationTypeName = node.getTypeName().toString();
++		if("Test".equals(annotationTypeName)){
++			newTestAnnotation = true;
++		}
++		return false;
++	}
++	
++	public List<TestMethod> getTestMethods(){
++		return testMethods;
++	}
++}
+diff -rNu src.origin/main/java/cn/edu/sjtu/TestMethodParser.java src/main/java/cn/edu/sjtu/TestMethodParser.java
+--- src.origin/main/java/cn/edu/sjtu/TestMethodParser.java	2015-04-30 02:24:30.000000000 +0800
++++ src/main/java/cn/edu/sjtu/TestMethodParser.java	2015-05-14 07:58:28.000000000 +0800
+@@ -4,6 +4,7 @@
+ import java.io.File;
+ import java.io.FileInputStream;
+ import java.io.FileNotFoundException;
++import java.io.FileReader;
+ import java.io.IOException;
+ import java.io.InputStreamReader;
+ import java.util.ArrayList;
+@@ -18,16 +19,10 @@
+ import org.apache.commons.io.filefilter.RegexFileFilter;
+ import org.apache.commons.lang3.SystemUtils;
+ 
+-import com.github.javaparser.JavaParser;
+-import com.github.javaparser.ParseException;
+-import com.github.javaparser.ast.CompilationUnit;
+-import com.github.javaparser.ast.body.BodyDeclaration;
+-import com.github.javaparser.ast.body.MethodDeclaration;
+-import com.github.javaparser.ast.body.TypeDeclaration;
+-import com.github.javaparser.ast.expr.AnnotationExpr;
+-import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
++import org.eclipse.jdt.core.dom.*;
+ 
+ /**
++ * @author YuPeng
+  *
+  */
+ public class TestMethodParser {
+@@ -52,94 +47,49 @@
+ 				continue;
+ 			}
+ 			
+-			FileInputStream in = null;
+-	        CompilationUnit cu = null;
+-			try {
+-				in = new FileInputStream(file);
+-	            // parse the file
+-	            cu = JavaParser.parse(in);
+-	        } catch (FileNotFoundException e) {
+-
+-			} catch (ParseException e) {
+-
+-			} finally {
+-	            if(in!=null)
+-					try {
+-						in.close();
+-					} catch (IOException e) {
+-
+-					}
+-	        }
+-
+-	        // visit and print the methods names
+-			if(cu!=null){
+-				//new MethodVisitor().visit(cu, null);
+-				listMethods(cu, quiet);
++			ASTParser parser = ASTParser.newParser(AST.JLS3);
++			parser.setSource(readFileToCharArray(file));
++			CompilationUnit root = (CompilationUnit) parser.createAST(null);
++			CompilationUnitVisitor visitor = new CompilationUnitVisitor();
++			root.accept(visitor);
++			
++			for (TestMethod method : visitor.getTestMethods()) {
++				method.setId(methodIndex++);
++				// System.out.println("\t" + method.getPackageName() + "." + method.getClassName() + "." + method.getMethodName());
++                testMethods.add(method);
+ 			}
+ 		}
+ 		
++		//meaningless
++		// if(!quiet) System.out.println();
++	}
++
++	private char[] readFileToCharArray(File file){
++		StringBuilder fileData = new StringBuilder(1000);
++		BufferedReader reader;
++		try {
++			reader = new BufferedReader(new FileReader(file));
++			char[] buf = new char[10];
++			int numRead = 0;
++			while ((numRead = reader.read(buf)) != -1) {
++				String readData = String.valueOf(buf, 0, numRead);
++				fileData.append(readData);
++				buf = new char[1024];
++			}
++			reader.close();
++		} catch (FileNotFoundException e) {
++			e.printStackTrace();
++		} catch (IOException e) {
++			e.printStackTrace();
++		}
++		
++		return  fileData.toString().toCharArray();	
+ 	}
+-	
+-	/**
+-	 * list all test method in a java file
+-	 * @param cu
+-	 */
+-	private void listMethods(CompilationUnit cu, boolean quiet) {
+-        String packageName = cu.getPackage().getName().toString();
+-        List<TypeDeclaration> types = cu.getTypes();
+-        for (TypeDeclaration type : types) {
+-        	String className = type.getName();
+-        	
+-            String fullClassName = packageName + "." + className;
+-            
+-        	List<BodyDeclaration> members = type.getMembers();
+-            for (BodyDeclaration member : members) {
+-                if (member instanceof MethodDeclaration) {
+-                    MethodDeclaration method = (MethodDeclaration) member;
+-                    String methodName = method.getName();
+-                    List<AnnotationExpr> annotations = method.getAnnotations();
+-                    boolean isTestMethod = false;
+-                    for (AnnotationExpr annotationExpr : annotations) {
+-						if("Ignore".equals(annotationExpr.getName().getName())){
+-								isTestMethod = false;
+-								break;
+-						} else if("Test".equals(annotationExpr.getName().getName())){
+-							isTestMethod = true;
+-							continue;
+-						}
+-					}
+-                    if(isTestMethod){
+-                    	testMethods.add(new TestMethod(methodIndex, packageName, className, methodName));
+-                        // result.add(fullClassName + " #" + methodName);
+-                        
+-                    	methodIndex++;
+-                    }
+-                }
+-            }
+-            // System.out.println();
+-        }
+-    }
+-	
+-    /**
+-     * Simple visitor implementation for visiting MethodDeclaration nodes. 
+-     */
+-    @SuppressWarnings({ "rawtypes", "unused" })
+-	private static class MethodVisitor extends VoidVisitorAdapter {
+-
+-        @Override
+-        public void visit(MethodDeclaration n, Object arg) {
+-            // here you can access the attributes of the method.
+-            // this method will be called for all methods in this 
+-            // CompilationUnit, including inner class methods
+-            // System.out.println(n.getName());
+-        }
+-    }
+ 
+ 	public List<TestMethod> getTestMethods() {
+ 		return testMethods;
+ 	}
+ 
+-
+ 	public void setTestMethods(List<TestMethod> testMethods) {
+ 		this.testMethods = testMethods;
+ 	}

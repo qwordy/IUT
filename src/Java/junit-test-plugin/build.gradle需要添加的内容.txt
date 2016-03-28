@@ -1,0 +1,13 @@
+apply plugin: 'maven'
+buildscript {
+    repositories {
+        maven {
+            url uri('../repo')
+        }
+    }
+    dependencies {
+        classpath group: 'com.yupeng', name: 'junit-test-plugin',
+                  version: '0.0.2'
+    }
+}
+apply plugin: 'com.yupeng.junit-test-plugin'  //provided tasks: listSrcDirs, listJUnitTestCases
