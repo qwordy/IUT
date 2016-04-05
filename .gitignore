@@ -3,4 +3,5 @@
 main
 *.class
 push.sh
+build/
 

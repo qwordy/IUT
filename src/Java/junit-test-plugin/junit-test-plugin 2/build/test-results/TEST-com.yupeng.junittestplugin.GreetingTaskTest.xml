@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.yupeng.junittestplugin.GreetingTaskTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-04-11T05:51:20" hostname="YP-PC" time="0.658">
-  <properties/>
-  <testcase name="canAddTaskToProject" classname="com.yupeng.junittestplugin.GreetingTaskTest" time="0.658"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
