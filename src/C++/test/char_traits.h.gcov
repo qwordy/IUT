@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/char_traits.h
         -:    0:Graph:main.gcno
         -:    0:Data:main.gcda
-        -:    0:Runs:2
+        -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Character Traits for use by standard string and iostream -*- C++ -*-
         -:    2:
@@ -264,6 +264,7 @@
         -:  259:      { return __builtin_memcmp(__s1, __s2, __n); }
         -:  260:
         -:  261:      static size_t
+function _ZNSt11char_traitsIcE6lengthEPKc called 0 returned 0% blocks executed 0%
     #####:  262:      length(const char_type* __s)
     #####:  263:      { return __builtin_strlen(__s); }
         -:  264:

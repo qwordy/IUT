@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/locale_facets.h
         -:    0:Graph:main.gcno
         -:    0:Data:main.gcda
-        -:    0:Runs:2
+        -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Locale support -*- C++ -*-
         -:    2:
@@ -867,12 +867,17 @@
         -:  862:       *  @return  The converted character.
         -:  863:      */
         -:  864:      char_type
+function _ZNKSt5ctypeIcE5widenEc called 0 returned 0% blocks executed 0%
     #####:  865:      widen(char __c) const
         -:  866:      {
     #####:  867:	if (_M_widen_ok)
+branch  0 never executed
+branch  1 never executed
     #####:  868:	  return _M_widen[static_cast<unsigned char>(__c)];
     #####:  869:	this->_M_widen_init();
+call    0 never executed
     #####:  870:	return this->do_widen(__c);
+call    0 never executed
         -:  871:      }
         -:  872:
         -:  873:      /**

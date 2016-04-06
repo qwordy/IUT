@@ -1,4 +1,5 @@
 #include <iostream>
+#include "fly.h"
 using namespace std;
 
 class Foo {
@@ -31,6 +32,7 @@ int main() {
   foo.foo(1);
   Foo2 foo2;
   foo2.foo();
+  Fly fly;
   return 0;
 }
 

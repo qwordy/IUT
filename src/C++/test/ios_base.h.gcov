@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/ios_base.h
         -:    0:Graph:main.gcno
         -:    0:Data:main.gcda
-        -:    0:Runs:2
+        -:    0:Runs:1
         -:    0:Programs:1
         -:    1:// Iostreams base classes -*- C++ -*-
         -:    2:
@@ -159,6 +159,7 @@
         -:  154:  { return _Ios_Iostate(static_cast<int>(__a) & static_cast<int>(__b)); }
         -:  155:
         -:  156:  inline _GLIBCXX_CONSTEXPR _Ios_Iostate
+function _ZStorSt12_Ios_IostateS_ called 0 returned 0% blocks executed 0%
     #####:  157:  operator|(_Ios_Iostate __a, _Ios_Iostate __b)
     #####:  158:  { return _Ios_Iostate(static_cast<int>(__a) | static_cast<int>(__b)); }
         -:  159:

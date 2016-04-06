@@ -1,6 +1,6 @@
 CC = g++
 OBJ = main.o inst.o
-CXXFLAGS = -std=c++11
+CXXFLAGS = -Wall -std=c++11
 
 main: $(OBJ)
 	$(CC) -o $@ $^
