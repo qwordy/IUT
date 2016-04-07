@@ -1,6 +1,7 @@
 srcdir=/home/yfy/iut/src/C++/test
 make=make
 run=./main
+bin=/home/yfy/iut/src/C++/trace
 
 cd $srcdir
 $make clean
@@ -27,6 +28,7 @@ walk() {
 }
 
 walk $srcdir
+$bin/parse $srcdir
 
 # analyse *.gcov
 for file in *
