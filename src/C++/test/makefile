@@ -1,5 +1,5 @@
 CC = g++
-OBJ = main.o fly.o
+OBJ = main.o fly.o d/book.o
 CXXFLAGS = -fprofile-arcs -ftest-coverage
 
 main: $(OBJ)
