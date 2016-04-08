@@ -23,7 +23,29 @@ void aparse(char *file) {
 }
 
 void parse(char *file) {
-  printf("%s\n", file);
+  char buf[MAXLEN], funcname[MAXLEN], *result, *pos;
+  FILE *f;
+  int times, line;
+
+  printf("parse %s\n", file);
+  printf("line No. | function name | called times\n");
+  f = fopen(file, "r");
+  result = fgets(buf, MAXLEN, f);
+  while (result) {
+    if (sscanf(buf, "function %s called %d", funcname, &times) == 2) {
+      if ((result = fgets(buf, MAXLEN, f)) && (pos = strchr(buf, ':')) &&
+          sscanf(pos + 1, "%d", &line) == 1) {
+        printf("%d ", line);
+        result = fgets(buf, MAXLEN, f);
+      } else {
+        printf("? ");
+      }
+      printf("%s %d\n", funcname, times);
+    } else {
+      result = fgets(buf, MAXLEN, f);
+    }
+  }
+
 }
 
 int isgcov(char *file) {
@@ -35,14 +57,19 @@ void ls(char *path) {
   DIR *dir;
   struct dirent *ent;
   char buf[MAXLEN];
+  int len;
 
   if ((dir = opendir(path)) == NULL)
     err(-1, "can't open %s", path);
 
   strncpy(buf, path, MAXLEN);
+  strcat(buf, "/");
+  len = strlen(buf);
   while ((ent = readdir(dir))) {
-    if (ent->d_type == 8 && isgcov(ent->d_name))
+    if (ent->d_type == 8 && isgcov(ent->d_name)) {
+      buf[len] = 0;
       parse(strcat(buf, ent->d_name));
+    }
   }
 }
 

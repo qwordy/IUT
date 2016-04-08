@@ -1,0 +1,12 @@
+        -:    0:Source:d/book.h
+        -:    0:Graph:/home/yfy/iut/src/C++/test/d/book.gcno
+        -:    0:Data:/home/yfy/iut/src/C++/test/d/book.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:class Book {
+        -:    2:public:
+        -:    3:  Book();
+function _ZN4Book2yyEv called 1 returned 100% blocks executed 100%
+        1:    4:  void yy(){}
+        -:    5:};
+        -:    6:

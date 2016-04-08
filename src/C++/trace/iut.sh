@@ -29,16 +29,6 @@ walk() {
 
 walk $srcdir
 $bin/parse $srcdir
-
-# analyse *.gcov
-for file in *
-do
-  path=$srcdir/$file
-  if [ -f $path ] && [ ${file##*.} = gcov ]
-  then
-    echo analyse $path
-  fi
-done
-rm -f *.gcov
+#rm -f *.gcov
 
 
