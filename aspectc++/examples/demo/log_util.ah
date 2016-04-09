@@ -1,5 +1,5 @@
-#ifndef __LOG_AH__
-#define __LOG_AH__
+#ifndef __LOG_UTIL_AH__
+#define __LOG_UTIL_AH__
 #include <iostream>
 
 using namespace std;
@@ -11,8 +11,15 @@ aspect LogUtil{
   //before they are executed
   advice execution(allFuncs()):before(){
    //print the name of the function 
-   cout<<"Before "<<JoinPoint::signature()<<" is executed."<<endl;
+  cout<<"Before "<<JoinPoint::signature()<<" is executed "
+  <<" in line "<<JoinPoint::line()<<" of "<<JoinPoint::filename()<<endl;
   }
+
+  advice call(allFuncs()):before(){
+  // cout<<"Before "<<JoinPoint::signature()<<" is called "
+  // <<" in line "<<JoinPoint::line()<<" of "<<JoinPoint::filename()<<endl;
+  }
+
 };
 
 #endif
