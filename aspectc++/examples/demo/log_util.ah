@@ -1,0 +1,18 @@
+#ifndef __LOG_AH__
+#define __LOG_AH__
+#include <iostream>
+
+using namespace std;
+
+aspect LogUtil{
+  //for all the functions
+  pointcut allFuncs() = "%...::%(...)";
+
+  //before they are executed
+  advice execution(allFuncs()):before(){
+   //print the name of the function 
+   cout<<"Before "<<JoinPoint::signature()<<" is executed."<<endl;
+  }
+};
+
+#endif
