@@ -1,4 +1,5 @@
 .*
+.classpath
 *.o
 main
 *.class
