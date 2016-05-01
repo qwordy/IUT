@@ -1,7 +1,6 @@
 .*
-.classpath
 *.o
-main
+
 *.class
 push.sh
 build/
