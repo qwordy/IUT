@@ -4,6 +4,8 @@ import java.io.File;
 
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionStyleMacroParameter;
+import org.eclipse.cdt.core.dom.ast.IASTPreprocessorFunctionStyleMacroDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroExpansion;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorStatement;
@@ -48,6 +50,13 @@ public class Demo {
 		IASTPreprocessorMacroDefinition[] macroDefinitions = astTranslationUnit.getMacroDefinitions();
 		for (IASTPreprocessorMacroDefinition macroDefinition : macroDefinitions){
 //			System.out.println(macroDefinition);
+			if(macroDefinition instanceof IASTPreprocessorFunctionStyleMacroDefinition){
+				IASTPreprocessorFunctionStyleMacroDefinition fucker = (IASTPreprocessorFunctionStyleMacroDefinition) macroDefinition;
+				IASTFunctionStyleMacroParameter[] macroParameters = fucker.getParameters();
+				for(IASTFunctionStyleMacroParameter mp : macroParameters){
+					System.out.println("macroprp: "+mp.getParameter());
+				}
+			}
 			System.out.println(macroDefinition.getName() );			
 			System.out.println(macroDefinition.getExpansion());
 		}
