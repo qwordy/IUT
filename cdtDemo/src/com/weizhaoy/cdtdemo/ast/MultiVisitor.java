@@ -13,11 +13,18 @@ import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTToken;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.model.IFunctionDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
 
 public class MultiVisitor extends ASTVisitor{
 
-	
+	public MultiVisitor(){
+		super();
+	}
+	public MultiVisitor(boolean visitAll) {
+		// TODO Auto-generated constructor stub
+		super(visitAll);
+	}
 	@Override
 	public int visit(IASTAttribute attribute) {
 		// TODO Auto-generated method stub
@@ -36,11 +43,14 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTDeclaration declaration) {
 		// TODO Auto-generated method stub
-		if(declaration instanceof CPPASTFunctionDefinition){//cpp function 
-			System.out.println("Function: "+ ((CPPASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
-			System.out.println("                    "+ ((CPPASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
-			
-		}
+		
+			if(declaration instanceof CPPASTFunctionDefinition){//cpp function 
+				System.out.println("Function: "+ ((CPPASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
+				System.out.println("                    "+ ((CPPASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
+				
+			}
+		
+		
 			
 		System.out.println("IASTDeclaration: "+declaration.toString() + "\n\t"+declaration.getRawSignature());
 

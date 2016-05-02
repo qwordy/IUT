@@ -2,8 +2,13 @@ package com.weizhaoy.cdtdemo.main;
 
 import java.io.File;
 
+import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroExpansion;
+import org.eclipse.cdt.core.dom.ast.IASTPreprocessorStatement;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.IMacroBinding;
 import org.eclipse.cdt.core.parser.ParserLanguage;
 
 import com.weizhaoy.cdtdemo.ast.ASTTranslationUnitCore;
@@ -39,6 +44,34 @@ public class Demo {
 //		astVisitor.shouldVisitParameterDeclarations = true;
 		astVisitor.shouldVisitDeclarations = true;
 		astTranslationUnit.accept(astVisitor);
+		
+		IASTPreprocessorMacroDefinition[] macroDefinitions = astTranslationUnit.getMacroDefinitions();
+		for (IASTPreprocessorMacroDefinition macroDefinition : macroDefinitions){
+//			System.out.println(macroDefinition);
+			System.out.println(macroDefinition.getName() );			
+			System.out.println(macroDefinition.getExpansion());
+		}
+		
+	
+		IASTPreprocessorMacroExpansion[] macroExpansions = astTranslationUnit.getMacroExpansions();
+		for(IASTPreprocessorMacroExpansion macroExpansion : macroExpansions){
+			System.out.println(macroExpansion.getRawSignature());
+			System.out.println(macroExpansion.getMacroReference());
+			System.out.println(macroExpansion.getMacroDefinition());
+		}
+		/*
+		IASTPreprocessorStatement[] preprocessorStatements = astTranslationUnit.getAllPreprocessorStatements();
+		for (IASTPreprocessorStatement ps : preprocessorStatements){
+			try {
+				System.out.println(ps.getSyntax().getNext().getCharImage());
+			} catch (ExpansionOverlapsBoundaryException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		}
+		*/
+		
 		
 		
 		

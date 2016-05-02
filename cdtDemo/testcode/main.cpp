@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #define PI 3.14
+#define _P(x) x
 using namespace std;
 
 
@@ -15,5 +16,6 @@ int main(){
   for(i = 0; i<10;i++){
 	cout<<"i: "<<i<<endl;
 }
+cout<<_P(i)<<endl;
 return 0;
 }
