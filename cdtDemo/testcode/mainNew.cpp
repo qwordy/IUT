@@ -23,9 +23,12 @@ void foo(Animal ani){
 	cout<<"Name: "<<ani.name<<endl;
 }
 
-int minus (int x, int y){
-	return x-y;
+int bar (int a, int b){
+	return a+b;
 }
+
+
+
 
 int AddThreeInt(int iFirst, int iSecond, int iThree)  
 {  
@@ -33,7 +36,7 @@ int AddThreeInt(int iFirst, int iSecond, int iThree)
     {  
         int operator()(int iOne, int iTwo)  
         {  
-            return iOne + iTwo;  
+            return iOne + iTwo+1;  
         }  
     } AddTwoInt;  
     return AddTwoInt(iFirst, iSecond) + iThree;  
