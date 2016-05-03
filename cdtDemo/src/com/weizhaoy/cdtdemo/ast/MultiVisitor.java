@@ -2,19 +2,23 @@ package com.weizhaoy.cdtdemo.ast;
 
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
 import org.eclipse.cdt.core.dom.ast.IASTAttribute;
+import org.eclipse.cdt.core.dom.ast.IASTAttributeSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTComment;
 import org.eclipse.cdt.core.dom.ast.IASTDeclSpecifier;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTExpression;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTInitializer;
 import org.eclipse.cdt.core.dom.ast.IASTName;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTToken;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.model.IFunctionDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
+import org.w3c.dom.Attr;
 
 public class MultiVisitor extends ASTVisitor{
 
@@ -43,16 +47,54 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTDeclaration declaration) {
 		// TODO Auto-generated method stub
-		
-			if(declaration instanceof CPPASTFunctionDefinition){//cpp function 
-				System.out.println("Function: "+ ((CPPASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
-				System.out.println("                    "+ ((CPPASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
-				
+
+//		if(declaration instanceof CPPASTFunctionDefinition){//cpp function 
+//			System.out.println("CPPFunction: "+ ((CPPASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
+//			System.out.println("                    "+ ((CPPASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
+//
+//		}
+
+
+		if(declaration instanceof IASTFunctionDefinition){
+			IASTFunctionDefinition iastFunctionDefinition = (IASTFunctionDefinition) declaration;
+			String info = "ASTFunction:"
+					//file path
+					+"\n\t"+iastFunctionDefinition.getContainingFilename() 
+					//return type
+					+"\n\t"+iastFunctionDefinition.getDeclSpecifier() 
+					//function name
+					+"\n\t"+iastFunctionDefinition.getDeclarator().getName(); 
+
+			if(iastFunctionDefinition.getDeclarator() instanceof IASTStandardFunctionDeclarator){
+				IASTStandardFunctionDeclarator standardFunctionDeclarator = (IASTStandardFunctionDeclarator) iastFunctionDefinition.getDeclarator();
+				IASTParameterDeclaration[] paras = standardFunctionDeclarator.getParameters();
+				for(IASTParameterDeclaration para : paras){
+					// parameters' type
+					info += "\n\t"+para.getDeclSpecifier();
+				}
 			}
-		
-		
-			
-		System.out.println("IASTDeclaration: "+declaration.toString() + "\n\t"+declaration.getRawSignature());
+			//				IASTAttribute[] attrs = iastFunctionDefinition.getDeclarator().getAttributes();
+			//				if(attrs.length != 0){
+			//					for(int i = 0; i< attrs.length;i++){
+			//						info += ("/n/t"+attrs[i]);
+			//					}
+			//				}
+			//				
+			//				IASTAttributeSpecifier[] attrSps = iastFunctionDefinition.getDeclarator().getAttributeSpecifiers();
+			//				if(attrSps.length != 0){
+			//					for(int i = 0; i< attrSps.length;i++){
+			//						info += ("/n/t"+attrSps[i]);
+			//					}
+			//				}
+			info += "\n\t"+iastFunctionDefinition.getBody().getRawSignature();
+			System.out.println(info);
+			//				System.out.println("ASTFunction: "+ ((IASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
+			//				System.out.println("                    "+ ((IASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
+		}
+
+
+
+		//		System.out.println("IASTDeclaration: "+declaration.toString() + "\n\t"+declaration.getRawSignature());
 
 		return super.visit(declaration);
 	}
@@ -84,7 +126,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTInitializer initializer) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTInitializer: "+initializer.getRawSignature());
+		System.out.println("IASTInitializer: "+initializer.getParent().getRawSignature());
 
 		return super.visit(initializer);
 	}

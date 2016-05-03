@@ -54,19 +54,19 @@ public class Demo {
 				IASTPreprocessorFunctionStyleMacroDefinition fucker = (IASTPreprocessorFunctionStyleMacroDefinition) macroDefinition;
 				IASTFunctionStyleMacroParameter[] macroParameters = fucker.getParameters();
 				for(IASTFunctionStyleMacroParameter mp : macroParameters){
-					System.out.println("macroprp: "+mp.getParameter());
+//					System.out.println("macroprp: "+mp.getParameter());
 				}
 			}
-			System.out.println(macroDefinition.getName() );			
-			System.out.println(macroDefinition.getExpansion());
+//			System.out.println(macroDefinition.getName() );			
+//			System.out.println(macroDefinition.getExpansion());
 		}
 		
 	
 		IASTPreprocessorMacroExpansion[] macroExpansions = astTranslationUnit.getMacroExpansions();
 		for(IASTPreprocessorMacroExpansion macroExpansion : macroExpansions){
-			System.out.println(macroExpansion.getRawSignature());
-			System.out.println(macroExpansion.getMacroReference());
-			System.out.println(macroExpansion.getMacroDefinition());
+//			System.out.println(macroExpansion.getRawSignature());
+//			System.out.println(macroExpansion.getMacroReference());
+//			System.out.println(macroExpansion.getMacroDefinition());
 		}
 		/*
 		IASTPreprocessorStatement[] preprocessorStatements = astTranslationUnit.getAllPreprocessorStatements();
