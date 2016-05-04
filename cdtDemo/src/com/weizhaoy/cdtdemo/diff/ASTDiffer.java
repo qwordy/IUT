@@ -1,4 +1,6 @@
 package com.weizhaoy.cdtdemo.diff;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,22 +18,37 @@ public class ASTDiffer {
 	List<String> funcAdded;
 	List<String> funcModified;
 	List<String> funcDeleted;
+//	private boolean isModified = false;
 
-	public ASTDiffer(){
 	
+	public ASTDiffer(){
+		//TODO: keep it or cut it?
 	}
 
-	public ASTDiffer(IASTTranslationUnit oldAST, IASTTranslationUnit newAST){
+	public ASTDiffer(IASTTranslationUnit oldAST, IASTTranslationUnit newAST){//Diff AST
 		
 		diff(oldAST, newAST);
 
 	}
 
-	public ASTDiffer(String oldPath, String newPath){
+	public ASTDiffer(String oldPath, String newPath){//Diff FilePath
 		diff(oldPath, newPath);
 	}
 
+	public ASTDiffer(File oldFile, File newFile)  {
+		try {
+			diff(oldFile.getCanonicalPath(), newFile.getCanonicalPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	public boolean isModified(){
+		return funcAdded.size()+funcModified.size()+funcDeleted.size() != 0;
+	}
+	
+	
 	public List<String> getFuncAdded() {
 		return funcAdded;
 	}
@@ -50,7 +67,7 @@ public class ASTDiffer {
 
 
 
-	public String diff(String oldFile, String newFile){
+	public String diff(String oldPath, String newPath){
 		/**
 		 *Focus on:
 		 *CPPASTFunctionDefinition
@@ -60,13 +77,14 @@ public class ASTDiffer {
 		
 
 		ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
-		IASTTranslationUnit oldAST = astTranslationUnitCore.parseFile(oldFile, ParserLanguage.CPP, false, false);
-		IASTTranslationUnit newAST = astTranslationUnitCore.parseFile(newFile, ParserLanguage.CPP, false, false);
+		IASTTranslationUnit oldAST = astTranslationUnitCore.parseFile(oldPath, ParserLanguage.CPP, false, false);
+		IASTTranslationUnit newAST = astTranslationUnitCore.parseFile(newPath, ParserLanguage.CPP, false, false);
 
 		return diff(oldAST, newAST);
 	}
 
 	public String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST){
+		
 		funcAdded = new ArrayList<>();
 		funcModified = new ArrayList<>();
 		funcDeleted = new ArrayList<>();

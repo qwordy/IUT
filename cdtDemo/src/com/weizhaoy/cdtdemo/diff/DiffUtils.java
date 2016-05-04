@@ -7,7 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 public class DiffUtils {
 
 	public static String getFunctionId(IASTFunctionDefinition funcDef) {
-		// TODO Auto-generated method stub
+		
 		String info = 
 				//file path
 //				funcDef.getContainingFilename() +

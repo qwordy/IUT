@@ -84,7 +84,7 @@ public class Demo {
 				try {
 					System.out.println(ps.getSyntax().getNext().getCharImage());
 				} catch (ExpansionOverlapsBoundaryException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			
