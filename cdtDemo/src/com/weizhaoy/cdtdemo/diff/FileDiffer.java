@@ -90,16 +90,17 @@ public class FileDiffer {
 				//file deleted
 				sb.append("/n/tFile Deleted: "+filename);
 			}else{
-				if(file.lastModified() != fileInNew.lastModified()
-						&& file.hashCode() != fileInNew.hashCode()){
+//				if(file.lastModified() != fileInNew.lastModified()
+//						&& file.hashCode() != fileInNew.hashCode()){
+				//TODO: compare in stream
 					String contentOld = FileUtils.readFileToString(file);
 					String contentNew = FileUtils.readFileToString(fileInNew);
-
+			//TODO		contentOld.replaceAll("*", "");
 					if(!contentOld.equals(contentNew)){
 						ASTDiffer astDiffer = new ASTDiffer();
 						sb.append("\nIn File: "+filename+"\n"+astDiffer.diff(contentOld, contentNew, true));
 					}
-				}
+//				}
 
 				newMap.remove(filename);
 			}
