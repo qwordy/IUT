@@ -1,0 +1,96 @@
+        -:    0:Source:src/time_zone_if.h
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcda
+        -:    0:Runs:8
+        -:    0:Programs:1
+        -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
+        -:    2://
+        -:    3:// Licensed under the Apache License, Version 2.0 (the "License");
+        -:    4:// you may not use this file except in compliance with the License.
+        -:    5:// You may obtain a copy of the License at
+        -:    6://
+        -:    7://   http://www.apache.org/licenses/LICENSE-2.0
+        -:    8://
+        -:    9://   Unless required by applicable law or agreed to in writing, software
+        -:   10://   distributed under the License is distributed on an "AS IS" BASIS,
+        -:   11://   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        -:   12://   See the License for the specific language governing permissions and
+        -:   13://   limitations under the License.
+        -:   14:
+        -:   15:#ifndef CCTZ_TIME_ZONE_IF_H_
+        -:   16:#define CCTZ_TIME_ZONE_IF_H_
+        -:   17:
+        -:   18:#include <cstdint>
+        -:   19:#include <memory>
+        -:   20:#include <string>
+        -:   21:
+        -:   22:#include "civil_time.h"
+        -:   23:#include "time_zone.h"
+        -:   24:
+        -:   25:namespace cctz {
+        -:   26:
+        -:   27:// The calendar and wall-clock (a.k.a. "civil time") components of a
+        -:   28:// time_point in a certain time_zone. A better std::tm.  Note that we
+        -:   29:// cannot use time_zone::absolute_lookup because we need a 64-bit year.
+        -:   30:struct Breakdown {
+        -:   31:  int64_t year;      // year (e.g., 2013)
+        -:   32:  int month;         // month of year [1:12]
+        -:   33:  int day;           // day of month [1:31]
+        -:   34:  int hour;          // hour of day [0:23]
+        -:   35:  int minute;        // minute of hour [0:59]
+        -:   36:  int second;        // second of minute [0:59]
+        -:   37:
+        -:   38:  // Note: The following fields exist for backward compatibility with older
+        -:   39:  // APIs. Accessing these fields directly is a sign of imprudent logic in the
+        -:   40:  // calling code. Modern time-related code should only access this data
+        -:   41:  // indirectly by way of cctz::format().
+        -:   42:  int offset;        // seconds east of UTC
+        -:   43:  bool is_dst;       // is offset non-standard?
+        -:   44:  std::string abbr;  // time-zone abbreviation (e.g., "PST")
+        -:   45:};
+        -:   46:
+        -:   47:// A TimeInfo represents the conversion of year, month, day, hour, minute,
+        -:   48:// and second values in a particular time_zone to a time instant.
+        -:   49:struct TimeInfo {
+        -:   50:  time_zone::civil_lookup::civil_kind kind;
+        -:   51:  time_point<sys_seconds> pre;   // Uses the pre-transition offset
+        -:   52:  time_point<sys_seconds> trans;
+        -:   53:  time_point<sys_seconds> post;  // Uses the post-transition offset
+        -:   54:  bool normalized;
+        -:   55:};
+        -:   56:
+        -:   57:// A simple interface used to hide time-zone complexities from time_zone::Impl.
+        -:   58:// Subclasses implement the functions for civil-time conversions in the zone.
+        -:   59:class TimeZoneIf {
+        -:   60: public:
+        -:   61:  // A factory function for TimeZoneIf implementations.
+        -:   62:  static std::unique_ptr<TimeZoneIf> Load(const std::string& name);
+        -:   63:
+    #####:   64:  virtual ~TimeZoneIf() {}
+        -:   65:
+        -:   66:  virtual Breakdown BreakTime(const time_point<sys_seconds>& tp) const = 0;
+        -:   67:  virtual TimeInfo MakeTimeInfo(int64_t year, int mon, int day,
+        -:   68:                                int hour, int min, int sec) const = 0;
+        -:   69:
+        -:   70: protected:
+    #####:   71:  TimeZoneIf() {}
+        -:   72:};
+        -:   73:
+        -:   74:// Converts tp to a count of seconds since the Unix epoch.
+        -:   75:inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {
+        -:   76:  return (tp - std::chrono::time_point_cast<sys_seconds>(
+        -:   77:                   std::chrono::system_clock::from_time_t(0)))
+        -:   78:      .count();
+        -:   79:}
+        -:   80:
+        -:   81:// Converts a count of seconds since the Unix epoch to a
+        -:   82:// time_point<sys_seconds>.
+        -:   83:inline time_point<sys_seconds> FromUnixSeconds(int64_t t) {
+        -:   84:  return std::chrono::time_point_cast<sys_seconds>(
+        -:   85:             std::chrono::system_clock::from_time_t(0)) +
+        -:   86:         sys_seconds(t);
+        -:   87:}
+        -:   88:
+        -:   89:}  // namespace cctz
+        -:   90:
+        -:   91:#endif  // CCTZ_TIME_ZONE_IF_H_

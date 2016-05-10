@@ -1,0 +1,10 @@
+        -:    0:Source:d/book.h
+        -:    0:Graph:book.gcno
+        -:    0:Data:book.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/*EOF*/
+        -:    2:/*EOF*/
+        -:    3:/*EOF*/
+function _ZN4Book2yyEv called 1 returned 100% blocks executed 100%
+        1:    4:/*EOF*/

@@ -1,0 +1,594 @@
+        -:    0:Source:include/civil_time_detail.h
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
+        -:    0:Runs:8
+        -:    0:Programs:1
+        -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
+        -:    2://
+        -:    3:// Licensed under the Apache License, Version 2.0 (the "License");
+        -:    4:// you may not use this file except in compliance with the License.
+        -:    5:// You may obtain a copy of the License at
+        -:    6://
+        -:    7://   http://www.apache.org/licenses/LICENSE-2.0
+        -:    8://
+        -:    9://   Unless required by applicable law or agreed to in writing, software
+        -:   10://   distributed under the License is distributed on an "AS IS" BASIS,
+        -:   11://   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        -:   12://   See the License for the specific language governing permissions and
+        -:   13://   limitations under the License.
+        -:   14:
+        -:   15:#include <iomanip>
+        -:   16:#include <limits>
+        -:   17:#include <ostream>
+        -:   18:#include <sstream>
+        -:   19:#include <type_traits>
+        -:   20:
+        -:   21:// Disable constexpr support unless we are using clang in C++14 mode.
+        -:   22:#if __clang__ && __cpp_constexpr >= 201304
+        -:   23:#define CONSTEXPR_D constexpr  // data
+        -:   24:#define CONSTEXPR_F constexpr  // function
+        -:   25:#define CONSTEXPR_M constexpr  // member
+        -:   26:#define CONSTEXPR_T constexpr  // template
+        -:   27:#else
+        -:   28:#define CONSTEXPR_D const
+        -:   29:#define CONSTEXPR_F inline
+        -:   30:#define CONSTEXPR_M
+        -:   31:#define CONSTEXPR_T
+        -:   32:#endif
+        -:   33:
+        -:   34:namespace cctz {
+        -:   35:namespace detail {
+        -:   36:
+        -:   37:// Normalized civil-time fields: Y-M-D HH:MM:SS.
+        -:   38:struct fields {
+        -:   39:  int y;
+        -:   40:  int m;
+        -:   41:  int d;
+        -:   42:  int hh;
+        -:   43:  int mm;
+        -:   44:  int ss;
+        -:   45:};
+        -:   46:
+        -:   47:struct second_tag {};
+        -:   48:struct minute_tag : second_tag {};
+        -:   49:struct hour_tag : minute_tag {};
+        -:   50:struct day_tag : hour_tag {};
+        -:   51:struct month_tag : day_tag {};
+        -:   52:struct year_tag : month_tag {};
+        -:   53:
+        -:   54:////////////////////////////////////////////////////////////////////////
+        -:   55:
+        -:   56:// Field normalization (without avoidable overflow).
+        -:   57:
+        -:   58:namespace impl {
+        -:   59:
+        -:   60:CONSTEXPR_F bool is_leap_year(int y) noexcept {
+    #####:   61:  return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+branch 12 never executed
+branch 13 never executed
+branch 14 never executed
+branch 15 never executed
+branch 16 never executed
+branch 17 never executed
+        -:   62:}
+        -:   63:CONSTEXPR_F int year_index(int y, int m) noexcept {
+    #####:   64:  return (((y + (m > 2)) % 400) + 400) % 400;
+        -:   65:}
+        -:   66:CONSTEXPR_F int days_per_century(int y, int m) noexcept {
+        -:   67:  const int yi = year_index(y, m);
+    #####:   68:  return 36524 + (yi == 0 || yi > 300);
+        -:   69:}
+        -:   70:CONSTEXPR_F int days_per_4years(int y, int m) noexcept {
+        -:   71:  const int yi = year_index(y, m);
+    #####:   72:  return 1460 + (yi == 0 || yi > 300 || (yi - 1) % 100 < 96);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+        -:   73:}
+        -:   74:CONSTEXPR_F int days_per_year(int y, int m) noexcept {
+    #####:   75:  return is_leap_year(y + (m > 2)) ? 366 : 365;
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:   76:}
+function _ZN4cctz6detail4impl14days_per_monthEii called 184 returned 100% blocks executed 38%
+      184:   77:CONSTEXPR_F int days_per_month(int y, int m) noexcept {
+        -:   78:  CONSTEXPR_D signed char k_days_per_month[12] = {
+        -:   79:      31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31  // non leap year
+      184:   80:  };
+      184:   81:  return k_days_per_month[m - 1] + (m == 2 && is_leap_year(y));
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+branch  2 never executed
+branch  3 never executed
+        -:   82:}
+        -:   83:
+function _ZN4cctz6detail4impl5n_dayEiiiiiii called 1360 returned 100% blocks executed 20%
+     1360:   84:CONSTEXPR_F fields n_day(int y, int m, int d, int cd, int hh, int mm,
+        -:   85:                         int ss) noexcept {
+     1360:   86:  y += (cd / 146097) * 400;
+     1360:   87:  cd %= 146097;
+     1360:   88:  if (cd < 0) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   89:    y -= 400;
+    #####:   90:    cd += 146097;
+        -:   91:  }
+     1360:   92:  y += (d / 146097) * 400;
+     1360:   93:  d = d % 146097 + cd;
+     1360:   94:  if (d <= 0) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   95:    y -= 400;
+    #####:   96:    d += 146097;
+     1360:   97:  } else if (d > 146097) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:   98:    y += 400;
+    #####:   99:    d -= 146097;
+        -:  100:  }
+     1360:  101:  if (d > 365) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  102:    for (int n = days_per_century(y, m); d > n; n = days_per_century(y, m)) {
+branch  0 never executed
+branch  1 never executed
+    #####:  103:      d -= n;
+    #####:  104:      y += 100;
+        -:  105:    }
+    #####:  106:    for (int n = days_per_4years(y, m); d > n; n = days_per_4years(y, m)) {
+branch  0 never executed
+branch  1 never executed
+    #####:  107:      d -= n;
+    #####:  108:      y += 4;
+        -:  109:    }
+    #####:  110:    for (int n = days_per_year(y, m); d > n; n = days_per_year(y, m)) {
+branch  0 never executed
+branch  1 never executed
+    #####:  111:      d -= n;
+    #####:  112:      ++y;
+        -:  113:    }
+        -:  114:  }
+     1360:  115:  if (d > 28) {
+branch  0 taken 14% (fallthrough)
+branch  1 taken 86%
+      184:  116:    for (int n = days_per_month(y, m); d > n; n = days_per_month(y, m)) {
+call    0 returned 100%
+call    1 never executed
+branch  2 taken 0%
+branch  3 taken 100% (fallthrough)
+    #####:  117:      d -= n;
+    #####:  118:      if (++m > 12) {
+branch  0 never executed
+branch  1 never executed
+    #####:  119:        ++y;
+        -:  120:        m = 1;
+        -:  121:      }
+        -:  122:    }
+        -:  123:  }
+     1360:  124:  return fields{y, m, d, hh, mm, ss};
+        -:  125:}
+function _ZN4cctz6detail4impl5n_monEiiiiiii called 1360 returned 100% blocks executed 100%
+     1360:  126:CONSTEXPR_F fields n_mon(int y, int m, int d, int cd, int hh, int mm,
+        -:  127:                         int ss) noexcept {
+     1360:  128:  y += m / 12;
+     1360:  129:  m %= 12;
+     1360:  130:  if (m <= 0) {
+branch  0 taken 11% (fallthrough)
+branch  1 taken 89%
+      144:  131:    y -= 1;
+      144:  132:    m += 12;
+        -:  133:  }
+     1360:  134:  return n_day(y, m, d, cd, hh, mm, ss);
+call    0 returned 100%
+        -:  135:}
+function _ZN4cctz6detail4impl6n_hourEiiiiiii called 1360 returned 100% blocks executed 75%
+     1360:  136:CONSTEXPR_F fields n_hour(int y, int m, int d, int cd, int hh, int mm,
+        -:  137:                          int ss) noexcept {
+     1360:  138:  cd += hh / 24;
+     1360:  139:  hh %= 24;
+     1360:  140:  if (hh < 0) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  141:    cd -= 1;
+    #####:  142:    hh += 24;
+        -:  143:  }
+     1360:  144:  return n_mon(y, m, d, cd, hh, mm, ss);
+call    0 returned 100%
+        -:  145:}
+function _ZN4cctz6detail4impl5n_minEiiiiiii called 1360 returned 100% blocks executed 75%
+     1360:  146:CONSTEXPR_F fields n_min(int y, int m, int d, int hh, int ch, int mm,
+        -:  147:                         int ss) noexcept {
+     1360:  148:  ch += mm / 60;
+     1360:  149:  mm %= 60;
+     1360:  150:  if (mm < 0) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  151:    ch -= 1;
+    #####:  152:    mm += 60;
+        -:  153:  }
+     1360:  154:  return n_hour(y, m, d, hh / 24 + ch / 24, hh % 24 + ch % 24, mm, ss);
+call    0 returned 100%
+        -:  155:}
+function _ZN4cctz6detail4impl5n_secEiiiiii called 1360 returned 100% blocks executed 75%
+     1360:  156:CONSTEXPR_F fields n_sec(int y, int m, int d, int hh, int mm, int ss) noexcept {
+     1360:  157:  int cm = ss / 60;
+     1360:  158:  ss %= 60;
+     1360:  159:  if (ss < 0) {
+branch  0 taken 0% (fallthrough)
+branch  1 taken 100%
+    #####:  160:    cm -= 1;
+    #####:  161:    ss += 60;
+        -:  162:  }
+     1360:  163:  return n_min(y, m, d, hh, mm / 60 + cm / 60, mm % 60 + cm % 60, ss);
+call    0 returned 100%
+        -:  164:}
+        -:  165:
+        -:  166:}  // namespace impl
+        -:  167:
+        -:  168:////////////////////////////////////////////////////////////////////////
+        -:  169:
+        -:  170:// Increments the indicated (normalized) field by "n".
+        -:  171:CONSTEXPR_F fields step(second_tag, fields f, int n) noexcept {
+        -:  172:  return impl::n_sec(f.y, f.m, f.d, f.hh, f.mm + n / 60, f.ss + n % 60);
+        -:  173:}
+        -:  174:CONSTEXPR_F fields step(minute_tag, fields f, int n) noexcept {
+        -:  175:  return impl::n_min(f.y, f.m, f.d, f.hh + n / 60, 0, f.mm + n % 60, f.ss);
+        -:  176:}
+        -:  177:CONSTEXPR_F fields step(hour_tag, fields f, int n) noexcept {
+        -:  178:  return impl::n_hour(f.y, f.m, f.d + n / 24, 0, f.hh + n % 24, f.mm, f.ss);
+        -:  179:}
+        -:  180:CONSTEXPR_F fields step(day_tag, fields f, int n) noexcept {
+        -:  181:  return impl::n_day(f.y, f.m, f.d, n, f.hh, f.mm, f.ss);
+        -:  182:}
+        -:  183:CONSTEXPR_F fields step(month_tag, fields f, int n) noexcept {
+        -:  184:  return impl::n_mon(f.y + n / 12, f.m + n % 12, f.d, 0, f.hh, f.mm, f.ss);
+        -:  185:}
+        -:  186:CONSTEXPR_F fields step(year_tag, fields f, int n) noexcept {
+        -:  187:  return fields{f.y + n, f.m, f.d, f.hh, f.mm, f.ss};
+        -:  188:}
+        -:  189:
+        -:  190:////////////////////////////////////////////////////////////////////////
+        -:  191:
+        -:  192:// Aligns the (normalized) fields struct to the indicated field.
+        -:  193:CONSTEXPR_F fields align(second_tag, fields f) noexcept {
+     1360:  194:  return f;
+        -:  195:}
+        -:  196:CONSTEXPR_F fields align(minute_tag, fields f) noexcept {
+        -:  197:  return fields{f.y, f.m, f.d, f.hh, f.mm, 0};
+        -:  198:}
+        -:  199:CONSTEXPR_F fields align(hour_tag, fields f) noexcept {
+        -:  200:  return fields{f.y, f.m, f.d, f.hh, 0, 0};
+        -:  201:}
+        -:  202:CONSTEXPR_F fields align(day_tag, fields f) noexcept {
+        -:  203:  return fields{f.y, f.m, f.d, 0, 0, 0};
+        -:  204:}
+        -:  205:CONSTEXPR_F fields align(month_tag, fields f) noexcept {
+        -:  206:  return fields{f.y, f.m, 1, 0, 0, 0};
+        -:  207:}
+        -:  208:CONSTEXPR_F fields align(year_tag, fields f) noexcept {
+        -:  209:  return fields{f.y, 1, 1, 0, 0, 0};
+        -:  210:}
+        -:  211:
+        -:  212:////////////////////////////////////////////////////////////////////////
+        -:  213:
+        -:  214:namespace impl {
+        -:  215:
+        -:  216:// Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
+        -:  217:// Will overflow outside of the range [-5877641-06-23 ... 5881580-07-11].
+        -:  218:CONSTEXPR_F int ymd_ord(int y, int m, int d) noexcept {
+        -:  219:  const int eyear = (m <= 2) ? y - 1 : y;
+        -:  220:  const int era = (eyear >= 0 ? eyear : eyear - 399) / 400;
+        -:  221:  const int yoe = eyear - era * 400;
+        -:  222:  const int doy = (153 * (m + (m > 2 ? -3 : 9)) + 2) / 5 + d - 1;
+        -:  223:  const int doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+        -:  224:  return era * 146097 + doe - 719468;
+        -:  225:}
+        -:  226:
+        -:  227:}  // namespace impl
+        -:  228:
+        -:  229:// Returns the difference between fields structs using the indicated unit.
+        -:  230:CONSTEXPR_F int difference(year_tag, fields f1, fields f2) noexcept {
+        -:  231:  return f1.y - f2.y;
+        -:  232:}
+        -:  233:CONSTEXPR_F int difference(month_tag, fields f1, fields f2) noexcept {
+        -:  234:  return difference(year_tag{}, f1, f2) * 12 + (f1.m - f2.m);
+        -:  235:}
+        -:  236:CONSTEXPR_F int difference(day_tag, fields f1, fields f2) noexcept {
+        -:  237:  return impl::ymd_ord(f1.y, f1.m, f1.d) - impl::ymd_ord(f2.y, f2.m, f2.d);
+        -:  238:}
+        -:  239:CONSTEXPR_F int difference(hour_tag, fields f1, fields f2) noexcept {
+        -:  240:  return difference(day_tag{}, f1, f2) * 24 + (f1.hh - f2.hh);
+        -:  241:}
+        -:  242:CONSTEXPR_F int difference(minute_tag, fields f1, fields f2) noexcept {
+        -:  243:  return difference(hour_tag{}, f1, f2) * 60 + (f1.mm - f2.mm);
+        -:  244:}
+        -:  245:CONSTEXPR_F int difference(second_tag, fields f1, fields f2) noexcept {
+        -:  246:  return difference(minute_tag{}, f1, f2) * 60 + (f1.ss - f2.ss);
+        -:  247:}
+        -:  248:
+        -:  249:////////////////////////////////////////////////////////////////////////
+        -:  250:
+        -:  251:template <typename T>
+        -:  252:class civil_time {
+        -:  253: public:
+function _ZN4cctz6detail10civil_timeINS0_10second_tagEEC2Eiiiiii called 1360 returned 100% blocks executed 100%
+     1360:  254:  explicit CONSTEXPR_M civil_time(int y, int m = 1, int d = 1, int hh = 0,
+        -:  255:                                  int mm = 0, int ss = 0) noexcept
+     2720:  256:      : civil_time(impl::n_sec(y, m, d, hh, mm, ss)) {}
+call    0 returned 100%
+        -:  257:
+function _ZN4cctz6detail10civil_timeINS0_10second_tagEEC2Ev called 680 returned 100% blocks executed 100%
+      680:  258:  CONSTEXPR_M civil_time() noexcept : civil_time(1970) {}
+call    0 returned 100%
+        -:  259:  civil_time(const civil_time&) = default;
+        -:  260:  civil_time& operator=(const civil_time&) = default;
+        -:  261:
+        -:  262:  // Conversion between civil times of different alignment. Conversion to
+        -:  263:  // a more precise alignment is allowed implicitly (e.g., day -> hour),
+        -:  264:  // but conversion where information is discarded must be explicit
+        -:  265:  // (e.g., second -> minute).
+        -:  266:  template <typename U, typename S>
+        -:  267:  using preserves_data =
+        -:  268:      typename std::enable_if<std::is_base_of<U, S>::value>::type;
+        -:  269:  template <typename U>
+        -:  270:  CONSTEXPR_M civil_time(const civil_time<U>& ct,
+        -:  271:                         preserves_data<T, U>* = nullptr) noexcept
+        -:  272:      : civil_time(ct.f_) {}
+        -:  273:  template <typename U>
+        -:  274:  explicit CONSTEXPR_M civil_time(const civil_time<U>& ct,
+        -:  275:                                  preserves_data<U, T>* = nullptr) noexcept
+        -:  276:      : civil_time(ct.f_) {}
+        -:  277:
+        -:  278:  // Factories for the maximum/minimum representable civil_time.
+        -:  279:  static civil_time max() {
+        -:  280:    return civil_time(std::numeric_limits<int>::max(), 12, 31, 23, 59, 59);
+        -:  281:  }
+        -:  282:  static civil_time min() {
+        -:  283:    return civil_time(std::numeric_limits<int>::min(), 1, 1, 0, 0, 0);
+        -:  284:  }
+        -:  285:
+        -:  286:  // Field accessors.
+      344:  287:  CONSTEXPR_M int year() const noexcept { return f_.y; }
+      344:  288:  CONSTEXPR_M int month() const noexcept { return f_.m; }
+      344:  289:  CONSTEXPR_M int day() const noexcept { return f_.d; }
+      344:  290:  CONSTEXPR_M int hour() const noexcept { return f_.hh; }
+      344:  291:  CONSTEXPR_M int minute() const noexcept { return f_.mm; }
+      344:  292:  CONSTEXPR_M int second() const noexcept { return f_.ss; }
+        -:  293:
+        -:  294:  // Assigning arithmetic.
+        -:  295:  CONSTEXPR_M civil_time& operator+=(int n) noexcept {
+        -:  296:    f_ = step(T{}, f_, n);
+        -:  297:    return *this;
+        -:  298:  }
+        -:  299:  CONSTEXPR_M civil_time& operator-=(int n) noexcept {
+        -:  300:    if (n != std::numeric_limits<int>::min()) {
+        -:  301:      f_ = step(T{}, f_, -n);
+        -:  302:    } else {
+        -:  303:      f_ = step(T(), step(T{}, f_, -(n + 1)), 1);
+        -:  304:    }
+        -:  305:    return *this;
+        -:  306:  }
+        -:  307:  CONSTEXPR_M civil_time& operator++() noexcept {
+        -:  308:    return *this += 1;
+        -:  309:  }
+        -:  310:  CONSTEXPR_M civil_time operator++(int) noexcept {
+        -:  311:    const civil_time a = *this;
+        -:  312:    ++*this;
+        -:  313:    return a;
+        -:  314:  }
+        -:  315:  CONSTEXPR_M civil_time& operator--() noexcept {
+        -:  316:    return *this -= 1;
+        -:  317:  }
+        -:  318:  CONSTEXPR_M civil_time operator--(int) noexcept {
+        -:  319:    const civil_time a = *this;
+        -:  320:    --*this;
+        -:  321:    return a;
+        -:  322:  }
+        -:  323:
+        -:  324:  // Binary arithmetic operators.
+        -:  325:  inline friend CONSTEXPR_M civil_time operator+(const civil_time& a,
+        -:  326:                                                 int n) noexcept {
+        -:  327:    return civil_time(step(T{}, a.f_, n));
+        -:  328:  }
+        -:  329:  inline friend CONSTEXPR_M civil_time operator+(int n,
+        -:  330:                                                 const civil_time& a) noexcept {
+        -:  331:    return civil_time(step(T{}, a.f_, n));
+        -:  332:  }
+        -:  333:  inline friend CONSTEXPR_M civil_time operator-(const civil_time& a,
+        -:  334:                                                 int n) noexcept {
+        -:  335:    return civil_time(step(T{}, a.f_, -n));
+        -:  336:  }
+        -:  337:  inline friend CONSTEXPR_M int operator-(const civil_time& lhs,
+        -:  338:                                          const civil_time& rhs) noexcept {
+        -:  339:    return difference(T{}, lhs.f_, rhs.f_);
+        -:  340:  }
+        -:  341:
+        -:  342: private:
+        -:  343:  // All instantiations of this template are allowed to call the following
+        -:  344:  // private constructor and access the private fields member.
+        -:  345:  template <typename U>
+        -:  346:  friend class civil_time;
+        -:  347:
+        -:  348:  // The designated constructor that all others eventually call.
+        -:  349:  explicit CONSTEXPR_M civil_time(fields f) noexcept : f_(align(T{}, f)) {}
+        -:  350:
+        -:  351:  fields f_;
+        -:  352:};
+        -:  353:
+        -:  354:using civil_year = civil_time<year_tag>;
+        -:  355:using civil_month = civil_time<month_tag>;
+        -:  356:using civil_day = civil_time<day_tag>;
+        -:  357:using civil_hour = civil_time<hour_tag>;
+        -:  358:using civil_minute = civil_time<minute_tag>;
+        -:  359:using civil_second = civil_time<second_tag>;
+        -:  360:
+        -:  361:////////////////////////////////////////////////////////////////////////
+        -:  362:
+        -:  363:// Relational operators that work with differently aligned objects.
+        -:  364:// Always compares all six fields.
+        -:  365:template <typename T1, typename T2>
+        -:  366:CONSTEXPR_T bool operator<(const civil_time<T1>& lhs,
+        -:  367:                           const civil_time<T2>& rhs) noexcept {
+        -:  368:  return (lhs.year() < rhs.year() ||
+        -:  369:          (lhs.year() == rhs.year() &&
+        -:  370:           (lhs.month() < rhs.month() ||
+        -:  371:            (lhs.month() == rhs.month() &&
+        -:  372:             (lhs.day() < rhs.day() ||
+        -:  373:              (lhs.day() == rhs.day() &&
+        -:  374:               (lhs.hour() < rhs.hour() ||
+        -:  375:                (lhs.hour() == rhs.hour() &&
+        -:  376:                 (lhs.minute() < rhs.minute() ||
+        -:  377:                  (lhs.minute() == rhs.minute() &&
+        -:  378:                   (lhs.second() < rhs.second())))))))))));
+        -:  379:}
+        -:  380:template <typename T1, typename T2>
+        -:  381:CONSTEXPR_T bool operator<=(const civil_time<T1>& lhs,
+        -:  382:                            const civil_time<T2>& rhs) noexcept {
+        -:  383:  return !(rhs < lhs);
+        -:  384:}
+        -:  385:template <typename T1, typename T2>
+        -:  386:CONSTEXPR_T bool operator>=(const civil_time<T1>& lhs,
+        -:  387:                            const civil_time<T2>& rhs) noexcept {
+        -:  388:  return !(lhs < rhs);
+        -:  389:}
+        -:  390:template <typename T1, typename T2>
+        -:  391:CONSTEXPR_T bool operator>(const civil_time<T1>& lhs,
+        -:  392:                           const civil_time<T2>& rhs) noexcept {
+        -:  393:  return rhs < lhs;
+        -:  394:}
+        -:  395:template <typename T1, typename T2>
+        -:  396:CONSTEXPR_T bool operator==(const civil_time<T1>& lhs,
+        -:  397:                            const civil_time<T2>& rhs) noexcept {
+        -:  398:  return lhs.year() == rhs.year() && lhs.month() == rhs.month() &&
+        -:  399:         lhs.day() == rhs.day() && lhs.hour() == rhs.hour() &&
+        -:  400:         lhs.minute() == rhs.minute() && lhs.second() == rhs.second();
+        -:  401:}
+        -:  402:template <typename T1, typename T2>
+        -:  403:CONSTEXPR_T bool operator!=(const civil_time<T1>& lhs,
+        -:  404:                            const civil_time<T2>& rhs) noexcept {
+        -:  405:  return !(lhs == rhs);
+        -:  406:}
+        -:  407:
+        -:  408:////////////////////////////////////////////////////////////////////////
+        -:  409:
+        -:  410:// Output stream operators output a format matching YYYY-MM-DDThh:mm:ss,
+        -:  411:// while omitting fields inferior to the type's alignment. For example,
+        -:  412:// civil_day is formatted only as YYYY-MM-DD.
+        -:  413:inline std::ostream& operator<<(std::ostream& os, const civil_year& y) {
+        -:  414:  std::stringstream ss;
+        -:  415:  ss << y.year();  // No padding.
+        -:  416:  return os << ss.str();
+        -:  417:}
+        -:  418:inline std::ostream& operator<<(std::ostream& os, const civil_month& m) {
+        -:  419:  std::stringstream ss;
+        -:  420:  ss << civil_year(m) << '-';
+        -:  421:  ss << std::setfill('0') << std::setw(2) << m.month();
+        -:  422:  return os << ss.str();
+        -:  423:}
+        -:  424:inline std::ostream& operator<<(std::ostream& os, const civil_day& d) {
+        -:  425:  std::stringstream ss;
+        -:  426:  ss << civil_month(d) << '-';
+        -:  427:  ss << std::setfill('0') << std::setw(2) << d.day();
+        -:  428:  return os << ss.str();
+        -:  429:}
+        -:  430:inline std::ostream& operator<<(std::ostream& os, const civil_hour& h) {
+        -:  431:  std::stringstream ss;
+        -:  432:  ss << civil_day(h) << 'T';
+        -:  433:  ss << std::setfill('0') << std::setw(2) << h.hour();
+        -:  434:  return os << ss.str();
+        -:  435:}
+        -:  436:inline std::ostream& operator<<(std::ostream& os, const civil_minute& m) {
+        -:  437:  std::stringstream ss;
+        -:  438:  ss << civil_hour(m) << ':';
+        -:  439:  ss << std::setfill('0') << std::setw(2) << m.minute();
+        -:  440:  return os << ss.str();
+        -:  441:}
+        -:  442:inline std::ostream& operator<<(std::ostream& os, const civil_second& s) {
+        -:  443:  std::stringstream ss;
+        -:  444:  ss << civil_minute(s) << ':';
+        -:  445:  ss << std::setfill('0') << std::setw(2) << s.second();
+        -:  446:  return os << ss.str();
+        -:  447:}
+        -:  448:
+        -:  449:////////////////////////////////////////////////////////////////////////
+        -:  450:
+        -:  451:enum class weekday {
+        -:  452:  monday,
+        -:  453:  tuesday,
+        -:  454:  wednesday,
+        -:  455:  thursday,
+        -:  456:  friday,
+        -:  457:  saturday,
+        -:  458:  sunday,
+        -:  459:};
+        -:  460:
+        -:  461:inline std::ostream& operator<<(std::ostream& os, weekday wd) {
+        -:  462:  switch (wd) {
+        -:  463:    case weekday::monday:
+        -:  464:      return os << "Monday";
+        -:  465:    case weekday::tuesday:
+        -:  466:      return os << "Tuesday";
+        -:  467:    case weekday::wednesday:
+        -:  468:      return os << "Wednesday";
+        -:  469:    case weekday::thursday:
+        -:  470:      return os << "Thursday";
+        -:  471:    case weekday::friday:
+        -:  472:      return os << "Friday";
+        -:  473:    case weekday::saturday:
+        -:  474:      return os << "Saturday";
+        -:  475:    case weekday::sunday:
+        -:  476:      return os << "Sunday";
+        -:  477:  }
+        -:  478:}
+        -:  479:
+        -:  480:CONSTEXPR_F weekday get_weekday(const civil_day& cd) noexcept {
+        -:  481:  CONSTEXPR_D weekday k_weekday_by_thu_off[] = {
+        -:  482:      weekday::thursday,  weekday::friday,  weekday::saturday,
+        -:  483:      weekday::sunday,    weekday::monday,  weekday::tuesday,
+        -:  484:      weekday::wednesday,
+        -:  485:  };
+        -:  486:  return k_weekday_by_thu_off[((cd - civil_day()) % 7 + 7) % 7];
+        -:  487:}
+        -:  488:
+        -:  489:////////////////////////////////////////////////////////////////////////
+        -:  490:
+        -:  491:CONSTEXPR_F civil_day next_weekday(civil_day cd, weekday wd) noexcept {
+        -:  492:  do { cd += 1; } while (get_weekday(cd) != wd);
+        -:  493:  return cd;
+        -:  494:}
+        -:  495:
+        -:  496:CONSTEXPR_F civil_day prev_weekday(civil_day cd, weekday wd) noexcept {
+        -:  497:  do { cd -= 1; } while (get_weekday(cd) != wd);
+        -:  498:  return cd;
+        -:  499:}
+        -:  500:
+        -:  501:CONSTEXPR_F int get_yearday(const civil_day& cd) noexcept {
+        -:  502:  return cd - civil_day(civil_year(cd)) + 1;
+        -:  503:}
+        -:  504:
+        -:  505:}  // namespace detail
+        -:  506:}  // namespace cctz
+        -:  507:
+        -:  508:#undef CONSTEXPR_T
+        -:  509:#undef CONSTEXPR_M
+        -:  510:#undef CONSTEXPR_F
+        -:  511:#undef CONSTEXPR_D

@@ -26,14 +26,14 @@ OPT = -O
 PREFIX = /usr/local
 
 # possible support for googletest
-## TESTS = civil_time_test time_zone_lookup_test time_zone_format_test
+TESTS = civil_time_test time_zone_lookup_test time_zone_format_test
 ## TEST_FLAGS = ...
-## TEST_LIBS = ...
+TEST_LIBS = -lgtest -lgtest_main
 
 VPATH = $(SRC)include:$(SRC)src:$(SRC)examples
 CC = $(CXX)
 CPPFLAGS = -Wall -I$(SRC)include -std=$(STD) -pthread \
-	   $(TEST_FLAGS) $(OPT) -fPIC -MMD
+	   $(TEST_FLAGS) $(OPT) -fPIC -MMD -fprofile-arcs -ftest-coverage
 ARFLAGS = rcs
 LDFLAGS = -pthread
 LDLIBS = $(TEST_LIBS)

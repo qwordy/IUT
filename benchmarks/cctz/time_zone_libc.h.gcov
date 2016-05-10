@@ -1,0 +1,52 @@
+        -:    0:Source:src/time_zone_libc.h
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcda
+        -:    0:Runs:8
+        -:    0:Programs:1
+        -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
+        -:    2://
+        -:    3:// Licensed under the Apache License, Version 2.0 (the "License");
+        -:    4:// you may not use this file except in compliance with the License.
+        -:    5:// You may obtain a copy of the License at
+        -:    6://
+        -:    7://   http://www.apache.org/licenses/LICENSE-2.0
+        -:    8://
+        -:    9://   Unless required by applicable law or agreed to in writing, software
+        -:   10://   distributed under the License is distributed on an "AS IS" BASIS,
+        -:   11://   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        -:   12://   See the License for the specific language governing permissions and
+        -:   13://   limitations under the License.
+        -:   14:
+        -:   15:#ifndef CCTZ_TIME_ZONE_LIBC_H_
+        -:   16:#define CCTZ_TIME_ZONE_LIBC_H_
+        -:   17:
+        -:   18:#include <cstdint>
+        -:   19:#include <string>
+        -:   20:
+        -:   21:#include "time_zone_if.h"
+        -:   22:
+        -:   23:namespace cctz {
+        -:   24:
+        -:   25:// A time zone backed by gmtime_r(3), localtime_r(3), and mktime(3), and
+        -:   26:// which therefore only supports "localtime" and fixed offsets from UTC.
+function _ZN4cctz12TimeZoneLibCD0Ev called 0 returned 0% blocks executed 0%
+function _ZN4cctz12TimeZoneLibCD2Ev called 0 returned 0% blocks executed 0%
+    #####:   27:class TimeZoneLibC : public TimeZoneIf {
+call    0 never executed
+        -:   28: public:
+        -:   29:  explicit TimeZoneLibC(const std::string& name);
+        -:   30:
+        -:   31:  // TimeZoneIf implementations.
+        -:   32:  Breakdown BreakTime(const time_point<sys_seconds>& tp) const override;
+        -:   33:  TimeInfo MakeTimeInfo(int64_t year, int mon, int day,
+        -:   34:                        int hour, int min, int sec) const override;
+        -:   35:
+        -:   36: private:
+        -:   37:  bool local_;        // localtime or UTC
+        -:   38:  int offset_;        // UTC offset when !local_
+        -:   39:  std::string abbr_;  // abbreviation when !local_
+        -:   40:};
+        -:   41:
+        -:   42:}  // namespace cctz
+        -:   43:
+        -:   44:#endif  // CCTZ_TIME_ZONE_LIBC_H_
