@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yfy/iut/benchmarks/avro-cpp-1.8.0/impl/json/JsonDom.hh
+iostream
+-
+stdint.h
+-
+map
+-
+string
+-
+vector
+-
+boost/shared_ptr.hpp
+-
+boost/any.hpp
+/home/yfy/iut/benchmarks/avro-cpp-1.8.0/impl/json/boost/any.hpp
+Config.hh
+/home/yfy/iut/benchmarks/avro-cpp-1.8.0/impl/json/Config.hh
+
+/home/yfy/iut/benchmarks/avro-cpp-1.8.0/test/JsonTests.cc
+limits
+-
+boost/test/included/unit_test_framework.hpp
+-
+boost/test/unit_test.hpp
+-
+boost/test/parameterized_test.hpp
+-
+../impl/json/JsonDom.hh
+/home/yfy/iut/benchmarks/avro-cpp-1.8.0/impl/json/JsonDom.hh
+
+api/Config.hh
+

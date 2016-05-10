@@ -3,7 +3,7 @@ OBJ = main.o fly.o d/book.o
 CXXFLAGS = -fprofile-arcs -ftest-coverage
 
 main: $(OBJ)
-	$(CC) -o $@ $^ -lgcov
+	$(CC) -o $@ $^ -fprofile-arcs
 
 %.o: %.cpp %.h
 	$(CC) $(CXXFLAGS) -c -o $@ $<
