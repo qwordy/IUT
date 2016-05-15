@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/chrono
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// <chrono> -*- C++ -*-
         -:    2:

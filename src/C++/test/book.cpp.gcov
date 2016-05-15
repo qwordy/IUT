@@ -1,6 +1,6 @@
         -:    0:Source:d/book.cpp
-        -:    0:Graph:/home/yfy/iut/src/C++/test/d/book.gcno
-        -:    0:Data:/home/yfy/iut/src/C++/test/d/book.gcda
+        -:    0:Graph:d/book.gcno
+        -:    0:Data:d/book.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:#include "book.h"

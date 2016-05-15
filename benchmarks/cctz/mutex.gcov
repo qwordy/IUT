@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/mutex
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// <mutex> -*- C++ -*-
         -:    2:
@@ -135,18 +135,18 @@
         -:  130:    mutex& operator=(const mutex&) = delete;
         -:  131:
         -:  132:    void
-function _ZNSt5mutex4lockEv called 1162087 returned 99% blocks executed 80%
-  1162087:  133:    lock()
+function _ZNSt5mutex4lockEv called 2177391 returned 99% blocks executed 80%
+  2177391:  133:    lock()
         -:  134:    {
-  1162087:  135:      int __e = __gthread_mutex_lock(&_M_mutex);
+  2177391:  135:      int __e = __gthread_mutex_lock(&_M_mutex);
         -:  136:
         -:  137:      // EINVAL, EAGAIN, EBUSY, EINVAL, EDEADLK(may)
-  1197039:  138:      if (__e)
+  2244398:  138:      if (__e)
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  139:	__throw_system_error(__e);
 call    0 never executed
-  1197039:  140:    }
+  2244398:  140:    }
         -:  141:
         -:  142:    bool
         -:  143:    try_lock() noexcept
@@ -383,7 +383,7 @@ call    0 never executed
         -:  374:      typedef _Mutex mutex_type;
         -:  375:
         -:  376:      explicit lock_guard(mutex_type& __m) : _M_device(__m)
-  1164936:  377:      { _M_device.lock(); }
+  2184366:  377:      { _M_device.lock(); }
 call    0 returned 99%
 call    1 returned 100%
         -:  378:
@@ -720,11 +720,11 @@ call    1 returned 100%
         -:  709:
         -:  710:  template<typename _Callable>
         -:  711:    inline void
-function _ZSt16__once_call_implISt12_Bind_simpleIFZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEvEUlvE_vEEEvv called 8 returned 100% blocks executed 100%
-        8:  712:    __once_call_impl()
+function _ZSt16__once_call_implISt12_Bind_simpleIFZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEvEUlvE_vEEEvv called 15 returned 100% blocks executed 100%
+       15:  712:    __once_call_impl()
         -:  713:    {
         -:  714:      (*(_Callable*)__once_callable)();
-        8:  715:    }
+       15:  715:    }
         -:  716:#else
         -:  717:  extern function<void()> __once_functor;
         -:  718:
@@ -740,15 +740,15 @@ function _ZSt16__once_call_implISt12_Bind_simpleIFZN4cctz12_GLOBAL__N_115LoadUTC
         -:  728:  /// call_once
         -:  729:  template<typename _Callable, typename... _Args>
         -:  730:    void
-function _ZSt9call_onceIZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEvEUlvE_IEEvRSt9once_flagOT_DpOT0_ called 4807 returned 100% blocks executed 83%
-     4807:  731:    call_once(once_flag& __once, _Callable&& __f, _Args&&... __args)
+function _ZSt9call_onceIZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEvEUlvE_IEEvRSt9once_flagOT_DpOT0_ called 8963 returned 100% blocks executed 83%
+     8963:  731:    call_once(once_flag& __once, _Callable&& __f, _Args&&... __args)
         -:  732:    {
         -:  733:#ifdef _GLIBCXX_HAVE_TLS
         -:  734:      auto __bound_functor = std::__bind_simple(std::forward<_Callable>(__f),
-     4807:  735:          std::forward<_Args>(__args)...);
+     8963:  735:          std::forward<_Args>(__args)...);
 call    0 returned 100%
-     4807:  736:      __once_callable = &__bound_functor;
-     4807:  737:      __once_call = &__once_call_impl<decltype(__bound_functor)>;
+     8963:  736:      __once_callable = &__bound_functor;
+     8963:  737:      __once_call = &__once_call_impl<decltype(__bound_functor)>;
         -:  738:#else
         -:  739:      unique_lock<mutex> __functor_lock(__get_once_mutex());
         -:  740:      auto __callable = std::__bind_simple(std::forward<_Callable>(__f),
@@ -757,19 +757,19 @@ call    0 returned 100%
         -:  743:      __set_once_functor_lock_ptr(&__functor_lock);
         -:  744:#endif
         -:  745:
-     4807:  746:      int __e = __gthread_once(&__once._M_once, &__once_proxy);
+     8963:  746:      int __e = __gthread_once(&__once._M_once, &__once_proxy);
         -:  747:
         -:  748:#ifndef _GLIBCXX_HAVE_TLS
         -:  749:      if (__functor_lock)
         -:  750:        __set_once_functor_lock_ptr(0);
         -:  751:#endif
         -:  752:
-     4807:  753:      if (__e)
+     8963:  753:      if (__e)
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  754:	__throw_system_error(__e);
 call    0 never executed
-     4807:  755:    }
+     8963:  755:    }
         -:  756:#endif // _GLIBCXX_HAS_GTHREADS
         -:  757:
         -:  758:  // @} group mutexes

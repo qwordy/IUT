@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/string.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_posix.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_posix.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:/* Copyright (C) 1991-2014 Free Software Foundation, Inc.
         -:    2:   This file is part of the GNU C Library.
@@ -233,7 +233,7 @@
         -:  228:__extern_always_inline const char *
         -:  229:strchr (const char *__s, int __c) __THROW
         -:  230:{
-    86024:  231:  return __builtin_strchr (__s, __c);
+   161295:  231:  return __builtin_strchr (__s, __c);
         -:  232:}
         -:  233:# endif
         -:  234:}

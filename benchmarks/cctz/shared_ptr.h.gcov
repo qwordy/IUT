@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/shared_ptr.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// shared_ptr and weak_ptr implementation -*- C++ -*-
         -:    2:
@@ -95,7 +95,7 @@
         -:   90:   *  it is destroyed or reset.
         -:   91:  */
         -:   92:  template<typename _Tp>
-    14358:   93:    class shared_ptr : public __shared_ptr<_Tp>
+    26923:   93:    class shared_ptr : public __shared_ptr<_Tp>
         -:   94:    {
         -:   95:    public:
         -:   96:      /**
@@ -318,7 +318,7 @@
         -:  313:      template<typename _Alloc, typename... _Args>
         -:  314:	shared_ptr(_Sp_make_shared_tag __tag, const _Alloc& __a,
         -:  315:		   _Args&&... __args)
-     4104:  316:	: __shared_ptr<_Tp>(__tag, __a, std::forward<_Args>(__args)...)
+     7695:  316:	: __shared_ptr<_Tp>(__tag, __a, std::forward<_Args>(__args)...)
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -610,7 +610,7 @@ call    3 returned 100%
         -:  601:    {
         -:  602:      typedef typename std::remove_const<_Tp>::type _Tp_nc;
         -:  603:      return std::allocate_shared<_Tp>(std::allocator<_Tp_nc>(),
-     4104:  604:				       std::forward<_Args>(__args)...);
+     7695:  604:				       std::forward<_Args>(__args)...);
         -:  605:    }
         -:  606:
         -:  607:  /// std::hash specialization for shared_ptr.

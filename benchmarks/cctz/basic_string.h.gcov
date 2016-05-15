@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/basic_string.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// Components for manipulating sequences of characters -*- C++ -*-
         -:    2:
@@ -274,7 +274,7 @@
         -:  269:      };
         -:  270:
         -:  271:      // Use empty-base optimization: http://www.cantrip.org/emptyopt.html
-       96:  272:      struct _Alloc_hider : _Alloc
+      180:  272:      struct _Alloc_hider : _Alloc
         -:  273:      {
         -:  274:	_Alloc_hider(_CharT* __dat, const _Alloc& __a) _GLIBCXX_NOEXCEPT
         -:  275:	: _Alloc(__a), _M_p(__dat) { }
@@ -295,7 +295,7 @@
         -:  290:
         -:  291:      _CharT*
         -:  292:      _M_data() const _GLIBCXX_NOEXCEPT
-       96:  293:      { return  _M_dataplus._M_p; }
+      180:  293:      { return  _M_dataplus._M_p; }
         -:  294:
         -:  295:      _CharT*
         -:  296:      _M_data(_CharT* __p) _GLIBCXX_NOEXCEPT
@@ -303,7 +303,7 @@
         -:  298:
         -:  299:      _Rep*
         -:  300:      _M_rep() const _GLIBCXX_NOEXCEPT
-       96:  301:      { return &((reinterpret_cast<_Rep*> (_M_data()))[-1]); }
+      180:  301:      { return &((reinterpret_cast<_Rep*> (_M_data()))[-1]); }
         -:  302:
         -:  303:      // For the internal use we have functions similar to `begin'/`end'
         -:  304:      // but they do not call _M_leak.
@@ -549,7 +549,7 @@
         -:  544:       *  @brief  Destroy the string instance.
         -:  545:       */
         -:  546:      ~basic_string() _GLIBCXX_NOEXCEPT
-      288:  547:      { _M_rep()->_M_dispose(this->get_allocator()); }
+      540:  547:      { _M_rep()->_M_dispose(this->get_allocator()); }
 call    0 never executed
 call    1 never executed
 call    2 never executed

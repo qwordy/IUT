@@ -1,6 +1,6 @@
         -:    0:Source:fly.cpp
-        -:    0:Graph:/home/yfy/iut/src/C++/test/fly.gcno
-        -:    0:Data:/home/yfy/iut/src/C++/test/fly.gcda
+        -:    0:Graph:fly.gcno
+        -:    0:Data:fly.gcda
         -:    0:Runs:1
         -:    0:Programs:1
         -:    1:#include "fly.h"

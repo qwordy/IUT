@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/move.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// Move, forward and identity for C++0x + swap -*- C++ -*-
         -:    2:
@@ -177,8 +177,8 @@
         -:  172:      // concept requirements
         -:  173:      __glibcxx_function_requires(_SGIAssignableConcept<_Tp>)
         -:  174:
-     4680:  175:      _Tp __tmp = _GLIBCXX_MOVE(__a);
-     4680:  176:      __a = _GLIBCXX_MOVE(__b);
+     8775:  175:      _Tp __tmp = _GLIBCXX_MOVE(__a);
+     8775:  176:      __a = _GLIBCXX_MOVE(__b);
         -:  177:      __b = _GLIBCXX_MOVE(__tmp);
         -:  178:    }
         -:  179:

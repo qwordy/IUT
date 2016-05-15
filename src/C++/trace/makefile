@@ -1,3 +1,3 @@
 parse: parse.c
-	gcc -Wall -o $@ $^
+	g++ -Wall -o $@ $^
 

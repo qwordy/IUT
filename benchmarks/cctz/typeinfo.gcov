@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/typeinfo
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// RTTI support for -*- C++ -*-
         -:    2:// Copyright (C) 1994-2014 Free Software Foundation, Inc.
@@ -122,18 +122,18 @@
         -:  117:	? __name < __arg.__name
         -:  118:	: __builtin_strcmp (__name, __arg.__name) < 0; }
         -:  119:
-function _ZNKSt9type_infoeqERKS_ called 4104 returned 100% blocks executed 40%
-     4104:  120:    bool operator==(const type_info& __arg) const _GLIBCXX_NOEXCEPT
+function _ZNKSt9type_infoeqERKS_ called 7695 returned 100% blocks executed 40%
+     7695:  120:    bool operator==(const type_info& __arg) const _GLIBCXX_NOEXCEPT
         -:  121:    {
-     4104:  122:      return ((__name == __arg.__name)
-     4104:  123:	      || (__name[0] != '*' &&
+     7695:  122:      return ((__name == __arg.__name)
+     7695:  123:	      || (__name[0] != '*' &&
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 never executed
 branch  3 never executed
 branch  4 never executed
 branch  5 never executed
-     4104:  124:		  __builtin_strcmp (__name, __arg.__name) == 0));
+     7695:  124:		  __builtin_strcmp (__name, __arg.__name) == 0));
         -:  125:    }
         -:  126:  #else
         -:  127:    // On some targets we can rely on type_info's NTBS being unique,

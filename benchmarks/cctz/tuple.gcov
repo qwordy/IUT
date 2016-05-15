@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/tuple
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:8
+        -:    0:Runs:15
         -:    0:Programs:1
         -:    1:// <tuple> -*- C++ -*-
         -:    2:
@@ -134,10 +134,10 @@
         -:  129:    struct _Head_base<_Idx, _Head, false>
         -:  130:    {
         -:  131:      constexpr _Head_base()
-     4680:  132:      : _M_head_impl() { }
+     8775:  132:      : _M_head_impl() { }
         -:  133:
         -:  134:      constexpr _Head_base(const _Head& __h)
-     4680:  135:      : _M_head_impl(__h) { }
+     8775:  135:      : _M_head_impl(__h) { }
         -:  136:
         -:  137:      constexpr _Head_base(const _Head_base&) = default;
         -:  138:      constexpr _Head_base(_Head_base&&) = default;
@@ -171,7 +171,7 @@
         -:  166:	: _M_head_impl(std::forward<_UHead>(__uhead), *__a._M_a) { }
         -:  167:
         -:  168:      static constexpr _Head&
-     4680:  169:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
+     8775:  169:      _M_head(_Head_base& __b) noexcept { return __b._M_head_impl; }
         -:  170:
         -:  171:      static constexpr const _Head&
         -:  172:      _M_head(const _Head_base& __b) noexcept { return __b._M_head_impl; }
@@ -1106,7 +1106,7 @@
         -: 1101:      pair(tuple<_Args1...>& __tuple1, tuple<_Args2...>& __tuple2,
         -: 1102:	   _Index_tuple<_Indexes1...>, _Index_tuple<_Indexes2...>)
         -: 1103:      : first(std::forward<_Args1>(std::get<_Indexes1>(__tuple1))...),
-     4680: 1104:        second(std::forward<_Args2>(std::get<_Indexes2>(__tuple2))...)
+     8775: 1104:        second(std::forward<_Args2>(std::get<_Indexes2>(__tuple2))...)
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
