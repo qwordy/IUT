@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/gtest/internal/gtest-internal.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:19
+        -:    0:Runs:21
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
         -:    2:// All rights reserved.
@@ -445,7 +445,7 @@
         -:  440:  virtual Test* CreateTest() = 0;
         -:  441:
         -:  442: protected:
-      399:  443:  TestFactoryBase() {}
+      441:  443:  TestFactoryBase() {}
         -:  444:
         -:  445: private:
         -:  446:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -496,7 +496,7 @@ function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestE
 function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestEED2Ev called 0 returned 0% blocks executed 0%
 function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEED0Ev called 0 returned 0% blocks executed 0%
 function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEED2Ev called 0 returned 0% blocks executed 0%
-      399:  452:class TestFactoryImpl : public TestFactoryBase {
+      441:  452:class TestFactoryImpl : public TestFactoryBase {
 call    0 never executed
 call    1 never executed
 call    2 never executed
@@ -519,28 +519,28 @@ call   18 never executed
 call   19 never executed
 call   20 never executed
         -:  453: public:
-function _ZN7testing8internal15TestFactoryImplIN4cctz34CivilTime_DefaultConstruction_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_StructMember_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz33CivilTime_FieldsConstruction_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz39CivilTime_FieldsConstructionLimits_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz26CivilTime_RangeLimits_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ImplicitCrossAlignment_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ExplicitCrossAlignment_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz29CivilTime_ValueSemantics_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Relational_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Arithmetic_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_ArithmeticLimits_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Difference_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_DifferenceLimits_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Properties_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_OutputStream_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz40CivilTime_OutputStreamLeftFillWidth_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz30CivilTime_NextPrevWeekday_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_DifferenceWithHugeYear_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz36CivilTime_NormalizeWithHugeYear_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEE10CreateTestEv called 19 returned 100% blocks executed 80%
-      798:  454:  virtual Test* CreateTest() { return new TestClass; }
+function _ZN7testing8internal15TestFactoryImplIN4cctz34CivilTime_DefaultConstruction_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_StructMember_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33CivilTime_FieldsConstruction_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39CivilTime_FieldsConstructionLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz26CivilTime_RangeLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ImplicitCrossAlignment_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ExplicitCrossAlignment_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29CivilTime_ValueSemantics_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Relational_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Arithmetic_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_ArithmeticLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Difference_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_DifferenceLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Properties_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_OutputStream_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz40CivilTime_OutputStreamLeftFillWidth_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz30CivilTime_NextPrevWeekday_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_DifferenceWithHugeYear_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36CivilTime_NormalizeWithHugeYear_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
+      882:  454:  virtual Test* CreateTest() { return new TestClass; }
 call    0 returned 100%
 call    1 never executed
 call    2 returned 100%

@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_posix.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -98,8 +98,8 @@
         -:   93:// remaining fields are also valid. Note that the start/end transitions
         -:   94:// are not ordered---in the southern hemisphere the transition to end
         -:   95:// daylight time occurs first in any particular year.
-function _ZN4cctz13PosixTimeZoneD2Ev called 8715 returned 100% blocks executed 100%
-    17430:   96:struct PosixTimeZone {
+function _ZN4cctz13PosixTimeZoneD2Ev called 9877 returned 100% blocks executed 100%
+    19754:   96:struct PosixTimeZone {
         -:   97:  std::string std_abbr;
         -:   98:  int std_offset;
         -:   99:

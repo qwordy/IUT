@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/ios_base.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:19
+        -:    0:Runs:21
         -:    0:Programs:1
         -:    1:// Iostreams base classes -*- C++ -*-
         -:    2:
@@ -78,11 +78,11 @@
         -:   73:
         -:   74:  inline _GLIBCXX_CONSTEXPR _Ios_Fmtflags
         -:   75:  operator&(_Ios_Fmtflags __a, _Ios_Fmtflags __b)
-      114:   76:  { return _Ios_Fmtflags(static_cast<int>(__a) & static_cast<int>(__b)); }
+      126:   76:  { return _Ios_Fmtflags(static_cast<int>(__a) & static_cast<int>(__b)); }
         -:   77:
         -:   78:  inline _GLIBCXX_CONSTEXPR _Ios_Fmtflags
         -:   79:  operator|(_Ios_Fmtflags __a, _Ios_Fmtflags __b)
-      114:   80:  { return _Ios_Fmtflags(static_cast<int>(__a) | static_cast<int>(__b)); }
+      126:   80:  { return _Ios_Fmtflags(static_cast<int>(__a) | static_cast<int>(__b)); }
         -:   81:
         -:   82:  inline _GLIBCXX_CONSTEXPR _Ios_Fmtflags
         -:   83:  operator^(_Ios_Fmtflags __a, _Ios_Fmtflags __b)
@@ -94,11 +94,11 @@
         -:   89:
         -:   90:  inline const _Ios_Fmtflags&
         -:   91:  operator|=(_Ios_Fmtflags& __a, _Ios_Fmtflags __b)
-      114:   92:  { return __a = __a | __b; }
+      126:   92:  { return __a = __a | __b; }
         -:   93:
         -:   94:  inline const _Ios_Fmtflags&
         -:   95:  operator&=(_Ios_Fmtflags& __a, _Ios_Fmtflags __b)
-      114:   96:  { return __a = __a & __b; }
+      126:   96:  { return __a = __a & __b; }
         -:   97:
         -:   98:  inline const _Ios_Fmtflags&
         -:   99:  operator^=(_Ios_Fmtflags& __a, _Ios_Fmtflags __b)
@@ -599,7 +599,7 @@
         -:  594:    fmtflags
         -:  595:    setf(fmtflags __fmtfl, fmtflags __mask)
         -:  596:    {
-      114:  597:      fmtflags __old = _M_flags;
+      126:  597:      fmtflags __old = _M_flags;
         -:  598:      _M_flags &= ~__mask;
         -:  599:      _M_flags |= (__fmtfl & __mask);
         -:  600:      return __old;
@@ -658,7 +658,7 @@
         -:  653:    width(streamsize __wide)
         -:  654:    {
         -:  655:      streamsize __old = _M_width;
-     8341:  656:      _M_width = __wide;
+     9219:  656:      _M_width = __wide;
         -:  657:      return __old;
         -:  658:    }
         -:  659:
@@ -918,11 +918,11 @@
         -:  913:
         -:  914:  /// Calls base.setf(ios_base::left, ios_base::adjustfield).
         -:  915:  inline ios_base&
-function _ZSt4leftRSt8ios_base called 114 returned 100% blocks executed 100%
-      114:  916:  left(ios_base& __base)
+function _ZSt4leftRSt8ios_base called 126 returned 100% blocks executed 100%
+      126:  916:  left(ios_base& __base)
         -:  917:  {
         -:  918:    __base.setf(ios_base::left, ios_base::adjustfield);
-      114:  919:    return __base;
+      126:  919:    return __base;
         -:  920:  }
         -:  921:
         -:  922:  /// Calls base.setf(ios_base::right, ios_base::adjustfield).

@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_posix.cc
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_posix.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_posix.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -29,104 +29,104 @@
         -:   24:
         -:   25:const char kDigits[] = "0123456789";
         -:   26:
-function _ZN4cctz12_GLOBAL__N_18ParseIntEPKciiPi called 31680 returned 100% blocks executed 100%
-    31680:   27:const char* ParseInt(const char* p, int min, int max, int* vp) {
+function _ZN4cctz12_GLOBAL__N_18ParseIntEPKciiPi called 35904 returned 100% blocks executed 100%
+    35904:   27:const char* ParseInt(const char* p, int min, int max, int* vp) {
         -:   28:  int value = 0;
         -:   29:  const char* op = p;
         -:   30:  const int kMaxInt = std::numeric_limits<int>::max();
-   173655:   31:  for (; const char* dp = strchr(kDigits, *p); ++p) {
+   196809:   31:  for (; const char* dp = strchr(kDigits, *p); ++p) {
 branch  0 taken 66% (fallthrough)
 branch  1 taken 34%
-    45480:   32:    int d = static_cast<int>(dp - kDigits);
-    45480:   33:    if (d >= 10) break;  // '\0'
+    51544:   32:    int d = static_cast<int>(dp - kDigits);
+    51544:   33:    if (d >= 10) break;  // '\0'
 branch  0 taken 81% (fallthrough)
 branch  1 taken 19%
-    36765:   34:    if (value > kMaxInt / 10) return nullptr;
+    41667:   34:    if (value > kMaxInt / 10) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-    36765:   35:    value *= 10;
-    36765:   36:    if (value > kMaxInt - d) return nullptr;
+    41667:   35:    value *= 10;
+    41667:   36:    if (value > kMaxInt - d) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-    36765:   37:    value += d;
-    36765:   38:  }
-    31680:   39:  if (p == op || value < min || value > max) return nullptr;
+    41667:   37:    value += d;
+    41667:   38:  }
+    35904:   39:  if (p == op || value < min || value > max) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
-    31680:   40:  *vp = value;
-    31680:   41:  return p;
+    35904:   40:  *vp = value;
+    35904:   41:  return p;
         -:   42:}
         -:   43:
         -:   44:// abbr = <.*?> | [^-+,\d]{3,}
-function _ZN4cctz12_GLOBAL__N_19ParseAbbrEPKcPSs called 12060 returned 100% blocks executed 100%
-    12060:   45:const char* ParseAbbr(const char* p, std::string* abbr) {
+function _ZN4cctz12_GLOBAL__N_19ParseAbbrEPKcPSs called 13668 returned 100% blocks executed 100%
+    13668:   45:const char* ParseAbbr(const char* p, std::string* abbr) {
         -:   46:  const char* op = p;
-    12060:   47:  if (*p == '<') {  // special zoneinfo <...> form
+    13668:   47:  if (*p == '<') {  // special zoneinfo <...> form
 branch  0 taken 97% (fallthrough)
 branch  1 taken 3%
-     2460:   48:    while (*++p != '>') {
+     2788:   48:    while (*++p != '>') {
 branch  0 taken 84%
 branch  1 taken 16% (fallthrough)
-     2070:   49:      if (*p == '\0') return nullptr;
+     2346:   49:      if (*p == '\0') return nullptr;
 branch  0 taken 100%
 branch  1 taken 0%
         -:   50:    }
-      390:   51:    abbr->assign(op + 1, p - op - 1);
+      442:   51:    abbr->assign(op + 1, p - op - 1);
 call    0 returned 100%
-      390:   52:    return ++p;
+      442:   52:    return ++p;
         -:   53:  }
-    50175:   54:  while (*p != '\0') {
+    56865:   54:  while (*p != '\0') {
 branch  0 taken 100%
 branch  1 taken 0% (fallthrough)
-   100350:   55:    if (strchr("-+,", *p)) break;
+   113730:   55:    if (strchr("-+,", *p)) break;
 branch  0 taken 85% (fallthrough)
 branch  1 taken 15%
-    42675:   56:    if (strchr(kDigits, *p)) break;
+    48365:   56:    if (strchr(kDigits, *p)) break;
 branch  0 taken 90% (fallthrough)
 branch  1 taken 10%
-    38505:   57:    ++p;
+    43639:   57:    ++p;
         -:   58:  }
-    11670:   59:  if (p - op < 3) return nullptr;
+    13226:   59:  if (p - op < 3) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-    11670:   60:  abbr->assign(op, p - op);
+    13226:   60:  abbr->assign(op, p - op);
 call    0 returned 100%
-    11670:   61:  return p;
+    13226:   61:  return p;
         -:   62:}
         -:   63:
         -:   64:// offset = [+|-]hh[:mm[:ss]] (aggregated into single seconds value)
-function _ZN4cctz12_GLOBAL__N_111ParseOffsetEPKciiiPi called 11280 returned 100% blocks executed 86%
-    11280:   65:const char* ParseOffset(const char* p, int min_hour, int max_hour, int sign,
+function _ZN4cctz12_GLOBAL__N_111ParseOffsetEPKciiiPi called 12784 returned 100% blocks executed 86%
+    12784:   65:const char* ParseOffset(const char* p, int min_hour, int max_hour, int sign,
         -:   66:                        int* offset) {
-    11280:   67:  if (p == nullptr) return nullptr;
+    12784:   67:  if (p == nullptr) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-    11280:   68:  if (*p == '+' || *p == '-') {
+    12784:   68:  if (*p == '+' || *p == '-') {
 branch  0 taken 39% (fallthrough)
 branch  1 taken 61%
-     4440:   69:    if (*p++ == '-') sign = -sign;
+     5032:   69:    if (*p++ == '-') sign = -sign;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:   70:  }
-    11280:   71:  int hours = 0;
-    11280:   72:  int minutes = 0;
-    11280:   73:  int seconds = 0;
-    11280:   74:  p = ParseInt(p, min_hour, max_hour, &hours);
+    12784:   71:  int hours = 0;
+    12784:   72:  int minutes = 0;
+    12784:   73:  int seconds = 0;
+    12784:   74:  p = ParseInt(p, min_hour, max_hour, &hours);
 call    0 returned 100%
-    11280:   75:  if (p == nullptr) return nullptr;
+    12784:   75:  if (p == nullptr) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-    11280:   76:  if (*p == ':') {
+    12784:   76:  if (*p == ':') {
 branch  0 taken 4% (fallthrough)
 branch  1 taken 96%
-      450:   77:    p = ParseInt(p + 1, 0, 59, &minutes);
+      510:   77:    p = ParseInt(p + 1, 0, 59, &minutes);
 call    0 returned 100%
-      450:   78:    if (p == nullptr) return nullptr;
+      510:   78:    if (p == nullptr) return nullptr;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-      450:   79:    if (*p == ':') {
+      510:   79:    if (*p == ':') {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:   80:      p = ParseInt(p + 1, 0, 59, &seconds);
@@ -136,23 +136,23 @@ branch  0 never executed
 branch  1 never executed
         -:   82:    }
         -:   83:  }
-    11280:   84:  *offset = sign * ((((hours * 60) + minutes) * 60) + seconds);
-    11280:   85:  return p;
+    12784:   84:  *offset = sign * ((((hours * 60) + minutes) * 60) + seconds);
+    12784:   85:  return p;
         -:   86:}
         -:   87:
         -:   88:// datetime = ( Jn | n | Mm.w.d ) [ / offset ]
-function _ZN4cctz12_GLOBAL__N_113ParseDateTimeEPKcPNS_15PosixTransitionE called 6690 returned 100% blocks executed 81%
-     6690:   89:const char* ParseDateTime(const char* p, PosixTransition* res) {
-     6690:   90:  if (p != nullptr && *p == ',') {
+function _ZN4cctz12_GLOBAL__N_113ParseDateTimeEPKcPNS_15PosixTransitionE called 7582 returned 100% blocks executed 81%
+     7582:   89:const char* ParseDateTime(const char* p, PosixTransition* res) {
+     7582:   90:  if (p != nullptr && *p == ',') {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
-     6690:   91:    if (*++p == 'M') {
+     7582:   91:    if (*++p == 'M') {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
-     6630:   92:      int month = 0;
-     6630:   93:      if ((p = ParseInt(p + 1, 1, 12, &month)) != nullptr && *p == '.') {
+     7514:   92:      int month = 0;
+     7514:   93:      if ((p = ParseInt(p + 1, 1, 12, &month)) != nullptr && *p == '.') {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%
@@ -160,8 +160,8 @@ branch  3 taken 0% (fallthrough)
 branch  4 taken 100%
 branch  5 taken 100% (fallthrough)
 branch  6 taken 0%
-     6630:   94:        int week = 0;
-     6630:   95:        if ((p = ParseInt(p + 1, 1, 5, &week)) != nullptr && *p == '.') {
+     7514:   94:        int week = 0;
+     7514:   95:        if ((p = ParseInt(p + 1, 1, 5, &week)) != nullptr && *p == '.') {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%
@@ -169,28 +169,28 @@ branch  3 taken 0% (fallthrough)
 branch  4 taken 100%
 branch  5 taken 100% (fallthrough)
 branch  6 taken 0%
-     6630:   96:          int weekday = 0;
-     6630:   97:          if ((p = ParseInt(p + 1, 0, 6, &weekday)) != nullptr) {
+     7514:   96:          int weekday = 0;
+     7514:   97:          if ((p = ParseInt(p + 1, 0, 6, &weekday)) != nullptr) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%
-     6630:   98:            res->date.fmt = PosixTransition::M;
-     6630:   99:            res->date.m.month = static_cast<int8_t>(month);
-     6630:  100:            res->date.m.week = static_cast<int8_t>(week);
-     6630:  101:            res->date.m.weekday = static_cast<int8_t>(weekday);
+     7514:   98:            res->date.fmt = PosixTransition::M;
+     7514:   99:            res->date.m.month = static_cast<int8_t>(month);
+     7514:  100:            res->date.m.week = static_cast<int8_t>(week);
+     7514:  101:            res->date.m.weekday = static_cast<int8_t>(weekday);
         -:  102:          }
         -:  103:        }
         -:  104:      }
-       60:  105:    } else if (*p == 'J') {
+       68:  105:    } else if (*p == 'J') {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-       60:  106:      int day = 0;
-       60:  107:      if ((p = ParseInt(p + 1, 1, 365, &day)) != nullptr) {
+       68:  106:      int day = 0;
+       68:  107:      if ((p = ParseInt(p + 1, 1, 365, &day)) != nullptr) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%
-       60:  108:        res->date.fmt = PosixTransition::J;
-       60:  109:        res->date.j.day = static_cast<int16_t>(day);
+       68:  108:        res->date.fmt = PosixTransition::J;
+       68:  109:        res->date.j.day = static_cast<int16_t>(day);
         -:  110:      }
         -:  111:    } else {
     #####:  112:      int day = 0;
@@ -203,56 +203,56 @@ branch  2 never executed
         -:  116:      }
         -:  117:    }
         -:  118:  }
-     6690:  119:  if (p != nullptr) {
+     7582:  119:  if (p != nullptr) {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-     6690:  120:    res->time.offset = 2 * 60 * 60;  // default offset is 02:00:00
-     6690:  121:    if (*p == '/') p = ParseOffset(p + 1, -167, 167, 1, &res->time.offset);
+     7582:  120:    res->time.offset = 2 * 60 * 60;  // default offset is 02:00:00
+     7582:  121:    if (*p == '/') p = ParseOffset(p + 1, -167, 167, 1, &res->time.offset);
 branch  0 taken 38% (fallthrough)
 branch  1 taken 62%
 call    2 returned 100%
         -:  122:  }
-     6690:  123:  return p;
+     7582:  123:  return p;
         -:  124:}
         -:  125:
         -:  126:}  // namespace
         -:  127:
         -:  128:// spec = std offset [ dst [ offset ] , datetime , datetime ]
-function _ZN4cctz14ParsePosixSpecERKSsPNS_13PosixTimeZoneE called 8715 returned 100% blocks executed 94%
-     8715:  129:bool ParsePosixSpec(const std::string& spec, PosixTimeZone* res) {
+function _ZN4cctz14ParsePosixSpecERKSsPNS_13PosixTimeZoneE called 9877 returned 100% blocks executed 94%
+     9877:  129:bool ParsePosixSpec(const std::string& spec, PosixTimeZone* res) {
         -:  130:  const char* p = spec.c_str();
-     8715:  131:  if (*p == ':') return false;
+     9877:  131:  if (*p == ':') return false;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  132:
-     8715:  133:  p = ParseAbbr(p, &res->std_abbr);
+     9877:  133:  p = ParseAbbr(p, &res->std_abbr);
 call    0 returned 100%
-     8715:  134:  p = ParseOffset(p, 0, 24, -1, &res->std_offset);
+     9877:  134:  p = ParseOffset(p, 0, 24, -1, &res->std_offset);
 call    0 returned 100%
-     8715:  135:  if (p == nullptr) return false;
+     9877:  135:  if (p == nullptr) return false;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-     8715:  136:  if (*p == '\0') return true;
+     9877:  136:  if (*p == '\0') return true;
 branch  0 taken 38% (fallthrough)
 branch  1 taken 62%
         -:  137:
-     3345:  138:  p = ParseAbbr(p, &res->dst_abbr);
+     3791:  138:  p = ParseAbbr(p, &res->dst_abbr);
 call    0 returned 100%
-     3345:  139:  if (p == nullptr) return false;
+     3791:  139:  if (p == nullptr) return false;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-     3345:  140:  res->dst_offset = res->std_offset + (60 * 60);  // default
-     3345:  141:  if (*p != ',') p = ParseOffset(p, 0, 24, -1, &res->dst_offset);
+     3791:  140:  res->dst_offset = res->std_offset + (60 * 60);  // default
+     3791:  141:  if (*p != ',') p = ParseOffset(p, 0, 24, -1, &res->dst_offset);
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
 call    2 returned 100%
         -:  142:
-     3345:  143:  p = ParseDateTime(p, &res->dst_start);
+     3791:  143:  p = ParseDateTime(p, &res->dst_start);
 call    0 returned 100%
-     3345:  144:  p = ParseDateTime(p, &res->dst_end);
+     3791:  144:  p = ParseDateTime(p, &res->dst_end);
 call    0 returned 100%
         -:  145:
-     3345:  146:  return p != nullptr && *p == '\0';
+     3791:  146:  return p != nullptr && *p == '\0';
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 0% (fallthrough)

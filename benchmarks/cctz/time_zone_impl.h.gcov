@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_impl.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -29,8 +29,8 @@
         -:   24:namespace cctz {
         -:   25:
         -:   26:// time_zone::Impl is the internal object referenced by a cctz::time_zone.
-function _ZN4cctz9time_zone4ImplD2Ev called 45 returned 100% blocks executed 60%
-       90:   27:class time_zone::Impl {
+function _ZN4cctz9time_zone4ImplD2Ev called 51 returned 100% blocks executed 60%
+      102:   27:class time_zone::Impl {
         -:   28: public:
         -:   29:  // Load a named time zone. Returns false if the name is invalid, or if
         -:   30:  // some other kind of error occurs. Note that loading "UTC" never fails.

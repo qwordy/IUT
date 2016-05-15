@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/condition_variable
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// <condition_variable> -*- C++ -*-
         -:    2:
@@ -99,10 +99,10 @@
         -:   94:      void
         -:   95:      wait(unique_lock<mutex>& __lock, _Predicate __p)
         -:   96:      {
-    15358:   97:	while (!__p())
+    17406:   97:	while (!__p())
 branch  0 taken 50%
 branch  1 taken 50% (fallthrough)
-     7678:   98:	  wait(__lock);
+     8702:   98:	  wait(__lock);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)

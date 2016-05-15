@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/x86_64-linux-gnu/c++/4.9/bits/gthr-default.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:/* Threads compatibility routines for libgcc2 and libobjc.  */
         -:    2:/* Compile this one with gcc.  */
@@ -700,10 +700,10 @@
         -:  695:static inline int
         -:  696:__gthread_once (__gthread_once_t *__once, void (*__func) (void))
         -:  697:{
-     8963:  698:  if (__gthread_active_p ())
+    10176:  698:  if (__gthread_active_p ())
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-     8963:  699:    return __gthrw_(pthread_once) (__once, __func);
+    10176:  699:    return __gthrw_(pthread_once) (__once, __func);
 call    0 returned 100%
         -:  700:  else
         -:  701:    return -1;
@@ -752,10 +752,10 @@ call    0 returned 100%
         -:  744:static inline int
         -:  745:__gthread_mutex_lock (__gthread_mutex_t *__mutex)
         -:  746:{
-  2177391:  747:  if (__gthread_active_p ())
+  2469100:  747:  if (__gthread_active_p ())
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
-  2186179:  748:    return __gthrw_(pthread_mutex_lock) (__mutex);
+  2478592:  748:    return __gthrw_(pthread_mutex_lock) (__mutex);
 call    0 returned 99%
         -:  749:  else
         -:  750:    return 0;
@@ -785,7 +785,7 @@ call    0 returned 99%
         -:  774:static inline int
         -:  775:__gthread_mutex_unlock (__gthread_mutex_t *__mutex)
         -:  776:{
-  2244398:  777:  if (__gthread_active_p ())
+  2543669:  777:  if (__gthread_active_p ())
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
@@ -794,7 +794,7 @@ branch  4 taken 100% (fallthrough)
 branch  5 taken 0%
 branch  6 never executed
 branch  7 never executed
-  2244398:  778:    return __gthrw_(pthread_mutex_unlock) (__mutex);
+  2543669:  778:    return __gthrw_(pthread_mutex_unlock) (__mutex);
 call    0 returned 99%
 call    1 returned 100%
 call    2 returned 100%

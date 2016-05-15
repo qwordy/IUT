@@ -35,7 +35,7 @@ void parse(char *file) {
   printf("line No. | function name | called times\n");
   f = fopen(file, "r");
   result = fgets(buf, MAXLEN, f);
-  /*while (result) {
+  while (result) {
     if (sscanf(buf, "function %s called %d", funcname, &times) == 2) {
       if ((result = fgets(buf, MAXLEN, f)) && (pos = strchr(buf, ':')) &&
           sscanf(pos + 1, "%d", &line) == 1) {
@@ -48,7 +48,7 @@ void parse(char *file) {
     } else {
       result = fgets(buf, MAXLEN, f);
     }
-  }*/
+  }
   fclose(f);
 }
 

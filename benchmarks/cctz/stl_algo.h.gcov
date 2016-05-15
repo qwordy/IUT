@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/stl_algo.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// Algorithm implementation -*- C++ -*-
         -:    2:
@@ -2043,9 +2043,9 @@
         -: 2038:
         -: 2039:  template<typename _ForwardIterator, typename _Tp, typename _Compare>
         -: 2040:    _ForwardIterator
-function _ZSt13__upper_boundIPKN4cctz10TransitionES1_N9__gnu_cxx5__ops14_Val_comp_iterINS1_10ByDateTimeEEEET_S9_S9_RKT0_T1_ called 180 returned 100% blocks executed 100%
-function _ZSt13__upper_boundIPKN4cctz10TransitionES1_N9__gnu_cxx5__ops14_Val_comp_iterINS1_10ByUnixTimeEEEET_S9_S9_RKT0_T1_ called 390 returned 100% blocks executed 100%
-      570: 2041:    __upper_bound(_ForwardIterator __first, _ForwardIterator __last,
+function _ZSt13__upper_boundIPKN4cctz10TransitionES1_N9__gnu_cxx5__ops14_Val_comp_iterINS1_10ByDateTimeEEEET_S9_S9_RKT0_T1_ called 204 returned 100% blocks executed 100%
+function _ZSt13__upper_boundIPKN4cctz10TransitionES1_N9__gnu_cxx5__ops14_Val_comp_iterINS1_10ByUnixTimeEEEET_S9_S9_RKT0_T1_ called 442 returned 100% blocks executed 100%
+      646: 2041:    __upper_bound(_ForwardIterator __first, _ForwardIterator __last,
         -: 2042:		  const _Tp& __val, _Compare __comp)
         -: 2043:    {
         -: 2044:      typedef typename iterator_traits<_ForwardIterator>::difference_type
@@ -2053,16 +2053,16 @@ function _ZSt13__upper_boundIPKN4cctz10TransitionES1_N9__gnu_cxx5__ops14_Val_com
         -: 2046:
         -: 2047:      _DistanceType __len = std::distance(__first, __last);
         -: 2048:
-     6000: 2049:      while (__len > 0)
+     6800: 2049:      while (__len > 0)
 branch  0 taken 89%
 branch  1 taken 11% (fallthrough)
 branch  2 taken 90%
 branch  3 taken 10% (fallthrough)
         -: 2050:	{
-     4860: 2051:	  _DistanceType __half = __len >> 1;
+     5508: 2051:	  _DistanceType __half = __len >> 1;
         -: 2052:	  _ForwardIterator __middle = __first;
         -: 2053:	  std::advance(__middle, __half);
-     4860: 2054:	  if (__comp(__val, __middle))
+     5508: 2054:	  if (__comp(__val, __middle))
 branch  0 taken 59% (fallthrough)
 branch  1 taken 41%
 branch  2 taken 65% (fallthrough)
@@ -2071,11 +2071,11 @@ branch  3 taken 35%
         -: 2056:	  else
         -: 2057:	    {
         -: 2058:	      __first = __middle;
-     1800: 2059:	      ++__first;
-     1800: 2060:	      __len = __len - __half - 1;
+     2040: 2059:	      ++__first;
+     2040: 2060:	      __len = __len - __half - 1;
         -: 2061:	    }
         -: 2062:	}
-      570: 2063:      return __first;
+      646: 2063:      return __first;
         -: 2064:    }
         -: 2065:
         -: 2066:  /**
@@ -2137,7 +2137,7 @@ branch  3 taken 35%
         -: 2122:						__val, __comp);
         -: 2123:
         -: 2124:      return std::__upper_bound(__first, __last, __val,
-      570: 2125:				__gnu_cxx::__ops::__val_comp_iter(__comp));
+      646: 2125:				__gnu_cxx::__ops::__val_comp_iter(__comp));
 call    0 returned 100%
 call    1 returned 100%
         -: 2126:    }

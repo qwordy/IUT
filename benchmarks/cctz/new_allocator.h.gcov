@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/ext/new_allocator.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// Allocator that wraps operator new -*- C++ -*-
         -:    2:
@@ -88,7 +88,7 @@
         -:   83:      template<typename _Tp1>
         -:   84:        new_allocator(const new_allocator<_Tp1>&) _GLIBCXX_USE_NOEXCEPT { }
         -:   85:
-      540:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
+      612:   86:      ~new_allocator() _GLIBCXX_USE_NOEXCEPT { }
         -:   87:
         -:   88:      pointer
         -:   89:      address(reference __x) const _GLIBCXX_NOEXCEPT

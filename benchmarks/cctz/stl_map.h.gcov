@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/stl_map.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:15
+        -:    0:Runs:17
         -:    0:Programs:1
         -:    1:// Map implementation -*- C++ -*-
         -:    2:
@@ -493,15 +493,15 @@
         -:  488:       *  Lookup requires logarithmic time.
         -:  489:       */
         -:  490:      mapped_type&
-function _ZNSt3mapISsPKN4cctz9time_zone4ImplESt4lessISsESaISt4pairIKSsS4_EEEixERS8_ called 8978 returned 100% blocks executed 100%
-     8978:  491:      operator[](const key_type& __k)
+function _ZNSt3mapISsPKN4cctz9time_zone4ImplESt4lessISsESaISt4pairIKSsS4_EEEixERS8_ called 10193 returned 100% blocks executed 100%
+    10193:  491:      operator[](const key_type& __k)
         -:  492:      {
         -:  493:	// concept requirements
         -:  494:	__glibcxx_function_requires(_DefaultConstructibleConcept<mapped_type>)
         -:  495:
-     8978:  496:	iterator __i = lower_bound(__k);
+    10193:  496:	iterator __i = lower_bound(__k);
         -:  497:	// __i->first is greater than or equivalent to __k.
-    17881:  498:	if (__i == end() || key_comp()(__k, (*__i).first))
+    20301:  498:	if (__i == end() || key_comp()(__k, (*__i).first))
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
 branch  2 taken 98% (fallthrough)
@@ -509,14 +509,14 @@ branch  3 taken 2%
 branch  4 taken 98% (fallthrough)
 branch  5 taken 2%
         -:  499:#if __cplusplus >= 201103L
-     8775:  500:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
+     9945:  500:	  __i = _M_t._M_emplace_hint_unique(__i, std::piecewise_construct,
 call    0 returned 100%
         -:  501:					    std::tuple<const key_type&>(__k),
         -:  502:					    std::tuple<>());
         -:  503:#else
         -:  504:          __i = insert(__i, value_type(__k, mapped_type()));
         -:  505:#endif
-     8978:  506:	return (*__i).second;
+    10193:  506:	return (*__i).second;
         -:  507:      }
         -:  508:
         -:  509:#if __cplusplus >= 201103L
@@ -870,7 +870,7 @@ call    0 returned 100%
         -:  857:       */
         -:  858:      iterator
         -:  859:      find(const key_type& __x)
-  2235380:  860:      { return _M_t.find(__x); }
+  2533430:  860:      { return _M_t.find(__x); }
 call    0 returned 100%
         -:  861:
         -:  862:      /**
@@ -913,7 +913,7 @@ call    0 returned 100%
         -:  899:       */
         -:  900:      iterator
         -:  901:      lower_bound(const key_type& __x)
-     8978:  902:      { return _M_t.lower_bound(__x); }
+    10193:  902:      { return _M_t.lower_bound(__x); }
         -:  903:
         -:  904:      /**
         -:  905:       *  @brief Finds the beginning of a subsequence matching given key.
