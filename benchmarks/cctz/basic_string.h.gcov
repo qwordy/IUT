@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/basic_string.h
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcda
-        -:    0:Runs:17
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Components for manipulating sequences of characters -*- C++ -*-
         -:    2:
@@ -274,10 +274,10 @@
         -:  269:      };
         -:  270:
         -:  271:      // Use empty-base optimization: http://www.cantrip.org/emptyopt.html
-      204:  272:      struct _Alloc_hider : _Alloc
+      176:  272:      struct _Alloc_hider : _Alloc
         -:  273:      {
         -:  274:	_Alloc_hider(_CharT* __dat, const _Alloc& __a) _GLIBCXX_NOEXCEPT
-        -:  275:	: _Alloc(__a), _M_p(__dat) { }
+      170:  275:	: _Alloc(__a), _M_p(__dat) { }
         -:  276:
         -:  277:	_CharT* _M_p; // The actual data.
         -:  278:      };
@@ -295,7 +295,7 @@
         -:  290:
         -:  291:      _CharT*
         -:  292:      _M_data() const _GLIBCXX_NOEXCEPT
-      204:  293:      { return  _M_dataplus._M_p; }
+      176:  293:      { return  _M_dataplus._M_p; }
         -:  294:
         -:  295:      _CharT*
         -:  296:      _M_data(_CharT* __p) _GLIBCXX_NOEXCEPT
@@ -303,7 +303,7 @@
         -:  298:
         -:  299:      _Rep*
         -:  300:      _M_rep() const _GLIBCXX_NOEXCEPT
-      204:  301:      { return &((reinterpret_cast<_Rep*> (_M_data()))[-1]); }
+      176:  301:      { return &((reinterpret_cast<_Rep*> (_M_data()))[-1]); }
         -:  302:
         -:  303:      // For the internal use we have functions similar to `begin'/`end'
         -:  304:      // but they do not call _M_leak.
@@ -549,13 +549,12 @@
         -:  544:       *  @brief  Destroy the string instance.
         -:  545:       */
         -:  546:      ~basic_string() _GLIBCXX_NOEXCEPT
-      612:  547:      { _M_rep()->_M_dispose(this->get_allocator()); }
+      528:  547:      { _M_rep()->_M_dispose(this->get_allocator()); }
 call    0 never executed
-call    1 never executed
+call    1 returned 100%
 call    2 never executed
 call    3 never executed
 call    4 returned 100%
-call    5 never executed
         -:  548:
         -:  549:      /**
         -:  550:       *  @brief  Assign the value of @a str to this string.
@@ -563,7 +562,10 @@ call    5 never executed
         -:  552:       */
         -:  553:      basic_string&
         -:  554:      operator=(const basic_string& __str) 
-        -:  555:      { return this->assign(__str); }
+      170:  555:      { return this->assign(__str); }
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
         -:  556:
         -:  557:      /**
         -:  558:       *  @brief  Copy contents of @a s into this string.
@@ -2598,7 +2600,18 @@ call    5 never executed
         -: 2587:    inline bool
         -: 2588:    operator<(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
         -: 2589:	      const basic_string<_CharT, _Traits, _Alloc>& __rhs)
-        -: 2590:    { return __lhs.compare(__rhs) < 0; }
+  3152241: 2590:    { return __lhs.compare(__rhs) < 0; }
+call    0 never executed
+call    1 never executed
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+call    5 returned 100%
+call    6 never executed
+call    7 never executed
+call    8 returned 100%
+call    9 returned 100%
+call   10 returned 100%
         -: 2591:
         -: 2592:  /**
         -: 2593:   *  @brief  Test if string precedes C string.

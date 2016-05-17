@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/gtest/internal/gtest-internal.h
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:21
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
         -:    2:// All rights reserved.
@@ -445,7 +445,7 @@
         -:  440:  virtual Test* CreateTest() = 0;
         -:  441:
         -:  442: protected:
-      441:  443:  TestFactoryBase() {}
+       78:  443:  TestFactoryBase() {}
         -:  444:
         -:  445: private:
         -:  446:  GTEST_DISALLOW_COPY_AND_ASSIGN_(TestFactoryBase);
@@ -454,49 +454,59 @@
         -:  449:// This class provides implementation of TeastFactoryBase interface.
         -:  450:// It is used in TEST and TEST_F macros.
         -:  451:template <class TestClass>
-function _ZN7testing8internal15TestFactoryImplIN4cctz34CivilTime_DefaultConstruction_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz34CivilTime_DefaultConstruction_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_StructMember_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_StructMember_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz33CivilTime_FieldsConstruction_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz33CivilTime_FieldsConstruction_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz39CivilTime_FieldsConstructionLimits_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz39CivilTime_FieldsConstructionLimits_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz26CivilTime_RangeLimits_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz26CivilTime_RangeLimits_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ImplicitCrossAlignment_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ImplicitCrossAlignment_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ExplicitCrossAlignment_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ExplicitCrossAlignment_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz29CivilTime_ValueSemantics_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz29CivilTime_ValueSemantics_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Relational_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Relational_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Arithmetic_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Arithmetic_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_ArithmeticLimits_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_ArithmeticLimits_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Difference_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Difference_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_DifferenceLimits_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_DifferenceLimits_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Properties_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Properties_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_OutputStream_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_OutputStream_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz40CivilTime_OutputStreamLeftFillWidth_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz40CivilTime_OutputStreamLeftFillWidth_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz30CivilTime_NextPrevWeekday_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz30CivilTime_NextPrevWeekday_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_DifferenceWithHugeYear_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_DifferenceWithHugeYear_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz36CivilTime_NormalizeWithHugeYear_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz36CivilTime_NormalizeWithHugeYear_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestEED2Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEED0Ev called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEED2Ev called 0 returned 0% blocks executed 0%
-      441:  452:class TestFactoryImpl : public TestFactoryBase {
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZones_LoadZonesConcurrently_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZones_LoadZonesConcurrently_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz22TimeZone_Failures_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz22TimeZone_Failures_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz38StdChronoTimePoint_TimeTAlignment_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz38StdChronoTimePoint_TimeTAlignment_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34BreakTime_TimePointResolution_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34BreakTime_TimePointResolution_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimeInUTC_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimeInUTC_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimePosix_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimePosix_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33BreakTime_LocalTimeInNewYork_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33BreakTime_LocalTimeInNewYork_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimeInMTV_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimeInMTV_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz32BreakTime_LocalTimeInSydney_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz32BreakTime_LocalTimeInSydney_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33MakeTime_TimePointResolution_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33MakeTime_TimePointResolution_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz27MakeTime_Normalization_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz27MakeTime_Normalization_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AmericaNewYork_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AmericaNewYork_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_AsiaKathmandu_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_AsiaKathmandu_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_PacificChatham_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_PacificChatham_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33TimeZoneEdgeCase_PacificApia_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33TimeZoneEdgeCase_PacificApia_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33TimeZoneEdgeCase_AfricaCairo_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33TimeZoneEdgeCase_AfricaCairo_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AfricaMonrovia_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AfricaMonrovia_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AmericaJamaica_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AmericaJamaica_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25TimeZoneEdgeCase_WET_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25TimeZoneEdgeCase_WET_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34TimeZoneEdgeCase_FixedOffsets_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34TimeZoneEdgeCase_FixedOffsets_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34TimeZoneEdgeCase_NegativeYear_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34TimeZoneEdgeCase_NegativeYear_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_UTC32bitLimit_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_UTC32bitLimit_TestEED2Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_UTC5DigitYear_TestEED0Ev called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_UTC5DigitYear_TestEED2Ev called 0 returned 0% blocks executed 0%
+       78:  452:class TestFactoryImpl : public TestFactoryBase {
 call    0 never executed
 call    1 never executed
 call    2 never executed
@@ -518,29 +528,39 @@ call   17 never executed
 call   18 never executed
 call   19 never executed
 call   20 never executed
+call   21 never executed
+call   22 never executed
+call   23 never executed
+call   24 never executed
+call   25 never executed
         -:  453: public:
-function _ZN7testing8internal15TestFactoryImplIN4cctz34CivilTime_DefaultConstruction_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_StructMember_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz33CivilTime_FieldsConstruction_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz39CivilTime_FieldsConstructionLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz26CivilTime_RangeLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ImplicitCrossAlignment_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_ExplicitCrossAlignment_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz29CivilTime_ValueSemantics_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Relational_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Arithmetic_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_ArithmeticLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Difference_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz31CivilTime_DifferenceLimits_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz25CivilTime_Properties_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz27CivilTime_OutputStream_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz40CivilTime_OutputStreamLeftFillWidth_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz30CivilTime_NextPrevWeekday_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz37CivilTime_DifferenceWithHugeYear_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz36CivilTime_NormalizeWithHugeYear_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz24CivilTime_LeapYears_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-function _ZN7testing8internal15TestFactoryImplIN4cctz35CivilTime_FirstThursdayInMonth_TestEE10CreateTestEv called 21 returned 100% blocks executed 80%
-      882:  454:  virtual Test* CreateTest() { return new TestClass; }
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZones_LoadZonesConcurrently_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz22TimeZone_Failures_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz38StdChronoTimePoint_TimeTAlignment_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34BreakTime_TimePointResolution_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimeInUTC_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimePosix_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33BreakTime_LocalTimeInNewYork_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz29BreakTime_LocalTimeInMTV_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz32BreakTime_LocalTimeInSydney_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33MakeTime_TimePointResolution_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz27MakeTime_Normalization_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AmericaNewYork_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_AsiaKathmandu_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_PacificChatham_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33TimeZoneEdgeCase_PacificApia_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz33TimeZoneEdgeCase_AfricaCairo_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AfricaMonrovia_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz36TimeZoneEdgeCase_AmericaJamaica_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz25TimeZoneEdgeCase_WET_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34TimeZoneEdgeCase_FixedOffsets_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz34TimeZoneEdgeCase_NegativeYear_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_UTC32bitLimit_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+function _ZN7testing8internal15TestFactoryImplIN4cctz35TimeZoneEdgeCase_UTC5DigitYear_TestEE10CreateTestEv called 2 returned 100% blocks executed 80%
+      104:  454:  virtual Test* CreateTest() { return new TestClass; }
 call    0 returned 100%
 call    1 never executed
 call    2 returned 100%
@@ -583,6 +603,16 @@ call   38 returned 100%
 call   39 never executed
 call   40 returned 100%
 call   41 never executed
+call   42 returned 100%
+call   43 never executed
+call   44 returned 100%
+call   45 never executed
+call   46 returned 100%
+call   47 never executed
+call   48 returned 100%
+call   49 never executed
+call   50 returned 100%
+call   51 never executed
         -:  455:};
         -:  456:
         -:  457:#if GTEST_OS_WINDOWS
@@ -997,14 +1027,13 @@ call   41 never executed
         -:  866:
         -:  867:typedef char IsNotContainer;
         -:  868:template <class C>
+function _ZN7testing8internal15IsContainerTestIN4cctz9time_zone12civil_lookup10civil_kindEEEcl called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15IsContainerTestIdEEcl called 0 returned 0% blocks executed 0%
 function _ZN7testing8internal15IsContainerTestIN4cctz6detail7weekdayEEEcl called 0 returned 0% blocks executed 0%
 function _ZN7testing8internal15IsContainerTestIiEEcl called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15IsContainerTestIN4cctz6detail10civil_timeINS3_8hour_tagEEEEEcl called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15IsContainerTestIN4cctz6detail10civil_timeINS3_8year_tagEEEEEcl called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15IsContainerTestIN4cctz6detail10civil_timeINS3_9month_tagEEEEEcl called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15IsContainerTestIN4cctz6detail10civil_timeINS3_7day_tagEEEEEcl called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15IsContainerTestIN4cctz6detail10civil_timeINS3_10minute_tagEEEEEcl called 0 returned 0% blocks executed 0%
-function _ZN7testing8internal15IsContainerTestIN4cctz6detail10civil_timeINS3_10second_tagEEEEEcl called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15IsContainerTestINSt6chrono8durationIlSt5ratioILl1ELl1000000000EEEEEEcl called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15IsContainerTestINSt6chrono10time_pointINS2_3_V212system_clockENS2_8durationIlSt5ratioILl1ELl1EEEEEEEEcl called 0 returned 0% blocks executed 0%
+function _ZN7testing8internal15IsContainerTestINSt6chrono10time_pointINS2_3_V212system_clockENS2_8durationIlSt5ratioILl1ELl1000000000EEEEEEEEcl called 0 returned 0% blocks executed 0%
     #####:  869:IsNotContainer IsContainerTest(long /* dummy */) { return '\0'; }
         -:  870:
         -:  871:// EnableIf<condition>::type is void when 'Cond' is true, and

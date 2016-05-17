@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/stl_tree.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:17
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// RB tree implementation -*- C++ -*-
         -:    2:
@@ -192,11 +192,11 @@
         -:  187:
         -:  188:      explicit
         -:  189:      _Rb_tree_iterator(_Link_type __x) _GLIBCXX_NOEXCEPT
-  2543623:  190:      : _M_node(__x) { }
+   299229:  190:      : _M_node(__x) { }
         -:  191:
         -:  192:      reference
         -:  193:      operator*() const _GLIBCXX_NOEXCEPT
-    10193:  194:      { return *static_cast<_Link_type>(_M_node)->_M_valptr(); }
+     1178:  194:      { return *static_cast<_Link_type>(_M_node)->_M_valptr(); }
         -:  195:
         -:  196:      pointer
         -:  197:      operator->() const _GLIBCXX_NOEXCEPT
@@ -221,7 +221,7 @@ call    0 never executed
         -:  215:      _Self&
         -:  216:      operator--() _GLIBCXX_NOEXCEPT
         -:  217:      {
-     9809:  218:	_M_node = _Rb_tree_decrement(_M_node);
+     1154:  218:	_M_node = _Rb_tree_decrement(_M_node);
 call    0 never executed
 call    1 returned 100%
         -:  219:	return *this;
@@ -270,12 +270,12 @@ call    1 returned 100%
         -:  262:      : _M_node(__x) { }
         -:  263:
         -:  264:      _Rb_tree_const_iterator(const iterator& __it) _GLIBCXX_NOEXCEPT
-     9945:  265:      : _M_node(__it._M_node) { }
+     1170:  265:      : _M_node(__it._M_node) { }
         -:  266:
         -:  267:      iterator
         -:  268:      _M_const_cast() const _GLIBCXX_NOEXCEPT
         -:  269:      { return iterator(static_cast<typename iterator::_Link_type>
-     9945:  270:			(const_cast<typename iterator::_Base_ptr>(_M_node))); }
+     1170:  270:			(const_cast<typename iterator::_Base_ptr>(_M_node))); }
         -:  271:
         -:  272:      reference
         -:  273:      operator*() const _GLIBCXX_NOEXCEPT
@@ -420,8 +420,8 @@ call    1 returned 100%
         -:  412:#else
         -:  413:      template<typename... _Args>
         -:  414:        _Link_type
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE14_M_create_nodeIIRKSt21piecewise_construct_tSt5tupleIIRS1_EESI_IIEEEEEPSt13_Rb_tree_nodeIS7_EDpOT_ called 9945 returned 100% blocks executed 55%
-     9945:  415:        _M_create_node(_Args&&... __args)
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE14_M_create_nodeIIRKSt21piecewise_construct_tSt5tupleIIRS1_EESI_IIEEEEEPSt13_Rb_tree_nodeIS7_EDpOT_ called 1170 returned 100% blocks executed 55%
+     1170:  415:        _M_create_node(_Args&&... __args)
         -:  416:	{
         -:  417:	  _Link_type __tmp = _M_get_node();
         -:  418:	  __try
@@ -439,7 +439,7 @@ call    2 never executed
         -:  427:	      _M_put_node(__tmp);
     =====:  428:	      __throw_exception_again;
         -:  429:	    }
-     9945:  430:	  return __tmp;
+     1170:  430:	  return __tmp;
         -:  431:	}
         -:  432:
         -:  433:      void
@@ -473,7 +473,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  460:
         -:  461:	  _Rb_tree_impl()
         -:  462:	  : _Node_allocator(), _M_key_compare(), _M_header(),
-       17:  463:	    _M_node_count(0)
+        2:  463:	    _M_node_count(0)
         -:  464:	  { _M_initialize(); }
         -:  465:
         -:  466:	  _Rb_tree_impl(const _Key_compare& __comp, const _Node_allocator& __a)
@@ -494,8 +494,8 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  481:	  {
         -:  482:	    this->_M_header._M_color = _S_red;
         -:  483:	    this->_M_header._M_parent = 0;
-       17:  484:	    this->_M_header._M_left = &this->_M_header;
-       17:  485:	    this->_M_header._M_right = &this->_M_header;
+        2:  484:	    this->_M_header._M_left = &this->_M_header;
+        2:  485:	    this->_M_header._M_right = &this->_M_header;
         -:  486:	  }	    
         -:  487:	};
         -:  488:
@@ -528,7 +528,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  515:
         -:  516:      _Link_type
         -:  517:      _M_begin() _GLIBCXX_NOEXCEPT
-  2543640:  518:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
+   299231:  518:      { return static_cast<_Link_type>(this->_M_impl._M_header._M_parent); }
         -:  519:
         -:  520:      _Const_Link_type
         -:  521:      _M_begin() const _GLIBCXX_NOEXCEPT
@@ -539,7 +539,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  526:
         -:  527:      _Link_type
         -:  528:      _M_end() _GLIBCXX_NOEXCEPT
-  2558583:  529:      { return reinterpret_cast<_Link_type>(&this->_M_impl._M_header); }
+   300989:  529:      { return reinterpret_cast<_Link_type>(&this->_M_impl._M_header); }
         -:  530:
         -:  531:      _Const_Link_type
         -:  532:      _M_end() const _GLIBCXX_NOEXCEPT
@@ -555,7 +555,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  542:
         -:  543:      static _Link_type
         -:  544:      _S_left(_Base_ptr __x) _GLIBCXX_NOEXCEPT
-  9151115:  545:      { return static_cast<_Link_type>(__x->_M_left); }
+  1062455:  545:      { return static_cast<_Link_type>(__x->_M_left); }
         -:  546:
         -:  547:      static _Const_Link_type
         -:  548:      _S_left(_Const_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -563,7 +563,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  550:
         -:  551:      static _Link_type
         -:  552:      _S_right(_Base_ptr __x) _GLIBCXX_NOEXCEPT
- 15202853:  553:      { return static_cast<_Link_type>(__x->_M_right); }
+  1788821:  553:      { return static_cast<_Link_type>(__x->_M_right); }
         -:  554:
         -:  555:      static _Const_Link_type
         -:  556:      _S_right(_Const_Base_ptr __x) _GLIBCXX_NOEXCEPT
@@ -739,7 +739,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  726:      begin() _GLIBCXX_NOEXCEPT
         -:  727:      { 
         -:  728:	return iterator(static_cast<_Link_type>
-       17:  729:			(this->_M_impl._M_header._M_left));
+        2:  729:			(this->_M_impl._M_header._M_left));
         -:  730:      }
         -:  731:
         -:  732:      const_iterator
@@ -751,7 +751,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  738:
         -:  739:      iterator
         -:  740:      end() _GLIBCXX_NOEXCEPT
-  2533430:  741:      { return iterator(static_cast<_Link_type>(&this->_M_impl._M_header)); }
+   298051:  741:      { return iterator(static_cast<_Link_type>(&this->_M_impl._M_header)); }
         -:  742:
         -:  743:      const_iterator
         -:  744:      end() const _GLIBCXX_NOEXCEPT
@@ -782,7 +782,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  769:
         -:  770:      size_type
         -:  771:      size() const _GLIBCXX_NOEXCEPT 
-       85:  772:      { return _M_impl._M_node_count; }
+       10:  772:      { return _M_impl._M_node_count; }
         -:  773:
         -:  774:      size_type
         -:  775:      max_size() const _GLIBCXX_NOEXCEPT
@@ -937,7 +937,7 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -:  924:
         -:  925:      iterator
         -:  926:      lower_bound(const key_type& __k)
-    10193:  927:      { return _M_lower_bound(_M_begin(), _M_end(), __k); }
+     1178:  927:      { return _M_lower_bound(_M_begin(), _M_end(), __k); }
 call    0 returned 100%
         -:  928:
         -:  929:      const_iterator
@@ -1267,21 +1267,21 @@ call    0 returned 100%
         -: 1253:           typename _Compare, typename _Alloc>
         -: 1254:    typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 1255:		      _Compare, _Alloc>::iterator
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE14_M_lower_boundEPSt13_Rb_tree_nodeIS7_ESG_RS1_ called 2543623 returned 100% blocks executed 100%
-  2543623: 1256:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE14_M_lower_boundEPSt13_Rb_tree_nodeIS7_ESG_RS1_ called 299229 returned 100% blocks executed 100%
+   299229: 1256:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1257:    _M_lower_bound(_Link_type __x, _Link_type __y,
         -: 1258:		   const _Key& __k)
         -: 1259:    {
- 29431405: 1260:      while (__x != 0)
-branch  0 taken 91%
-branch  1 taken 9% (fallthrough)
- 24344159: 1261:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
-branch  0 taken 38% (fallthrough)
-branch  1 taken 62%
+  3448580: 1260:      while (__x != 0)
+branch  0 taken 90%
+branch  1 taken 10% (fallthrough)
+  2850122: 1261:	if (!_M_impl._M_key_compare(_S_key(__x), __k))
+branch  0 taken 37% (fallthrough)
+branch  1 taken 63%
         -: 1262:	  __y = __x, __x = _S_left(__x);
         -: 1263:	else
         -: 1264:	  __x = _S_right(__x);
-  2543623: 1265:      return iterator(__y);
+   299229: 1265:      return iterator(__y);
         -: 1266:    }
         -: 1267:
         -: 1268:  template<typename _Key, typename _Val, typename _KeyOfValue,
@@ -1451,15 +1451,15 @@ branch  1 taken 62%
         -: 1432:			   _Compare, _Alloc>::_Base_ptr,
         -: 1433:	 typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 1434:			   _Compare, _Alloc>::_Base_ptr>
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE24_M_get_insert_unique_posERS1_ called 17 returned 100% blocks executed 38%
-       17: 1435:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE24_M_get_insert_unique_posERS1_ called 2 returned 100% blocks executed 38%
+        2: 1435:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1436:    _M_get_insert_unique_pos(const key_type& __k)
         -: 1437:    {
         -: 1438:      typedef pair<_Base_ptr, _Base_ptr> _Res;
         -: 1439:      _Link_type __x = _M_begin();
         -: 1440:      _Link_type __y = _M_end();
         -: 1441:      bool __comp = true;
-       34: 1442:      while (__x != 0)
+        4: 1442:      while (__x != 0)
 branch  0 taken 0%
 branch  1 taken 100% (fallthrough)
         -: 1443:	{
@@ -1469,15 +1469,15 @@ branch  1 taken 100% (fallthrough)
 branch  0 never executed
 branch  1 never executed
         -: 1447:	}
-       17: 1448:      iterator __j = iterator(__y);
-       17: 1449:      if (__comp)
+        2: 1448:      iterator __j = iterator(__y);
+        2: 1449:      if (__comp)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -: 1450:	{
-       17: 1451:	  if (__j == begin())
+        2: 1451:	  if (__j == begin())
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-       17: 1452:	    return _Res(__x, __y);
+        2: 1452:	    return _Res(__x, __y);
         -: 1453:	  else
         -: 1454:	    --__j;
         -: 1455:	}
@@ -1559,8 +1559,8 @@ branch  1 never executed
         -: 1529:			   _Compare, _Alloc>::_Base_ptr,
         -: 1530:         typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 1531:			   _Compare, _Alloc>::_Base_ptr>
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS7_ERS1_ called 9945 returned 100% blocks executed 59%
-     9945: 1532:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE29_M_get_insert_hint_unique_posESt23_Rb_tree_const_iteratorIS7_ERS1_ called 1170 returned 100% blocks executed 59%
+     1170: 1532:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1533:    _M_get_insert_hint_unique_pos(const_iterator __position,
         -: 1534:				  const key_type& __k)
         -: 1535:    {
@@ -1568,43 +1568,43 @@ function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_
         -: 1537:      typedef pair<_Base_ptr, _Base_ptr> _Res;
         -: 1538:
         -: 1539:      // end()
-     9945: 1540:      if (__pos._M_node == _M_end())
+     1170: 1540:      if (__pos._M_node == _M_end())
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
         -: 1541:	{
-      153: 1542:	  if (size() > 0
+       18: 1542:	  if (size() > 0
 branch  0 taken 80% (fallthrough)
 branch  1 taken 20%
 branch  2 taken 0% (fallthrough)
 branch  3 taken 100%
 branch  4 taken 80% (fallthrough)
 branch  5 taken 20%
-       68: 1543:	      && _M_impl._M_key_compare(_S_key(_M_rightmost()), __k))
-       68: 1544:	    return _Res(0, _M_rightmost());
+        8: 1543:	      && _M_impl._M_key_compare(_S_key(_M_rightmost()), __k))
+        8: 1544:	    return _Res(0, _M_rightmost());
         -: 1545:	  else
-       17: 1546:	    return _M_get_insert_unique_pos(__k);
+        2: 1546:	    return _M_get_insert_unique_pos(__k);
 call    0 returned 100%
         -: 1547:	}
-     9860: 1548:      else if (_M_impl._M_key_compare(__k, _S_key(__pos._M_node)))
+     1160: 1548:      else if (_M_impl._M_key_compare(__k, _S_key(__pos._M_node)))
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -: 1549:	{
         -: 1550:	  // First, try before...
         -: 1551:	  iterator __before = __pos;
-     9860: 1552:	  if (__pos._M_node == _M_leftmost()) // begin()
+     1160: 1552:	  if (__pos._M_node == _M_leftmost()) // begin()
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
-       51: 1553:	    return _Res(_M_leftmost(), _M_leftmost());
-     9809: 1554:	  else if (_M_impl._M_key_compare(_S_key((--__before)._M_node), __k))
+        6: 1553:	    return _Res(_M_leftmost(), _M_leftmost());
+     1154: 1554:	  else if (_M_impl._M_key_compare(_S_key((--__before)._M_node), __k))
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -: 1555:	    {
-     9809: 1556:	      if (_S_right(__before._M_node) == 0)
+     1154: 1556:	      if (_S_right(__before._M_node) == 0)
 branch  0 taken 50% (fallthrough)
 branch  1 taken 50%
-     4913: 1557:		return _Res(0, __before._M_node);
+      578: 1557:		return _Res(0, __before._M_node);
         -: 1558:	      else
-     4896: 1559:		return _Res(__pos._M_node, __pos._M_node);
+      576: 1559:		return _Res(__pos._M_node, __pos._M_node);
         -: 1560:	    }
         -: 1561:	  else
     #####: 1562:	    return _M_get_insert_unique_pos(__k);
@@ -1744,13 +1744,13 @@ call    0 never executed
         -: 1686:  template<typename _Key, typename _Val, typename _KeyOfValue,
         -: 1687:           typename _Compare, typename _Alloc>
         -: 1688:    typename _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::iterator
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE14_M_insert_nodeEPSt18_Rb_tree_node_baseSF_PSt13_Rb_tree_nodeIS7_E called 9945 returned 100% blocks executed 100%
-     9945: 1689:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE14_M_insert_nodeEPSt18_Rb_tree_node_baseSF_PSt13_Rb_tree_nodeIS7_E called 1170 returned 100% blocks executed 100%
+     1170: 1689:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1690:    _M_insert_node(_Base_ptr __x, _Base_ptr __p, _Link_type __z)
         -: 1691:    {
         -: 1692:      bool __insert_left = (__x != 0 || __p == _M_end()
         -: 1693:			    || _M_impl._M_key_compare(_S_key(__z),
-    19924: 1694:						      _S_key(__p)));
+     2344: 1694:						      _S_key(__p)));
 branch  0 taken 50% (fallthrough)
 branch  1 taken 50%
 branch  2 taken 99% (fallthrough)
@@ -1758,11 +1758,11 @@ branch  3 taken 1%
 branch  4 taken 100% (fallthrough)
 branch  5 taken 0%
         -: 1695:
-     9945: 1696:      _Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
+     1170: 1696:      _Rb_tree_insert_and_rebalance(__insert_left, __z, __p,
 call    0 returned 100%
-     9945: 1697:				    this->_M_impl._M_header);
-     9945: 1698:      ++_M_impl._M_node_count;
-     9945: 1699:      return iterator(__z);
+     1170: 1697:				    this->_M_impl._M_header);
+     1170: 1698:      ++_M_impl._M_node_count;
+     1170: 1699:      return iterator(__z);
         -: 1700:    }
         -: 1701:
         -: 1702:  template<typename _Key, typename _Val, typename _KeyOfValue,
@@ -1850,22 +1850,22 @@ call    0 returned 100%
         -: 1784:           typename _Compare, typename _Alloc>
         -: 1785:    template<typename... _Args>
         -: 1786:      typename _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::iterator
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE22_M_emplace_hint_uniqueIIRKSt21piecewise_construct_tSt5tupleIIRS1_EESI_IIEEEEESt17_Rb_tree_iteratorIS7_ESt23_Rb_tree_const_iteratorIS7_EDpOT_ called 9945 returned 100% blocks executed 71%
-     9945: 1787:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE22_M_emplace_hint_uniqueIIRKSt21piecewise_construct_tSt5tupleIIRS1_EESI_IIEEEEESt17_Rb_tree_iteratorIS7_ESt23_Rb_tree_const_iteratorIS7_EDpOT_ called 1170 returned 100% blocks executed 71%
+     1170: 1787:      _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1788:      _M_emplace_hint_unique(const_iterator __pos, _Args&&... __args)
         -: 1789:      {
-     9945: 1790:	_Link_type __z = _M_create_node(std::forward<_Args>(__args)...);
+     1170: 1790:	_Link_type __z = _M_create_node(std::forward<_Args>(__args)...);
 call    0 returned 100%
         -: 1791:
         -: 1792:	__try
         -: 1793:	  {
-     9945: 1794:	    auto __res = _M_get_insert_hint_unique_pos(__pos, _S_key(__z));
+     1170: 1794:	    auto __res = _M_get_insert_hint_unique_pos(__pos, _S_key(__z));
 call    0 returned 100%
         -: 1795:
-     9945: 1796:	    if (__res.second)
+     1170: 1796:	    if (__res.second)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-     9945: 1797:	      return _M_insert_node(__res.first, __res.second, __z);
+     1170: 1797:	      return _M_insert_node(__res.first, __res.second, __z);
 call    0 returned 100%
         -: 1798:
     #####: 1799:	    _M_destroy_node(__z);
@@ -1980,15 +1980,15 @@ call    0 never executed
         -: 1907:           typename _Compare, typename _Alloc>
         -: 1908:    typename _Rb_tree<_Key, _Val, _KeyOfValue,
         -: 1909:		      _Compare, _Alloc>::iterator
-function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE4findERS1_ called 2533430 returned 100% blocks executed 100%
-  2533430: 1910:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
+function _ZNSt8_Rb_treeISsSt4pairIKSsPKN4cctz9time_zone4ImplEESt10_Select1stIS7_ESt4lessISsESaIS7_EE4findERS1_ called 298051 returned 100% blocks executed 100%
+   298051: 1910:    _Rb_tree<_Key, _Val, _KeyOfValue, _Compare, _Alloc>::
         -: 1911:    find(const _Key& __k)
         -: 1912:    {
-  2533430: 1913:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
+   298051: 1913:      iterator __j = _M_lower_bound(_M_begin(), _M_end(), __k);
 call    0 returned 100%
         -: 1914:      return (__j == end()
         -: 1915:	      || _M_impl._M_key_compare(__k,
-  5066783: 1916:					_S_key(__j._M_node))) ? end() : __j;
+   596094: 1916:					_S_key(__j._M_node))) ? end() : __j;
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
 branch  2 taken 1% (fallthrough)

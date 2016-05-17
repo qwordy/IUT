@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/atomic_base.h
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcda
-        -:    0:Runs:17
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// -*- C++ -*- header.
         -:    2:
@@ -287,13 +287,13 @@
         -:  282:
         -:  283:    // Conversion to ATOMIC_FLAG_INIT.
         -:  284:    constexpr atomic_flag(bool __i) noexcept
-        -:  285:      : __atomic_flag_base{ _S_init(__i) }
+      514:  285:      : __atomic_flag_base{ _S_init(__i) }
         -:  286:    { }
         -:  287:
         -:  288:    _GLIBCXX_ALWAYS_INLINE bool
         -:  289:    test_and_set(memory_order __m = memory_order_seq_cst) noexcept
         -:  290:    {
-        -:  291:      return __atomic_test_and_set (&_M_i, __m);
+      514:  291:      return __atomic_test_and_set (&_M_i, __m);
         -:  292:    }
         -:  293:
         -:  294:    _GLIBCXX_ALWAYS_INLINE bool
@@ -480,7 +480,7 @@
         -:  475:	__glibcxx_assert(__b != memory_order_acq_rel);
         -:  476:	__glibcxx_assert(__b != memory_order_consume);
         -:  477:
-    10523:  478:	__atomic_store_n(&_M_i, __i, __m);
+        -:  478:	__atomic_store_n(&_M_i, __i, __m);
         -:  479:      }
         -:  480:
         -:  481:      _GLIBCXX_ALWAYS_INLINE void
@@ -502,7 +502,7 @@
         -:  497:	__glibcxx_assert(__b != memory_order_release);
         -:  498:	__glibcxx_assert(__b != memory_order_acq_rel);
         -:  499:
-      986:  500:	return __atomic_load_n(&_M_i, __m);
+        -:  500:	return __atomic_load_n(&_M_i, __m);
         -:  501:      }
         -:  502:
         -:  503:      _GLIBCXX_ALWAYS_INLINE __int_type

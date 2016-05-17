@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/ext/aligned_buffer.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:17
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Aligned memory buffer -*- C++ -*-
         -:    2:
@@ -55,7 +55,7 @@
         -:   50:      void*
         -:   51:      _M_addr() noexcept
         -:   52:      {
-     9945:   53:        return static_cast<void*>(&_M_storage);
+     1170:   53:        return static_cast<void*>(&_M_storage);
         -:   54:      }
         -:   55:
         -:   56:      const void*

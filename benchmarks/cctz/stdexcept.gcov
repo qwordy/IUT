@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/stdexcept
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
-        -:    0:Runs:17
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Standard exception classes  -*- C++ -*-
         -:    2:

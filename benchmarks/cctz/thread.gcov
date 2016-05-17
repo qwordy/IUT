@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/thread
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
-        -:    0:Runs:17
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// <thread> -*- C++ -*-
         -:    2:
@@ -75,7 +75,7 @@
         -:   70:      native_handle_type	_M_thread;
         -:   71:
         -:   72:    public:
-     8687:   73:      id() noexcept : _M_thread() { }
+     1022:   73:      id() noexcept : _M_thread() { }
         -:   74:
         -:   75:      explicit
         -:   76:      id(native_handle_type __id) : _M_thread(__id) { }
@@ -99,7 +99,7 @@
         -:   94:
         -:   95:    // Simple base type that the templatized, derived class containing
         -:   96:    // an arbitrary functor can be converted to and called.
-    13054:   97:    struct _Impl_base
+     1536:   97:    struct _Impl_base
         -:   98:    {
         -:   99:      __shared_base_type	_M_this_ptr;
         -:  100:
@@ -110,19 +110,19 @@
         -:  105:
         -:  106:    template<typename _Callable>
 function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEED0Ev called 0 returned 0% blocks executed 0%
-function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEED2Ev called 4351 returned 100% blocks executed 80%
-     8702:  107:      struct _Impl : public _Impl_base
+function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEED2Ev called 512 returned 100% blocks executed 80%
+     1024:  107:      struct _Impl : public _Impl_base
 call    0 never executed
 call    1 never executed
         -:  108:      {
         -:  109:	_Callable		_M_func;
         -:  110:
-     4352:  111:	_Impl(_Callable&& __f) : _M_func(std::forward<_Callable>(__f))
+      512:  111:	_Impl(_Callable&& __f) : _M_func(std::forward<_Callable>(__f))
         -:  112:	{ }
         -:  113:
         -:  114:	void
-function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEE6_M_runEv called 4352 returned 99% blocks executed 100%
-     8702:  115:	_M_run() { _M_func(); }
+function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEE6_M_runEv called 512 returned 100% blocks executed 100%
+     1024:  115:	_M_run() { _M_func(); }
         -:  116:      };
         -:  117:
         -:  118:  private:
@@ -140,25 +140,25 @@ function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcur
         -:  130:
         -:  131:    template<typename _Callable, typename... _Args>
         -:  132:      explicit 
-function _ZNSt6threadC2IRZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_IS5_EEEOT_DpOT0_ called 4352 returned 100% blocks executed 50%
-     4352:  133:      thread(_Callable&& __f, _Args&&... __args)
+function _ZNSt6threadC2IRZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_IS5_EEEOT_DpOT0_ called 512 returned 100% blocks executed 50%
+      512:  133:      thread(_Callable&& __f, _Args&&... __args)
         -:  134:      {
         -:  135:#ifdef GTHR_ACTIVE_PROXY
-     4352:  136:	__asm ("" : : "r" (&pthread_create));
+      512:  136:	__asm ("" : : "r" (&pthread_create));
 call    0 returned 100%
         -:  137:#endif
-    21760:  138:        _M_start_thread(_M_make_routine(std::__bind_simple(
+     2560:  138:        _M_start_thread(_M_make_routine(std::__bind_simple(
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
         -:  139:                std::forward<_Callable>(__f),
         -:  140:                std::forward<_Args>(__args)...)));
-     4352:  141:      }
+      512:  141:      }
         -:  142:
         -:  143:    ~thread()
         -:  144:    {
-     8687:  145:      if (joinable())
+     1022:  145:      if (joinable())
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 never executed
@@ -169,7 +169,7 @@ branch  5 taken 100%
 call    0 never executed
 call    1 never executed
 call    2 never executed
-     8687:  147:    }
+     1022:  147:    }
         -:  148:
         -:  149:    thread& operator=(const thread&) = delete;
         -:  150:

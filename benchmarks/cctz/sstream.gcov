@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/sstream
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:21
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// String based streams -*- C++ -*-
         -:    2:
@@ -67,8 +67,8 @@
         -:   62:  */
         -:   63:  template<typename _CharT, typename _Traits, typename _Alloc>
 function _ZNSt15basic_stringbufIcSt11char_traitsIcESaIcEED0Ev called 0 returned 0% blocks executed 0%
-function _ZNSt15basic_stringbufIcSt11char_traitsIcESaIcEED2Ev called 15834 returned 100% blocks executed 100%
-    31668:   64:    class basic_stringbuf : public basic_streambuf<_CharT, _Traits>
+function _ZNSt15basic_stringbufIcSt11char_traitsIcESaIcEED2Ev called 0 returned 0% blocks executed 0%
+    #####:   64:    class basic_stringbuf : public basic_streambuf<_CharT, _Traits>
 call    0 never executed
 call    1 never executed
         -:   65:    {
@@ -590,7 +590,7 @@ call    1 never executed
         -:  581:      */
         -:  582:      __string_type
         -:  583:      str() const
-    15834:  584:      { return _M_stringbuf.str(); }
+    #####:  584:      { return _M_stringbuf.str(); }
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
@@ -618,66 +618,6 @@ branch 23 never executed
 call   24 never executed
 branch 25 never executed
 branch 26 never executed
-call   27 returned 100%
-branch 28 taken 100% (fallthrough)
-branch 29 taken 0% (throw)
-call   30 returned 100%
-branch 31 taken 100% (fallthrough)
-branch 32 taken 0% (throw)
-call   33 returned 100%
-branch 34 taken 100% (fallthrough)
-branch 35 taken 0% (throw)
-call   36 returned 100%
-branch 37 taken 100% (fallthrough)
-branch 38 taken 0% (throw)
-call   39 returned 100%
-branch 40 taken 100% (fallthrough)
-branch 41 taken 0% (throw)
-call   42 returned 100%
-branch 43 taken 100% (fallthrough)
-branch 44 taken 0% (throw)
-call   45 returned 100%
-branch 46 taken 100% (fallthrough)
-branch 47 taken 0% (throw)
-call   48 never executed
-branch 49 never executed
-branch 50 never executed
-call   51 returned 100%
-branch 52 taken 100% (fallthrough)
-branch 53 taken 0% (throw)
-call   54 returned 100%
-branch 55 taken 100% (fallthrough)
-branch 56 taken 0% (throw)
-call   57 returned 100%
-branch 58 taken 100% (fallthrough)
-branch 59 taken 0% (throw)
-call   60 returned 100%
-branch 61 taken 100% (fallthrough)
-branch 62 taken 0% (throw)
-call   63 returned 100%
-branch 64 taken 100% (fallthrough)
-branch 65 taken 0% (throw)
-call   66 returned 100%
-branch 67 taken 100% (fallthrough)
-branch 68 taken 0% (throw)
-call   69 returned 100%
-branch 70 taken 100% (fallthrough)
-branch 71 taken 0% (throw)
-call   72 returned 100%
-branch 73 taken 100% (fallthrough)
-branch 74 taken 0% (throw)
-call   75 returned 100%
-branch 76 taken 100% (fallthrough)
-branch 77 taken 0% (throw)
-call   78 returned 100%
-branch 79 taken 100% (fallthrough)
-branch 80 taken 0% (throw)
-call   81 returned 100%
-branch 82 taken 100% (fallthrough)
-branch 83 taken 0% (throw)
-call   84 returned 100%
-branch 85 taken 100% (fallthrough)
-branch 86 taken 0% (throw)
         -:  585:
         -:  586:      /**
         -:  587:       *  @brief  Setting a new buffer.

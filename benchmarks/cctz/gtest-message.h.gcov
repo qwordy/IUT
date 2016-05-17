@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/gtest/gtest-message.h
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:21
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Copyright 2005, Google Inc.
         -:    2:// All rights reserved.
@@ -133,19 +133,7 @@
         -:  128:    // overloads of << defined in the global namespace and those
         -:  129:    // visible via Koenig lookup are both exposed in this function.
         -:  130:    using ::operator <<;
-    #####:  131:    *ss_ << val;
-call    0 never executed
-branch  1 never executed
-branch  2 never executed
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
+        -:  131:    *ss_ << val;
         -:  132:    return *this;
         -:  133:  }
         -:  134:
@@ -163,18 +151,13 @@ branch 11 never executed
         -:  146:  // ensure consistent result across compilers, we always treat NULL
         -:  147:  // as "(null)".
         -:  148:  template <typename T>
-function _ZN7testing7MessagelsIKcEERS0_RKPT_ called 0 returned 0% blocks executed 0%
-    #####:  149:  inline Message& operator <<(T* const& pointer) {  // NOLINT
-    #####:  150:    if (pointer == NULL) {
-branch  0 never executed
-branch  1 never executed
-    #####:  151:      *ss_ << "(null)";
-call    0 never executed
+        -:  149:  inline Message& operator <<(T* const& pointer) {  // NOLINT
+        -:  150:    if (pointer == NULL) {
+        -:  151:      *ss_ << "(null)";
         -:  152:    } else {
-    #####:  153:      *ss_ << pointer;
-call    0 never executed
+        -:  153:      *ss_ << pointer;
         -:  154:    }
-    #####:  155:    return *this;
+        -:  155:    return *this;
         -:  156:  }
         -:  157:#endif  // GTEST_OS_SYMBIAN
         -:  158:

@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/chrono
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcda
-        -:    0:Runs:17
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// <chrono> -*- C++ -*-
         -:    2:
@@ -555,7 +555,7 @@
         -:  550:	typedef typename duration::rep	  			rep;
         -:  551:	typedef typename duration::period			period;
         -:  552:
-    #####:  553:	constexpr time_point() : __d(duration::zero())
+       86:  553:	constexpr time_point() : __d(duration::zero())
         -:  554:	{ }
         -:  555:
         -:  556:	constexpr explicit time_point(const duration& __dur)
@@ -571,7 +571,7 @@
         -:  566:	// observer
         -:  567:	constexpr duration
         -:  568:	time_since_epoch() const
-    #####:  569:	{ return __d; }
+        -:  569:	{ return __d; }
         -:  570:
         -:  571:	// arithmetic
         -:  572:	time_point&

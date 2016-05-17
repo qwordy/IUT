@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_info.h
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcda
-        -:    0:Runs:17
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_if.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_if.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -52,13 +52,13 @@
         -:   47:};
         -:   48:
         -:   49:inline bool operator<(const DateTime& lhs, const DateTime& rhs) {
-  3695341:   50:  return lhs.offset < rhs.offset;
+        -:   50:  return lhs.offset < rhs.offset;
         -:   51:}
         -:   52:
         -:   53:// The difference between two DateTimes in seconds. Requires that all
         -:   54:// intervening DateTimes share the same UTC offset (i.e., no transitions).
         -:   55:inline int64_t operator-(const DateTime& lhs, const DateTime& rhs) {
-      782:   56:  return lhs.offset - rhs.offset;
+        -:   56:  return lhs.offset - rhs.offset;
         -:   57:}
         -:   58:
         -:   59:// A transition to a new UTC offset.
@@ -70,7 +70,7 @@
         -:   65:
         -:   66:  struct ByUnixTime {
         -:   67:    inline bool operator()(const Transition& lhs, const Transition& rhs) const {
-   662082:   68:      return lhs.unix_time < rhs.unix_time;
+        -:   68:      return lhs.unix_time < rhs.unix_time;
         -:   69:    }
         -:   70:  };
         -:   71:  struct ByDateTime {
@@ -89,13 +89,13 @@
         -:   84:
         -:   85:
         -:   86:// A time zone backed by the IANA Time Zone Database (zoneinfo).
-function _ZN4cctz12TimeZoneInfoD0Ev called 51 returned 100% blocks executed 100%
-function _ZN4cctz12TimeZoneInfoD2Ev called 51 returned 100% blocks executed 71%
-      153:   87:class TimeZoneInfo : public TimeZoneIf {
-call    0 returned 100%
-call    1 returned 100%
+function _ZN4cctz12TimeZoneInfoD0Ev called 0 returned 0% blocks executed 0%
+function _ZN4cctz12TimeZoneInfoD2Ev called 0 returned 0% blocks executed 0%
+    #####:   87:class TimeZoneInfo : public TimeZoneIf {
+call    0 never executed
+call    1 never executed
         -:   88: public:
-        -:   89:  TimeZoneInfo() = default;
+     1170:   89:  TimeZoneInfo() = default;
         -:   90:  TimeZoneInfo(const TimeZoneInfo&) = delete;
         -:   91:  TimeZoneInfo& operator=(const TimeZoneInfo&) = delete;
         -:   92:

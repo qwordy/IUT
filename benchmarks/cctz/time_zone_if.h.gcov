@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_if.h
-        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcno
-        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcda
-        -:    0:Runs:17
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
+        -:    0:Runs:3
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -32,7 +32,7 @@
         -:   27:// The calendar and wall-clock (a.k.a. "civil time") components of a
         -:   28:// time_point in a certain time_zone. A better std::tm.  Note that we
         -:   29:// cannot use time_zone::absolute_lookup because we need a 64-bit year.
-        -:   30:struct Breakdown {
+      170:   30:struct Breakdown {
         -:   31:  int64_t year;      // year (e.g., 2013)
         -:   32:  int month;         // month of year [1:12]
         -:   33:  int day;           // day of month [1:31]
@@ -66,14 +66,14 @@
         -:   61:  // A factory function for TimeZoneIf implementations.
         -:   62:  static std::unique_ptr<TimeZoneIf> Load(const std::string& name);
         -:   63:
-    #####:   64:  virtual ~TimeZoneIf() {}
+        -:   64:  virtual ~TimeZoneIf() {}
         -:   65:
         -:   66:  virtual Breakdown BreakTime(const time_point<sys_seconds>& tp) const = 0;
         -:   67:  virtual TimeInfo MakeTimeInfo(int64_t year, int mon, int day,
         -:   68:                                int hour, int min, int sec) const = 0;
         -:   69:
         -:   70: protected:
-    #####:   71:  TimeZoneIf() {}
+        -:   71:  TimeZoneIf() {}
         -:   72:};
         -:   73:
         -:   74:// Converts tp to a count of seconds since the Unix epoch.
