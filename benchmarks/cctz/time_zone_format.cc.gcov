@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_format.cc
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_format.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_format.gcda
-        -:    0:Runs:17
+        -:    0:Runs:19
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -53,27 +53,27 @@
         -:   48:}
         -:   49:#endif
         -:   50:
-function _ZN4cctz6detail12_GLOBAL__N_14ToTMERKNS_9time_zone15absolute_lookupE called 119 returned 100% blocks executed 60%
-      119:   51:std::tm ToTM(const time_zone::absolute_lookup& al) {
-      119:   52:  std::tm tm{};
-      119:   53:  tm.tm_sec = al.cs.second();
-      119:   54:  tm.tm_min = al.cs.minute();
-      119:   55:  tm.tm_hour = al.cs.hour();
-      119:   56:  tm.tm_mday = al.cs.day();
-      119:   57:  tm.tm_mon = al.cs.month() - 1;
+function _ZN4cctz6detail12_GLOBAL__N_14ToTMERKNS_9time_zone15absolute_lookupE called 133 returned 100% blocks executed 60%
+      133:   51:std::tm ToTM(const time_zone::absolute_lookup& al) {
+      133:   52:  std::tm tm{};
+      133:   53:  tm.tm_sec = al.cs.second();
+      133:   54:  tm.tm_min = al.cs.minute();
+      133:   55:  tm.tm_hour = al.cs.hour();
+      133:   56:  tm.tm_mday = al.cs.day();
+      133:   57:  tm.tm_mon = al.cs.month() - 1;
         -:   58:
         -:   59:  // Saturate tm.tm_year is cases of over/underflow.
-      119:   60:  if (al.cs.year() < std::numeric_limits<int>::min() + 1900) {
+      133:   60:  if (al.cs.year() < std::numeric_limits<int>::min() + 1900) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:   61:    tm.tm_year = std::numeric_limits<int>::min();
         -:   62:  } else if (al.cs.year() - 1900 > std::numeric_limits<int>::max()) {
         -:   63:    tm.tm_year = std::numeric_limits<int>::max();
         -:   64:  } else {
-      119:   65:    tm.tm_year = static_cast<int>(al.cs.year() - 1900);
+      133:   65:    tm.tm_year = static_cast<int>(al.cs.year() - 1900);
         -:   66:  }
         -:   67:
-      119:   68:  switch (get_weekday(civil_day(al.cs))) {
+      133:   68:  switch (get_weekday(civil_day(al.cs))) {
 call    0 returned 100%
 branch  1 taken 0%
 branch  2 taken 0%
@@ -98,18 +98,18 @@ branch  7 taken 0%
     #####:   82:      tm.tm_wday = 4;
     #####:   83:      break;
         -:   84:    case weekday::friday:
-      119:   85:      tm.tm_wday = 5;
-      119:   86:      break;
+      133:   85:      tm.tm_wday = 5;
+      133:   86:      break;
         -:   87:    case weekday::saturday:
     #####:   88:      tm.tm_wday = 6;
     #####:   89:      break;
         -:   90:  }
-      119:   91:  tm.tm_yday = get_yearday(civil_day(al.cs)) - 1;
+      133:   91:  tm.tm_yday = get_yearday(civil_day(al.cs)) - 1;
 call    0 returned 100%
-      119:   92:  tm.tm_isdst = al.is_dst ? 1 : 0;
+      133:   92:  tm.tm_isdst = al.is_dst ? 1 : 0;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-      119:   93:  return tm;
+      133:   93:  return tm;
         -:   94:}
         -:   95:
         -:   96:const char kDigits[] = "0123456789";
@@ -117,10 +117,10 @@ branch  1 taken 0%
         -:   98:// Formats a 64-bit integer in the given field width.  Note that it is up
         -:   99:// to the caller of Format64() [and Format02d()/FormatOffset()] to ensure
         -:  100:// that there is sufficient space before ep to hold the conversion.
-function _ZN4cctz6detail12_GLOBAL__N_18Format64EPcil called 119 returned 100% blocks executed 53%
-      119:  101:char* Format64(char* ep, int width, int64_t v) {
+function _ZN4cctz6detail12_GLOBAL__N_18Format64EPcil called 133 returned 100% blocks executed 53%
+      133:  101:char* Format64(char* ep, int width, int64_t v) {
         -:  102:  bool neg = false;
-      119:  103:  if (v < 0) {
+      133:  103:  if (v < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  104:    --width;
@@ -142,27 +142,27 @@ branch  1 never executed
         -:  116:    }
     #####:  117:    v = -v;
         -:  118:  }
-      119:  119:  do {
+      133:  119:  do {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
-      119:  120:    --width;
-      119:  121:    *--ep = kDigits[v % 10];
+      133:  120:    --width;
+      133:  121:    *--ep = kDigits[v % 10];
         -:  122:  } while (v /= 10);
-      952:  123:  while (--width >= 0) *--ep = '0';  // zero pad
+     1064:  123:  while (--width >= 0) *--ep = '0';  // zero pad
 branch  0 taken 89%
 branch  1 taken 11% (fallthrough)
-      119:  124:  if (neg) *--ep = '-';
+      133:  124:  if (neg) *--ep = '-';
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
-      119:  125:  return ep;
+      133:  125:  return ep;
         -:  126:}
         -:  127:
         -:  128:// Formats [0 .. 99] as %02d.
-function _ZN4cctz6detail12_GLOBAL__N_19Format02dEPci called 238 returned 100% blocks executed 100%
-      238:  129:char* Format02d(char* ep, int v) {
-      238:  130:  *--ep = kDigits[v % 10];
-      238:  131:  *--ep = kDigits[(v / 10) % 10];
-      238:  132:  return ep;
+function _ZN4cctz6detail12_GLOBAL__N_19Format02dEPci called 266 returned 100% blocks executed 100%
+      266:  129:char* Format02d(char* ep, int v) {
+      266:  130:  *--ep = kDigits[v % 10];
+      266:  131:  *--ep = kDigits[(v / 10) % 10];
+      266:  132:  return ep;
         -:  133:}
         -:  134:
         -:  135:// Formats a UTC offset, like +00:00.
@@ -384,15 +384,15 @@ branch  3 never executed
         -:  260://
         -:  261:// We also handle the %z and %Z specifiers to accommodate platforms that do
         -:  262:// not support the tm_gmtoff and tm_zone extensions to std::tm.
-function _ZN4cctz6detail6formatERKSsRKNSt6chrono10time_pointINS3_3_V212system_clockENS3_8durationIlSt5ratioILl1ELl1EEEEEERKNS7_IlS8_ILl1ELl1000000000EEEERKNS_9time_zoneE called 119 returned 100% blocks executed 35%
-      119:  263:std::string format(const std::string& format, const time_point<sys_seconds>& tp,
+function _ZN4cctz6detail6formatERKSsRKNSt6chrono10time_pointINS3_3_V212system_clockENS3_8durationIlSt5ratioILl1ELl1EEEEEERKNS7_IlS8_ILl1ELl1000000000EEEERKNS_9time_zoneE called 133 returned 100% blocks executed 35%
+      133:  263:std::string format(const std::string& format, const time_point<sys_seconds>& tp,
         -:  264:                   const std::chrono::nanoseconds& ns, const time_zone& tz) {
         -:  265:  std::string result;
-      119:  266:  const time_zone::absolute_lookup al = tz.lookup(tp);
+      133:  266:  const time_zone::absolute_lookup al = tz.lookup(tp);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      119:  267:  const std::tm tm = ToTM(al);
+      133:  267:  const std::tm tm = ToTM(al);
 call    0 returned 100%
         -:  268:
         -:  269:  // Scratch buffer for internal conversions.
@@ -407,33 +407,33 @@ call    0 returned 100%
         -:  278:  // Initially, everything is in the unexamined part.
         -:  279:  const char* pending = format.c_str();  // NUL terminated
         -:  280:  const char* cur = pending;
-      119:  281:  const char* end = pending + format.length();
+      133:  281:  const char* end = pending + format.length();
         -:  282:
-      476:  283:  while (cur != end) {  // while something is unexamined
+      532:  283:  while (cur != end) {  // while something is unexamined
 branch  0 taken 67% (fallthrough)
 branch  1 taken 33%
         -:  284:    // Moves cur to the next percent sign.
         -:  285:    const char* start = cur;
-      119:  286:    while (cur != end && *cur != '%') ++cur;
+      133:  286:    while (cur != end && *cur != '%') ++cur;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 33%
 branch  3 taken 67% (fallthrough)
         -:  287:
         -:  288:    // If the new pending text is all ordinary, copy it out.
-      238:  289:    if (cur != start && pending == start) {
+      266:  289:    if (cur != start && pending == start) {
 branch  0 taken 50% (fallthrough)
 branch  1 taken 50%
-      119:  290:      result.append(pending, cur - pending);
+      133:  290:      result.append(pending, cur - pending);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      119:  291:      pending = start = cur;
+      133:  291:      pending = start = cur;
         -:  292:    }
         -:  293:
         -:  294:    // Span the sequential percent signs.
-      238:  295:    const char* percent = cur;
-      238:  296:    while (cur != end && *cur == '%') ++cur;
+      266:  295:    const char* percent = cur;
+      266:  296:    while (cur != end && *cur == '%') ++cur;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 50%
@@ -441,17 +441,17 @@ branch  3 taken 50% (fallthrough)
         -:  297:
         -:  298:    // If the new pending text is all percents, copy out one
         -:  299:    // percent for every matched pair, then skip those pairs.
-      238:  300:    if (cur != start && pending == start) {
+      266:  300:    if (cur != start && pending == start) {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-      238:  301:      size_t escaped = (cur - pending) / 2;
-      238:  302:      result.append(pending, escaped);
+      266:  301:      size_t escaped = (cur - pending) / 2;
+      266:  302:      result.append(pending, escaped);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      238:  303:      pending += escaped * 2;
+      266:  303:      pending += escaped * 2;
         -:  304:      // Also copy out a single trailing percent.
-      238:  305:      if (pending != cur && cur == end) {
+      266:  305:      if (pending != cur && cur == end) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  306:        result.push_back(*pending++);
@@ -462,17 +462,17 @@ branch  2 never executed
         -:  308:    }
         -:  309:
         -:  310:    // Loop unless we have an unescaped percent.
-      238:  311:    if (cur == end || (cur - percent) % 2 == 0) continue;
+      266:  311:    if (cur == end || (cur - percent) % 2 == 0) continue;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
         -:  312:
         -:  313:    // Simple specifiers that we handle ourselves.
-      476:  314:    if (strchr("YmdeHMSzZs", *cur)) {
+      532:  314:    if (strchr("YmdeHMSzZs", *cur)) {
 branch  0 taken 50% (fallthrough)
 branch  1 taken 50%
-      119:  315:      if (cur - 1 != pending) {
+      133:  315:      if (cur - 1 != pending) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  316:        FormatTM(&result, std::string(pending, cur - 1), tm);
@@ -483,7 +483,7 @@ call    3 never executed
 branch  4 never executed
 branch  5 never executed
         -:  317:      }
-      119:  318:      switch (*cur) {
+      133:  318:      switch (*cur) {
 branch  0 taken 0%
 branch  1 taken 0%
 branch  2 taken 0%
@@ -535,9 +535,9 @@ branch  1 never executed
 branch  2 never executed
         -:  338:          break;
         -:  339:        case 'M':
-      119:  340:          bp = Format02d(ep, al.cs.minute());
+      133:  340:          bp = Format02d(ep, al.cs.minute());
 call    0 returned 100%
-      119:  341:          result.append(bp, ep - bp);
+      133:  341:          result.append(bp, ep - bp);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -573,12 +573,12 @@ branch  1 never executed
 branch  2 never executed
         -:  357:          break;
         -:  358:      }
-      119:  359:      pending = ++cur;
-      119:  360:      continue;
+      133:  359:      pending = ++cur;
+      133:  360:      continue;
         -:  361:    }
         -:  362:
         -:  363:    // Loop if there is no E modifier.
-      119:  364:    if (*cur != 'E' || ++cur == end) continue;
+      133:  364:    if (*cur != 'E' || ++cur == end) continue;
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 0% (fallthrough)
@@ -587,7 +587,7 @@ branch  4 taken 100% (fallthrough)
 branch  5 taken 0%
         -:  365:
         -:  366:    // Format our extensions.
-      119:  367:    if (*cur == 'z') {
+      133:  367:    if (*cur == 'z') {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  368:      // Formats %Ez.
@@ -609,16 +609,16 @@ call    0 never executed
 branch  1 never executed
 branch  2 never executed
     #####:  374:      pending = ++cur;
-      238:  375:    } else if (*cur == '*' && cur + 1 != end &&
+      266:  375:    } else if (*cur == '*' && cur + 1 != end &&
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
 branch  4 taken 100% (fallthrough)
 branch  5 taken 0%
-      119:  376:               (*(cur + 1) == 'S' || *(cur + 1) == 'f')) {
+      133:  376:               (*(cur + 1) == 'S' || *(cur + 1) == 'f')) {
         -:  377:      // Formats %E*S or %E*F.
-      119:  378:      if (cur - 2 != pending) {
+      133:  378:      if (cur - 2 != pending) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  379:        FormatTM(&result, std::string(pending, cur - 2), tm);
@@ -630,35 +630,35 @@ branch  4 never executed
 branch  5 never executed
         -:  380:      }
         -:  381:      char* cp = ep;
-      119:  382:      bp = Format64(cp, 9, ns.count());
+      133:  382:      bp = Format64(cp, 9, ns.count());
 call    0 returned 100%
-      119:  383:      while (cp != bp && cp[-1] == '0') --cp;
+      133:  383:      while (cp != bp && cp[-1] == '0') --cp;
 branch  0 taken 90% (fallthrough)
 branch  1 taken 10%
 branch  2 taken 100%
 branch  3 taken 0% (fallthrough)
-      119:  384:      switch (*(cur + 1)) {
+      133:  384:      switch (*(cur + 1)) {
 branch  0 taken 100%
 branch  1 taken 0%
 branch  2 taken 0%
         -:  385:        case 'S':
-      119:  386:          if (cp != bp) *--bp = '.';
+      133:  386:          if (cp != bp) *--bp = '.';
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
-      119:  387:          bp = Format02d(bp, al.cs.second());
+      133:  387:          bp = Format02d(bp, al.cs.second());
 call    0 returned 100%
-      119:  388:          break;
+      133:  388:          break;
         -:  389:        case 'f':
     #####:  390:          if (cp == bp) *--bp = '0';
 branch  0 never executed
 branch  1 never executed
         -:  391:          break;
         -:  392:      }
-      119:  393:      result.append(bp, cp - bp);
+      133:  393:      result.append(bp, cp - bp);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      119:  394:      pending = cur += 2;
+      133:  394:      pending = cur += 2;
     #####:  395:    } else if (*cur == '4' && cur + 1 != end && *(cur + 1) == 'Y') {
 branch  0 never executed
 branch  1 never executed
@@ -740,7 +740,7 @@ branch  2 never executed
         -:  425:  }
         -:  426:
         -:  427:  // Formats any remaining data.
-      119:  428:  if (end != pending) {
+      133:  428:  if (end != pending) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  429:    FormatTM(&result, std::string(pending, end), tm);
@@ -752,7 +752,7 @@ branch  4 never executed
 branch  5 never executed
         -:  430:  }
         -:  431:
-      119:  432:  return result;
+      133:  432:  return result;
         -:  433:}
         -:  434:
         -:  435:namespace {

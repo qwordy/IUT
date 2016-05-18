@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/locale_facets.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:21
+        -:    0:Runs:42
         -:    0:Programs:1
         -:    1:// Locale support -*- C++ -*-
         -:    2:
@@ -867,13 +867,13 @@
         -:  862:       *  @return  The converted character.
         -:  863:      */
         -:  864:      char_type
-function _ZNKSt5ctypeIcE5widenEc called 8967 returned 100% blocks executed 60%
-     8967:  865:      widen(char __c) const
+function _ZNKSt5ctypeIcE5widenEc called 12047 returned 100% blocks executed 60%
+    12047:  865:      widen(char __c) const
         -:  866:      {
-     8967:  867:	if (_M_widen_ok)
+    12047:  867:	if (_M_widen_ok)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-     8967:  868:	  return _M_widen[static_cast<unsigned char>(__c)];
+    12047:  868:	  return _M_widen[static_cast<unsigned char>(__c)];
     #####:  869:	this->_M_widen_init();
 call    0 never executed
     #####:  870:	return this->do_widen(__c);

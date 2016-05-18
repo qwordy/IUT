@@ -1,7 +1,7 @@
         -:    0:Source:include/time_zone.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:17
+        -:    0:Runs:19
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -70,7 +70,7 @@
         -:   65:  //   const cctz::time_zone tz = ...
         -:   66:  //   const auto tp = std::chrono::system_clock::now();
         -:   67:  //   const cctz::time_zone::absolute_lookup al = tz.lookup(tp);
-     1445:   68:  struct absolute_lookup {
+     1615:   68:  struct absolute_lookup {
 call    0 returned 100%
         -:   69:    civil_second cs;
         -:   70:    // Note: The following fields exist for backward compatibility with older

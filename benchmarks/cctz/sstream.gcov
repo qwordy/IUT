@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/sstream
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:21
+        -:    0:Runs:42
         -:    0:Programs:1
         -:    1:// String based streams -*- C++ -*-
         -:    2:
@@ -67,8 +67,8 @@
         -:   62:  */
         -:   63:  template<typename _CharT, typename _Traits, typename _Alloc>
 function _ZNSt15basic_stringbufIcSt11char_traitsIcESaIcEED0Ev called 0 returned 0% blocks executed 0%
-function _ZNSt15basic_stringbufIcSt11char_traitsIcESaIcEED2Ev called 15834 returned 100% blocks executed 100%
-    31668:   64:    class basic_stringbuf : public basic_streambuf<_CharT, _Traits>
+function _ZNSt15basic_stringbufIcSt11char_traitsIcESaIcEED2Ev called 21305 returned 100% blocks executed 100%
+    42610:   64:    class basic_stringbuf : public basic_streambuf<_CharT, _Traits>
 call    0 never executed
 call    1 never executed
         -:   65:    {
@@ -590,7 +590,7 @@ call    1 never executed
         -:  581:      */
         -:  582:      __string_type
         -:  583:      str() const
-    15834:  584:      { return _M_stringbuf.str(); }
+    21305:  584:      { return _M_stringbuf.str(); }
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
