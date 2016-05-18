@@ -4,6 +4,7 @@
 import os
 
 srcdir = '/home/yfy/iut/benchmarks/cctz'
+coverageFile = srcdir + '/iutFuncCoverage.txt'
 make = 'make'
 makeClean = 'make clean'
 run = './civil_time_test; ./time_zone_lookup_test'
@@ -33,12 +34,19 @@ def listTests():
         testCases.append(TestCase(test, suite + case))
       line = f.readline()
     f.close()
-  for i in testCases:
-    print i
+  #for i in testCases: print i
 
 def runTests():
+  fo = open(coverageFile, 'w')
   for test in testCases:
     os.system('./' + test.f + ' --gtest_filter=' + test.t)
+    walk(srcdir)
+    fi = os.popen(parse + ' ' + srcdir)
+    fo.write(test.__str__() + '\n')
+    fo.write(fi.read() + '\n')
+    fi.close()
+    os.system('rm -r *.gcov')
+  fo.close()
 
 def walk(dir):
   for root, dirs, files in os.walk(dir):
@@ -47,7 +55,7 @@ def walk(dir):
       name, ext = os.path.splitext(path)
       if ext == '.gcda':
         cmd = 'gcov -b %s > /dev/null' % name
-        print cmd
+        #print cmd
         os.system(cmd)
 
 os.chdir(srcdir)
@@ -55,6 +63,6 @@ os.chdir(srcdir)
 os.system(make)
 listTests()
 runTests()
-#walk(srcdir)
+os.system('rm -r *.gcda')
 #os.system(parse + ' ' + srcdir)
 

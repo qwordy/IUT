@@ -31,20 +31,22 @@ void parse(char *file) {
   FILE *f;
   int times, line;
 
-  printf("parse %s\n", file);
-  printf("line No. | function name | called times\n");
+  printf("%s\n", file);
+  //printf("line No. | function name | called times\n");
   f = fopen(file, "r");
   result = fgets(buf, MAXLEN, f);
   while (result) {
     if (sscanf(buf, "function %s called %d", funcname, &times) == 2) {
       if ((result = fgets(buf, MAXLEN, f)) && (pos = strchr(buf, ':')) &&
           sscanf(pos + 1, "%d", &line) == 1) {
-        printf("%d ", line);
         result = fgets(buf, MAXLEN, f);
       } else {
-        printf("? ");
+        line = 0;
       }
-      printf("%s %d\n", funcname, times);
+      if (times > 0) {
+        if (line == 0) printf("  ? "); else printf("  %d ", line);
+        printf("%s\n", funcname);
+      }
     } else {
       result = fgets(buf, MAXLEN, f);
     }
