@@ -24,17 +24,20 @@ public class FileDiffer {
 	}
 
 	public String diff(String oldDir, String newDir, String base){
+		System.out.println("FileDiffer.diff( "+oldDir+", "+newDir+", "+base+")");
 		StringBuilder sb = new StringBuilder();
 		File oldFolder = new File(oldDir + base);
 		File newFolder = new File(newDir + base);
 		CPPFileFilter cppFilter = new CPPFileFilter();
 
 		if(oldFolder.isDirectory() && newFolder.isDirectory()){
+//			System.out.println("good");
 			List<File> oldFiles = new ArrayList<>();
 			List<File> newFiles = new ArrayList<>();
 
 			HashMap<String, File> dirMap = new HashMap<>();
 
+			//compare files
 			for(File file : newFolder.listFiles()){
 				if(cppFilter.accept(file)){
 					newFiles.add(file);
@@ -71,6 +74,8 @@ public class FileDiffer {
 				e.printStackTrace();
 			}
 
+		}else{
+			sb.append("\nERROR: At least one of the paths is not a DIRECTORY!");
 		}
 		return sb.toString();
 	}

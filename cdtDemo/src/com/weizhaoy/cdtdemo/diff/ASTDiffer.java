@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorFunctionStyleMacroDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.parser.ParserLanguage;
@@ -105,7 +106,7 @@ public class ASTDiffer {
 	 * @return
 	 */
 	public String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST){
-		
+//		System.out.println("String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST): "+oldAST.toString()+"\t"+newAST.toString());
 		funcAdded = new ArrayList<>();
 		funcModified = new ArrayList<>();
 		funcDeleted = new ArrayList<>();
@@ -114,11 +115,17 @@ public class ASTDiffer {
 
 		//get all new
 		IASTDeclaration[] newDecls = newAST.getDeclarations();
+//		for(IASTNode a : newAST.getChildren()){
+//			System.out.println("*--------*"+a.getRawSignature());
+//		}
 		//put into map
 		for(IASTDeclaration nw : newDecls){
+			System.out.println("*--------*"+nw.getRawSignature());
 			if(nw instanceof IASTFunctionDefinition){
 				IASTFunctionDefinition iastFunctionDefinition = (IASTFunctionDefinition) nw;
 				newFuncDefsMap.put(DiffUtils.getFunctionId(iastFunctionDefinition), iastFunctionDefinition);
+			}else{
+				function 的 scope问题
 			}
 		}
 

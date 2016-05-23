@@ -22,16 +22,45 @@ import com.weizhaoy.cdtdemo.diff.FileDiffer;
 
 public class Demo {
 
-	static int flag = 3;
+	static int FLAG = 3;// only for test
+	
 	public static void main(String[] args) {
-		if(flag == 2){
-			String oldPath = "testcode/main.cpp";
-			String newPath="testcode/mainNew.cpp";
+		
+		if(FLAG == 3){
+			FileDiffer fileDiffer = new FileDiffer();
+			String oldDir = "testcode/project.Old";
+			String newDir = "testcode/project.New";
+			
+			 oldDir = "/home/weizhaoy/Desktop/cctz-old/src";
+			 newDir = "/home/weizhaoy/Desktop/cctz-new/src";
+
+			if(args.length != 0){
+				oldDir = args[0];
+				newDir = args[1];
+			}
+			System.out.println("Old: "+oldDir+"------------New: "+newDir);
+			String result = fileDiffer.diff(oldDir, newDir);
+			System.out.println(result);
+		}
+		
+		if(FLAG == 2){
+//			String oldPath = "testcode/main.cpp"; ///home/weizhaoy/Desktop/cctz-old/src
+//			String newPath="testcode/mainNew.cpp";///home/weizhaoy/Desktop/cctz-new/src
+			
+			String oldPath = "testcode/main.cpp"; ///home/weizhaoy/Desktop/cctz-old/src
+			String newPath="testcode/mainNew.cpp";///home/weizhaoy/Desktop/cctz-new/src
+			
+			if(args.length != 0){
+				oldPath = args[0];
+				newPath = args[1];
+			}
 			ASTDiffer astDiffer = new ASTDiffer();
 			String result =  astDiffer.diff(oldPath, newPath, false);
 			System.out.println(result);
 		}
-		if(flag == 1){
+		
+		
+		if(FLAG == 1){
 			String filePath = "testcode/main.cpp";
 			if (args.length != 0)
 				filePath = args[0];
@@ -102,13 +131,7 @@ public class Demo {
 			*/
 		}
 		
-		if(flag == 3){
-			FileDiffer fileDiffer = new FileDiffer();
-			String oldDir = "testcode/project.Old";
-			String newDir = "testcode/project.New";
-			String result = fileDiffer.diff(oldDir, newDir);
-			System.out.println(result);
-		}
+		
 		
 
 	}
