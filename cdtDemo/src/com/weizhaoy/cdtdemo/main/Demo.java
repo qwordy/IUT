@@ -17,17 +17,18 @@ import com.weizhaoy.cdtdemo.ast.ASTTranslationUnitCore;
 import com.weizhaoy.cdtdemo.ast.MultiVisitor;
 import com.weizhaoy.cdtdemo.ast.MyASTVisitor;
 import com.weizhaoy.cdtdemo.diff.ASTDiffer;
+import com.weizhaoy.cdtdemo.diff.FileDiffer;
 
 
 public class Demo {
 
-	static int flag = 2;
+	static int flag = 3;
 	public static void main(String[] args) {
 		if(flag == 2){
 			String oldPath = "testcode/main.cpp";
 			String newPath="testcode/mainNew.cpp";
 			ASTDiffer astDiffer = new ASTDiffer();
-			String result =  astDiffer.diff(oldPath, newPath);
+			String result =  astDiffer.diff(oldPath, newPath, false);
 			System.out.println(result);
 		}
 		if(flag == 1){
@@ -99,6 +100,14 @@ public class Demo {
 				System.out.println("Rawsig: "+declaration.getRawSignature());
 			}
 			*/
+		}
+		
+		if(flag == 3){
+			FileDiffer fileDiffer = new FileDiffer();
+			String oldDir = "testcode/project.Old";
+			String newDir = "testcode/project.New";
+			String result = fileDiffer.diff(oldDir, newDir);
+			System.out.println(result);
 		}
 		
 

@@ -19,8 +19,12 @@ public class ASTDiffer {
 	List<String> funcModified;
 	List<String> funcDeleted;
 //	private boolean isModified = false;
-
+	String diffResult = "";
 	
+	public String getDiffResult() {
+		return diffResult;
+	}
+
 	public ASTDiffer(){
 		//TODO: keep it or cut it?
 	}
@@ -31,13 +35,13 @@ public class ASTDiffer {
 
 	}
 
-	public ASTDiffer(String oldPath, String newPath){//Diff FilePath
-		diff(oldPath, newPath);
+	public ASTDiffer(String oldPath, String newPath, boolean isCode){//Diff FilePath
+		diff(oldPath, newPath, isCode);
 	}
 
 	public ASTDiffer(File oldFile, File newFile)  {
 		try {
-			diff(oldFile.getCanonicalPath(), newFile.getCanonicalPath());
+			diff(oldFile.getCanonicalPath(), newFile.getCanonicalPath(), false);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,7 +71,9 @@ public class ASTDiffer {
 
 
 
-	public String diff(String oldPath, String newPath){
+	
+	
+	public String diff(String oldPath, String newPath, boolean isCode){
 		/**
 		 *Focus on:
 		 *CPPASTFunctionDefinition
@@ -77,18 +83,33 @@ public class ASTDiffer {
 		
 
 		ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
-		IASTTranslationUnit oldAST = astTranslationUnitCore.parseFile(oldPath, ParserLanguage.CPP, false, false);
-		IASTTranslationUnit newAST = astTranslationUnitCore.parseFile(newPath, ParserLanguage.CPP, false, false);
+		IASTTranslationUnit oldAST;
+		IASTTranslationUnit newAST;
+		if(!isCode){
+			 oldAST = astTranslationUnitCore.parseFile(oldPath, ParserLanguage.CPP, false, false);
+			 newAST = astTranslationUnitCore.parseFile(newPath, ParserLanguage.CPP, false, false);
+		}else{
+			 oldAST = astTranslationUnitCore.parseCode(oldPath, ParserLanguage.CPP, false, false);
+			 newAST = astTranslationUnitCore.parseCode(newPath, ParserLanguage.CPP, false, false);
+		}
+		
 
+		
 		return diff(oldAST, newAST);
 	}
 
+	/**
+	 * Core diff method
+	 * @param oldAST
+	 * @param newAST
+	 * @return
+	 */
 	public String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST){
 		
 		funcAdded = new ArrayList<>();
 		funcModified = new ArrayList<>();
 		funcDeleted = new ArrayList<>();
-		String result = "DIFF RESULT: \n";
+		String result = "AST Diff Result: "+" \n";//TODO: StringBuilder
 		HashMap<String, IASTFunctionDefinition> newFuncDefsMap = new HashMap<>();
 
 		//get all new
@@ -149,7 +170,7 @@ public class ASTDiffer {
 		}
 
 		//TODO: add IASTPreprocessorFunctionStyleMacroDefinition
-
+		diffResult = result;
 		return result;
 	}
 }
