@@ -13,7 +13,7 @@ class Animal{
 };
 
 string Animal::getName(string kind){
-	return name+" is a/an "+kind;
+	return name+" is a/and "+kind;
 }
 
 bool biggerThan (int a, int b = 0){

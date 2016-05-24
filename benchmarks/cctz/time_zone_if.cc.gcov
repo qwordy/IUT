@@ -1,0 +1,58 @@
+        -:    0:Source:src/time_zone_if.cc
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_if.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_if.gcda
+        -:    0:Runs:28
+        -:    0:Programs:1
+        -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
+        -:    2://
+        -:    3:// Licensed under the Apache License, Version 2.0 (the "License");
+        -:    4:// you may not use this file except in compliance with the License.
+        -:    5:// You may obtain a copy of the License at
+        -:    6://
+        -:    7://   http://www.apache.org/licenses/LICENSE-2.0
+        -:    8://
+        -:    9://   Unless required by applicable law or agreed to in writing, software
+        -:   10://   distributed under the License is distributed on an "AS IS" BASIS,
+        -:   11://   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        -:   12://   See the License for the specific language governing permissions and
+        -:   13://   limitations under the License.
+        -:   14:
+        -:   15:#include "time_zone_if.h"
+        -:   16:#include "time_zone_info.h"
+        -:   17:#include "time_zone_libc.h"
+        -:   18:
+        -:   19:namespace cctz {
+        -:   20:
+function _ZN4cctz10TimeZoneIf4LoadERKSs called 1212 returned 100% blocks executed 48%
+     1212:   21:std::unique_ptr<TimeZoneIf> TimeZoneIf::Load(const std::string& name) {
+        -:   22:  // Support "libc:localtime" and "libc:*" to access the legacy
+        -:   23:  // localtime and UTC support respectively from the C library.
+     1212:   24:  if (name.compare(0, 5, "libc:") == 0) {
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+    #####:   25:    return std::unique_ptr<TimeZoneIf>(new TimeZoneLibC(name.substr(5)));
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+call    8 never executed
+        -:   26:  }
+        -:   27:
+        -:   28:  // Otherwise use the "zoneinfo" implementation by default.
+     1212:   29:  std::unique_ptr<TimeZoneInfo> tz(new TimeZoneInfo);
+call    0 returned 100%
+     1212:   30:  if (!tz->Load(name)) tz.reset();
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+branch  3 taken 1% (fallthrough)
+branch  4 taken 99%
+        -:   31:  return std::unique_ptr<TimeZoneIf>(tz.release());
+        -:   32:}
+        -:   33:
+        -:   34:}  // namespace cctz

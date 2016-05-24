@@ -1,0 +1,150 @@
+        -:    0:Source:src/time_zone_info.h
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcda
+        -:    0:Runs:28
+        -:    0:Programs:1
+        -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
+        -:    2://
+        -:    3:// Licensed under the Apache License, Version 2.0 (the "License");
+        -:    4:// you may not use this file except in compliance with the License.
+        -:    5:// You may obtain a copy of the License at
+        -:    6://
+        -:    7://   http://www.apache.org/licenses/LICENSE-2.0
+        -:    8://
+        -:    9://   Unless required by applicable law or agreed to in writing, software
+        -:   10://   distributed under the License is distributed on an "AS IS" BASIS,
+        -:   11://   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        -:   12://   See the License for the specific language governing permissions and
+        -:   13://   limitations under the License.
+        -:   14:
+        -:   15:#ifndef CCTZ_TIME_ZONE_INFO_H_
+        -:   16:#define CCTZ_TIME_ZONE_INFO_H_
+        -:   17:
+        -:   18:#include <atomic>
+        -:   19:#include <cstdint>
+        -:   20:#include <cstdio>
+        -:   21:#include <string>
+        -:   22:#include <vector>
+        -:   23:
+        -:   24:#include "time_zone_if.h"
+        -:   25:#include "tzfile.h"
+        -:   26:
+        -:   27:namespace cctz {
+        -:   28:
+        -:   29:// A zone-independent date/time. A DateTime represents a "Y/M/D H:M:S"
+        -:   30:// as an offset in seconds from some epoch DateTime, without taking into
+        -:   31:// account the value of, or changes in any time_zone's UTC offset (i.e., as
+        -:   32:// if the date/time was in UTC). This allows "Y/M/D H:M:S" values to be
+        -:   33:// quickly ordered by offset (although this may not be the same ordering as
+        -:   34:// their corresponding times in a time_zone). Also, if two DateTimes are not
+        -:   35:// separated by a UTC-offset change in some time_zone, then the number of
+        -:   36:// seconds between them can be computed as a simple difference of offsets.
+        -:   37://
+        -:   38:// Note: Because the DateTime epoch does not correspond to the time_point
+        -:   39:// epoch (even if only because of the unknown UTC offset) there can be valid
+        -:   40:// times that will not be representable as DateTimes when DateTime only has
+        -:   41:// the same number of "seconds" bits. We accept this at the moment (so as
+        -:   42:// to avoid extended arithmetic) and lose a little range as a result.
+        -:   43:struct DateTime {
+        -:   44:  int64_t offset;  // seconds from some epoch DateTime
+        -:   45:  bool Normalize(int64_t year, int mon, int day, int hour, int min, int sec);
+        -:   46:  void Assign(const Breakdown& bd);
+        -:   47:};
+        -:   48:
+        -:   49:inline bool operator<(const DateTime& lhs, const DateTime& rhs) {
+   445527:   50:  return lhs.offset < rhs.offset;
+        -:   51:}
+        -:   52:
+        -:   53:// The difference between two DateTimes in seconds. Requires that all
+        -:   54:// intervening DateTimes share the same UTC offset (i.e., no transitions).
+        -:   55:inline int64_t operator-(const DateTime& lhs, const DateTime& rhs) {
+       92:   56:  return lhs.offset - rhs.offset;
+        -:   57:}
+        -:   58:
+        -:   59:// A transition to a new UTC offset.
+        -:   60:struct Transition {
+        -:   61:  int64_t unix_time;        // the instant of this transition
+        -:   62:  uint8_t type_index;       // index of the transition type
+        -:   63:  DateTime date_time;       // local date/time of transition
+        -:   64:  DateTime prev_date_time;  // local date/time one second earlier
+        -:   65:
+        -:   66:  struct ByUnixTime {
+        -:   67:    inline bool operator()(const Transition& lhs, const Transition& rhs) const {
+    79874:   68:      return lhs.unix_time < rhs.unix_time;
+        -:   69:    }
+        -:   70:  };
+        -:   71:  struct ByDateTime {
+        -:   72:    inline bool operator()(const Transition& lhs, const Transition& rhs) const {
+        -:   73:      return lhs.date_time < rhs.date_time;
+        -:   74:    }
+        -:   75:  };
+        -:   76:};
+        -:   77:
+        -:   78:// The characteristics of a particular transition.
+        -:   79:struct TransitionType {
+        -:   80:  int32_t utc_offset;  // the new prevailing UTC offset
+        -:   81:  bool is_dst;         // did we move into daylight-saving time
+        -:   82:  uint8_t abbr_index;  // index of the new abbreviation
+        -:   83:};
+        -:   84:
+        -:   85:
+        -:   86:// A time zone backed by the IANA Time Zone Database (zoneinfo).
+function _ZN4cctz12TimeZoneInfoD0Ev called 6 returned 100% blocks executed 100%
+function _ZN4cctz12TimeZoneInfoD2Ev called 6 returned 100% blocks executed 71%
+       18:   87:class TimeZoneInfo : public TimeZoneIf {
+call    0 returned 100%
+call    1 returned 100%
+        -:   88: public:
+        -:   89:  TimeZoneInfo() = default;
+        -:   90:  TimeZoneInfo(const TimeZoneInfo&) = delete;
+        -:   91:  TimeZoneInfo& operator=(const TimeZoneInfo&) = delete;
+        -:   92:
+        -:   93:  // Loads the zoneinfo for the given name, returning true if successful.
+        -:   94:  bool Load(const std::string& name);
+        -:   95:
+        -:   96:  // TimeZoneIf implementations.
+        -:   97:  Breakdown BreakTime(const time_point<sys_seconds>& tp) const override;
+        -:   98:  TimeInfo MakeTimeInfo(int64_t year, int mon, int day,
+        -:   99:                        int hour, int min, int sec) const override;
+        -:  100:
+        -:  101: private:
+        -:  102:  struct Header {  // counts of:
+        -:  103:    int32_t timecnt;     // transition times
+        -:  104:    int32_t typecnt;     // transition types
+        -:  105:    int32_t charcnt;     // zone abbreviation characters
+        -:  106:    int32_t leapcnt;     // leap seconds (we expect none)
+        -:  107:    int32_t ttisstdcnt;  // UTC/local indicators (unused)
+        -:  108:    int32_t ttisgmtcnt;  // standard/wall indicators (unused)
+        -:  109:
+        -:  110:    void Build(const tzhead& tzh);
+        -:  111:    size_t DataLength(size_t time_len) const;
+        -:  112:  };
+        -:  113:
+        -:  114:  void CheckTransition(const std::string& name, const TransitionType& tt,
+        -:  115:                       int32_t offset, bool is_dst,
+        -:  116:                       const std::string& abbr) const;
+        -:  117:
+        -:  118:  void ResetToBuiltinUTC(int seconds);
+        -:  119:  bool Load(const std::string& name, FILE* fp);
+        -:  120:
+        -:  121:  // Helpers for BreakTime() and MakeTimeInfo() respectively.
+        -:  122:  Breakdown LocalTime(int64_t unix_time, const TransitionType& tt) const;
+        -:  123:  TimeInfo TimeLocal(int64_t year, int mon, int day,
+        -:  124:                     int hour, int min, int sec, int64_t offset) const;
+        -:  125:
+        -:  126:  std::vector<Transition> transitions_;  // ordered by unix_time and date_time
+        -:  127:  std::vector<TransitionType> transition_types_;  // distinct transition types
+        -:  128:  int default_transition_type_;  // for before the first transition
+        -:  129:  std::string abbreviations_;  // all the NUL-terminated abbreviations
+        -:  130:
+        -:  131:  std::string future_spec_;  // for after the last zic transition
+        -:  132:  bool extended_;            // future_spec_ was used to generate transitions
+        -:  133:  int64_t last_year_;        // the final year of the generated transitions
+        -:  134:
+        -:  135:  mutable std::atomic<size_t> local_time_hint_;  // BreakTime() search hint
+        -:  136:  mutable std::atomic<size_t> time_local_hint_;  // MakeTimeInfo() search hint
+        -:  137:};
+        -:  138:
+        -:  139:}  // namespace cctz
+        -:  140:
+        -:  141:#endif  // CCTZ_TIME_ZONE_INFO_H_

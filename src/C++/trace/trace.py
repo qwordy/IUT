@@ -45,7 +45,7 @@ def runTests():
     fo.write(test.__str__() + '\n')
     fo.write(fi.read() + '\n')
     fi.close()
-    os.system('rm -r *.gcov')
+    #os.system('rm -r *.gcov')
   fo.close()
 
 def walk(dir):
