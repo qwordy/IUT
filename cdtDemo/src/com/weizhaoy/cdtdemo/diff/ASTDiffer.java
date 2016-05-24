@@ -120,12 +120,12 @@ public class ASTDiffer {
 //		}
 		//put into map
 		for(IASTDeclaration nw : newDecls){
-			System.out.println("*--------*"+nw.getRawSignature());
+			System.out.println("*--------*"+nw.toString());
 			if(nw instanceof IASTFunctionDefinition){
 				IASTFunctionDefinition iastFunctionDefinition = (IASTFunctionDefinition) nw;
 				newFuncDefsMap.put(DiffUtils.getFunctionId(iastFunctionDefinition), iastFunctionDefinition);
 			}else{
-				function 的 scope问题
+				//function 的 scope问题
 			}
 		}
 

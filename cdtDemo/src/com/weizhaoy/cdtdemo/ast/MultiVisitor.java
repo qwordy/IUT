@@ -16,6 +16,7 @@ import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTToken;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTDecltypeSpecifier;
 import org.eclipse.cdt.core.model.IFunctionDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
 import org.w3c.dom.Attr;
@@ -29,17 +30,27 @@ public class MultiVisitor extends ASTVisitor{
 		// TODO Auto-generated constructor stub
 		super(visitAll);
 	}
+	
+	
+	
+	@Override
+	public int visit(ICPPASTDecltypeSpecifier decltypeSpecifier) {
+		// TODO Auto-generated method stub
+		System.out.println("ICPPASTDecltypeSpecifier: "+decltypeSpecifier.getRawSignature() );
+		return super.visit(decltypeSpecifier);
+	}
+	
 	@Override
 	public int visit(IASTAttribute attribute) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTAttribute: "+attribute.getRawSignature());
+		System.out.println("IASTAttribute: "+attribute.getRawSignature() );
 		return super.visit(attribute);
 	}
 
 	@Override
 	public int visit(IASTComment comment) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTComment: "+comment.getRawSignature());
+		System.out.println("IASTComment: "+comment.getRawSignature() );
 
 		return super.visit(comment);
 	}
@@ -54,6 +65,7 @@ public class MultiVisitor extends ASTVisitor{
 //
 //		}
 
+		System.out.println("DECLARATION: "+declaration.toString());
 
 		if(declaration instanceof IASTFunctionDefinition){
 			IASTFunctionDefinition iastFunctionDefinition = (IASTFunctionDefinition) declaration;
@@ -86,7 +98,7 @@ public class MultiVisitor extends ASTVisitor{
 			//						info += ("/n/t"+attrSps[i]);
 			//					}
 			//				}
-			info += "\n\t"+iastFunctionDefinition.getBody().getRawSignature();
+			info += "\n\t"+iastFunctionDefinition.getBody().getRawSignature() ;
 			System.out.println(info);
 			//				System.out.println("ASTFunction: "+ ((IASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
 			//				System.out.println("                    "+ ((IASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
@@ -103,6 +115,7 @@ public class MultiVisitor extends ASTVisitor{
 	public int visit(IASTDeclarator declarator) {
 		// TODO Auto-generated method stub
 		System.out.println("IASTDeclarator: "+declarator.getName());
+		System.out.println("IASTDeclarator: "+declarator.toString());
 
 		return super.visit(declarator);
 	}
@@ -110,7 +123,8 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTDeclSpecifier declSpec) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTDeclSpecifier: "+declSpec.getRawSignature());
+		System.out.println("IASTDeclSpecifier: "+declSpec.getRawSignature() );
+		System.out.println("IASTDeclSpecifier: "+declSpec.toString() );
 
 		return super.visit(declSpec);
 	}
@@ -118,7 +132,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTExpression expression) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTExpression: "+expression.getRawSignature());
+		System.out.println("IASTExpression: "+expression.getRawSignature() );
 
 		return super.visit(expression);
 	}
@@ -126,7 +140,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTInitializer initializer) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTInitializer: "+initializer.getParent().getRawSignature());
+		System.out.println("IASTInitializer: "+initializer.getParent().getRawSignature() );
 
 		return super.visit(initializer);
 	}
@@ -134,7 +148,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTName name) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTName: "+name.getRawSignature());
+		//System.out.println("IASTName: "+name.getRawSignature() );
 
 		return super.visit(name);
 	}
@@ -142,7 +156,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTParameterDeclaration parameterDeclaration) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTParameterDeclaration: "+parameterDeclaration.getRawSignature());
+		System.out.println("IASTParameterDeclaration: "+parameterDeclaration.getRawSignature() );
 
 		return super.visit(parameterDeclaration);
 	}
@@ -150,7 +164,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTStatement statement) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTStatement: "+statement.getRawSignature());
+		System.out.println("IASTStatement: "+statement.getRawSignature() );
 
 		return super.visit(statement);
 	}
@@ -166,7 +180,7 @@ public class MultiVisitor extends ASTVisitor{
 	@Override
 	public int visit(IASTTranslationUnit tu) {
 		// TODO Auto-generated method stub
-		System.out.println("IASTTranslationUnit: "+tu.getRawSignature());
+		//System.out.println("IASTTranslationUnit: "+tu.getRawSignature() );
 
 		return super.visit(tu);
 	}
