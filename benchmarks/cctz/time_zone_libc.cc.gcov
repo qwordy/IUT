@@ -1,0 +1,267 @@
+        -:    0:Source:src/time_zone_libc.cc
+        -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcno
+        -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_libc.gcda
+        -:    0:Runs:28
+        -:    0:Programs:1
+        -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
+        -:    2://
+        -:    3:// Licensed under the Apache License, Version 2.0 (the "License");
+        -:    4:// you may not use this file except in compliance with the License.
+        -:    5:// You may obtain a copy of the License at
+        -:    6://
+        -:    7://   http://www.apache.org/licenses/LICENSE-2.0
+        -:    8://
+        -:    9://   Unless required by applicable law or agreed to in writing, software
+        -:   10://   distributed under the License is distributed on an "AS IS" BASIS,
+        -:   11://   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        -:   12://   See the License for the specific language governing permissions and
+        -:   13://   limitations under the License.
+        -:   14:
+        -:   15:#include "time_zone_libc.h"
+        -:   16:
+        -:   17:#include <chrono>
+        -:   18:#include <cstdint>
+        -:   19:#include <ctime>
+        -:   20:
+        -:   21:// Define OFFSET(tm) and ABBR(tm) for your platform to return the UTC
+        -:   22:// offset and zone abbreviation after a call to localtime_r().
+        -:   23:#if defined(linux)
+        -:   24:# if defined(__USE_BSD)
+        -:   25:#  define OFFSET(tm) ((tm).tm_gmtoff)
+        -:   26:#  define ABBR(tm)   ((tm).tm_zone)
+        -:   27:# else
+        -:   28:#  define OFFSET(tm) ((tm).__tm_gmtoff)
+        -:   29:#  define ABBR(tm)   ((tm).__tm_zone)
+        -:   30:# endif
+        -:   31:#elif defined(__APPLE__)
+        -:   32:# define OFFSET(tm) ((tm).tm_gmtoff)
+        -:   33:# define ABBR(tm)   ((tm).tm_zone)
+        -:   34:#elif defined(__sun)
+        -:   35:# define OFFSET(tm) ((tm).tm_isdst > 0 ? altzone : timezone)
+        -:   36:# define ABBR(tm)   (tzname[(tm).tm_isdst > 0])
+        -:   37:#elif defined(_WIN32) || defined(_WIN64)
+        -:   38:static long get_timezone() {
+        -:   39:  long seconds;
+        -:   40:  _get_timezone(&seconds);
+        -:   41:  return seconds;
+        -:   42:}
+        -:   43:static std::string get_tzname(int index) {
+        -:   44:  char time_zone_name[32] = {0};
+        -:   45:  size_t size_in_bytes = sizeof time_zone_name;
+        -:   46:  _get_tzname(&size_in_bytes, time_zone_name, size_in_bytes, index);
+        -:   47:  return time_zone_name;
+        -:   48:}
+        -:   49:# define OFFSET(tm) (get_timezone() + ((tm).tm_isdst > 0 ? 60 * 60 : 0))
+        -:   50:# define ABBR(tm)   (get_tzname((tm).tm_isdst > 0))
+        -:   51:#else
+        -:   52:# define OFFSET(tm) (timezone + ((tm).tm_isdst > 0 ? 60 * 60 : 0))
+        -:   53:# define ABBR(tm)   (tzname[(tm).tm_isdst > 0])
+        -:   54:#endif
+        -:   55:
+        -:   56:namespace cctz {
+        -:   57:
+function _ZN4cctz12TimeZoneLibCC2ERKSs called 0 returned 0% blocks executed 0%
+    #####:   58:TimeZoneLibC::TimeZoneLibC(const std::string& name) {
+    #####:   59:  local_ = (name == "localtime");
+    #####:   60:  if (!local_) {
+branch  0 never executed
+branch  1 never executed
+        -:   61:    // TODO: Support "UTC-05:00", for example.
+    #####:   62:    offset_ = 0;
+    #####:   63:    abbr_ = "UTC";
+        -:   64:  }
+    #####:   65:}
+        -:   66:
+function _ZNK4cctz12TimeZoneLibC9BreakTimeERKNSt6chrono10time_pointINS1_3_V212system_clockENS1_8durationIlSt5ratioILl1ELl1EEEEEE called 0 returned 0% blocks executed 0%
+    #####:   67:Breakdown TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const {
+        -:   68:  Breakdown bd;
+    #####:   69:  std::time_t t = ToUnixSeconds(tp);
+        -:   70:  std::tm tm;
+    #####:   71:  if (local_) {
+branch  0 never executed
+branch  1 never executed
+        -:   72:#if defined(_WIN32) || defined(_WIN64)
+        -:   73:    localtime_s(&tm, &t);
+        -:   74:#else
+    #####:   75:    localtime_r(&t, &tm);
+call    0 never executed
+        -:   76:#endif
+    #####:   77:    bd.offset = OFFSET(tm);
+branch  0 never executed
+branch  1 never executed
+    #####:   78:    bd.abbr = ABBR(tm);
+        -:   79:  } else {
+        -:   80:#if defined(_WIN32) || defined(_WIN64)
+        -:   81:    gmtime_s(&tm, &t);
+        -:   82:#else
+    #####:   83:    gmtime_r(&t, &tm);
+call    0 never executed
+        -:   84:#endif
+    #####:   85:    bd.offset = offset_;
+    #####:   86:    bd.abbr = abbr_;
+        -:   87:  }
+    #####:   88:  bd.year = tm.tm_year + 1900;
+    #####:   89:  bd.month = tm.tm_mon + 1;
+    #####:   90:  bd.day = tm.tm_mday;
+    #####:   91:  bd.hour = tm.tm_hour;
+    #####:   92:  bd.minute = tm.tm_min;
+    #####:   93:  bd.second = tm.tm_sec;
+    #####:   94:  bd.is_dst = tm.tm_isdst > 0;
+    #####:   95:  return bd;
+        -:   96:}
+        -:   97:
+        -:   98:namespace {
+        -:   99:
+        -:  100:// Normalize *val so that 0 <= *val < base, returning any carry.
+function _ZN4cctz12_GLOBAL__N_114NormalizeFieldEiPiPb called 0 returned 0% blocks executed 0%
+    #####:  101:int NormalizeField(int base, int* val, bool* normalized) {
+    #####:  102:  int carry = *val / base;
+    #####:  103:  *val %= base;
+    #####:  104:  if (*val < 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  105:    carry -= 1;
+    #####:  106:    *val += base;
+        -:  107:  }
+    #####:  108:  if (carry != 0) *normalized = true;
+branch  0 never executed
+branch  1 never executed
+    #####:  109:  return carry;
+        -:  110:}
+        -:  111:
+function _ZN4cctz12_GLOBAL__N_16IsLeapEl called 0 returned 0% blocks executed 0%
+    #####:  112:bool IsLeap(int64_t year) {
+    #####:  113:  return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  114:}
+        -:  115:
+        -:  116:// The month lengths in non-leap and leap years respectively.
+        -:  117:const int kDaysPerMonth[2][1+12] = {
+        -:  118:  {-1, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+        -:  119:  {-1, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31},
+        -:  120:};
+        -:  121:
+        -:  122:// The number of days in non-leap and leap years respectively.
+        -:  123:const int kDaysPerYear[2] = {365, 366};
+        -:  124:
+        -:  125:// Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
+        -:  126:// See http://howardhinnant.github.io/date_algorithms.html#days_from_civil.
+function _ZN4cctz12_GLOBAL__N_110DayOrdinalElii called 0 returned 0% blocks executed 0%
+    #####:  127:std::time_t DayOrdinal(int64_t year, int month, int day) {
+    #####:  128:  year -= (month <= 2 ? 1 : 0);
+branch  0 never executed
+branch  1 never executed
+    #####:  129:  const std::time_t era = (year >= 0 ? year : year - 399) / 400;
+branch  0 never executed
+branch  1 never executed
+    #####:  130:  const int yoe = static_cast<int>(year - era * 400);
+    #####:  131:  const int doy = (153 * (month + (month > 2 ? -3 : 9)) + 2) / 5 + day - 1;
+branch  0 never executed
+branch  1 never executed
+    #####:  132:  const int doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+    #####:  133:  return era * 146097 + doe - 719468;  // shift epoch to 1970-01-01
+        -:  134:}
+        -:  135:
+        -:  136:}  // namespace
+        -:  137:
+function _ZNK4cctz12TimeZoneLibC12MakeTimeInfoEliiiii called 0 returned 0% blocks executed 0%
+    #####:  138:TimeInfo TimeZoneLibC::MakeTimeInfo(int64_t year, int mon, int day,
+        -:  139:                                    int hour, int min, int sec) const {
+    #####:  140:  bool normalized = false;
+        -:  141:  std::time_t t;
+    #####:  142:  if (local_) {
+branch  0 never executed
+branch  1 never executed
+        -:  143:    // Does not handle SKIPPED/AMBIGUOUS or huge years.
+        -:  144:    std::tm tm;
+    #####:  145:    tm.tm_year = static_cast<int>(year - 1900);
+    #####:  146:    tm.tm_mon = mon - 1;
+    #####:  147:    tm.tm_mday = day;
+    #####:  148:    tm.tm_hour = hour;
+    #####:  149:    tm.tm_min = min;
+    #####:  150:    tm.tm_sec = sec;
+    #####:  151:    tm.tm_isdst = -1;
+    #####:  152:    t = std::mktime(&tm);
+call    0 never executed
+    #####:  153:    if (tm.tm_year != year - 1900 || tm.tm_mon != mon - 1 ||
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  154:        tm.tm_mday != day || tm.tm_hour != hour ||
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  155:        tm.tm_min != min || tm.tm_sec != sec) {
+branch  0 never executed
+branch  1 never executed
+    #####:  156:      normalized = true;
+        -:  157:    }
+        -:  158:  } else {
+    #####:  159:    min += NormalizeField(60, &sec, &normalized);
+call    0 never executed
+    #####:  160:    hour += NormalizeField(60, &min, &normalized);
+call    0 never executed
+    #####:  161:    day += NormalizeField(24, &hour, &normalized);
+call    0 never executed
+    #####:  162:    mon -= 1;  // months are one-based
+    #####:  163:    year += NormalizeField(12, &mon, &normalized);
+call    0 never executed
+    #####:  164:    mon += 1;  // restore [1:12]
+    #####:  165:    year += (mon > 2 ? 1 : 0);
+branch  0 never executed
+branch  1 never executed
+    #####:  166:    int year_len = kDaysPerYear[IsLeap(year)];
+call    0 never executed
+    #####:  167:    while (day > year_len) {
+branch  0 never executed
+branch  1 never executed
+    #####:  168:      day -= year_len;
+    #####:  169:      year += 1;
+    #####:  170:      year_len = kDaysPerYear[IsLeap(year)];
+call    0 never executed
+        -:  171:    }
+    #####:  172:    while (day <= 0) {
+branch  0 never executed
+branch  1 never executed
+    #####:  173:      year -= 1;
+    #####:  174:      day += kDaysPerYear[IsLeap(year)];
+call    0 never executed
+        -:  175:    }
+    #####:  176:    year -= (mon > 2 ? 1 : 0);
+branch  0 never executed
+branch  1 never executed
+    #####:  177:    bool leap_year = IsLeap(year);
+call    0 never executed
+    #####:  178:    while (day > kDaysPerMonth[leap_year][mon]) {
+branch  0 never executed
+branch  1 never executed
+    #####:  179:      day -= kDaysPerMonth[leap_year][mon];
+    #####:  180:      if (++mon > 12) {
+branch  0 never executed
+branch  1 never executed
+    #####:  181:        mon = 1;
+    #####:  182:        year += 1;
+    #####:  183:        leap_year = IsLeap(year);
+call    0 never executed
+        -:  184:      }
+        -:  185:    }
+    #####:  186:    t = ((((DayOrdinal(year, mon, day) * 24) + hour) * 60) + min) * 60 + sec;
+call    0 never executed
+        -:  187:  }
+        -:  188:  TimeInfo ti;
+    #####:  189:  ti.kind = time_zone::civil_lookup::UNIQUE;
+    #####:  190:  ti.pre = ti.trans = ti.post = FromUnixSeconds(t);
+    #####:  191:  ti.normalized = normalized;
+    #####:  192:  return ti;
+        -:  193:}
+        -:  194:
+        -:  195:}  // namespace cctz

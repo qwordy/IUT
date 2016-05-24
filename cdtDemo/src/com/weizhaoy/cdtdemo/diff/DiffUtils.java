@@ -7,22 +7,23 @@ import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 public class DiffUtils {
 
 	public static String getFunctionId(IASTFunctionDefinition funcDef) {
-		
 		String info = 
 				//file path
 //				funcDef.getContainingFilename() +
 				//return type
-				"\t"+funcDef.getDeclSpecifier() +
+				" "+funcDef.getDeclSpecifier() +
 				//function name
-				"\t"+funcDef.getDeclarator().getName(); 
+				" "+funcDef.getDeclarator().getName();
 
 		if(funcDef.getDeclarator() instanceof IASTStandardFunctionDeclarator){
 			IASTStandardFunctionDeclarator standardFunctionDeclarator = (IASTStandardFunctionDeclarator) funcDef.getDeclarator();
 			IASTParameterDeclaration[] paras = standardFunctionDeclarator.getParameters();
+			info += "(";
 			for(IASTParameterDeclaration para : paras){
 				// parameters' type
-				info += "\t"+para.getDeclSpecifier();
+				info += para.getDeclSpecifier() + " ";
 			}
+			info += ")";
 		}
 		
 //		System.out.println("Debug: info ===> "+info);
