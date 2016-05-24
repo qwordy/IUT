@@ -96,7 +96,7 @@ Breakdown TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const {
 }
 
 namespace yuanweizhao {
-  int ywz_foo(int a, int b){
+  inline int ywz_foo(int a, int b){
   int ywz_int = 9;
   return ywz_int;
   }

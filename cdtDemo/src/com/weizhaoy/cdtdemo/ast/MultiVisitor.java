@@ -18,7 +18,9 @@ import org.eclipse.cdt.core.dom.ast.IASTToken;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTDecltypeSpecifier;
 import org.eclipse.cdt.core.model.IFunctionDeclaration;
+import org.eclipse.cdt.internal.core.dom.parser.ASTAmbiguousNode;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
 import org.w3c.dom.Attr;
 
 public class MultiVisitor extends ASTVisitor{
@@ -31,6 +33,14 @@ public class MultiVisitor extends ASTVisitor{
 		super(visitAll);
 	}
 	
+	
+	
+	@Override
+	public int visit(ASTAmbiguousNode astAmbiguousNode) {
+		// TODO Auto-generated method stub
+		System.out.println("ASTAmbiguousNode: "+astAmbiguousNode.getRawSignature() );
+		return super.visit(astAmbiguousNode);
+	}
 	
 	
 	@Override
@@ -102,6 +112,9 @@ public class MultiVisitor extends ASTVisitor{
 			System.out.println(info);
 			//				System.out.println("ASTFunction: "+ ((IASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
 			//				System.out.println("                    "+ ((IASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
+		}else if(declaration instanceof CPPASTProblemDeclaration){
+			CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
+			System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
 		}
 
 

@@ -62,6 +62,7 @@ public class Demo {
 		
 		if(FLAG == 1){
 			String filePath = "testcode/time_zone_libc.cc";
+//			String filePath = "testcode/cctz_v1_test.cc";
 			if (args.length != 0)
 				filePath = args[0];
 			/*
