@@ -23,6 +23,9 @@ public class XFunctionDeclaration {
 		return id;
 	}
 	
+	public IASTFunctionDefinition getOrigin(){
+		return this.functionDefinition;
+	}
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.functionDefinition.getFileLocation().getStartingLineNumber()+"")//line number

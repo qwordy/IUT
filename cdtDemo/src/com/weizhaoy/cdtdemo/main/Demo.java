@@ -1,6 +1,7 @@
 package com.weizhaoy.cdtdemo.main;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
 import org.eclipse.cdt.core.dom.ast.IASTComment;
@@ -19,6 +20,8 @@ import com.weizhaoy.cdtdemo.ast.ASTTranslationUnitCore;
 import com.weizhaoy.cdtdemo.ast.MultiVisitor;
 import com.weizhaoy.cdtdemo.ast.MyASTVisitor;
 import com.weizhaoy.cdtdemo.diff.ASTDiffer;
+import com.weizhaoy.cdtdemo.diff.ASTDifferOld;
+import com.weizhaoy.cdtdemo.diff.DifferResult;
 import com.weizhaoy.cdtdemo.diff.FileDiffer;
 
 
@@ -29,20 +32,32 @@ public class Demo {
 	public static void main(String[] args) {
 		
 		if(FLAG == 3){
-			FileDiffer fileDiffer = new FileDiffer();
+			FileDiffer differ = new FileDiffer();
 			String oldDir = "testcode/project.Old";
 			String newDir = "testcode/project.New";
 			
-//			 oldDir = "/home/weizhaoy/Desktop/cctz-old/src";
-//			 newDir = "/home/weizhaoy/Desktop/cctz-new/src";
+//			 oldDir = "/home/weizhaoy/Desktop/cctz-old";
+//			 newDir = "/home/weizhaoy/Desktop/cctz-new";
 
 			if(args.length != 0){
 				oldDir = args[0];
 				newDir = args[1];
 			}
 			System.out.println("Old: "+oldDir+"------------New: "+newDir);
-			String result = fileDiffer.diff(oldDir, newDir);
-			System.out.println(result);
+//			String result = fileDiffer.diff(oldDir, newDir);
+			
+			DifferResult result;
+			try {
+				result = differ.diff(oldDir, newDir);
+				System.out.println("**************************************");
+				System.out.println("*                              DifferResult                               *");
+				System.out.println("**************************************");
+				System.out.println(result);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		if(FLAG == 2){
@@ -56,7 +71,7 @@ public class Demo {
 				oldPath = args[0];
 				newPath = args[1];
 			}
-			ASTDiffer astDiffer = new ASTDiffer();
+			ASTDifferOld astDiffer = new ASTDifferOld();
 			String result =  astDiffer.diff(oldPath, newPath, false);
 			System.out.println(result);
 		}

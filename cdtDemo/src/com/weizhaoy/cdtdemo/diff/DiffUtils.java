@@ -48,7 +48,7 @@ public class DiffUtils {
 			sb.append("(");
 			for(IASTParameterDeclaration para : paras){
 				// parameters' type
-				sb.append( para.getDeclSpecifier() + " " );//TODO: add ","
+				sb.append( para.getRawSignature() + " " );//TODO: add ","
 			}
 			sb.append(")");
 		}

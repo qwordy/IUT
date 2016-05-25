@@ -42,7 +42,23 @@ public class DUFile extends DifferUnit{
 		
 		public String toString(){
 			StringBuilder sb = new StringBuilder();
-			//TODO
+			sb.append("* ").append(filename);
+			
+			if(astDiffer.isModified()){
+				sb.append('\n');
+			}
+			
+			for(DUFunction.Added e : astDiffer.getFunctionAdded()){
+				sb.append('\t').append(e).append('\n');
+			}
+			
+			for(DUFunction.Deleted e : astDiffer.getFunctionDeleted()){
+				sb.append('\t').append(e).append('\n');
+			}
+			
+			for(DUFunction.Modified e : astDiffer.getFunctionModified()){
+				sb.append('\t').append(e).append('\n');
+			}
 			
 			return sb.toString();
 		}
