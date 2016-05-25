@@ -24,7 +24,7 @@ void foo(Animal ani){
 }
 
 int minus (int x, int y){
-	return x-y;
+	return x-y+1-1;
 }
 
 int AddThreeInt(int iFirst, int iSecond, int iThree)  

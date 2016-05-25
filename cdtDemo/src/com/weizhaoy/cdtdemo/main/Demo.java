@@ -33,8 +33,8 @@ public class Demo {
 			String oldDir = "testcode/project.Old";
 			String newDir = "testcode/project.New";
 			
-			 oldDir = "/home/weizhaoy/Desktop/cctz-old/src";
-			 newDir = "/home/weizhaoy/Desktop/cctz-new/src";
+//			 oldDir = "/home/weizhaoy/Desktop/cctz-old/src";
+//			 newDir = "/home/weizhaoy/Desktop/cctz-new/src";
 
 			if(args.length != 0){
 				oldDir = args[0];

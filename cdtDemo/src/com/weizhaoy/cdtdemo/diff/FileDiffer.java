@@ -55,7 +55,8 @@ public class FileDiffer {
 						sb.append("\nDir Deleted: "+file.getName());
 					}else{
 //						System.out.println("filename: "+oldDir+file.getName());
-						sb.append(this.diff(oldDir, newDir, file.getName()+"/"));//diff this dir
+						//TODO: BUG: oldDir should be oldFolder's path, new* too
+						sb.append(this.diff(oldDir, newDir, base+file.getName()+"/"));//diff this dir
 						dirMap.remove(file.getName());
 					}
 				}
@@ -75,7 +76,7 @@ public class FileDiffer {
 			}
 
 		}else{
-			sb.append("\nERROR: At least one of the paths is not a DIRECTORY!");
+			sb.append("\nERROR: At least one of the paths is not a DIRECTORY! "+ oldFolder+" or "+newFolder);
 		}
 		return sb.toString();
 	}

@@ -16,12 +16,33 @@ import com.weizhaoy.cdtdemo.ast.ASTTranslationUnitCore;
 
 public class ASTDiffer {
 
-	List<String> funcAdded;
-	List<String> funcModified;
-	List<String> funcDeleted;
-//	private boolean isModified = false;
+	//	List<String> funcAdded;
+	//	List<String> funcModified;
+	//	List<String> funcDeleted;
+
+	List<DUFunction.Added> functionAdded;
+	List<DUFunction.Deleted> functionDeleted;
+	List<DUFunction.Modified> functionModified;
+
+
+	public List<DUFunction.Added> getFunctionAdded() {
+		return functionAdded;
+	}
+
+	public List<DUFunction.Deleted> getFunctionDeleted() {
+		return functionDeleted;
+	}
+
+	public List<DUFunction.Modified> getFunctionModified() {
+		return functionModified;
+	}
+
+	public boolean isModified(){
+		return this.functionAdded.size() + this.functionDeleted.size() + this.functionModified.size() != 0;
+	}
+	//	private boolean isModified = false;
 	String diffResult = "";
-	
+
 	public String getDiffResult() {
 		return diffResult;
 	}
@@ -31,7 +52,7 @@ public class ASTDiffer {
 	}
 
 	public ASTDiffer(IASTTranslationUnit oldAST, IASTTranslationUnit newAST){//Diff AST
-		
+
 		diff(oldAST, newAST);
 
 	}
@@ -44,36 +65,19 @@ public class ASTDiffer {
 		try {
 			diff(oldFile.getCanonicalPath(), newFile.getCanonicalPath(), false);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public boolean isModified(){
-		return funcAdded.size()+funcModified.size()+funcDeleted.size() != 0;
-	}
 	
-	
-	public List<String> getFuncAdded() {
-		return funcAdded;
-	}
-
-
-
-	public List<String> getFuncModified() {
-		return funcModified;
-	}
-
-
-
-	public List<String> getFuncDeleted() {
-		return funcDeleted;
-	}
-
 
 
 	
-	
+
+
+
+
+
 	public String diff(String oldPath, String newPath, boolean isCode){
 		/**
 		 *Focus on:
@@ -81,21 +85,21 @@ public class ASTDiffer {
 		 *IASTPreprocessorFunctionStyleMacroDefinition
 		 *...
 		 **/
-		
+
 
 		ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
 		IASTTranslationUnit oldAST;
 		IASTTranslationUnit newAST;
 		if(!isCode){
-			 oldAST = astTranslationUnitCore.parseFile(oldPath, ParserLanguage.CPP, false, false);
-			 newAST = astTranslationUnitCore.parseFile(newPath, ParserLanguage.CPP, false, false);
+			oldAST = astTranslationUnitCore.parseFile(oldPath, ParserLanguage.CPP, false, false);
+			newAST = astTranslationUnitCore.parseFile(newPath, ParserLanguage.CPP, false, false);
 		}else{
-			 oldAST = astTranslationUnitCore.parseCode(oldPath, ParserLanguage.CPP, false, false);
-			 newAST = astTranslationUnitCore.parseCode(newPath, ParserLanguage.CPP, false, false);
+			oldAST = astTranslationUnitCore.parseCode(oldPath, ParserLanguage.CPP, false, false);
+			newAST = astTranslationUnitCore.parseCode(newPath, ParserLanguage.CPP, false, false);
 		}
-		
 
-		
+
+
 		return diff(oldAST, newAST);
 	}
 
@@ -106,18 +110,18 @@ public class ASTDiffer {
 	 * @return
 	 */
 	public String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST){
-//		System.out.println("String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST): "+oldAST.toString()+"\t"+newAST.toString());
-		funcAdded = new ArrayList<>();
-		funcModified = new ArrayList<>();
-		funcDeleted = new ArrayList<>();
+		//		System.out.println("String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST): "+oldAST.toString()+"\t"+newAST.toString());
+		functionAdded = new ArrayList<>();
+		functionModified = new ArrayList<>();
+		functionDeleted = new ArrayList<>();
 		String result = "AST Diff Result: "+" \n";//TODO: StringBuilder
 		HashMap<String, IASTFunctionDefinition> newFuncDefsMap = new HashMap<>();
 
 		//get all new
 		IASTDeclaration[] newDecls = newAST.getDeclarations();
-//		for(IASTNode a : newAST.getChildren()){
-//			System.out.println("*--------*"+a.getRawSignature());
-//		}
+		//		for(IASTNode a : newAST.getChildren()){
+		//			System.out.println("*--------*"+a.getRawSignature());
+		//		}
 		//put into map
 		for(IASTDeclaration nw : newDecls){
 			System.out.println("*--------*"+nw.toString());
@@ -139,38 +143,38 @@ public class ASTDiffer {
 				IASTFunctionDefinition funcInNew = newFuncDefsMap.get(DiffUtils.getFunctionId(funcInOld));
 				if(funcInNew != null){
 					if(!funcInNew.getBody().getRawSignature().equals(funcInOld.getBody().getRawSignature()) ){ //modified
-						funcModified.add(DiffUtils.getFunctionId(funcInOld));
-						
+						functionModified.add(DiffUtils.getFunctionId(funcInOld));
+
 					}
 					newFuncDefsMap.remove(DiffUtils.getFunctionId(funcInNew));
 				}else{//deleted
-					funcDeleted.add(DiffUtils.getFunctionId(funcInOld));
+					functionDeleted.add(DiffUtils.getFunctionId(funcInOld));
 				}
-				
+
 			}
 		}
 
 		for(IASTFunctionDefinition func : newFuncDefsMap.values()){//added
-			funcAdded.add(DiffUtils.getFunctionId(func));
+			functionAdded.add(DiffUtils.getFunctionId(func));
 		}
 
-		if(funcAdded.size() != 0){
+		if(functionAdded.size() != 0){
 			result += "Added: ";
-			for(String str : funcAdded){
+			for(String str : functionAdded){
 				result += "\n\t"+ str;
 			}
 			result += "\n";
 		}
-		if(funcModified.size() != 0){
+		if(functionModified.size() != 0){
 			result += "Modified: ";
-			for(String str : funcModified){
+			for(String str : functionModified){
 				result += "\n\t"+ str;
 			}
 			result += "\n";
 		}
-		if(funcDeleted.size() != 0){
+		if(functionDeleted.size() != 0){
 			result += "Deleted: ";
-			for(String str : funcDeleted){
+			for(String str : functionDeleted){
 				result += "\n\t"+ str;
 			}
 			result += "\n";

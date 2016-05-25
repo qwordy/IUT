@@ -8,7 +8,7 @@ public class DiffUtils {
 
 
 	public static String getFunctionId(IASTFunctionDefinition functionDefinition) { //function tostring
-		System.out.println(functionDefinition.getRawSignature());
+//		System.out.println(functionDefinition.getRawSignature());
 
 		String info = 
 				//file path
@@ -48,7 +48,7 @@ public class DiffUtils {
 			sb.append("(");
 			for(IASTParameterDeclaration para : paras){
 				// parameters' type
-				sb.append( para.getDeclSpecifier() + " " );
+				sb.append( para.getDeclSpecifier() + " " );//TODO: add ","
 			}
 			sb.append(")");
 		}
