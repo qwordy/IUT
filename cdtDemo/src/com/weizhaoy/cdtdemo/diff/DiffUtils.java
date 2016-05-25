@@ -7,32 +7,53 @@ import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
 public class DiffUtils {
 
 
-	public static String getFunctionId(IASTFunctionDefinition funcDef) { //function tostring
-		System.out.println(funcDef.getRawSignature());
+	public static String getFunctionId(IASTFunctionDefinition functionDefinition) { //function tostring
+		System.out.println(functionDefinition.getRawSignature());
 
 		String info = 
 				//file path
 //				funcDef.getContainingFilename() +
 				//return type
 
-				" "+funcDef.getDeclSpecifier() +
+				" "+functionDefinition.getDeclSpecifier() +
 
 				//function name
-				" "+funcDef.getDeclarator().getName();
+				" "+functionDefinition.getDeclarator().getName();
 
-		if(funcDef.getDeclarator() instanceof IASTStandardFunctionDeclarator){
-			IASTStandardFunctionDeclarator standardFunctionDeclarator = (IASTStandardFunctionDeclarator) funcDef.getDeclarator();
+		if(functionDefinition.getDeclarator() instanceof IASTStandardFunctionDeclarator){
+			IASTStandardFunctionDeclarator standardFunctionDeclarator = (IASTStandardFunctionDeclarator) functionDefinition.getDeclarator();
 			IASTParameterDeclaration[] paras = standardFunctionDeclarator.getParameters();
 			info += "(";
 			for(IASTParameterDeclaration para : paras){
 				// parameters' type
-				info += para.getDeclSpecifier() + " ";
+//				info += para.getDeclSpecifier() + " ";
+				info += para.getRawSignature() + " ";
 			}
 			info += ")";
 		}
 		
 //		System.out.println("Debug: info ===> "+info);
 		return info;
+	}
+
+	public static String getFunctionSignature(IASTFunctionDefinition functionDefinition) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(functionDefinition.getDeclSpecifier()).append(" ");//return type
+		sb.append(functionDefinition.getDeclarator().getName()).append(" ");//function name
+		
+		if(functionDefinition.getDeclarator() instanceof IASTStandardFunctionDeclarator){
+			IASTStandardFunctionDeclarator standardFunctionDeclarator = (IASTStandardFunctionDeclarator) functionDefinition.getDeclarator();
+			IASTParameterDeclaration[] paras = standardFunctionDeclarator.getParameters();
+			
+			sb.append("(");
+			for(IASTParameterDeclaration para : paras){
+				// parameters' type
+				sb.append( para.getDeclSpecifier() + " " );
+			}
+			sb.append(")");
+		}
+		
+		return sb.toString();
 	}
 
 }

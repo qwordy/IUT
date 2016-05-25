@@ -57,13 +57,7 @@ public class MultiVisitor extends ASTVisitor{
 		return super.visit(attribute);
 	}
 
-	@Override
-	public int visit(IASTComment comment) {
-		// TODO Auto-generated method stub
-		System.out.println("IASTComment: "+comment.getRawSignature() );
-
-		return super.visit(comment);
-	}
+	
 
 	@Override
 	public int visit(IASTDeclaration declaration) {
@@ -81,7 +75,9 @@ public class MultiVisitor extends ASTVisitor{
 			IASTFunctionDefinition iastFunctionDefinition = (IASTFunctionDefinition) declaration;
 			String info = "ASTFunction:"
 					//file path
-					+"\n\t"+iastFunctionDefinition.getContainingFilename() 
+					+"\n\t"+iastFunctionDefinition.getFileLocation().getStartingLineNumber() 
+					+"\n\t"+iastFunctionDefinition.getFileLocation().getEndingLineNumber() 
+					
 					//return type
 					+"\n\t"+iastFunctionDefinition.getDeclSpecifier() 
 					//function name
@@ -178,6 +174,7 @@ public class MultiVisitor extends ASTVisitor{
 	public int visit(IASTStatement statement) {
 		// TODO Auto-generated method stub
 		System.out.println("IASTStatement: "+statement.getRawSignature() );
+//		System.out.println("IASTStatement: "+statement.toString() );
 
 		return super.visit(statement);
 	}

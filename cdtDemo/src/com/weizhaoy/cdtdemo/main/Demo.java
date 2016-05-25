@@ -3,6 +3,7 @@ package com.weizhaoy.cdtdemo.main;
 import java.io.File;
 
 import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
+import org.eclipse.cdt.core.dom.ast.IASTComment;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionStyleMacroParameter;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorFunctionStyleMacroDefinition;
@@ -11,6 +12,7 @@ import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroExpansion;
 import org.eclipse.cdt.core.dom.ast.IASTPreprocessorStatement;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.IMacroBinding;
+import org.eclipse.cdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.cdt.core.parser.ParserLanguage;
 
 import com.weizhaoy.cdtdemo.ast.ASTTranslationUnitCore;
@@ -22,7 +24,7 @@ import com.weizhaoy.cdtdemo.diff.FileDiffer;
 
 public class Demo {
 
-	static int FLAG = 1;// only for test
+	static int FLAG = 3;// only for test
 	
 	public static void main(String[] args) {
 		
@@ -75,18 +77,35 @@ public class Demo {
 			
 //			MyASTVisitor astVisitor = new MyASTVisitor();
 			
-			MultiVisitor astVisitor = new MultiVisitor(false);
+			MultiVisitor astVisitor = new MultiVisitor();
 //			astVisitor.shouldVisitDeclSpecifiers = true;
 //			astVisitor.shouldVisitDeclarators = true;
 ////			astVisitor.shouldVisitExpressions = true;
 //			astVisitor.shouldVisitAttributes = true;
 //			astVisitor.shouldVisitImplicitNames = true;
 //			astVisitor.shouldVisitInitializers = true;
-////			astVisitor.shouldVisitStatements = true;
+//         astVisitor.shouldVisitStatements = true;
 //			astVisitor.shouldVisitTokens = true;
 //			astVisitor.shouldVisitParameterDeclarations = true;
 			astVisitor.shouldVisitDeclarations = true;
+//			astVisitor.shouldVisitAmbiguousNodes = true;
 			astTranslationUnit.accept(astVisitor);
+			
+			//Comments
+			
+			/*
+			IASTComment[] comments = astTranslationUnit.getComments();
+			for( IASTComment comm : comments){
+				System.out.println("IASTComment: "+comm.toString());
+				comm.setParent(null);
+			}
+			
+			IASTComment[] c = astTranslationUnit.getComments();
+			for( IASTComment comm : c){
+				System.out.println(" c IASTComment: "+comm.toString());
+				
+			}
+			*/
 			
 			IASTPreprocessorMacroDefinition[] macroDefinitions = astTranslationUnit.getMacroDefinitions();
 			for (IASTPreprocessorMacroDefinition macroDefinition : macroDefinitions){
