@@ -46,7 +46,7 @@ public class Demo {
 			System.out.println("Old: "+oldDir+"------------New: "+newDir);
 //			String result = fileDiffer.diff(oldDir, newDir);
 			
-			DifferResult result;
+			DifferResult result = null;
 			try {
 				result = differ.diff(oldDir, newDir);
 				System.out.println("**************************************");
@@ -57,7 +57,12 @@ public class Demo {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+			try {
+				Utils.writeStringToFile(result.toString(), new File("result/DifferResult.txt"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		if(FLAG == 2){
