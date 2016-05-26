@@ -1,31 +1,20 @@
         -:    0:Source:fly.cpp
-        -:    0:Graph:fly.gcno
-        -:    0:Data:fly.gcda
-        -:    0:Runs:1
-        -:    0:Programs:1
+        -:    0:Programs:2
         -:    1:#include "fly.h"
         -:    2:
-function _Z6globalv called 5 returned 100% blocks executed 100%
         5:    3:int global() {
         5:    4:  return 1;
         -:    5:}
         -:    6:
-function _ZN3FlyC2Ev called 1 returned 100% blocks executed 100%
         1:    7:Fly::Fly() {
         1:    8:  prepare();
-call    0 returned 100%
         1:    9:}
         -:   10:
-function _ZN3Fly7prepareEv called 1 returned 100% blocks executed 100%
         1:   11:void Fly::prepare() {
         6:   12:  for (int i = 0; i < 5; i++)
-branch  0 taken 83%
-branch  1 taken 17% (fallthrough)
         5:   13:    global();
-call    0 returned 100%
         1:   14:}
         -:   15:
-function _ZN3Fly4heheEv called 0 returned 0% blocks executed 0%
     #####:   16:int Fly::hehe() {
     #####:   17:}
         -:   18:

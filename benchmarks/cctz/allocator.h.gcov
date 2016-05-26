@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/allocator.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup.gcda
-        -:    0:Runs:28
+        -:    0:Runs:27
         -:    0:Programs:1
         -:    1:// Allocators -*- C++ -*-
         -:    2:
@@ -123,7 +123,7 @@
         -:  118:      template<typename _Tp1>
         -:  119:        allocator(const allocator<_Tp1>&) throw() { }
         -:  120:
-      123:  121:      ~allocator() throw() { }
+       87:  121:      ~allocator() throw() { }
         -:  122:
         -:  123:      // Inherit everything else.
         -:  124:    };

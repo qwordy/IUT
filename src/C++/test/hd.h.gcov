@@ -1,9 +1,5 @@
         -:    0:Source:d/hd.h
-        -:    0:Graph:/home/yfy/iut/src/C++/test/main.gcno
-        -:    0:Data:/home/yfy/iut/src/C++/test/main.gcda
-        -:    0:Runs:1
-        -:    0:Programs:1
-function _Z3addii called 1 returned 100% blocks executed 100%
+        -:    0:Programs:2
         1:    1:int add(int a, int b) {
         1:    2:  return a + b;
         -:    3:}

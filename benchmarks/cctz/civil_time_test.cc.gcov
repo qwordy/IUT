@@ -1,7 +1,7 @@
         -:    0:Source:src/civil_time_test.cc
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:23
+        -:    0:Runs:22
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -32,15 +32,15 @@
         -:   27:namespace {
         -:   28:
         -:   29:template <typename T>
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail7weekdayEEESsRKT_ called 14 returned 100% blocks executed 86%
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_8year_tagEEEEESsRKT_ called 50 returned 100% blocks executed 86%
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_9month_tagEEEEESsRKT_ called 54 returned 100% blocks executed 86%
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_7day_tagEEEEESsRKT_ called 50 returned 100% blocks executed 86%
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_8hour_tagEEEEESsRKT_ called 48 returned 100% blocks executed 86%
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_10minute_tagEEEEESsRKT_ called 46 returned 100% blocks executed 86%
-function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_10second_tagEEEEESsRKT_ called 66 returned 100% blocks executed 86%
-      328:   30:std::string Format(const T& t) {
-      328:   31:  std::stringstream ss;
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail7weekdayEEESsRKT_ called 7 returned 100% blocks executed 86%
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_8year_tagEEEEESsRKT_ called 25 returned 100% blocks executed 86%
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_9month_tagEEEEESsRKT_ called 27 returned 100% blocks executed 86%
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_7day_tagEEEEESsRKT_ called 25 returned 100% blocks executed 86%
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_8hour_tagEEEEESsRKT_ called 24 returned 100% blocks executed 86%
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_10minute_tagEEEEESsRKT_ called 23 returned 100% blocks executed 86%
+function _ZN4cctz12_GLOBAL__N_16FormatINS_6detail10civil_timeINS2_10second_tagEEEEESsRKT_ called 33 returned 100% blocks executed 86%
+      164:   30:std::string Format(const T& t) {
+      164:   31:  std::stringstream ss;
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -48,7 +48,7 @@ call    3 returned 100%
 call    4 returned 100%
 call    5 returned 100%
 call    6 returned 100%
-      328:   32:  ss << t;
+      164:   32:  ss << t;
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -70,7 +70,7 @@ branch 17 taken 0% (throw)
 call   18 returned 100%
 branch 19 taken 100% (fallthrough)
 branch 20 taken 0% (throw)
-      328:   33:  return ss.str();
+      164:   33:  return ss.str();
 call    0 returned 100%
 call    1 never executed
 call    2 returned 100%
@@ -317,10 +317,10 @@ call   13 never executed
         -:  263:
         -:  264:// The remaining tests do not use constexpr.
         -:  265:
-function _ZN4cctz34CivilTime_DefaultConstruction_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz34CivilTime_DefaultConstruction_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz34CivilTime_DefaultConstruction_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz34CivilTime_DefaultConstruction_Test8TestBodyEv called 2 returned 100% blocks executed 29%
-       52:  266:TEST(CivilTime, DefaultConstruction) {
+function _ZN4cctz34CivilTime_DefaultConstruction_Test8TestBodyEv called 1 returned 100% blocks executed 29%
+       47:  266:TEST(CivilTime, DefaultConstruction) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -330,9 +330,9 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  267:  civil_second ss;
+        1:  267:  civil_second ss;
 call    0 returned 100%
-        6:  268:  EXPECT_EQ("1970-01-01T00:00:00", Format(ss));
+        3:  268:  EXPECT_EQ("1970-01-01T00:00:00", Format(ss));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -349,9 +349,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  269:
-        2:  270:  civil_minute mm;
+        1:  270:  civil_minute mm;
 call    0 returned 100%
-        6:  271:  EXPECT_EQ("1970-01-01T00:00", Format(mm));
+        3:  271:  EXPECT_EQ("1970-01-01T00:00", Format(mm));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -368,9 +368,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  272:
-        2:  273:  civil_hour hh;
+        1:  273:  civil_hour hh;
 call    0 returned 100%
-        6:  274:  EXPECT_EQ("1970-01-01T00", Format(hh));
+        3:  274:  EXPECT_EQ("1970-01-01T00", Format(hh));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -387,9 +387,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  275:
-        2:  276:  civil_day d;
+        1:  276:  civil_day d;
 call    0 returned 100%
-        6:  277:  EXPECT_EQ("1970-01-01", Format(d));
+        3:  277:  EXPECT_EQ("1970-01-01", Format(d));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -406,9 +406,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  278:
-        2:  279:  civil_month m;
+        1:  279:  civil_month m;
 call    0 returned 100%
-        6:  280:  EXPECT_EQ("1970-01", Format(m));
+        3:  280:  EXPECT_EQ("1970-01", Format(m));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -425,9 +425,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  281:
-        2:  282:  civil_year y;
+        1:  282:  civil_year y;
 call    0 returned 100%
-        6:  283:  EXPECT_EQ("1970", Format(y));
+        3:  283:  EXPECT_EQ("1970", Format(y));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -443,12 +443,12 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  284:}
+        1:  284:}
         -:  285:
-function _ZN4cctz27CivilTime_StructMember_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz27CivilTime_StructMember_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz27CivilTime_StructMember_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz27CivilTime_StructMember_Test8TestBodyEv called 2 returned 100% blocks executed 33%
-       52:  286:TEST(CivilTime, StructMember) {
+function _ZN4cctz27CivilTime_StructMember_Test8TestBodyEv called 1 returned 100% blocks executed 33%
+       47:  286:TEST(CivilTime, StructMember) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -461,9 +461,9 @@ call    8 never executed
         -:  287:  struct S {
         -:  288:    civil_day day;
         -:  289:  };
-        2:  290:  S s = {};
+        1:  290:  S s = {};
 call    0 returned 100%
-        6:  291:  EXPECT_EQ(civil_day{}, s.day);
+        3:  291:  EXPECT_EQ(civil_day{}, s.day);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -478,12 +478,12 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        2:  292:}
+        1:  292:}
         -:  293:
-function _ZN4cctz33CivilTime_FieldsConstruction_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz33CivilTime_FieldsConstruction_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz33CivilTime_FieldsConstruction_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz33CivilTime_FieldsConstruction_Test8TestBodyEv called 2 returned 100% blocks executed 27%
-       52:  294:TEST(CivilTime, FieldsConstruction) {
+function _ZN4cctz33CivilTime_FieldsConstruction_Test8TestBodyEv called 1 returned 100% blocks executed 27%
+       47:  294:TEST(CivilTime, FieldsConstruction) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -493,7 +493,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  295:  EXPECT_EQ("2015-01-02T03:04:05", Format(civil_second(2015, 1, 2, 3, 4, 5)));
+        3:  295:  EXPECT_EQ("2015-01-02T03:04:05", Format(civil_second(2015, 1, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -510,7 +510,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  296:  EXPECT_EQ("2015-01-02T03:04:00", Format(civil_second(2015, 1, 2, 3, 4)));
+        3:  296:  EXPECT_EQ("2015-01-02T03:04:00", Format(civil_second(2015, 1, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -527,7 +527,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  297:  EXPECT_EQ("2015-01-02T03:00:00", Format(civil_second(2015, 1, 2, 3)));
+        3:  297:  EXPECT_EQ("2015-01-02T03:00:00", Format(civil_second(2015, 1, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -544,7 +544,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  298:  EXPECT_EQ("2015-01-02T00:00:00", Format(civil_second(2015, 1, 2)));
+        3:  298:  EXPECT_EQ("2015-01-02T00:00:00", Format(civil_second(2015, 1, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -561,7 +561,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  299:  EXPECT_EQ("2015-01-01T00:00:00", Format(civil_second(2015, 1)));
+        3:  299:  EXPECT_EQ("2015-01-01T00:00:00", Format(civil_second(2015, 1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -578,7 +578,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  300:  EXPECT_EQ("2015-01-01T00:00:00", Format(civil_second(2015)));
+        3:  300:  EXPECT_EQ("2015-01-01T00:00:00", Format(civil_second(2015)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -596,7 +596,7 @@ call   13 never executed
 call   14 never executed
 call   15 never executed
         -:  301:
-        6:  302:  EXPECT_EQ("2015-01-02T03:04", Format(civil_minute(2015, 1, 2, 3, 4, 5)));
+        3:  302:  EXPECT_EQ("2015-01-02T03:04", Format(civil_minute(2015, 1, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -613,7 +613,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  303:  EXPECT_EQ("2015-01-02T03:04", Format(civil_minute(2015, 1, 2, 3, 4)));
+        3:  303:  EXPECT_EQ("2015-01-02T03:04", Format(civil_minute(2015, 1, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -630,7 +630,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  304:  EXPECT_EQ("2015-01-02T03:00", Format(civil_minute(2015, 1, 2, 3)));
+        3:  304:  EXPECT_EQ("2015-01-02T03:00", Format(civil_minute(2015, 1, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -647,7 +647,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  305:  EXPECT_EQ("2015-01-02T00:00", Format(civil_minute(2015, 1, 2)));
+        3:  305:  EXPECT_EQ("2015-01-02T00:00", Format(civil_minute(2015, 1, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -664,7 +664,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  306:  EXPECT_EQ("2015-01-01T00:00", Format(civil_minute(2015, 1)));
+        3:  306:  EXPECT_EQ("2015-01-01T00:00", Format(civil_minute(2015, 1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -681,7 +681,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  307:  EXPECT_EQ("2015-01-01T00:00", Format(civil_minute(2015)));
+        3:  307:  EXPECT_EQ("2015-01-01T00:00", Format(civil_minute(2015)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -699,7 +699,7 @@ call   13 never executed
 call   14 never executed
 call   15 never executed
         -:  308:
-        6:  309:  EXPECT_EQ("2015-01-02T03", Format(civil_hour(2015, 1, 2, 3, 4, 5)));
+        3:  309:  EXPECT_EQ("2015-01-02T03", Format(civil_hour(2015, 1, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -716,7 +716,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  310:  EXPECT_EQ("2015-01-02T03", Format(civil_hour(2015, 1, 2, 3, 4)));
+        3:  310:  EXPECT_EQ("2015-01-02T03", Format(civil_hour(2015, 1, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -733,7 +733,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  311:  EXPECT_EQ("2015-01-02T03", Format(civil_hour(2015, 1, 2, 3)));
+        3:  311:  EXPECT_EQ("2015-01-02T03", Format(civil_hour(2015, 1, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -750,7 +750,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  312:  EXPECT_EQ("2015-01-02T00", Format(civil_hour(2015, 1, 2)));
+        3:  312:  EXPECT_EQ("2015-01-02T00", Format(civil_hour(2015, 1, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -767,7 +767,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  313:  EXPECT_EQ("2015-01-01T00", Format(civil_hour(2015, 1)));
+        3:  313:  EXPECT_EQ("2015-01-01T00", Format(civil_hour(2015, 1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -784,7 +784,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  314:  EXPECT_EQ("2015-01-01T00", Format(civil_hour(2015)));
+        3:  314:  EXPECT_EQ("2015-01-01T00", Format(civil_hour(2015)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -802,7 +802,7 @@ call   13 never executed
 call   14 never executed
 call   15 never executed
         -:  315:
-        6:  316:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2, 3, 4, 5)));
+        3:  316:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -819,7 +819,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  317:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2, 3, 4)));
+        3:  317:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -836,7 +836,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  318:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2, 3)));
+        3:  318:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -853,7 +853,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  319:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2)));
+        3:  319:  EXPECT_EQ("2015-01-02", Format(civil_day(2015, 1, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -870,7 +870,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  320:  EXPECT_EQ("2015-01-01", Format(civil_day(2015, 1)));
+        3:  320:  EXPECT_EQ("2015-01-01", Format(civil_day(2015, 1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -887,7 +887,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  321:  EXPECT_EQ("2015-01-01", Format(civil_day(2015)));
+        3:  321:  EXPECT_EQ("2015-01-01", Format(civil_day(2015)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -905,7 +905,7 @@ call   13 never executed
 call   14 never executed
 call   15 never executed
         -:  322:
-        6:  323:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2, 3, 4, 5)));
+        3:  323:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -922,7 +922,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  324:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2, 3, 4)));
+        3:  324:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -939,7 +939,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  325:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2, 3)));
+        3:  325:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -956,7 +956,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  326:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2)));
+        3:  326:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -973,7 +973,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  327:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1)));
+        3:  327:  EXPECT_EQ("2015-01", Format(civil_month(2015, 1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -990,7 +990,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  328:  EXPECT_EQ("2015-01", Format(civil_month(2015)));
+        3:  328:  EXPECT_EQ("2015-01", Format(civil_month(2015)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1008,7 +1008,7 @@ call   13 never executed
 call   14 never executed
 call   15 never executed
         -:  329:
-        6:  330:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2, 3, 4, 5)));
+        3:  330:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1025,7 +1025,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  331:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2, 3, 4)));
+        3:  331:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1042,7 +1042,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  332:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2, 3)));
+        3:  332:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1059,7 +1059,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  333:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2)));
+        3:  333:  EXPECT_EQ("2015", Format(civil_year(2015, 1, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1076,7 +1076,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  334:  EXPECT_EQ("2015", Format(civil_year(2015, 1)));
+        3:  334:  EXPECT_EQ("2015", Format(civil_year(2015, 1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1093,7 +1093,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  335:  EXPECT_EQ("2015", Format(civil_year(2015)));
+        3:  335:  EXPECT_EQ("2015", Format(civil_year(2015)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1110,12 +1110,12 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        2:  336:}
+        1:  336:}
         -:  337:
-function _ZN4cctz39CivilTime_FieldsConstructionLimits_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz39CivilTime_FieldsConstructionLimits_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz39CivilTime_FieldsConstructionLimits_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz39CivilTime_FieldsConstructionLimits_Test8TestBodyEv called 2 returned 100% blocks executed 28%
-       52:  338:TEST(CivilTime, FieldsConstructionLimits) {
+function _ZN4cctz39CivilTime_FieldsConstructionLimits_Test8TestBodyEv called 1 returned 100% blocks executed 28%
+       47:  338:TEST(CivilTime, FieldsConstructionLimits) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1126,7 +1126,7 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  339:  const int kIntMax = std::numeric_limits<int>::max();
-        6:  340:  EXPECT_EQ("2038-01-19T03:14:07",
+        3:  340:  EXPECT_EQ("2038-01-19T03:14:07",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1144,7 +1144,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  342:  EXPECT_EQ("6121-02-11T05:21:07",
+        3:  342:  EXPECT_EQ("6121-02-11T05:21:07",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1162,7 +1162,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  344:  EXPECT_EQ("251104-11-20T12:21:07",
+        3:  344:  EXPECT_EQ("251104-11-20T12:21:07",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1180,7 +1180,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  346:  EXPECT_EQ("6130715-05-30T12:21:07",
+        3:  346:  EXPECT_EQ("6130715-05-30T12:21:07",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1198,7 +1198,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  348:  EXPECT_EQ(
+        3:  348:  EXPECT_EQ(
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1219,7 +1219,7 @@ branch  1 never executed
 branch  2 never executed
         -:  351:
         -:  352:  const int kIntMin = std::numeric_limits<int>::min();
-        6:  353:  EXPECT_EQ("1901-12-13T20:45:52",
+        3:  353:  EXPECT_EQ("1901-12-13T20:45:52",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1237,7 +1237,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  355:  EXPECT_EQ("-2182-11-20T18:37:52",
+        3:  355:  EXPECT_EQ("-2182-11-20T18:37:52",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1255,7 +1255,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  357:  EXPECT_EQ("-247165-02-11T10:37:52",
+        3:  357:  EXPECT_EQ("-247165-02-11T10:37:52",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1273,7 +1273,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  359:  EXPECT_EQ("-6126776-08-01T10:37:52",
+        3:  359:  EXPECT_EQ("-6126776-08-01T10:37:52",
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1291,7 +1291,7 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        6:  361:  EXPECT_EQ(
+        3:  361:  EXPECT_EQ(
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -1310,12 +1310,12 @@ call   12 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        2:  364:}
+        1:  364:}
         -:  365:
-function _ZN4cctz26CivilTime_RangeLimits_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz26CivilTime_RangeLimits_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz26CivilTime_RangeLimits_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz26CivilTime_RangeLimits_Test8TestBodyEv called 2 returned 100% blocks executed 27%
-       52:  366:TEST(CivilTime, RangeLimits) {
+function _ZN4cctz26CivilTime_RangeLimits_Test8TestBodyEv called 1 returned 100% blocks executed 27%
+       47:  366:TEST(CivilTime, RangeLimits) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1328,7 +1328,7 @@ call    8 never executed
         -:  367:  const int kIntMax = std::numeric_limits<int>::max();
         -:  368:  const int kIntMin = std::numeric_limits<int>::min();
         -:  369:
-        6:  370:  EXPECT_EQ(civil_year(kIntMax), civil_year::max());
+        3:  370:  EXPECT_EQ(civil_year(kIntMax), civil_year::max());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1343,7 +1343,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  371:  EXPECT_EQ(civil_month(kIntMax, 12), civil_month::max());
+        3:  371:  EXPECT_EQ(civil_month(kIntMax, 12), civil_month::max());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1358,7 +1358,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  372:  EXPECT_EQ(civil_day(kIntMax, 12, 31), civil_day::max());
+        3:  372:  EXPECT_EQ(civil_day(kIntMax, 12, 31), civil_day::max());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1373,7 +1373,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  373:  EXPECT_EQ(civil_hour(kIntMax, 12, 31, 23), civil_hour::max());
+        3:  373:  EXPECT_EQ(civil_hour(kIntMax, 12, 31, 23), civil_hour::max());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1388,7 +1388,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  374:  EXPECT_EQ(civil_minute(kIntMax, 12, 31, 23, 59), civil_minute::max());
+        3:  374:  EXPECT_EQ(civil_minute(kIntMax, 12, 31, 23, 59), civil_minute::max());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1403,7 +1403,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  375:  EXPECT_EQ(civil_second(kIntMax, 12, 31, 23, 59, 59), civil_second::max());
+        3:  375:  EXPECT_EQ(civil_second(kIntMax, 12, 31, 23, 59, 59), civil_second::max());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1419,7 +1419,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  376:
-        6:  377:  EXPECT_EQ(civil_year(kIntMin), civil_year::min());
+        3:  377:  EXPECT_EQ(civil_year(kIntMin), civil_year::min());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1434,7 +1434,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  378:  EXPECT_EQ(civil_month(kIntMin, 1), civil_month::min());
+        3:  378:  EXPECT_EQ(civil_month(kIntMin, 1), civil_month::min());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1449,7 +1449,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  379:  EXPECT_EQ(civil_day(kIntMin, 1, 1), civil_day::min());
+        3:  379:  EXPECT_EQ(civil_day(kIntMin, 1, 1), civil_day::min());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1464,7 +1464,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  380:  EXPECT_EQ(civil_hour(kIntMin, 1, 1, 0), civil_hour::min());
+        3:  380:  EXPECT_EQ(civil_hour(kIntMin, 1, 1, 0), civil_hour::min());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1479,7 +1479,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  381:  EXPECT_EQ(civil_minute(kIntMin, 1, 1, 0, 0), civil_minute::min());
+        3:  381:  EXPECT_EQ(civil_minute(kIntMin, 1, 1, 0, 0), civil_minute::min());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1494,7 +1494,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  382:  EXPECT_EQ(civil_second(kIntMin, 1, 1, 0, 0, 0), civil_second::min());
+        3:  382:  EXPECT_EQ(civil_second(kIntMin, 1, 1, 0, 0, 0), civil_second::min());
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1509,12 +1509,12 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        2:  383:}
+        1:  383:}
         -:  384:
-function _ZN4cctz37CivilTime_ImplicitCrossAlignment_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz37CivilTime_ImplicitCrossAlignment_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz37CivilTime_ImplicitCrossAlignment_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz37CivilTime_ImplicitCrossAlignment_Test8TestBodyEv called 2 returned 100% blocks executed 23%
-       52:  385:TEST(CivilTime, ImplicitCrossAlignment) {
+function _ZN4cctz37CivilTime_ImplicitCrossAlignment_Test8TestBodyEv called 1 returned 100% blocks executed 23%
+       47:  385:TEST(CivilTime, ImplicitCrossAlignment) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1524,7 +1524,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  386:  civil_year year(2015);
+        1:  386:  civil_year year(2015);
 call    0 returned 100%
         -:  387:  civil_month month = year;
         -:  388:  civil_day day = month;
@@ -1532,8 +1532,8 @@ call    0 returned 100%
         -:  390:  civil_minute minute = hour;
         -:  391:  civil_second second = minute;
         -:  392:
-        2:  393:  second = year;
-        2:  394:  EXPECT_EQ(second, year);
+        1:  393:  second = year;
+        1:  394:  EXPECT_EQ(second, year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1547,8 +1547,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  395:  second = month;
-        2:  396:  EXPECT_EQ(second, month);
+        1:  395:  second = month;
+        1:  396:  EXPECT_EQ(second, month);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1562,8 +1562,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  397:  second = day;
-        2:  398:  EXPECT_EQ(second, day);
+        1:  397:  second = day;
+        1:  398:  EXPECT_EQ(second, day);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1577,8 +1577,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  399:  second = hour;
-        2:  400:  EXPECT_EQ(second, hour);
+        1:  399:  second = hour;
+        1:  400:  EXPECT_EQ(second, hour);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1592,8 +1592,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  401:  second = minute;
-        2:  402:  EXPECT_EQ(second, minute);
+        1:  401:  second = minute;
+        1:  402:  EXPECT_EQ(second, minute);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1608,8 +1608,8 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  403:
-        2:  404:  minute = year;
-        2:  405:  EXPECT_EQ(minute, year);
+        1:  404:  minute = year;
+        1:  405:  EXPECT_EQ(minute, year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1623,8 +1623,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  406:  minute = month;
-        2:  407:  EXPECT_EQ(minute, month);
+        1:  406:  minute = month;
+        1:  407:  EXPECT_EQ(minute, month);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1638,8 +1638,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  408:  minute = day;
-        2:  409:  EXPECT_EQ(minute, day);
+        1:  408:  minute = day;
+        1:  409:  EXPECT_EQ(minute, day);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1653,8 +1653,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  410:  minute = hour;
-        2:  411:  EXPECT_EQ(minute, hour);
+        1:  410:  minute = hour;
+        1:  411:  EXPECT_EQ(minute, hour);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1669,8 +1669,8 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  412:
-        2:  413:  hour = year;
-        2:  414:  EXPECT_EQ(hour, year);
+        1:  413:  hour = year;
+        1:  414:  EXPECT_EQ(hour, year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1684,8 +1684,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  415:  hour = month;
-        2:  416:  EXPECT_EQ(hour, month);
+        1:  415:  hour = month;
+        1:  416:  EXPECT_EQ(hour, month);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1699,8 +1699,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  417:  hour = day;
-        2:  418:  EXPECT_EQ(hour, day);
+        1:  417:  hour = day;
+        1:  418:  EXPECT_EQ(hour, day);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1715,8 +1715,8 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  419:
-        2:  420:  day = year;
-        2:  421:  EXPECT_EQ(day, year);
+        1:  420:  day = year;
+        1:  421:  EXPECT_EQ(day, year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1730,8 +1730,8 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  422:  day = month;
-        2:  423:  EXPECT_EQ(day, month);
+        1:  422:  day = month;
+        1:  423:  EXPECT_EQ(day, month);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1746,8 +1746,8 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  424:
-        2:  425:  month = year;
-        2:  426:  EXPECT_EQ(month, year);
+        1:  425:  month = year;
+        1:  426:  EXPECT_EQ(month, year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1782,12 +1782,12 @@ call   12 never executed
         -:  445:  EXPECT_FALSE((std::is_convertible<civil_day, civil_year>::value));
         -:  446:
         -:  447:  EXPECT_FALSE((std::is_convertible<civil_month, civil_year>::value));
-        2:  448:}
+        1:  448:}
         -:  449:
-function _ZN4cctz37CivilTime_ExplicitCrossAlignment_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz37CivilTime_ExplicitCrossAlignment_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz37CivilTime_ExplicitCrossAlignment_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz37CivilTime_ExplicitCrossAlignment_Test8TestBodyEv called 2 returned 100% blocks executed 25%
-       52:  450:TEST(CivilTime, ExplicitCrossAlignment) {
+function _ZN4cctz37CivilTime_ExplicitCrossAlignment_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+       47:  450:TEST(CivilTime, ExplicitCrossAlignment) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1801,9 +1801,9 @@ call    8 never executed
         -:  452:  // Assign from smaller units -> larger units
         -:  453:  //
         -:  454:
-        2:  455:  civil_second second(2015, 1, 2, 3, 4, 5);
+        1:  455:  civil_second second(2015, 1, 2, 3, 4, 5);
 call    0 returned 100%
-        6:  456:  EXPECT_EQ("2015-01-02T03:04:05", Format(second));
+        3:  456:  EXPECT_EQ("2015-01-02T03:04:05", Format(second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1821,7 +1821,7 @@ call   13 never executed
 call   14 never executed
         -:  457:
         -:  458:  civil_minute minute(second);
-        6:  459:  EXPECT_EQ("2015-01-02T03:04", Format(minute));
+        3:  459:  EXPECT_EQ("2015-01-02T03:04", Format(minute));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1839,7 +1839,7 @@ call   13 never executed
 call   14 never executed
         -:  460:
         -:  461:  civil_hour hour(minute);
-        6:  462:  EXPECT_EQ("2015-01-02T03", Format(hour));
+        3:  462:  EXPECT_EQ("2015-01-02T03", Format(hour));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1857,7 +1857,7 @@ call   13 never executed
 call   14 never executed
         -:  463:
         -:  464:  civil_day day(hour);
-        6:  465:  EXPECT_EQ("2015-01-02", Format(day));
+        3:  465:  EXPECT_EQ("2015-01-02", Format(day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1875,7 +1875,7 @@ call   13 never executed
 call   14 never executed
         -:  466:
         -:  467:  civil_month month(day);
-        6:  468:  EXPECT_EQ("2015-01", Format(month));
+        3:  468:  EXPECT_EQ("2015-01", Format(month));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1893,7 +1893,7 @@ call   13 never executed
 call   14 never executed
         -:  469:
         -:  470:  civil_year year(month);
-        6:  471:  EXPECT_EQ("2015", Format(year));
+        3:  471:  EXPECT_EQ("2015", Format(year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1914,8 +1914,8 @@ call   14 never executed
         -:  474:  // Now assign from larger units -> smaller units
         -:  475:  //
         -:  476:
-        2:  477:  month = civil_month(year);
-        6:  478:  EXPECT_EQ("2015-01", Format(month));
+        1:  477:  month = civil_month(year);
+        3:  478:  EXPECT_EQ("2015-01", Format(month));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1932,8 +1932,8 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  479:
-        2:  480:  day = civil_day(month);
-        6:  481:  EXPECT_EQ("2015-01-01", Format(day));
+        1:  480:  day = civil_day(month);
+        3:  481:  EXPECT_EQ("2015-01-01", Format(day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1950,8 +1950,8 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  482:
-        2:  483:  hour = civil_hour(day);
-        6:  484:  EXPECT_EQ("2015-01-01T00", Format(hour));
+        1:  483:  hour = civil_hour(day);
+        3:  484:  EXPECT_EQ("2015-01-01T00", Format(hour));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1968,8 +1968,8 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  485:
-        2:  486:  minute = civil_minute(hour);
-        6:  487:  EXPECT_EQ("2015-01-01T00:00", Format(minute));
+        1:  486:  minute = civil_minute(hour);
+        3:  487:  EXPECT_EQ("2015-01-01T00:00", Format(minute));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1986,8 +1986,8 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  488:
-        2:  489:  second = civil_second(minute);
-        6:  490:  EXPECT_EQ("2015-01-01T00:00:00", Format(second));
+        1:  489:  second = civil_second(minute);
+        3:  490:  EXPECT_EQ("2015-01-01T00:00:00", Format(second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -2003,12 +2003,12 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  491:}
+        1:  491:}
         -:  492:
-function _ZN4cctz29CivilTime_ValueSemantics_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz29CivilTime_ValueSemantics_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz29CivilTime_ValueSemantics_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz29CivilTime_ValueSemantics_Test8TestBodyEv called 2 returned 100% blocks executed 36%
-       52:  493:TEST(CivilTime, ValueSemantics) {
+function _ZN4cctz29CivilTime_ValueSemantics_Test8TestBodyEv called 1 returned 100% blocks executed 36%
+       47:  493:TEST(CivilTime, ValueSemantics) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2018,14 +2018,14 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  494:  const civil_hour a(2015, 1, 2, 3);
+        1:  494:  const civil_hour a(2015, 1, 2, 3);
 call    0 returned 100%
-        2:  495:  const civil_hour b = a;
+        1:  495:  const civil_hour b = a;
         -:  496:  const civil_hour c(b);
-        2:  497:  civil_hour d;
+        1:  497:  civil_hour d;
 call    0 returned 100%
-        2:  498:  d = c;
-        6:  499:  EXPECT_EQ("2015-01-02T03", Format(d));
+        1:  498:  d = c;
+        3:  499:  EXPECT_EQ("2015-01-02T03", Format(d));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2042,12 +2042,12 @@ branch 12 never executed
 branch 13 never executed
 call   14 never executed
 call   15 never executed
-        2:  500:}
+        1:  500:}
         -:  501:
-function _ZN4cctz25CivilTime_Relational_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz25CivilTime_Relational_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz25CivilTime_Relational_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz25CivilTime_Relational_Test8TestBodyEv called 2 returned 100% blocks executed 25%
-       52:  502:TEST(CivilTime, Relational) {
+function _ZN4cctz25CivilTime_Relational_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+       47:  502:TEST(CivilTime, Relational) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2058,10 +2058,10 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  503:  // Tests that the alignment unit is ignored in comparison.
-        2:  504:  const civil_year year(2014);
+        1:  504:  const civil_year year(2014);
 call    0 returned 100%
         -:  505:  const civil_month month(year);
-        2:  506:  EXPECT_EQ(year, month);
+        1:  506:  EXPECT_EQ(year, month);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2096,7 +2096,7 @@ call   12 never executed
         -:  525:
         -:  526:  // Alignment is ignored in comparison (verified above), so kSecond is used
         -:  527:  // to test comparison in all field positions.
-       58:  528:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
+       29:  528:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -2345,7 +2345,7 @@ call   244 never executed
 call   245 never executed
 call   246 never executed
         -:  529:                  civil_second(2015, 1, 1, 0, 0, 0));
-       58:  530:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
+       29:  530:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -2594,7 +2594,7 @@ call   244 never executed
 call   245 never executed
 call   246 never executed
         -:  531:                  civil_second(2014, 2, 1, 0, 0, 0));
-       58:  532:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
+       29:  532:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -2843,7 +2843,7 @@ call   244 never executed
 call   245 never executed
 call   246 never executed
         -:  533:                  civil_second(2014, 1, 2, 0, 0, 0));
-       58:  534:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
+       29:  534:  TEST_RELATIONAL(civil_second(2014, 1, 1, 0, 0, 0),
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -3092,7 +3092,7 @@ call   244 never executed
 call   245 never executed
 call   246 never executed
         -:  535:                  civil_second(2014, 1, 1, 1, 0, 0));
-       58:  536:  TEST_RELATIONAL(civil_second(2014, 1, 1, 1, 0, 0),
+       29:  536:  TEST_RELATIONAL(civil_second(2014, 1, 1, 1, 0, 0),
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -3341,7 +3341,7 @@ call   244 never executed
 call   245 never executed
 call   246 never executed
         -:  537:                  civil_second(2014, 1, 1, 1, 1, 0));
-       58:  538:  TEST_RELATIONAL(civil_second(2014, 1, 1, 1, 1, 0),
+       29:  538:  TEST_RELATIONAL(civil_second(2014, 1, 1, 1, 1, 0),
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -3592,7 +3592,7 @@ call   246 never executed
         -:  539:                  civil_second(2014, 1, 1, 1, 1, 1));
         -:  540:
         -:  541:  // Tests the relational operators of two different CivilTime types.
-       58:  542:  TEST_RELATIONAL(civil_day(2014, 1, 1), civil_minute(2014, 1, 1, 1, 1));
+       29:  542:  TEST_RELATIONAL(civil_day(2014, 1, 1), civil_minute(2014, 1, 1, 1, 1));
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -3840,7 +3840,7 @@ call   243 never executed
 call   244 never executed
 call   245 never executed
 call   246 never executed
-       58:  543:  TEST_RELATIONAL(civil_day(2014, 1, 1), civil_month(2014, 2));
+       29:  543:  TEST_RELATIONAL(civil_day(2014, 1, 1), civil_month(2014, 2));
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -4090,12 +4090,12 @@ call   245 never executed
 call   246 never executed
         -:  544:
         -:  545:#undef TEST_RELATIONAL
-        2:  546:}
+        1:  546:}
         -:  547:
-function _ZN4cctz25CivilTime_Arithmetic_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz25CivilTime_Arithmetic_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz25CivilTime_Arithmetic_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz25CivilTime_Arithmetic_Test8TestBodyEv called 2 returned 100% blocks executed 27%
-       52:  548:TEST(CivilTime, Arithmetic) {
+function _ZN4cctz25CivilTime_Arithmetic_Test8TestBodyEv called 1 returned 100% blocks executed 27%
+       47:  548:TEST(CivilTime, Arithmetic) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -4105,26 +4105,9 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  549:  civil_second second(2015, 1, 2, 3, 4, 5);
+        1:  549:  civil_second second(2015, 1, 2, 3, 4, 5);
 call    0 returned 100%
-        6:  550:  EXPECT_EQ("2015-01-02T03:04:06", Format(second += 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  551:  EXPECT_EQ("2015-01-02T03:04:07", Format(second + 1));
+        3:  550:  EXPECT_EQ("2015-01-02T03:04:06", Format(second += 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4141,7 +4124,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  552:  EXPECT_EQ("2015-01-02T03:04:08", Format(2 + second));
+        3:  551:  EXPECT_EQ("2015-01-02T03:04:07", Format(second + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4158,7 +4141,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  553:  EXPECT_EQ("2015-01-02T03:04:05", Format(second - 1));
+        3:  552:  EXPECT_EQ("2015-01-02T03:04:08", Format(2 + second));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4175,7 +4158,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  554:  EXPECT_EQ("2015-01-02T03:04:05", Format(second -= 1));
+        3:  553:  EXPECT_EQ("2015-01-02T03:04:05", Format(second - 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4192,7 +4175,24 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  555:  EXPECT_EQ("2015-01-02T03:04:05", Format(second++));
+        3:  554:  EXPECT_EQ("2015-01-02T03:04:05", Format(second -= 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  555:  EXPECT_EQ("2015-01-02T03:04:05", Format(second++));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4208,7 +4208,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  556:  EXPECT_EQ("2015-01-02T03:04:07", Format(++second));
+        3:  556:  EXPECT_EQ("2015-01-02T03:04:07", Format(++second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4224,7 +4224,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  557:  EXPECT_EQ("2015-01-02T03:04:07", Format(second--));
+        3:  557:  EXPECT_EQ("2015-01-02T03:04:07", Format(second--));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4240,7 +4240,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  558:  EXPECT_EQ("2015-01-02T03:04:05", Format(--second));
+        3:  558:  EXPECT_EQ("2015-01-02T03:04:05", Format(--second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4257,93 +4257,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  559:
-        2:  560:  civil_minute minute(2015, 1, 2, 3, 4);
+        1:  560:  civil_minute minute(2015, 1, 2, 3, 4);
 call    0 returned 100%
-        6:  561:  EXPECT_EQ("2015-01-02T03:05", Format(minute += 1));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        6:  562:  EXPECT_EQ("2015-01-02T03:06", Format(minute + 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  563:  EXPECT_EQ("2015-01-02T03:07", Format(2 + minute));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  564:  EXPECT_EQ("2015-01-02T03:04", Format(minute - 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  565:  EXPECT_EQ("2015-01-02T03:04", Format(minute -= 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  566:  EXPECT_EQ("2015-01-02T03:04", Format(minute++));
+        3:  561:  EXPECT_EQ("2015-01-02T03:05", Format(minute += 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4359,7 +4275,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  567:  EXPECT_EQ("2015-01-02T03:06", Format(++minute));
+        3:  562:  EXPECT_EQ("2015-01-02T03:06", Format(minute + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4376,7 +4292,58 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  568:  EXPECT_EQ("2015-01-02T03:06", Format(minute--));
+        3:  563:  EXPECT_EQ("2015-01-02T03:07", Format(2 + minute));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  564:  EXPECT_EQ("2015-01-02T03:04", Format(minute - 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  565:  EXPECT_EQ("2015-01-02T03:04", Format(minute -= 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  566:  EXPECT_EQ("2015-01-02T03:04", Format(minute++));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4392,7 +4359,40 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  569:  EXPECT_EQ("2015-01-02T03:04", Format(--minute));
+        3:  567:  EXPECT_EQ("2015-01-02T03:06", Format(++minute));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  568:  EXPECT_EQ("2015-01-02T03:06", Format(minute--));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        3:  569:  EXPECT_EQ("2015-01-02T03:04", Format(--minute));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4409,93 +4409,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  570:
-        2:  571:  civil_hour hour(2015, 1, 2, 3);
+        1:  571:  civil_hour hour(2015, 1, 2, 3);
 call    0 returned 100%
-        6:  572:  EXPECT_EQ("2015-01-02T04", Format(hour += 1));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        6:  573:  EXPECT_EQ("2015-01-02T05", Format(hour + 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  574:  EXPECT_EQ("2015-01-02T06", Format(2 + hour));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  575:  EXPECT_EQ("2015-01-02T03", Format(hour - 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  576:  EXPECT_EQ("2015-01-02T03", Format(hour -= 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  577:  EXPECT_EQ("2015-01-02T03", Format(hour++));
+        3:  572:  EXPECT_EQ("2015-01-02T04", Format(hour += 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4511,7 +4427,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  578:  EXPECT_EQ("2015-01-02T05", Format(++hour));
+        3:  573:  EXPECT_EQ("2015-01-02T05", Format(hour + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4528,7 +4444,58 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  579:  EXPECT_EQ("2015-01-02T05", Format(hour--));
+        3:  574:  EXPECT_EQ("2015-01-02T06", Format(2 + hour));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  575:  EXPECT_EQ("2015-01-02T03", Format(hour - 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  576:  EXPECT_EQ("2015-01-02T03", Format(hour -= 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  577:  EXPECT_EQ("2015-01-02T03", Format(hour++));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4544,7 +4511,40 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  580:  EXPECT_EQ("2015-01-02T03", Format(--hour));
+        3:  578:  EXPECT_EQ("2015-01-02T05", Format(++hour));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  579:  EXPECT_EQ("2015-01-02T05", Format(hour--));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        3:  580:  EXPECT_EQ("2015-01-02T03", Format(--hour));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4561,26 +4561,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  581:
-        2:  582:  civil_day day(2015, 1, 2);
+        1:  582:  civil_day day(2015, 1, 2);
 call    0 returned 100%
-        6:  583:  EXPECT_EQ("2015-01-03", Format(day += 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  584:  EXPECT_EQ("2015-01-04", Format(day + 1));
+        3:  583:  EXPECT_EQ("2015-01-03", Format(day += 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4597,7 +4580,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  585:  EXPECT_EQ("2015-01-05", Format(2 + day));
+        3:  584:  EXPECT_EQ("2015-01-04", Format(day + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4614,7 +4597,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  586:  EXPECT_EQ("2015-01-02", Format(day - 1));
+        3:  585:  EXPECT_EQ("2015-01-05", Format(2 + day));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4631,7 +4614,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  587:  EXPECT_EQ("2015-01-02", Format(day -= 1));
+        3:  586:  EXPECT_EQ("2015-01-02", Format(day - 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4648,7 +4631,24 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  588:  EXPECT_EQ("2015-01-02", Format(day++));
+        3:  587:  EXPECT_EQ("2015-01-02", Format(day -= 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  588:  EXPECT_EQ("2015-01-02", Format(day++));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4664,7 +4664,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  589:  EXPECT_EQ("2015-01-04", Format(++day));
+        3:  589:  EXPECT_EQ("2015-01-04", Format(++day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4680,7 +4680,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  590:  EXPECT_EQ("2015-01-04", Format(day--));
+        3:  590:  EXPECT_EQ("2015-01-04", Format(day--));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4696,7 +4696,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  591:  EXPECT_EQ("2015-01-02", Format(--day));
+        3:  591:  EXPECT_EQ("2015-01-02", Format(--day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4713,93 +4713,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  592:
-        2:  593:  civil_month month(2015, 1);
+        1:  593:  civil_month month(2015, 1);
 call    0 returned 100%
-        6:  594:  EXPECT_EQ("2015-02", Format(month += 1));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        6:  595:  EXPECT_EQ("2015-03", Format(month + 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  596:  EXPECT_EQ("2015-04", Format(2 + month));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  597:  EXPECT_EQ("2015-01", Format(month - 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  598:  EXPECT_EQ("2015-01", Format(month -= 1));
-call    0 returned 100%
-call    1 returned 100%
-branch  2 taken 0% (fallthrough)
-branch  3 taken 100%
-call    4 never executed
-branch  5 never executed
-branch  6 never executed
-call    7 never executed
-branch  8 never executed
-branch  9 never executed
-call   10 never executed
-branch 11 never executed
-branch 12 never executed
-call   13 never executed
-call   14 never executed
-call   15 never executed
-        6:  599:  EXPECT_EQ("2015-01", Format(month++));
+        3:  594:  EXPECT_EQ("2015-02", Format(month += 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4815,7 +4731,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  600:  EXPECT_EQ("2015-03", Format(++month));
+        3:  595:  EXPECT_EQ("2015-03", Format(month + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -4832,7 +4748,58 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  601:  EXPECT_EQ("2015-03", Format(month--));
+        3:  596:  EXPECT_EQ("2015-04", Format(2 + month));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  597:  EXPECT_EQ("2015-01", Format(month - 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  598:  EXPECT_EQ("2015-01", Format(month -= 1));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  599:  EXPECT_EQ("2015-01", Format(month++));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4848,7 +4815,40 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  602:  EXPECT_EQ("2015-01", Format(--month));
+        3:  600:  EXPECT_EQ("2015-03", Format(++month));
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 0% (fallthrough)
+branch  3 taken 100%
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+call   13 never executed
+call   14 never executed
+call   15 never executed
+        3:  601:  EXPECT_EQ("2015-03", Format(month--));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        3:  602:  EXPECT_EQ("2015-01", Format(--month));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4865,25 +4865,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  603:
-        2:  604:  civil_year year(2015);
+        1:  604:  civil_year year(2015);
 call    0 returned 100%
-        6:  605:  EXPECT_EQ("2016", Format(year += 1));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        6:  606:  EXPECT_EQ("2017", Format(year + 1));
+        3:  605:  EXPECT_EQ("2016", Format(year += 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4899,7 +4883,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  607:  EXPECT_EQ("2018", Format(2 + year));
+        3:  606:  EXPECT_EQ("2017", Format(year + 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4915,7 +4899,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  608:  EXPECT_EQ("2015", Format(year - 1));
+        3:  607:  EXPECT_EQ("2018", Format(2 + year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4931,7 +4915,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  609:  EXPECT_EQ("2015", Format(year -= 1));
+        3:  608:  EXPECT_EQ("2015", Format(year - 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4947,7 +4931,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  610:  EXPECT_EQ("2015", Format(year++));
+        3:  609:  EXPECT_EQ("2015", Format(year -= 1));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4963,7 +4947,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  611:  EXPECT_EQ("2017", Format(++year));
+        3:  610:  EXPECT_EQ("2015", Format(year++));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4979,7 +4963,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  612:  EXPECT_EQ("2017", Format(year--));
+        3:  611:  EXPECT_EQ("2017", Format(++year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4995,7 +4979,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  613:  EXPECT_EQ("2015", Format(--year));
+        3:  612:  EXPECT_EQ("2017", Format(year--));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5011,12 +4995,28 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  614:}
+        3:  613:  EXPECT_EQ("2015", Format(--year));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  614:}
         -:  615:
-function _ZN4cctz31CivilTime_ArithmeticLimits_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz31CivilTime_ArithmeticLimits_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz31CivilTime_ArithmeticLimits_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz31CivilTime_ArithmeticLimits_Test8TestBodyEv called 2 returned 100% blocks executed 28%
-       52:  616:TEST(CivilTime, ArithmeticLimits) {
+function _ZN4cctz31CivilTime_ArithmeticLimits_Test8TestBodyEv called 1 returned 100% blocks executed 28%
+       47:  616:TEST(CivilTime, ArithmeticLimits) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -5029,29 +5029,11 @@ call    8 never executed
         -:  617:  const int kIntMax = std::numeric_limits<int>::max();
         -:  618:  const int kIntMin = std::numeric_limits<int>::min();
         -:  619:
-        2:  620:  civil_second second(1970, 1, 1, 0, 0, 0);
+        1:  620:  civil_second second(1970, 1, 1, 0, 0, 0);
 call    0 returned 100%
-        2:  621:  second += kIntMax;
+        1:  621:  second += kIntMax;
 call    0 returned 100%
-        6:  622:  EXPECT_EQ("2038-01-19T03:14:07", Format(second));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        2:  623:  second -= kIntMax;
-call    0 returned 100%
-        6:  624:  EXPECT_EQ("1970-01-01T00:00:00", Format(second));
+        3:  622:  EXPECT_EQ("2038-01-19T03:14:07", Format(second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5067,9 +5049,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  625:  second += kIntMin;
+        1:  623:  second -= kIntMax;
 call    0 returned 100%
-        6:  626:  EXPECT_EQ("1901-12-13T20:45:52", Format(second));
+        3:  624:  EXPECT_EQ("1970-01-01T00:00:00", Format(second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5085,9 +5067,27 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  627:  second -= kIntMin;
+        1:  625:  second += kIntMin;
 call    0 returned 100%
-        6:  628:  EXPECT_EQ("1970-01-01T00:00:00", Format(second));
+        3:  626:  EXPECT_EQ("1901-12-13T20:45:52", Format(second));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  627:  second -= kIntMin;
+call    0 returned 100%
+        3:  628:  EXPECT_EQ("1970-01-01T00:00:00", Format(second));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5104,29 +5104,11 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  629:
-        2:  630:  civil_minute minute(1970, 1, 1, 0, 0);
+        1:  630:  civil_minute minute(1970, 1, 1, 0, 0);
 call    0 returned 100%
-        2:  631:  minute += kIntMax;
+        1:  631:  minute += kIntMax;
 call    0 returned 100%
-        6:  632:  EXPECT_EQ("6053-01-23T02:07", Format(minute));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        2:  633:  minute -= kIntMax;
-call    0 returned 100%
-        6:  634:  EXPECT_EQ("1970-01-01T00:00", Format(minute));
+        3:  632:  EXPECT_EQ("6053-01-23T02:07", Format(minute));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5142,9 +5124,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  635:  minute += kIntMin;
+        1:  633:  minute -= kIntMax;
 call    0 returned 100%
-        6:  636:  EXPECT_EQ("-2114-12-08T21:52", Format(minute));
+        3:  634:  EXPECT_EQ("1970-01-01T00:00", Format(minute));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5160,9 +5142,27 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  637:  minute -= kIntMin;
+        1:  635:  minute += kIntMin;
 call    0 returned 100%
-        6:  638:  EXPECT_EQ("1970-01-01T00:00", Format(minute));
+        3:  636:  EXPECT_EQ("-2114-12-08T21:52", Format(minute));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  637:  minute -= kIntMin;
+call    0 returned 100%
+        3:  638:  EXPECT_EQ("1970-01-01T00:00", Format(minute));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5179,29 +5179,11 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  639:
-        2:  640:  civil_hour hour(1970, 1, 1, 0);
+        1:  640:  civil_hour hour(1970, 1, 1, 0);
 call    0 returned 100%
-        2:  641:  hour += kIntMax;
+        1:  641:  hour += kIntMax;
 call    0 returned 100%
-        6:  642:  EXPECT_EQ("246953-10-09T07", Format(hour));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        2:  643:  hour -= kIntMax;
-call    0 returned 100%
-        6:  644:  EXPECT_EQ("1970-01-01T00", Format(hour));
+        3:  642:  EXPECT_EQ("246953-10-09T07", Format(hour));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5217,9 +5199,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  645:  hour += kIntMin;
+        1:  643:  hour -= kIntMax;
 call    0 returned 100%
-        6:  646:  EXPECT_EQ("-243014-03-24T16", Format(hour));
+        3:  644:  EXPECT_EQ("1970-01-01T00", Format(hour));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5235,9 +5217,27 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  647:  hour -= kIntMin;
+        1:  645:  hour += kIntMin;
 call    0 returned 100%
-        6:  648:  EXPECT_EQ("1970-01-01T00", Format(hour));
+        3:  646:  EXPECT_EQ("-243014-03-24T16", Format(hour));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  647:  hour -= kIntMin;
+call    0 returned 100%
+        3:  648:  EXPECT_EQ("1970-01-01T00", Format(hour));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5254,29 +5254,11 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  649:
-        2:  650:  civil_day day(1970, 1, 1);
+        1:  650:  civil_day day(1970, 1, 1);
 call    0 returned 100%
-        2:  651:  day += kIntMax;
+        1:  651:  day += kIntMax;
 call    0 returned 100%
-        6:  652:  EXPECT_EQ("5881580-07-11", Format(day));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        2:  653:  day -= kIntMax;
-call    0 returned 100%
-        6:  654:  EXPECT_EQ("1970-01-01", Format(day));
+        3:  652:  EXPECT_EQ("5881580-07-11", Format(day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5292,9 +5274,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  655:  day += kIntMin;
+        1:  653:  day -= kIntMax;
 call    0 returned 100%
-        6:  656:  EXPECT_EQ("-5877641-06-23", Format(day));
+        3:  654:  EXPECT_EQ("1970-01-01", Format(day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5310,9 +5292,27 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  657:  day -= kIntMin;
+        1:  655:  day += kIntMin;
 call    0 returned 100%
-        6:  658:  EXPECT_EQ("1970-01-01", Format(day));
+        3:  656:  EXPECT_EQ("-5877641-06-23", Format(day));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  657:  day -= kIntMin;
+call    0 returned 100%
+        3:  658:  EXPECT_EQ("1970-01-01", Format(day));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5329,29 +5329,11 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  659:
-        2:  660:  civil_month month(1970, 1);
+        1:  660:  civil_month month(1970, 1);
 call    0 returned 100%
-        2:  661:  month += kIntMax;
+        1:  661:  month += kIntMax;
 call    0 returned 100%
-        6:  662:  EXPECT_EQ("178958940-08", Format(month));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        2:  663:  month -= kIntMax;
-call    0 returned 100%
-        6:  664:  EXPECT_EQ("1970-01", Format(month));
+        3:  662:  EXPECT_EQ("178958940-08", Format(month));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5367,9 +5349,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  665:  month += kIntMin;
+        1:  663:  month -= kIntMax;
 call    0 returned 100%
-        6:  666:  EXPECT_EQ("-178955001-05", Format(month));
+        3:  664:  EXPECT_EQ("1970-01", Format(month));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5385,9 +5367,27 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  667:  month -= kIntMin;
+        1:  665:  month += kIntMin;
 call    0 returned 100%
-        6:  668:  EXPECT_EQ("1970-01", Format(month));
+        3:  666:  EXPECT_EQ("-178955001-05", Format(month));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  667:  month -= kIntMin;
+call    0 returned 100%
+        3:  668:  EXPECT_EQ("1970-01", Format(month));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5404,10 +5404,10 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  669:
-        2:  670:  civil_year year(0);
+        1:  670:  civil_year year(0);
 call    0 returned 100%
         -:  671:  year += kIntMax;
-        6:  672:  EXPECT_EQ("2147483647", Format(year));
+        3:  672:  EXPECT_EQ("2147483647", Format(year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5424,7 +5424,7 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  673:  year -= kIntMax;
-        6:  674:  EXPECT_EQ("0", Format(year));
+        3:  674:  EXPECT_EQ("0", Format(year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5441,7 +5441,7 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  675:  year += kIntMin;
-        6:  676:  EXPECT_EQ("-2147483648", Format(year));
+        3:  676:  EXPECT_EQ("-2147483648", Format(year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5458,7 +5458,7 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  677:  year -= kIntMin;
-        6:  678:  EXPECT_EQ("0", Format(year));
+        3:  678:  EXPECT_EQ("0", Format(year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5474,12 +5474,12 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  679:}
+        1:  679:}
         -:  680:
-function _ZN4cctz25CivilTime_Difference_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz25CivilTime_Difference_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz25CivilTime_Difference_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz25CivilTime_Difference_Test8TestBodyEv called 2 returned 100% blocks executed 25%
-       52:  681:TEST(CivilTime, Difference) {
+function _ZN4cctz25CivilTime_Difference_Test8TestBodyEv called 1 returned 100% blocks executed 25%
+       47:  681:TEST(CivilTime, Difference) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -5489,9 +5489,9 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  682:  civil_second second(2015, 1, 2, 3, 4, 5);
+        1:  682:  civil_second second(2015, 1, 2, 3, 4, 5);
 call    0 returned 100%
-        6:  683:  EXPECT_EQ(0, second - second);
+        3:  683:  EXPECT_EQ(0, second - second);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5505,7 +5505,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        8:  684:  EXPECT_EQ(10, (second + 10) - second);
+        4:  684:  EXPECT_EQ(10, (second + 10) - second);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5520,7 +5520,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        8:  685:  EXPECT_EQ(-10, (second - 10) - second);
+        4:  685:  EXPECT_EQ(-10, (second - 10) - second);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5536,9 +5536,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  686:
-        2:  687:  civil_minute minute(2015, 1, 2, 3, 4);
+        1:  687:  civil_minute minute(2015, 1, 2, 3, 4);
 call    0 returned 100%
-        6:  688:  EXPECT_EQ(0, minute - minute);
+        3:  688:  EXPECT_EQ(0, minute - minute);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5553,7 +5553,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  689:  EXPECT_EQ(10, (minute + 10) - minute);
+        3:  689:  EXPECT_EQ(10, (minute + 10) - minute);
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5569,7 +5569,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  690:  EXPECT_EQ(-10, (minute - 10) - minute);
+        3:  690:  EXPECT_EQ(-10, (minute - 10) - minute);
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5586,9 +5586,9 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
         -:  691:
-        2:  692:  civil_hour hour(2015, 1, 2, 3);
+        1:  692:  civil_hour hour(2015, 1, 2, 3);
 call    0 returned 100%
-        6:  693:  EXPECT_EQ(0, hour - hour);
+        3:  693:  EXPECT_EQ(0, hour - hour);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5602,7 +5602,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        8:  694:  EXPECT_EQ(10, (hour + 10) - hour);
+        4:  694:  EXPECT_EQ(10, (hour + 10) - hour);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5617,7 +5617,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        8:  695:  EXPECT_EQ(-10, (hour - 10) - hour);
+        4:  695:  EXPECT_EQ(-10, (hour - 10) - hour);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5633,9 +5633,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  696:
-        2:  697:  civil_day day(2015, 1, 2);
+        1:  697:  civil_day day(2015, 1, 2);
 call    0 returned 100%
-        6:  698:  EXPECT_EQ(0, day - day);
+        3:  698:  EXPECT_EQ(0, day - day);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5650,7 +5650,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  699:  EXPECT_EQ(10, (day + 10) - day);
+        3:  699:  EXPECT_EQ(10, (day + 10) - day);
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5666,7 +5666,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  700:  EXPECT_EQ(-10, (day - 10) - day);
+        3:  700:  EXPECT_EQ(-10, (day - 10) - day);
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5683,9 +5683,9 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
         -:  701:
-        2:  702:  civil_month month(2015, 1);
+        1:  702:  civil_month month(2015, 1);
 call    0 returned 100%
-        6:  703:  EXPECT_EQ(0, month - month);
+        3:  703:  EXPECT_EQ(0, month - month);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5699,7 +5699,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        8:  704:  EXPECT_EQ(10, (month + 10) - month);
+        4:  704:  EXPECT_EQ(10, (month + 10) - month);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5714,7 +5714,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        8:  705:  EXPECT_EQ(-10, (month - 10) - month);
+        4:  705:  EXPECT_EQ(-10, (month - 10) - month);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5730,9 +5730,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  706:
-        2:  707:  civil_year year(2015);
+        1:  707:  civil_year year(2015);
 call    0 returned 100%
-        6:  708:  EXPECT_EQ(0, year - year);
+        3:  708:  EXPECT_EQ(0, year - year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5746,7 +5746,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  709:  EXPECT_EQ(10, (year + 10) - year);
+        3:  709:  EXPECT_EQ(10, (year + 10) - year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5760,7 +5760,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  710:  EXPECT_EQ(-10, (year - 10) - year);
+        3:  710:  EXPECT_EQ(-10, (year - 10) - year);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5774,12 +5774,12 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  711:}
+        1:  711:}
         -:  712:
-function _ZN4cctz31CivilTime_DifferenceLimits_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz31CivilTime_DifferenceLimits_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz31CivilTime_DifferenceLimits_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz31CivilTime_DifferenceLimits_Test8TestBodyEv called 2 returned 100% blocks executed 30%
-       52:  713:TEST(CivilTime, DifferenceLimits) {
+function _ZN4cctz31CivilTime_DifferenceLimits_Test8TestBodyEv called 1 returned 100% blocks executed 30%
+       47:  713:TEST(CivilTime, DifferenceLimits) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -5789,13 +5789,13 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  714:  const int kIntMax = std::numeric_limits<int>::max();
-        2:  715:  const int kIntMin = std::numeric_limits<int>::min();
+        1:  714:  const int kIntMax = std::numeric_limits<int>::max();
+        1:  715:  const int kIntMin = std::numeric_limits<int>::min();
         -:  716:
         -:  717:  // Check day arithmetic at the end of the year range.
-        2:  718:  const civil_day max_day(kIntMax, 12, 31);
+        1:  718:  const civil_day max_day(kIntMax, 12, 31);
 call    0 returned 100%
-        6:  719:  EXPECT_EQ(1, max_day - (max_day - 1));
+        3:  719:  EXPECT_EQ(1, max_day - (max_day - 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5811,7 +5811,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  720:  EXPECT_EQ(-1, (max_day - 1) - max_day);
+        3:  720:  EXPECT_EQ(-1, (max_day - 1) - max_day);
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5829,9 +5829,9 @@ call   13 never executed
 call   14 never executed
         -:  721:
         -:  722:  // Check day arithmetic at the end of the year range.
-        2:  723:  const civil_day min_day(kIntMin, 1, 1);
+        1:  723:  const civil_day min_day(kIntMin, 1, 1);
 call    0 returned 100%
-        6:  724:  EXPECT_EQ(1, (min_day + 1) - min_day);
+        3:  724:  EXPECT_EQ(1, (min_day + 1) - min_day);
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5847,7 +5847,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  725:  EXPECT_EQ(-1, min_day - (min_day + 1));
+        3:  725:  EXPECT_EQ(-1, min_day - (min_day + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5865,11 +5865,11 @@ call   13 never executed
 call   14 never executed
         -:  726:
         -:  727:  // Check the limits of the return value.
-        2:  728:  const civil_day d1(1970, 1, 1);
+        1:  728:  const civil_day d1(1970, 1, 1);
 call    0 returned 100%
-        2:  729:  const civil_day d2(5881580, 7, 11);
+        1:  729:  const civil_day d2(5881580, 7, 11);
 call    0 returned 100%
-        6:  730:  EXPECT_EQ(kIntMax, d2 - d1);
+        3:  730:  EXPECT_EQ(kIntMax, d2 - d1);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5884,7 +5884,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  731:  EXPECT_EQ(kIntMin, d1 - (d2 + 1));
+        3:  731:  EXPECT_EQ(kIntMin, d1 - (d2 + 1));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5900,12 +5900,12 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        2:  732:}
+        1:  732:}
         -:  733:
-function _ZN4cctz25CivilTime_Properties_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz25CivilTime_Properties_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz25CivilTime_Properties_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz25CivilTime_Properties_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       52:  734:TEST(CivilTime, Properties) {
+function _ZN4cctz25CivilTime_Properties_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       47:  734:TEST(CivilTime, Properties) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -5915,9 +5915,9 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  735:  civil_second ss(2015, 2, 3, 4, 5, 6);
+        1:  735:  civil_second ss(2015, 2, 3, 4, 5, 6);
 call    0 returned 100%
-        6:  736:  EXPECT_EQ(2015, ss.year());
+        3:  736:  EXPECT_EQ(2015, ss.year());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5931,7 +5931,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  737:  EXPECT_EQ(2, ss.month());
+        3:  737:  EXPECT_EQ(2, ss.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5945,7 +5945,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  738:  EXPECT_EQ(3, ss.day());
+        3:  738:  EXPECT_EQ(3, ss.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5959,7 +5959,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  739:  EXPECT_EQ(4, ss.hour());
+        3:  739:  EXPECT_EQ(4, ss.hour());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5973,7 +5973,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  740:  EXPECT_EQ(5, ss.minute());
+        3:  740:  EXPECT_EQ(5, ss.minute());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -5987,7 +5987,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  741:  EXPECT_EQ(6, ss.second());
+        3:  741:  EXPECT_EQ(6, ss.second());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6002,9 +6002,9 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  742:
-        2:  743:  civil_minute mm(2015, 2, 3, 4, 5, 6);
+        1:  743:  civil_minute mm(2015, 2, 3, 4, 5, 6);
 call    0 returned 100%
-        6:  744:  EXPECT_EQ(2015, mm.year());
+        3:  744:  EXPECT_EQ(2015, mm.year());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6018,7 +6018,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  745:  EXPECT_EQ(2, mm.month());
+        3:  745:  EXPECT_EQ(2, mm.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6032,7 +6032,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  746:  EXPECT_EQ(3, mm.day());
+        3:  746:  EXPECT_EQ(3, mm.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6046,7 +6046,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  747:  EXPECT_EQ(4, mm.hour());
+        3:  747:  EXPECT_EQ(4, mm.hour());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6060,7 +6060,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  748:  EXPECT_EQ(5, mm.minute());
+        3:  748:  EXPECT_EQ(5, mm.minute());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6074,7 +6074,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  749:  EXPECT_EQ(0, mm.second());
+        3:  749:  EXPECT_EQ(0, mm.second());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6089,9 +6089,9 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  750:
-        2:  751:  civil_hour hh(2015, 2, 3, 4, 5, 6);
+        1:  751:  civil_hour hh(2015, 2, 3, 4, 5, 6);
 call    0 returned 100%
-        6:  752:  EXPECT_EQ(2015, hh.year());
+        3:  752:  EXPECT_EQ(2015, hh.year());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6105,7 +6105,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  753:  EXPECT_EQ(2, hh.month());
+        3:  753:  EXPECT_EQ(2, hh.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6119,7 +6119,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  754:  EXPECT_EQ(3, hh.day());
+        3:  754:  EXPECT_EQ(3, hh.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6133,7 +6133,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  755:  EXPECT_EQ(4, hh.hour());
+        3:  755:  EXPECT_EQ(4, hh.hour());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6147,7 +6147,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  756:  EXPECT_EQ(0, hh.minute());
+        3:  756:  EXPECT_EQ(0, hh.minute());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6161,7 +6161,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  757:  EXPECT_EQ(0, hh.second());
+        3:  757:  EXPECT_EQ(0, hh.second());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6176,9 +6176,9 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  758:
-        2:  759:  civil_day d(2015, 2, 3, 4, 5, 6);
+        1:  759:  civil_day d(2015, 2, 3, 4, 5, 6);
 call    0 returned 100%
-        6:  760:  EXPECT_EQ(2015, d.year());
+        3:  760:  EXPECT_EQ(2015, d.year());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6192,7 +6192,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  761:  EXPECT_EQ(2, d.month());
+        3:  761:  EXPECT_EQ(2, d.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6206,7 +6206,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  762:  EXPECT_EQ(3, d.day());
+        3:  762:  EXPECT_EQ(3, d.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6220,7 +6220,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  763:  EXPECT_EQ(0, d.hour());
+        3:  763:  EXPECT_EQ(0, d.hour());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6234,7 +6234,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  764:  EXPECT_EQ(0, d.minute());
+        3:  764:  EXPECT_EQ(0, d.minute());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6248,7 +6248,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  765:  EXPECT_EQ(0, d.second());
+        3:  765:  EXPECT_EQ(0, d.second());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6262,7 +6262,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  766:  EXPECT_EQ(weekday::tuesday, get_weekday(d));
+        3:  766:  EXPECT_EQ(weekday::tuesday, get_weekday(d));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6277,7 +6277,7 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        6:  767:  EXPECT_EQ(34, get_yearday(d));
+        3:  767:  EXPECT_EQ(34, get_yearday(d));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6293,9 +6293,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  768:
-        2:  769:  civil_month m(2015, 2, 3, 4, 5, 6);
+        1:  769:  civil_month m(2015, 2, 3, 4, 5, 6);
 call    0 returned 100%
-        6:  770:  EXPECT_EQ(2015, m.year());
+        3:  770:  EXPECT_EQ(2015, m.year());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6309,7 +6309,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  771:  EXPECT_EQ(2, m.month());
+        3:  771:  EXPECT_EQ(2, m.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6323,7 +6323,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  772:  EXPECT_EQ(1, m.day());
+        3:  772:  EXPECT_EQ(1, m.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6337,7 +6337,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  773:  EXPECT_EQ(0, m.hour());
+        3:  773:  EXPECT_EQ(0, m.hour());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6351,7 +6351,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  774:  EXPECT_EQ(0, m.minute());
+        3:  774:  EXPECT_EQ(0, m.minute());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6365,7 +6365,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  775:  EXPECT_EQ(0, m.second());
+        3:  775:  EXPECT_EQ(0, m.second());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6380,9 +6380,9 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -:  776:
-        2:  777:  civil_year y(2015, 2, 3, 4, 5, 6);
+        1:  777:  civil_year y(2015, 2, 3, 4, 5, 6);
 call    0 returned 100%
-        6:  778:  EXPECT_EQ(2015, y.year());
+        3:  778:  EXPECT_EQ(2015, y.year());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6396,7 +6396,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  779:  EXPECT_EQ(1, y.month());
+        3:  779:  EXPECT_EQ(1, y.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6410,7 +6410,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  780:  EXPECT_EQ(1, y.day());
+        3:  780:  EXPECT_EQ(1, y.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6424,7 +6424,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  781:  EXPECT_EQ(0, y.hour());
+        3:  781:  EXPECT_EQ(0, y.hour());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6438,7 +6438,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  782:  EXPECT_EQ(0, y.minute());
+        3:  782:  EXPECT_EQ(0, y.minute());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6452,7 +6452,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        6:  783:  EXPECT_EQ(0, y.second());
+        3:  783:  EXPECT_EQ(0, y.second());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6466,12 +6466,12 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  784:}
+        1:  784:}
         -:  785:
-function _ZN4cctz27CivilTime_OutputStream_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz27CivilTime_OutputStream_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz27CivilTime_OutputStream_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz27CivilTime_OutputStream_Test8TestBodyEv called 2 returned 100% blocks executed 26%
-       52:  786:TEST(CivilTime, OutputStream) {
+function _ZN4cctz27CivilTime_OutputStream_Test8TestBodyEv called 1 returned 100% blocks executed 26%
+       47:  786:TEST(CivilTime, OutputStream) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -6482,7 +6482,7 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  787:  // Tests formatting of civil_year, which does not pad.
-        6:  788:  EXPECT_EQ("2016", Format(civil_year(2016)));
+        3:  788:  EXPECT_EQ("2016", Format(civil_year(2016)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6499,7 +6499,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  789:  EXPECT_EQ("123", Format(civil_year(123)));
+        3:  789:  EXPECT_EQ("123", Format(civil_year(123)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6516,7 +6516,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  790:  EXPECT_EQ("0", Format(civil_year(0)));
+        3:  790:  EXPECT_EQ("0", Format(civil_year(0)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6533,7 +6533,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  791:  EXPECT_EQ("-1", Format(civil_year(-1)));
+        3:  791:  EXPECT_EQ("-1", Format(civil_year(-1)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6552,7 +6552,7 @@ call   14 never executed
 call   15 never executed
         -:  792:
         -:  793:  // Tests formatting of sub-year types, which pad to 2 digits
-        6:  794:  EXPECT_EQ("2016-02", Format(civil_month(2016, 2)));
+        3:  794:  EXPECT_EQ("2016-02", Format(civil_month(2016, 2)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6569,7 +6569,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  795:  EXPECT_EQ("2016-02-03", Format(civil_day(2016, 2, 3)));
+        3:  795:  EXPECT_EQ("2016-02-03", Format(civil_day(2016, 2, 3)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6586,7 +6586,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  796:  EXPECT_EQ("2016-02-03T04", Format(civil_hour(2016, 2, 3, 4)));
+        3:  796:  EXPECT_EQ("2016-02-03T04", Format(civil_hour(2016, 2, 3, 4)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6603,7 +6603,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  797:  EXPECT_EQ("2016-02-03T04:05", Format(civil_minute(2016, 2, 3, 4, 5)));
+        3:  797:  EXPECT_EQ("2016-02-03T04:05", Format(civil_minute(2016, 2, 3, 4, 5)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6620,7 +6620,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
 call   15 never executed
-        6:  798:  EXPECT_EQ("2016-02-03T04:05:06", Format(civil_second(2016, 2, 3, 4, 5, 6)));
+        3:  798:  EXPECT_EQ("2016-02-03T04:05:06", Format(civil_second(2016, 2, 3, 4, 5, 6)));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6639,7 +6639,7 @@ call   14 never executed
 call   15 never executed
         -:  799:
         -:  800:  // Tests formatting of weekday.
-        6:  801:  EXPECT_EQ("Monday", Format(weekday::monday));
+        3:  801:  EXPECT_EQ("Monday", Format(weekday::monday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6655,7 +6655,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  802:  EXPECT_EQ("Tuesday", Format(weekday::tuesday));
+        3:  802:  EXPECT_EQ("Tuesday", Format(weekday::tuesday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6671,7 +6671,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  803:  EXPECT_EQ("Wednesday", Format(weekday::wednesday));
+        3:  803:  EXPECT_EQ("Wednesday", Format(weekday::wednesday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6687,7 +6687,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  804:  EXPECT_EQ("Thursday", Format(weekday::thursday));
+        3:  804:  EXPECT_EQ("Thursday", Format(weekday::thursday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6703,7 +6703,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  805:  EXPECT_EQ("Friday", Format(weekday::friday));
+        3:  805:  EXPECT_EQ("Friday", Format(weekday::friday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6719,7 +6719,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  806:  EXPECT_EQ("Saturday", Format(weekday::saturday));
+        3:  806:  EXPECT_EQ("Saturday", Format(weekday::saturday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6735,7 +6735,7 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        6:  807:  EXPECT_EQ("Sunday", Format(weekday::sunday));
+        3:  807:  EXPECT_EQ("Sunday", Format(weekday::sunday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6751,12 +6751,12 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  808:}
+        1:  808:}
         -:  809:
-function _ZN4cctz40CivilTime_OutputStreamLeftFillWidth_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz40CivilTime_OutputStreamLeftFillWidth_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz40CivilTime_OutputStreamLeftFillWidth_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz40CivilTime_OutputStreamLeftFillWidth_Test8TestBodyEv called 2 returned 100% blocks executed 41%
-       52:  810:TEST(CivilTime, OutputStreamLeftFillWidth) {
+function _ZN4cctz40CivilTime_OutputStreamLeftFillWidth_Test8TestBodyEv called 1 returned 100% blocks executed 41%
+       47:  810:TEST(CivilTime, OutputStreamLeftFillWidth) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -6766,19 +6766,19 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  811:  civil_second cs(2016, 2, 3, 4, 5, 6);
+        1:  811:  civil_second cs(2016, 2, 3, 4, 5, 6);
 call    0 returned 100%
         -:  812:  {
-        2:  813:    std::stringstream ss;
+        1:  813:    std::stringstream ss;
 call    0 returned 100%
         -:  814:    ss << std::left << std::setfill('.');
         -:  815:    ss << std::setw(3) << 'X';
-        2:  816:    ss << std::setw(21) << civil_year(cs);
+        1:  816:    ss << std::setw(21) << civil_year(cs);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  817:    ss << std::setw(3) << 'X';
-        6:  818:    EXPECT_EQ("X..2016.................X..", ss.str());
+        3:  818:    EXPECT_EQ("X..2016.................X..", ss.str());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6797,16 +6797,16 @@ call   14 never executed
 call   15 never executed
         -:  819:  }
         -:  820:  {
-        2:  821:    std::stringstream ss;
+        1:  821:    std::stringstream ss;
 call    0 returned 100%
         -:  822:    ss << std::left << std::setfill('.');
         -:  823:    ss << std::setw(3) << 'X';
-        2:  824:    ss << std::setw(21) << civil_month(cs);
+        1:  824:    ss << std::setw(21) << civil_month(cs);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  825:    ss << std::setw(3) << 'X';
-        6:  826:    EXPECT_EQ("X..2016-02..............X..", ss.str());
+        3:  826:    EXPECT_EQ("X..2016-02..............X..", ss.str());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6825,16 +6825,16 @@ call   14 never executed
 call   15 never executed
         -:  827:  }
         -:  828:  {
-        2:  829:    std::stringstream ss;
+        1:  829:    std::stringstream ss;
 call    0 returned 100%
         -:  830:    ss << std::left << std::setfill('.');
         -:  831:    ss << std::setw(3) << 'X';
-        2:  832:    ss << std::setw(21) << civil_day(cs);
+        1:  832:    ss << std::setw(21) << civil_day(cs);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  833:    ss << std::setw(3) << 'X';
-        6:  834:    EXPECT_EQ("X..2016-02-03...........X..", ss.str());
+        3:  834:    EXPECT_EQ("X..2016-02-03...........X..", ss.str());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6853,16 +6853,16 @@ call   14 never executed
 call   15 never executed
         -:  835:  }
         -:  836:  {
-        2:  837:    std::stringstream ss;
+        1:  837:    std::stringstream ss;
 call    0 returned 100%
         -:  838:    ss << std::left << std::setfill('.');
         -:  839:    ss << std::setw(3) << 'X';
-        2:  840:    ss << std::setw(21) << civil_hour(cs);
+        1:  840:    ss << std::setw(21) << civil_hour(cs);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  841:    ss << std::setw(3) << 'X';
-        6:  842:    EXPECT_EQ("X..2016-02-03T04........X..", ss.str());
+        3:  842:    EXPECT_EQ("X..2016-02-03T04........X..", ss.str());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6881,16 +6881,16 @@ call   14 never executed
 call   15 never executed
         -:  843:  }
         -:  844:  {
-        2:  845:    std::stringstream ss;
+        1:  845:    std::stringstream ss;
 call    0 returned 100%
         -:  846:    ss << std::left << std::setfill('.');
         -:  847:    ss << std::setw(3) << 'X';
-        2:  848:    ss << std::setw(21) << civil_minute(cs);
+        1:  848:    ss << std::setw(21) << civil_minute(cs);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  849:    ss << std::setw(3) << 'X';
-        6:  850:    EXPECT_EQ("X..2016-02-03T04:05.....X..", ss.str());
+        3:  850:    EXPECT_EQ("X..2016-02-03T04:05.....X..", ss.str());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6909,16 +6909,16 @@ call   14 never executed
 call   15 never executed
         -:  851:  }
         -:  852:  {
-        2:  853:    std::stringstream ss;
+        1:  853:    std::stringstream ss;
 call    0 returned 100%
         -:  854:    ss << std::left << std::setfill('.');
         -:  855:    ss << std::setw(3) << 'X';
-        4:  856:    ss << std::setw(21) << civil_second(cs);
+        2:  856:    ss << std::setw(21) << civil_second(cs);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  857:    ss << std::setw(3) << 'X';
-        6:  858:    EXPECT_EQ("X..2016-02-03T04:05:06..X..", ss.str());
+        3:  858:    EXPECT_EQ("X..2016-02-03T04:05:06..X..", ss.str());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -6935,12 +6935,12 @@ call   12 returned 100%
 call   13 never executed
 call   14 never executed
         -:  859:  }
-        2:  860:}
+        1:  860:}
         -:  861:
-function _ZN4cctz30CivilTime_NextPrevWeekday_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz30CivilTime_NextPrevWeekday_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz30CivilTime_NextPrevWeekday_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz30CivilTime_NextPrevWeekday_Test8TestBodyEv called 2 returned 100% blocks executed 24%
-       52:  862:TEST(CivilTime, NextPrevWeekday) {
+function _ZN4cctz30CivilTime_NextPrevWeekday_Test8TestBodyEv called 1 returned 100% blocks executed 24%
+       47:  862:TEST(CivilTime, NextPrevWeekday) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -6951,9 +6951,9 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  863:  // Jan 1, 1970 was a Thursday.
-        2:  864:  const civil_day thursday(1970, 1, 1);
+        1:  864:  const civil_day thursday(1970, 1, 1);
 call    0 returned 100%
-        6:  865:  EXPECT_EQ(weekday::thursday, get_weekday(thursday));
+        3:  865:  EXPECT_EQ(weekday::thursday, get_weekday(thursday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6970,9 +6970,9 @@ call   12 never executed
 call   13 never executed
         -:  866:
         -:  867:  // Thursday -> Thursday
-        2:  868:  civil_day d = next_weekday(thursday, weekday::thursday);
+        1:  868:  civil_day d = next_weekday(thursday, weekday::thursday);
 call    0 returned 100%
-        6:  869:  EXPECT_EQ(7, d - thursday) << Format(d);
+        3:  869:  EXPECT_EQ(7, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6990,7 +6990,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  870:  EXPECT_EQ(d - 14, prev_weekday(thursday, weekday::thursday));
+        3:  870:  EXPECT_EQ(d - 14, prev_weekday(thursday, weekday::thursday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7008,9 +7008,9 @@ call   13 never executed
 call   14 never executed
         -:  871:
         -:  872:  // Thursday -> Friday
-        2:  873:  d = next_weekday(thursday, weekday::friday);
+        1:  873:  d = next_weekday(thursday, weekday::friday);
 call    0 returned 100%
-        6:  874:  EXPECT_EQ(1, d - thursday) << Format(d);
+        3:  874:  EXPECT_EQ(1, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7028,7 +7028,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  875:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::friday));
+        3:  875:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::friday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7046,9 +7046,9 @@ call   13 never executed
 call   14 never executed
         -:  876:
         -:  877:  // Thursday -> Saturday
-        2:  878:  d = next_weekday(thursday, weekday::saturday);
+        1:  878:  d = next_weekday(thursday, weekday::saturday);
 call    0 returned 100%
-        6:  879:  EXPECT_EQ(2, d - thursday) << Format(d);
+        3:  879:  EXPECT_EQ(2, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7066,7 +7066,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  880:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::saturday));
+        3:  880:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::saturday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7084,9 +7084,9 @@ call   13 never executed
 call   14 never executed
         -:  881:
         -:  882:  // Thursday -> Sunday
-        2:  883:  d = next_weekday(thursday, weekday::sunday);
+        1:  883:  d = next_weekday(thursday, weekday::sunday);
 call    0 returned 100%
-        6:  884:  EXPECT_EQ(3, d - thursday) << Format(d);
+        3:  884:  EXPECT_EQ(3, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7104,7 +7104,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  885:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::sunday));
+        3:  885:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::sunday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7122,9 +7122,9 @@ call   13 never executed
 call   14 never executed
         -:  886:
         -:  887:  // Thursday -> Monday
-        2:  888:  d = next_weekday(thursday, weekday::monday);
+        1:  888:  d = next_weekday(thursday, weekday::monday);
 call    0 returned 100%
-        6:  889:  EXPECT_EQ(4, d - thursday) << Format(d);
+        3:  889:  EXPECT_EQ(4, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7142,7 +7142,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  890:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::monday));
+        3:  890:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::monday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7160,9 +7160,9 @@ call   13 never executed
 call   14 never executed
         -:  891:
         -:  892:  // Thursday -> Tuesday
-        2:  893:  d = next_weekday(thursday, weekday::tuesday);
+        1:  893:  d = next_weekday(thursday, weekday::tuesday);
 call    0 returned 100%
-        6:  894:  EXPECT_EQ(5, d - thursday) << Format(d);
+        3:  894:  EXPECT_EQ(5, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7180,7 +7180,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  895:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::tuesday));
+        3:  895:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::tuesday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7198,9 +7198,9 @@ call   13 never executed
 call   14 never executed
         -:  896:
         -:  897:  // Thursday -> Wednesday
-        2:  898:  d = next_weekday(thursday, weekday::wednesday);
+        1:  898:  d = next_weekday(thursday, weekday::wednesday);
 call    0 returned 100%
-        6:  899:  EXPECT_EQ(6, d - thursday) << Format(d);
+        3:  899:  EXPECT_EQ(6, d - thursday) << Format(d);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7218,7 +7218,7 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        6:  900:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::wednesday));
+        3:  900:  EXPECT_EQ(d - 7, prev_weekday(thursday, weekday::wednesday));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -7234,13 +7234,13 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        2:  901:}
+        1:  901:}
         -:  902:
         -:  903:// NOTE: Run this with --copt=-ftrapv to detect overflow problems.
-function _ZN4cctz37CivilTime_DifferenceWithHugeYear_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz37CivilTime_DifferenceWithHugeYear_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz37CivilTime_DifferenceWithHugeYear_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz37CivilTime_DifferenceWithHugeYear_Test8TestBodyEv called 2 returned 100% blocks executed 30%
-       52:  904:TEST(CivilTime, DifferenceWithHugeYear) {
+function _ZN4cctz37CivilTime_DifferenceWithHugeYear_Test8TestBodyEv called 1 returned 100% blocks executed 30%
+       47:  904:TEST(CivilTime, DifferenceWithHugeYear) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -7250,11 +7250,11 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  905:  civil_day d1(5881579, 1, 1);
+        1:  905:  civil_day d1(5881579, 1, 1);
 call    0 returned 100%
-        2:  906:  civil_day d2(5881579, 12, 31);
+        1:  906:  civil_day d2(5881579, 12, 31);
 call    0 returned 100%
-        6:  907:  EXPECT_EQ(364, d2 - d1);
+        3:  907:  EXPECT_EQ(364, d2 - d1);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7270,11 +7270,11 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  908:
-        2:  909:  d1 = civil_day(-5877640, 1, 1);
+        1:  909:  d1 = civil_day(-5877640, 1, 1);
 call    0 returned 100%
-        2:  910:  d2 = civil_day(-5877640, 12, 31);
+        1:  910:  d2 = civil_day(-5877640, 12, 31);
 call    0 returned 100%
-        6:  911:  EXPECT_EQ(365, d2 - d1);
+        3:  911:  EXPECT_EQ(365, d2 - d1);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7291,11 +7291,11 @@ call   12 never executed
 call   13 never executed
         -:  912:
         -:  913:  // Check the limits of the return value with large positive year.
-        2:  914:  d1 = civil_day(5881580, 7, 11);
+        1:  914:  d1 = civil_day(5881580, 7, 11);
 call    0 returned 100%
-        2:  915:  d2 = civil_day(1970, 1, 1);
+        1:  915:  d2 = civil_day(1970, 1, 1);
 call    0 returned 100%
-        6:  916:  EXPECT_EQ(2147483647, d1 - d2);
+        3:  916:  EXPECT_EQ(2147483647, d1 - d2);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7310,9 +7310,9 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        2:  917:  d2 = d2 - 1;
+        1:  917:  d2 = d2 - 1;
 call    0 returned 100%
-        6:  918:  EXPECT_EQ(-2147483647 - 1, d2 - d1);
+        3:  918:  EXPECT_EQ(-2147483647 - 1, d2 - d1);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7329,11 +7329,11 @@ call   12 never executed
 call   13 never executed
         -:  919:
         -:  920:  // Check the limits of the return value with large negative year.
-        2:  921:  d1 = civil_day(-5877641, 6, 23);
+        1:  921:  d1 = civil_day(-5877641, 6, 23);
 call    0 returned 100%
-        2:  922:  d2 = civil_day(1969, 12, 31);
+        1:  922:  d2 = civil_day(1969, 12, 31);
 call    0 returned 100%
-        6:  923:  EXPECT_EQ(2147483647, d2 - d1);
+        3:  923:  EXPECT_EQ(2147483647, d2 - d1);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7348,9 +7348,9 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        2:  924:  d2 = d2 + 1;
+        1:  924:  d2 = d2 + 1;
 call    0 returned 100%
-        6:  925:  EXPECT_EQ(-2147483647 - 1, d1 - d2);
+        3:  925:  EXPECT_EQ(-2147483647 - 1, d1 - d2);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7367,28 +7367,11 @@ call   12 never executed
 call   13 never executed
         -:  926:
         -:  927:  // Check the limits of the return value from either side of year 0.
-        2:  928:  d1 = civil_day(-2939806, 9, 26);
+        1:  928:  d1 = civil_day(-2939806, 9, 26);
 call    0 returned 100%
-        2:  929:  d2 = civil_day(2939805, 4, 6);
+        1:  929:  d2 = civil_day(2939805, 4, 6);
 call    0 returned 100%
-        6:  930:  EXPECT_EQ(2147483647, d2 - d1);
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-        2:  931:  d2 = d2 + 1;
-call    0 returned 100%
-        6:  932:  EXPECT_EQ(-2147483647 - 1, d1 - d2);
+        3:  930:  EXPECT_EQ(2147483647, d2 - d1);
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7403,12 +7386,29 @@ branch 10 never executed
 branch 11 never executed
 call   12 never executed
 call   13 never executed
-        2:  933:}
+        1:  931:  d2 = d2 + 1;
+call    0 returned 100%
+        3:  932:  EXPECT_EQ(-2147483647 - 1, d1 - d2);
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+        1:  933:}
         -:  934:
-function _ZN4cctz36CivilTime_NormalizeWithHugeYear_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz36CivilTime_NormalizeWithHugeYear_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz36CivilTime_NormalizeWithHugeYear_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz36CivilTime_NormalizeWithHugeYear_Test8TestBodyEv called 2 returned 100% blocks executed 29%
-       52:  935:TEST(CivilTime, NormalizeWithHugeYear) {
+function _ZN4cctz36CivilTime_NormalizeWithHugeYear_Test8TestBodyEv called 1 returned 100% blocks executed 29%
+       47:  935:TEST(CivilTime, NormalizeWithHugeYear) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -7418,9 +7418,9 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  936:  civil_month c(2147483647, 1);
+        1:  936:  civil_month c(2147483647, 1);
 call    0 returned 100%
-        6:  937:  EXPECT_EQ("2147483647-01", Format(c));
+        3:  937:  EXPECT_EQ("2147483647-01", Format(c));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7436,9 +7436,9 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  938:  c = c - 1;  // Causes normalization
+        1:  938:  c = c - 1;  // Causes normalization
 call    0 returned 100%
-        6:  939:  EXPECT_EQ("2147483646-12", Format(c));
+        3:  939:  EXPECT_EQ("2147483646-12", Format(c));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7455,27 +7455,9 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  940:
-        2:  941:  c = civil_month(-2147483647 - 1, 1);
+        1:  941:  c = civil_month(-2147483647 - 1, 1);
 call    0 returned 100%
-        6:  942:  EXPECT_EQ("-2147483648-01", Format(c));
-call    0 returned 100%
-branch  1 taken 0% (fallthrough)
-branch  2 taken 100%
-call    3 never executed
-branch  4 never executed
-branch  5 never executed
-call    6 never executed
-branch  7 never executed
-branch  8 never executed
-call    9 never executed
-branch 10 never executed
-branch 11 never executed
-call   12 never executed
-call   13 never executed
-call   14 never executed
-        2:  943:  c = c + 12;  // Causes normalization
-call    0 returned 100%
-        6:  944:  EXPECT_EQ("-2147483647-01", Format(c));
+        3:  942:  EXPECT_EQ("-2147483648-01", Format(c));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7491,12 +7473,30 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2:  945:}
+        1:  943:  c = c + 12;  // Causes normalization
+call    0 returned 100%
+        3:  944:  EXPECT_EQ("-2147483647-01", Format(c));
+call    0 returned 100%
+branch  1 taken 0% (fallthrough)
+branch  2 taken 100%
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+call   13 never executed
+call   14 never executed
+        1:  945:}
         -:  946:
-function _ZN4cctz24CivilTime_LeapYears_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz24CivilTime_LeapYears_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz24CivilTime_LeapYears_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz24CivilTime_LeapYears_Test8TestBodyEv called 2 returned 100% blocks executed 30%
-       52:  947:TEST(CivilTime, LeapYears) {
+function _ZN4cctz24CivilTime_LeapYears_Test8TestBodyEv called 1 returned 100% blocks executed 30%
+       47:  947:TEST(CivilTime, LeapYears) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -7528,23 +7528,23 @@ call    8 never executed
         -:  967:      {2008, 366, {2, 29}},  // leap year
         -:  968:      {2009, 365, {3, 1}},
         -:  969:      {2100, 365, {3, 1}},
-        2:  970:  };
+        1:  970:  };
         -:  971:
-       28:  972:  for (size_t i = 0; i < (sizeof kLeapYearTable) / (sizeof kLeapYearTable[0]);
+       14:  972:  for (size_t i = 0; i < (sizeof kLeapYearTable) / (sizeof kLeapYearTable[0]);
 branch  0 taken 93%
 branch  1 taken 7% (fallthrough)
         -:  973:       ++i) {
-       26:  974:    const int y = kLeapYearTable[i].year;
-       26:  975:    const int m = kLeapYearTable[i].leap_day.month;
-       26:  976:    const int d = kLeapYearTable[i].leap_day.day;
-       26:  977:    const int n = kLeapYearTable[i].days;
+       13:  974:    const int y = kLeapYearTable[i].year;
+       13:  975:    const int m = kLeapYearTable[i].leap_day.month;
+       13:  976:    const int d = kLeapYearTable[i].leap_day.day;
+       13:  977:    const int n = kLeapYearTable[i].days;
         -:  978:
         -:  979:    // Tests incrementing through the leap day.
-       26:  980:    const civil_day feb28(y, 2, 28);
+       13:  980:    const civil_day feb28(y, 2, 28);
 call    0 returned 100%
-       26:  981:    const civil_day next_day = feb28 + 1;
+       13:  981:    const civil_day next_day = feb28 + 1;
 call    0 returned 100%
-       78:  982:    EXPECT_EQ(m, next_day.month());
+       39:  982:    EXPECT_EQ(m, next_day.month());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -7558,7 +7558,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-       78:  983:    EXPECT_EQ(d, next_day.day());
+       39:  983:    EXPECT_EQ(d, next_day.day());
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -7576,7 +7576,7 @@ call   12 never executed
         -:  985:    // Tests difference in days of leap years.
         -:  986:    const civil_year year(feb28);
         -:  987:    const civil_year next_year = year + 1;
-       78:  988:    EXPECT_EQ(n, civil_day(next_year) - civil_day(year));
+       39:  988:    EXPECT_EQ(n, civil_day(next_year) - civil_day(year));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7592,12 +7592,12 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
         -:  989:  }
-        2:  990:}
+        1:  990:}
         -:  991:
-function _ZN4cctz35CivilTime_FirstThursdayInMonth_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz35CivilTime_FirstThursdayInMonth_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz35CivilTime_FirstThursdayInMonth_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz35CivilTime_FirstThursdayInMonth_Test8TestBodyEv called 2 returned 100% blocks executed 34%
-       52:  992:TEST(CivilTime, FirstThursdayInMonth) {
+function _ZN4cctz35CivilTime_FirstThursdayInMonth_Test8TestBodyEv called 1 returned 100% blocks executed 34%
+       47:  992:TEST(CivilTime, FirstThursdayInMonth) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -7607,12 +7607,12 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  993:  const civil_day nov1(2014, 11, 1);
+        1:  993:  const civil_day nov1(2014, 11, 1);
 call    0 returned 100%
-        2:  994:  const civil_day thursday = prev_weekday(nov1, weekday::thursday) + 7;
+        1:  994:  const civil_day thursday = prev_weekday(nov1, weekday::thursday) + 7;
 call    0 returned 100%
 call    1 returned 100%
-        6:  995:  EXPECT_EQ("2014-11-06", Format(thursday));
+        3:  995:  EXPECT_EQ("2014-11-06", Format(thursday));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7631,9 +7631,9 @@ call   14 never executed
         -:  996:
         -:  997:  // Bonus: Date of Thanksgiving in the United States
         -:  998:  // Rule: Fourth Thursday of November
-        2:  999:  const civil_day thanksgiving = thursday + 7 * 3;
+        1:  999:  const civil_day thanksgiving = thursday + 7 * 3;
 call    0 returned 100%
-        6: 1000:  EXPECT_EQ("2014-11-27", Format(thanksgiving));
+        3: 1000:  EXPECT_EQ("2014-11-27", Format(thanksgiving));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7649,11 +7649,11 @@ branch 11 never executed
 call   12 never executed
 call   13 never executed
 call   14 never executed
-        2: 1001:}
+        1: 1001:}
         -: 1002:
-function _GLOBAL__sub_I_civil_time_test.cc called 23 returned 100% blocks executed 100%
-function _Z41__static_initialization_and_destruction_0ii called 23 returned 100% blocks executed 100%
-       69: 1003:}  // namespace cctz
+function _GLOBAL__sub_I_civil_time_test.cc called 22 returned 100% blocks executed 100%
+function _Z41__static_initialization_and_destruction_0ii called 22 returned 100% blocks executed 100%
+       66: 1003:}  // namespace cctz
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%

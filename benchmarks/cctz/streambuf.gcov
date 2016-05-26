@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/streambuf
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/civil_time_test.gcda
-        -:    0:Runs:23
+        -:    0:Runs:22
         -:    0:Programs:1
         -:    1:// Stream buffer classes -*- C++ -*-
         -:    2:
@@ -200,7 +200,7 @@
         -:  195:      /// Destructor deallocates no buffer space.
         -:  196:      virtual 
         -:  197:      ~basic_streambuf() 
-     1508:  198:      { }
+      754:  198:      { }
 call    0 returned 100%
         -:  199:
         -:  200:      // [27.5.2.2.1] locales

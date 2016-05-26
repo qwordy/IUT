@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_info.cc
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_info.gcda
-        -:    0:Runs:28
+        -:    0:Runs:27
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -55,8 +55,8 @@
         -:   50:
         -:   51:// Convert errnum to a message, using buf[buflen] if necessary.
         -:   52:// buf must be non-null, and buflen non-zero.
-function _ZN4cctz12_GLOBAL__N_16errmsgEiPcm called 4 returned 100% blocks executed 100%
-        4:   53:char* errmsg(int errnum, char* buf, size_t buflen) {
+function _ZN4cctz12_GLOBAL__N_16errmsgEiPcm called 2 returned 100% blocks executed 100%
+        2:   53:char* errmsg(int errnum, char* buf, size_t buflen) {
         -:   54:#if defined(_WIN32) || defined(_WIN64)
         -:   55:  strerror_s(buf, buflen, errnum);
         -:   56:  return buf;
@@ -67,14 +67,14 @@ function _ZN4cctz12_GLOBAL__N_16errmsgEiPcm called 4 returned 100% blocks execut
         -:   61:  strerror_r(errnum, buf, buflen);
         -:   62:  return buf;
         -:   63:#else
-        4:   64:  return strerror_r(errnum, buf, buflen);
+        2:   64:  return strerror_r(errnum, buf, buflen);
 call    0 returned 100%
         -:   65:#endif
         -:   66:}
         -:   67:
         -:   68:// Wrap the tzfile.h isleap() macro with an inline function, which will
         -:   69:// then have normal argument-passing semantics (i.e., single evaluation).
-  1031260:   70:inline bool IsLeap(int64_t year) { return isleap(year); }
+   528112:   70:inline bool IsLeap(int64_t year) { return isleap(year); }
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 never executed
@@ -212,40 +212,40 @@ branch 41 never executed
         -:  163:
         -:  164:// Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
         -:  165:// See http://howardhinnant.github.io/date_algorithms.html#days_from_civil.
-function _ZN4cctz12_GLOBAL__N_110DayOrdinalElii called 892789 returned 100% blocks executed 100%
-   892789:  166:int64_t DayOrdinal(int64_t year, int month, int day) {
-   892789:  167:  year -= (month <= 2 ? 1 : 0);
+function _ZN4cctz12_GLOBAL__N_110DayOrdinalElii called 457210 returned 100% blocks executed 100%
+   457210:  166:int64_t DayOrdinal(int64_t year, int month, int day) {
+   457210:  167:  year -= (month <= 2 ? 1 : 0);
 branch  0 taken 98% (fallthrough)
 branch  1 taken 2%
-   892789:  168:  const int64_t era = (year >= 0 ? year : year - 399) / 400;
+   457210:  168:  const int64_t era = (year >= 0 ? year : year - 399) / 400;
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
-   892789:  169:  const int yoe = static_cast<int>(year - era * 400);
-   892789:  170:  const int doy = (153 * (month + (month > 2 ? -3 : 9)) + 2) / 5 + day - 1;
+   457210:  169:  const int yoe = static_cast<int>(year - era * 400);
+   457210:  170:  const int doy = (153 * (month + (month > 2 ? -3 : 9)) + 2) / 5 + day - 1;
 branch  0 taken 2% (fallthrough)
 branch  1 taken 98%
-   892789:  171:  const int doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
-   892789:  172:  return era * 146097 + doe - 719468;  // shift epoch to 1970-01-01
+   457210:  171:  const int doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+   457210:  172:  return era * 146097 + doe - 719468;  // shift epoch to 1970-01-01
         -:  173:}
         -:  174:
         -:  175:// Normalize (*valp + carry_in) so that [zero <= *valp < (zero + base)],
         -:  176:// returning multiples of base to carry out. "zero" must be >= 0, and
         -:  177:// base must be sufficiently large to avoid overflowing the return value.
         -:  178:// Inlining admits significant gains as base and zero are literals.
-function _ZN4cctz12_GLOBAL__N_114NormalizeFieldEiiPii called 4461660 returned 100% blocks executed 40%
-  4461660:  179:inline int NormalizeField(int base, int zero, int* valp, int carry_in) {
+function _ZN4cctz12_GLOBAL__N_114NormalizeFieldEiiPii called 2284880 returned 100% blocks executed 40%
+  2284880:  179:inline int NormalizeField(int base, int zero, int* valp, int carry_in) {
         -:  180:  int carry_out = 0;
-  4461660:  181:  int val = *valp;
-  4461660:  182:  if (zero != 0 && val < 0) {
+  2284880:  181:  int val = *valp;
+  2284880:  182:  if (zero != 0 && val < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  183:    val += base;
         -:  184:    carry_out -= 1;
         -:  185:  }
-  4461660:  186:  val -= zero;
-  4461660:  187:  carry_out += val / base;
-  4461660:  188:  int rem = val % base;
-  4461660:  189:  if (carry_in != 0) {
+  2284880:  186:  val -= zero;
+  2284880:  187:  carry_out += val / base;
+  2284880:  188:  int rem = val % base;
+  2284880:  189:  if (carry_in != 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  190:    carry_out += carry_in / base;
@@ -262,54 +262,54 @@ branch  1 never executed
     #####:  197:      rem -= base;
         -:  198:    }
         -:  199:  }
-  4461660:  200:  if (rem < 0) {
+  2284880:  200:  if (rem < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  201:    carry_out -= 1;
     #####:  202:    rem += base;
         -:  203:  }
-  4461660:  204:  *valp = rem + zero;
-  4461660:  205:  return carry_out;
+  2284880:  204:  *valp = rem + zero;
+  2284880:  205:  return carry_out;
         -:  206:}
         -:  207:
         -:  208:// Multi-byte, numeric values are encoded using a MSB first,
         -:  209:// twos-complement representation. These helpers decode, from
         -:  210:// the given address, 4-byte and 8-byte values respectively.
-function _ZN4cctz12_GLOBAL__N_18Decode32EPKc called 20587 returned 100% blocks executed 100%
-    20587:  211:int32_t Decode32(const char* cp) {
+function _ZN4cctz12_GLOBAL__N_18Decode32EPKc called 10439 returned 100% blocks executed 100%
+    10439:  211:int32_t Decode32(const char* cp) {
         -:  212:  uint32_t v = 0;
-   102935:  213:  for (int i = 0; i != (32 / 8); ++i)
+    52195:  213:  for (int i = 0; i != (32 / 8); ++i)
 branch  0 taken 80%
 branch  1 taken 20% (fallthrough)
-    82348:  214:    v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
-    20587:  215:  if ((v & ~(UINT32_MAX >> 1)) == 0) return v;
+    41756:  214:    v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
+    10439:  215:  if ((v & ~(UINT32_MAX >> 1)) == 0) return v;
         -:  216:  return -static_cast<int32_t>(~v) - 1;
         -:  217:}
         -:  218:
-function _ZN4cctz12_GLOBAL__N_18Decode64EPKc called 80510 returned 100% blocks executed 100%
-    80510:  219:int64_t Decode64(const char* cp) {
+function _ZN4cctz12_GLOBAL__N_18Decode64EPKc called 41254 returned 100% blocks executed 100%
+    41254:  219:int64_t Decode64(const char* cp) {
         -:  220:  uint64_t v = 0;
-   724590:  221:  for (int i = 0; i != (64 / 8); ++i)
+   371286:  221:  for (int i = 0; i != (64 / 8); ++i)
 branch  0 taken 89%
 branch  1 taken 11% (fallthrough)
-   644080:  222:    v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
-    80510:  223:  if ((v & ~(UINT64_MAX >> 1)) == 0) return v;
+   330032:  222:    v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
+    41254:  223:  if ((v & ~(UINT64_MAX >> 1)) == 0) return v;
         -:  224:  return -static_cast<int64_t>(~v) - 1;
         -:  225:}
         -:  226:
         -:  227:// Generate a year-relative offset for a PosixTransition.
-function _ZN4cctz12_GLOBAL__N_111TransOffsetEbiRKNS_15PosixTransitionE called 365600 returned 100% blocks executed 89%
-   365600:  228:int64_t TransOffset(bool leap_year, int jan1_weekday,
+function _ZN4cctz12_GLOBAL__N_111TransOffsetEbiRKNS_15PosixTransitionE called 187200 returned 100% blocks executed 89%
+   187200:  228:int64_t TransOffset(bool leap_year, int jan1_weekday,
         -:  229:                    const PosixTransition& pt) {
         -:  230:  int days = 0;
-   365600:  231:  switch (pt.date.fmt) {
+   187200:  231:  switch (pt.date.fmt) {
 branch  0 taken 1%
 branch  1 taken 0%
 branch  2 taken 99%
 branch  3 taken 0%
         -:  232:    case PosixTransition::J: {
-     3200:  233:      days = pt.date.j.day;
-     3200:  234:      if (!leap_year || days < kMonthOffsets[1][TM_MARCH + 1]) days -= 1;
+     1600:  233:      days = pt.date.j.day;
+     1600:  234:      if (!leap_year || days < kMonthOffsets[1][TM_MARCH + 1]) days -= 1;
 branch  0 taken 24% (fallthrough)
 branch  1 taken 76%
 branch  2 taken 0% (fallthrough)
@@ -321,72 +321,72 @@ branch  3 taken 100%
     #####:  239:      break;
         -:  240:    }
         -:  241:    case PosixTransition::M: {
-   362400:  242:      const bool last_week = (pt.date.m.week == 5);
-   362400:  243:      days = kMonthOffsets[leap_year][pt.date.m.month + last_week];
-   362400:  244:      const int weekday = (jan1_weekday + days) % DAYSPERWEEK;
-   362400:  245:      if (last_week) {
+   185600:  242:      const bool last_week = (pt.date.m.week == 5);
+   185600:  243:      days = kMonthOffsets[leap_year][pt.date.m.month + last_week];
+   185600:  244:      const int weekday = (jan1_weekday + days) % DAYSPERWEEK;
+   185600:  245:      if (last_week) {
 branch  0 taken 42% (fallthrough)
 branch  1 taken 58%
         -:  246:        days -=
-   153600:  247:            (weekday + DAYSPERWEEK - 1 - pt.date.m.weekday) % DAYSPERWEEK + 1;
+    77600:  247:            (weekday + DAYSPERWEEK - 1 - pt.date.m.weekday) % DAYSPERWEEK + 1;
         -:  248:      } else {
-   208800:  249:        days += (pt.date.m.weekday + DAYSPERWEEK - weekday) % DAYSPERWEEK;
-   208800:  250:        days += (pt.date.m.week - 1) * DAYSPERWEEK;
+   108000:  249:        days += (pt.date.m.weekday + DAYSPERWEEK - weekday) % DAYSPERWEEK;
+   108000:  250:        days += (pt.date.m.week - 1) * DAYSPERWEEK;
         -:  251:      }
         -:  252:      break;
         -:  253:    }
         -:  254:  }
-   365600:  255:  return (days * SECSPERDAY) + pt.time.offset;
+   187200:  255:  return (days * SECSPERDAY) + pt.time.offset;
         -:  256:}
         -:  257:
         -:  258:inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {
         -:  259:  TimeInfo ti;
-       72:  260:  ti.pre = ti.trans = ti.post = FromUnixSeconds(unix_time);
-       72:  261:  ti.kind = time_zone::civil_lookup::UNIQUE;
-       72:  262:  ti.normalized = normalized;
+       36:  260:  ti.pre = ti.trans = ti.post = FromUnixSeconds(unix_time);
+       36:  261:  ti.kind = time_zone::civil_lookup::UNIQUE;
+       36:  262:  ti.normalized = normalized;
         -:  263:  return ti;
         -:  264:}
         -:  265:
         -:  266:inline TimeInfo MakeSkipped(const Transition& tr, const DateTime& dt,
         -:  267:                            bool normalized) {
         -:  268:  TimeInfo ti;
-        8:  269:  ti.pre = FromUnixSeconds(tr.unix_time - 1 + (dt - tr.prev_date_time));
-        4:  270:  ti.trans = FromUnixSeconds(tr.unix_time);
-        4:  271:  ti.post = FromUnixSeconds(tr.unix_time - (tr.date_time - dt));
-        4:  272:  ti.kind = time_zone::civil_lookup::SKIPPED;
-        4:  273:  ti.normalized = normalized;
+        4:  269:  ti.pre = FromUnixSeconds(tr.unix_time - 1 + (dt - tr.prev_date_time));
+        2:  270:  ti.trans = FromUnixSeconds(tr.unix_time);
+        2:  271:  ti.post = FromUnixSeconds(tr.unix_time - (tr.date_time - dt));
+        2:  272:  ti.kind = time_zone::civil_lookup::SKIPPED;
+        2:  273:  ti.normalized = normalized;
         -:  274:  return ti;
         -:  275:}
         -:  276:
         -:  277:inline TimeInfo MakeRepeated(const Transition& tr, const DateTime& dt,
         -:  278:                             bool normalized) {
         -:  279:  TimeInfo ti;
-       20:  280:  ti.pre = FromUnixSeconds(tr.unix_time - 1 - (tr.prev_date_time - dt));
-       10:  281:  ti.trans = FromUnixSeconds(tr.unix_time);
-       10:  282:  ti.post = FromUnixSeconds(tr.unix_time + (dt - tr.date_time));
-       10:  283:  ti.kind = time_zone::civil_lookup::REPEATED;
-       10:  284:  ti.normalized = normalized;
+       10:  280:  ti.pre = FromUnixSeconds(tr.unix_time - 1 - (tr.prev_date_time - dt));
+        5:  281:  ti.trans = FromUnixSeconds(tr.unix_time);
+        5:  282:  ti.post = FromUnixSeconds(tr.unix_time + (dt - tr.date_time));
+        5:  283:  ti.kind = time_zone::civil_lookup::REPEATED;
+        5:  284:  ti.normalized = normalized;
         -:  285:  return ti;
         -:  286:}
         -:  287:
         -:  288:}  // namespace
         -:  289:
         -:  290:// Normalize from individual date/time fields.
-function _ZN4cctz8DateTime9NormalizeEliiiii called 892332 returned 100% blocks executed 34%
-   892332:  291:bool DateTime::Normalize(int64_t year, int mon, int day,
+function _ZN4cctz8DateTime9NormalizeEliiiii called 456976 returned 100% blocks executed 34%
+   456976:  291:bool DateTime::Normalize(int64_t year, int mon, int day,
         -:  292:                         int hour, int min, int sec) {
-   892332:  293:  int min_carry = NormalizeField(SECSPERMIN, 0, &sec, 0);
+   456976:  293:  int min_carry = NormalizeField(SECSPERMIN, 0, &sec, 0);
 call    0 returned 100%
-   892332:  294:  int hour_carry = NormalizeField(MINSPERHOUR, 0, &min, min_carry);
+   456976:  294:  int hour_carry = NormalizeField(MINSPERHOUR, 0, &min, min_carry);
 call    0 returned 100%
-   892332:  295:  int day_carry = NormalizeField(HOURSPERDAY, 0, &hour, hour_carry);
+   456976:  295:  int day_carry = NormalizeField(HOURSPERDAY, 0, &hour, hour_carry);
 call    0 returned 100%
-   892332:  296:  int year_carry = NormalizeField(MONSPERYEAR, 1, &mon, 0);
+   456976:  296:  int year_carry = NormalizeField(MONSPERYEAR, 1, &mon, 0);
 call    0 returned 100%
-   892332:  297:  bool normalized = min_carry || hour_carry || day_carry || year_carry;
+   456976:  297:  bool normalized = min_carry || hour_carry || day_carry || year_carry;
         -:  298:
         -:  299:  // Normalize the number of days within a 400-year (146097-day) period.
-   892332:  300:  if (int c4_carry = NormalizeField(146097, 1, &day, day_carry)) {
+   456976:  300:  if (int c4_carry = NormalizeField(146097, 1, &day, day_carry)) {
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -397,17 +397,17 @@ branch  2 taken 100%
         -:  305:  // Extract a [0:399] year calendrically equivalent to (year + year_carry)
         -:  306:  // from that sum in order to simplify year/day normalization and to defer
         -:  307:  // the possibility of int64_t overflow until the final stage.
-   892332:  308:  int eyear = year % 400;
-   892332:  309:  if (year_carry != 0) { eyear += year_carry; eyear %= 400; }
+   456976:  308:  int eyear = year % 400;
+   456976:  309:  if (year_carry != 0) { eyear += year_carry; eyear %= 400; }
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
-   892332:  310:  if (eyear < 0) eyear += 400;
+   456976:  310:  if (eyear < 0) eyear += 400;
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
-   892332:  311:  year_carry -= eyear;
+   456976:  311:  year_carry -= eyear;
         -:  312:
-   892332:  313:  int orig_day = day;
-   892332:  314:  if (day > DAYSPERNYEAR) {
+   456976:  313:  int orig_day = day;
+   456976:  314:  if (day > DAYSPERNYEAR) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  315:    eyear += (mon > 2 ? 1 : 0);
@@ -449,8 +449,8 @@ branch  0 never executed
 branch  1 never executed
         -:  336:  }
         -:  337:  // Handle days within one year.
-   892332:  338:  bool leap_year = IsLeap(eyear);
-   892332:  339:  for (int mdays = kDaysPerMonth[leap_year][mon]; day > mdays;
+   456976:  338:  bool leap_year = IsLeap(eyear);
+   456976:  339:  for (int mdays = kDaysPerMonth[leap_year][mon]; day > mdays;
 branch  0 taken 0%
 branch  1 taken 100% (fallthrough)
     #####:  340:       day -= mdays, mdays = kDaysPerMonth[leap_year][mon]) {
@@ -458,87 +458,87 @@ branch  1 taken 100% (fallthrough)
 branch  0 never executed
 branch  1 never executed
         -:  342:  }
-   892332:  343:  if (day != orig_day) normalized = true;
+   456976:  343:  if (day != orig_day) normalized = true;
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  344:
         -:  345:  // Add the updated eyear back into (year + year_carry).
-   892332:  346:  year_carry += eyear;
+   456976:  346:  year_carry += eyear;
         -:  347:
         -:  348:  // Finally, set the DateTime offset.
-   892332:  349:  offset = DayOrdinal(year + year_carry, mon, day);
+   456976:  349:  offset = DayOrdinal(year + year_carry, mon, day);
 call    0 returned 100%
-   892332:  350:  if (offset < 0) {
+   456976:  350:  if (offset < 0) {
 branch  0 taken 4% (fallthrough)
 branch  1 taken 96%
-    36964:  351:    offset += 1;
-    36964:  352:    offset *= SECSPERHOUR * HOURSPERDAY;
-    36964:  353:    offset += hour * SECSPERHOUR + min * SECSPERMIN + sec;
-    36964:  354:    offset -= SECSPERHOUR * HOURSPERDAY;
+    19014:  351:    offset += 1;
+    19014:  352:    offset *= SECSPERHOUR * HOURSPERDAY;
+    19014:  353:    offset += hour * SECSPERHOUR + min * SECSPERMIN + sec;
+    19014:  354:    offset -= SECSPERHOUR * HOURSPERDAY;
         -:  355:  } else {
-   855368:  356:    offset *= SECSPERHOUR * HOURSPERDAY;
-   855368:  357:    offset += hour * SECSPERHOUR + min * SECSPERMIN + sec;
+   437962:  356:    offset *= SECSPERHOUR * HOURSPERDAY;
+   437962:  357:    offset += hour * SECSPERHOUR + min * SECSPERMIN + sec;
         -:  358:  }
-   892332:  359:  return normalized;
+   456976:  359:  return normalized;
         -:  360:}
         -:  361:
         -:  362:// Assign from a Breakdown, created using a TimeZoneInfo timestamp.
-function _ZN4cctz8DateTime6AssignERKNS_9BreakdownE called 892246 returned 100% blocks executed 100%
-   892246:  363:inline void DateTime::Assign(const Breakdown& bd) {
-   892246:  364:  Normalize(bd.year, bd.month, bd.day, bd.hour, bd.minute, bd.second);
+function _ZN4cctz8DateTime6AssignERKNS_9BreakdownE called 456933 returned 100% blocks executed 100%
+   456933:  363:inline void DateTime::Assign(const Breakdown& bd) {
+   456933:  364:  Normalize(bd.year, bd.month, bd.day, bd.hour, bd.minute, bd.second);
 call    0 returned 100%
-   892246:  365:}
+   456933:  365:}
         -:  366:
         -:  367:// What (no leap-seconds) UTC+seconds zoneinfo would look like.
-function _ZN4cctz12TimeZoneInfo17ResetToBuiltinUTCEi called 26 returned 100% blocks executed 91%
-       26:  368:void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {
-       26:  369:  transition_types_.resize(1);
+function _ZN4cctz12TimeZoneInfo17ResetToBuiltinUTCEi called 25 returned 100% blocks executed 91%
+       25:  368:void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {
+       25:  369:  transition_types_.resize(1);
 call    0 returned 100%
-       26:  370:  transition_types_[0].utc_offset = seconds;
-       26:  371:  transition_types_[0].is_dst = false;
-       26:  372:  transition_types_[0].abbr_index = 0;
-       26:  373:  transitions_.resize(1);
+       25:  370:  transition_types_[0].utc_offset = seconds;
+       25:  371:  transition_types_[0].is_dst = false;
+       25:  372:  transition_types_[0].abbr_index = 0;
+       25:  373:  transitions_.resize(1);
 call    0 returned 100%
-       26:  374:  transitions_[0].unix_time = -(1LL << 59);  // zic "BIG_BANG"
-       26:  375:  transitions_[0].type_index = 0;
+       25:  374:  transitions_[0].unix_time = -(1LL << 59);  // zic "BIG_BANG"
+       25:  375:  transitions_[0].type_index = 0;
         -:  376:  transitions_[0].date_time.Assign(
-       78:  377:      LocalTime(transitions_[0].unix_time, transition_types_[0]));
+       75:  377:      LocalTime(transitions_[0].unix_time, transition_types_[0]));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
-       26:  378:  transitions_[0].prev_date_time = transitions_[0].date_time;
-       26:  379:  transitions_[0].prev_date_time.offset -= 1;
-       26:  380:  default_transition_type_ = 0;
-       26:  381:  abbreviations_ = "UTC";  // TODO: Handle non-zero offset.
-       26:  382:  abbreviations_.append(1, '\0');  // add NUL
+       25:  378:  transitions_[0].prev_date_time = transitions_[0].date_time;
+       25:  379:  transitions_[0].prev_date_time.offset -= 1;
+       25:  380:  default_transition_type_ = 0;
+       25:  381:  abbreviations_ = "UTC";  // TODO: Handle non-zero offset.
+       25:  382:  abbreviations_.append(1, '\0');  // add NUL
 call    0 returned 100%
-       26:  383:  future_spec_.clear();  // never needed for a fixed-offset zone
-       26:  384:  extended_ = false;
-       26:  385:}
+       25:  383:  future_spec_.clear();  // never needed for a fixed-offset zone
+       25:  384:  extended_ = false;
+       25:  385:}
         -:  386:
         -:  387:// Builds the in-memory header using the raw bytes from the file.
-function _ZN4cctz12TimeZoneInfo6Header5BuildERK6tzhead called 2360 returned 100% blocks executed 100%
-     2360:  388:void TimeZoneInfo::Header::Build(const tzhead& tzh) {
-     2360:  389:  timecnt = Decode32(tzh.tzh_timecnt);
+function _ZN4cctz12TimeZoneInfo6Header5BuildERK6tzhead called 1198 returned 100% blocks executed 100%
+     1198:  388:void TimeZoneInfo::Header::Build(const tzhead& tzh) {
+     1198:  389:  timecnt = Decode32(tzh.tzh_timecnt);
 call    0 returned 100%
-     2360:  390:  typecnt = Decode32(tzh.tzh_typecnt);
+     1198:  390:  typecnt = Decode32(tzh.tzh_typecnt);
 call    0 returned 100%
-     2360:  391:  charcnt = Decode32(tzh.tzh_charcnt);
+     1198:  391:  charcnt = Decode32(tzh.tzh_charcnt);
 call    0 returned 100%
-     2360:  392:  leapcnt = Decode32(tzh.tzh_leapcnt);
+     1198:  392:  leapcnt = Decode32(tzh.tzh_leapcnt);
 call    0 returned 100%
-     2360:  393:  ttisstdcnt = Decode32(tzh.tzh_ttisstdcnt);
+     1198:  393:  ttisstdcnt = Decode32(tzh.tzh_ttisstdcnt);
 call    0 returned 100%
-     2360:  394:  ttisgmtcnt = Decode32(tzh.tzh_ttisgmtcnt);
+     1198:  394:  ttisgmtcnt = Decode32(tzh.tzh_ttisgmtcnt);
 call    0 returned 100%
-     2360:  395:}
+     1198:  395:}
         -:  396:
-function _ZNK4cctz12TimeZoneInfo15CheckTransitionERKSsRKNS_14TransitionTypeEibS2_ called 1637 returned 100% blocks executed 30%
-     1637:  397:void TimeZoneInfo::CheckTransition(const std::string& name,
+function _ZNK4cctz12TimeZoneInfo15CheckTransitionERKSsRKNS_14TransitionTypeEibS2_ called 833 returned 100% blocks executed 30%
+      833:  397:void TimeZoneInfo::CheckTransition(const std::string& name,
         -:  398:                                   const TransitionType& tt, int32_t offset,
         -:  399:                                   bool is_dst, const std::string& abbr) const {
-     3274:  400:  if (tt.utc_offset != offset || tt.is_dst != is_dst ||
+     1666:  400:  if (tt.utc_offset != offset || tt.is_dst != is_dst ||
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
@@ -547,7 +547,7 @@ branch  4 taken 0% (fallthrough)
 branch  5 taken 100%
 branch  6 taken 0% (fallthrough)
 branch  7 taken 100%
-     1637:  401:      &abbreviations_[tt.abbr_index] != abbr) {
+      833:  401:      &abbreviations_[tt.abbr_index] != abbr) {
     #####:  402:    std::clog << name << ": Transition"
 call    0 never executed
     #####:  403:              << " offset=" << tt.utc_offset << "/"
@@ -565,74 +565,74 @@ call    1 never executed
 call    0 never executed
 call    1 never executed
         -:  407:  }
-     1637:  408:}
+      833:  408:}
         -:  409:
         -:  410:// How many bytes of data are associated with this header. The result
         -:  411:// depends upon whether this is a section with 4-byte or 8-byte times.
-function _ZNK4cctz12TimeZoneInfo6Header10DataLengthEm called 2360 returned 100% blocks executed 100%
-     2360:  412:size_t TimeZoneInfo::Header::DataLength(size_t time_len) const {
+function _ZNK4cctz12TimeZoneInfo6Header10DataLengthEm called 1198 returned 100% blocks executed 100%
+     1198:  412:size_t TimeZoneInfo::Header::DataLength(size_t time_len) const {
         -:  413:  size_t len = 0;
-     2360:  414:  len += (time_len + 1) * timecnt;  // unix_time + type_index
-     2360:  415:  len += (4 + 1 + 1) * typecnt;     // utc_offset + is_dst + abbr_index
-     2360:  416:  len += 1 * charcnt;               // abbreviations
-     2360:  417:  len += (time_len + 4) * leapcnt;  // leap-time + TAI-UTC
-     2360:  418:  len += 1 * ttisstdcnt;            // UTC/local indicators
-     2360:  419:  len += 1 * ttisgmtcnt;            // standard/wall indicators
-     2360:  420:  return len;
+     1198:  414:  len += (time_len + 1) * timecnt;  // unix_time + type_index
+     1198:  415:  len += (4 + 1 + 1) * typecnt;     // utc_offset + is_dst + abbr_index
+     1198:  416:  len += 1 * charcnt;               // abbreviations
+     1198:  417:  len += (time_len + 4) * leapcnt;  // leap-time + TAI-UTC
+     1198:  418:  len += 1 * ttisstdcnt;            // UTC/local indicators
+     1198:  419:  len += 1 * ttisgmtcnt;            // standard/wall indicators
+     1198:  420:  return len;
         -:  421:}
         -:  422:
-function _ZN4cctz12TimeZoneInfo4LoadERKSsP8_IO_FILE called 1182 returned 100% blocks executed 84%
-     1182:  423:bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {
+function _ZN4cctz12TimeZoneInfo4LoadERKSsP8_IO_FILE called 600 returned 100% blocks executed 84%
+      600:  423:bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {
         -:  424:  // Read and validate the header.
         -:  425:  tzhead tzh;
-     1182:  426:  if (fread(&tzh, 1, sizeof tzh, fp) != sizeof tzh)
+      600:  426:  if (fread(&tzh, 1, sizeof tzh, fp) != sizeof tzh)
 call    0 returned 100%
 branch  1 taken 99% (fallthrough)
 branch  2 taken 1%
         -:  427:    return false;
-     1180:  428:  if (strncmp(tzh.tzh_magic, TZ_MAGIC, sizeof(tzh.tzh_magic)) != 0)
+      599:  428:  if (strncmp(tzh.tzh_magic, TZ_MAGIC, sizeof(tzh.tzh_magic)) != 0)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  429:    return false;
         -:  430:  Header hdr;
-     1180:  431:  hdr.Build(tzh);
+      599:  431:  hdr.Build(tzh);
 call    0 returned 100%
         -:  432:  size_t time_len = 4;
-     1180:  433:  if (tzh.tzh_version[0] != '\0') {
+      599:  433:  if (tzh.tzh_version[0] != '\0') {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  434:    // Skip the 4-byte data.
-     1180:  435:    if (fseek(fp, static_cast<long>(hdr.DataLength(time_len)), SEEK_CUR) != 0)
+      599:  435:    if (fseek(fp, static_cast<long>(hdr.DataLength(time_len)), SEEK_CUR) != 0)
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
         -:  436:      return false;
         -:  437:    // Read and validate the header for the 8-byte data.
-     1180:  438:    if (fread(&tzh, 1, sizeof tzh, fp) != sizeof tzh)
+      599:  438:    if (fread(&tzh, 1, sizeof tzh, fp) != sizeof tzh)
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%
         -:  439:      return false;
-     1180:  440:    if (strncmp(tzh.tzh_magic, TZ_MAGIC, sizeof(tzh.tzh_magic)) != 0)
+      599:  440:    if (strncmp(tzh.tzh_magic, TZ_MAGIC, sizeof(tzh.tzh_magic)) != 0)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  441:      return false;
-     1180:  442:    if (tzh.tzh_version[0] == '\0')
+      599:  442:    if (tzh.tzh_version[0] == '\0')
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  443:      return false;
-     1180:  444:    hdr.Build(tzh);
+      599:  444:    hdr.Build(tzh);
 call    0 returned 100%
         -:  445:    time_len = 8;
         -:  446:  }
-     1180:  447:  if (hdr.timecnt < 0 || hdr.typecnt <= 0)
+      599:  447:  if (hdr.timecnt < 0 || hdr.typecnt <= 0)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
         -:  448:    return false;
-     1180:  449:  if (hdr.leapcnt != 0) {
+      599:  449:  if (hdr.leapcnt != 0) {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  450:    // This code assumes 60-second minutes so we do not want
@@ -641,13 +641,13 @@ branch  1 taken 0%
         -:  453:    // so currently we simply reject such data.
         -:  454:    return false;
         -:  455:  }
-     1180:  456:  if (hdr.ttisstdcnt != 0 && hdr.ttisstdcnt != hdr.typecnt)
+      599:  456:  if (hdr.ttisstdcnt != 0 && hdr.ttisstdcnt != hdr.typecnt)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
         -:  457:    return false;
-     1180:  458:  if (hdr.ttisgmtcnt != 0 && hdr.ttisgmtcnt != hdr.typecnt)
+      599:  458:  if (hdr.ttisgmtcnt != 0 && hdr.ttisgmtcnt != hdr.typecnt)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
@@ -655,11 +655,11 @@ branch  3 taken 0%
         -:  459:    return false;
         -:  460:
         -:  461:  // Read the data into a local buffer.
-     1180:  462:  size_t len = hdr.DataLength(time_len);
+      599:  462:  size_t len = hdr.DataLength(time_len);
 call    0 returned 100%
-     2360:  463:  std::vector<char> tbuf(len);
+     1198:  463:  std::vector<char> tbuf(len);
 call    0 returned 100%
-     1180:  464:  if (fread(tbuf.data(), 1, len, fp) != len)
+      599:  464:  if (fread(tbuf.data(), 1, len, fp) != len)
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -669,55 +669,55 @@ branch  4 taken 0%
         -:  466:  const char* bp = tbuf.data();
         -:  467:
         -:  468:  // Decode and validate the transitions.
-     1180:  469:  transitions_.resize(hdr.timecnt);
+      599:  469:  transitions_.resize(hdr.timecnt);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-    80510:  470:  for (int32_t i = 0; i != hdr.timecnt; ++i) {
+    41254:  470:  for (int32_t i = 0; i != hdr.timecnt; ++i) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-   161020:  471:    transitions_[i].unix_time = (time_len == 4) ? Decode32(bp) : Decode64(bp);
+    82508:  471:    transitions_[i].unix_time = (time_len == 4) ? Decode32(bp) : Decode64(bp);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
 call    3 returned 100%
-    80510:  472:    bp += time_len;
-    80510:  473:    if (i != 0) {
+    41254:  472:    bp += time_len;
+    41254:  473:    if (i != 0) {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
         -:  474:      // Check that the transitions are ordered by time (as zic guarantees).
-   158848:  475:      if (!Transition::ByUnixTime()(transitions_[i - 1], transitions_[i]))
+    81406:  475:      if (!Transition::ByUnixTime()(transitions_[i - 1], transitions_[i]))
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  476:        return false;  // out of order
         -:  477:    }
         -:  478:  }
         -:  479:  bool seen_type_0 = false;
-    80510:  480:  for (int32_t i = 0; i != hdr.timecnt; ++i) {
+    41254:  480:  for (int32_t i = 0; i != hdr.timecnt; ++i) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-   161020:  481:    transitions_[i].type_index = (static_cast<uint8_t>(*bp++) & 0xff);
-    80510:  482:    if (transitions_[i].type_index >= hdr.typecnt)
+    82508:  481:    transitions_[i].type_index = (static_cast<uint8_t>(*bp++) & 0xff);
+    41254:  482:    if (transitions_[i].type_index >= hdr.typecnt)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  483:      return false;
-    80510:  484:    if (transitions_[i].type_index == 0)
+    41254:  484:    if (transitions_[i].type_index == 0)
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
         -:  485:      seen_type_0 = true;
         -:  486:  }
         -:  487:
         -:  488:  // Decode and validate the transition types.
-     1180:  489:  transition_types_.resize(hdr.typecnt);
+      599:  489:  transition_types_.resize(hdr.typecnt);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-     6427:  490:  for (int32_t i = 0; i != hdr.typecnt; ++i) {
+     3251:  490:  for (int32_t i = 0; i != hdr.typecnt; ++i) {
 branch  0 taken 84%
 branch  1 taken 16% (fallthrough)
-    12854:  491:    transition_types_[i].utc_offset = Decode32(bp);
+     6502:  491:    transition_types_[i].utc_offset = Decode32(bp);
 call    0 returned 100%
-     6427:  492:    if (transition_types_[i].utc_offset >= SECSPERDAY ||
+     3251:  492:    if (transition_types_[i].utc_offset >= SECSPERDAY ||
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 100% (fallthrough)
@@ -727,27 +727,27 @@ branch  5 taken 0%
         -:  493:        transition_types_[i].utc_offset <= -SECSPERDAY)
         -:  494:      return false;
         -:  495:    bp += 4;
-     6427:  496:    transition_types_[i].is_dst = ((static_cast<uint8_t>(*bp++) & 0xff) != 0);
-     6427:  497:    transition_types_[i].abbr_index = (static_cast<uint8_t>(*bp++) & 0xff);
-     6427:  498:    if (transition_types_[i].abbr_index >= hdr.charcnt)
+     3251:  496:    transition_types_[i].is_dst = ((static_cast<uint8_t>(*bp++) & 0xff) != 0);
+     3251:  497:    transition_types_[i].abbr_index = (static_cast<uint8_t>(*bp++) & 0xff);
+     3251:  498:    if (transition_types_[i].abbr_index >= hdr.charcnt)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  499:      return false;
         -:  500:  }
         -:  501:
         -:  502:  // Determine the before-first-transition type.
-     1180:  503:  default_transition_type_ = 0;
-     1180:  504:  if (seen_type_0 && hdr.timecnt != 0) {
+      599:  503:  default_transition_type_ = 0;
+      599:  504:  if (seen_type_0 && hdr.timecnt != 0) {
 branch  0 taken 2% (fallthrough)
 branch  1 taken 98%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0%
         -:  505:    uint8_t index = 0;
-       21:  506:    if (transition_types_[0].is_dst) {
-branch  0 taken 81% (fallthrough)
-branch  1 taken 19%
-       17:  507:      index = transitions_[0].type_index;
-       34:  508:      while (index != 0 && transition_types_[index].is_dst)
+       11:  506:    if (transition_types_[0].is_dst) {
+branch  0 taken 82% (fallthrough)
+branch  1 taken 18%
+        9:  507:      index = transitions_[0].type_index;
+       18:  508:      while (index != 0 && transition_types_[index].is_dst)
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 never executed
@@ -756,22 +756,22 @@ branch  4 taken 0%
 branch  5 taken 100% (fallthrough)
     #####:  509:        --index;
         -:  510:    }
-       76:  511:    while (index != hdr.typecnt && transition_types_[index].is_dst)
+       40:  511:    while (index != hdr.typecnt && transition_types_[index].is_dst)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 branch  2 taken 55% (fallthrough)
 branch  3 taken 45%
 branch  4 taken 45%
 branch  5 taken 55% (fallthrough)
-       17:  512:      ++index;
-       21:  513:    if (index != hdr.typecnt)
+        9:  512:      ++index;
+       11:  513:    if (index != hdr.typecnt)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-       21:  514:      default_transition_type_ = index;
+       11:  514:      default_transition_type_ = index;
         -:  515:  }
         -:  516:
         -:  517:  // Copy all the abbreviations.
-     1180:  518:  abbreviations_.assign(bp, hdr.charcnt);
+      599:  518:  abbreviations_.assign(bp, hdr.charcnt);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -785,20 +785,20 @@ branch  2 taken 0% (throw)
         -:  526:  bp += 1 * hdr.ttisstdcnt;     // UTC/local indicators
         -:  527:  bp += 1 * hdr.ttisgmtcnt;     // standard/wall indicators
         -:  528:
-     1180:  529:  future_spec_.clear();
-     1180:  530:  if (tzh.tzh_version[0] != '\0') {
+      599:  529:  future_spec_.clear();
+      599:  530:  if (tzh.tzh_version[0] != '\0') {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  531:    // Snarf up the NL-enclosed future POSIX spec. Note
         -:  532:    // that version '3' files utilize an extended format.
-     1180:  533:    if (fgetc(fp) != '\n')
+      599:  533:    if (fgetc(fp) != '\n')
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
 branch  3 taken 100% (fallthrough)
 branch  4 taken 0%
         -:  534:      return false;
-    16464:  535:    for (int c = fgetc(fp); c != '\n'; c = fgetc(fp)) {
+     8405:  535:    for (int c = fgetc(fp); c != '\n'; c = fgetc(fp)) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -807,11 +807,11 @@ branch  4 taken 100% (fallthrough)
 branch  5 taken 0% (throw)
 branch  6 taken 93%
 branch  7 taken 7% (fallthrough)
-    15284:  536:      if (c == EOF)
+     7806:  536:      if (c == EOF)
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  537:        return false;
-    15284:  538:      future_spec_.push_back(static_cast<char>(c));
+     7806:  538:      future_spec_.push_back(static_cast<char>(c));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -822,12 +822,12 @@ branch  2 taken 0% (throw)
         -:  543:
         -:  544:  // Use the POSIX-TZ-environment-variable-style string to handle times
         -:  545:  // in years after the last transition stored in the zoneinfo data.
-     1180:  546:  extended_ = false;
-     1180:  547:  if (!future_spec_.empty()) {
+      599:  546:  extended_ = false;
+      599:  547:  if (!future_spec_.empty()) {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  548:    PosixTimeZone posix;
-     1180:  549:    if (!ParsePosixSpec(future_spec_, &posix)) {
+      599:  549:    if (!ParsePosixSpec(future_spec_, &posix)) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -840,28 +840,28 @@ branch  2 never executed
 call    3 never executed
 branch  4 never executed
 branch  5 never executed
-     1180:  551:    } else if (posix.dst_abbr.empty()) {  // std only
+      599:  551:    } else if (posix.dst_abbr.empty()) {  // std only
 branch  0 taken 61% (fallthrough)
 branch  1 taken 39%
         -:  552:      // The future specification should match the last/default transition,
         -:  553:      // and that means that handling the future will fall out naturally.
-      723:  554:      int index = default_transition_type_;
-     1352:  555:      if (hdr.timecnt != 0) index = transitions_[hdr.timecnt - 1].type_index;
+      365:  554:      int index = default_transition_type_;
+      682:  555:      if (hdr.timecnt != 0) index = transitions_[hdr.timecnt - 1].type_index;
 branch  0 taken 87% (fallthrough)
 branch  1 taken 13%
-      723:  556:      const TransitionType& tt(transition_types_[index]);
-      723:  557:      CheckTransition(name, tt, posix.std_offset, false, posix.std_abbr);
+      365:  556:      const TransitionType& tt(transition_types_[index]);
+      365:  557:      CheckTransition(name, tt, posix.std_offset, false, posix.std_abbr);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      457:  558:    } else if (hdr.timecnt < 2) {
+      234:  558:    } else if (hdr.timecnt < 2) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  559:      std::clog << name << ": Too few transitions for POSIX spec\n";
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-      914:  560:    } else if (transitions_[hdr.timecnt - 1].unix_time < 0) {
+      468:  560:    } else if (transitions_[hdr.timecnt - 1].unix_time < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  561:      std::clog << name << ": Old transitions for POSIX spec\n";
@@ -873,38 +873,38 @@ branch  2 never executed
         -:  564:      // future specification. Years beyond those can be handled by
         -:  565:      // mapping back to a cycle-equivalent year within that range.
         -:  566:      // zic(8) should probably do this so that we don't have to.
-      457:  567:      transitions_.resize(hdr.timecnt + 400 * 2);
+      234:  567:      transitions_.resize(hdr.timecnt + 400 * 2);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      457:  568:      extended_ = true;
+      234:  568:      extended_ = true;
         -:  569:
         -:  570:      // The future specification should match the last two transitions,
         -:  571:      // and those transitions should have different is_dst flags but be
         -:  572:      // in the same calendar year.
-      457:  573:      const Transition& tr0(transitions_[hdr.timecnt - 1]);
-      457:  574:      const Transition& tr1(transitions_[hdr.timecnt - 2]);
-      457:  575:      const TransitionType& tt0(transition_types_[tr0.type_index]);
-      457:  576:      const TransitionType& tt1(transition_types_[tr1.type_index]);
-      457:  577:      const TransitionType& spring(tt0.is_dst ? tt0 : tt1);
+      234:  573:      const Transition& tr0(transitions_[hdr.timecnt - 1]);
+      234:  574:      const Transition& tr1(transitions_[hdr.timecnt - 2]);
+      234:  575:      const TransitionType& tt0(transition_types_[tr0.type_index]);
+      234:  576:      const TransitionType& tt1(transition_types_[tr1.type_index]);
+      234:  577:      const TransitionType& spring(tt0.is_dst ? tt0 : tt1);
 branch  0 taken 84% (fallthrough)
 branch  1 taken 16%
-      457:  578:      const TransitionType& autumn(tt0.is_dst ? tt1 : tt0);
+      234:  578:      const TransitionType& autumn(tt0.is_dst ? tt1 : tt0);
 branch  0 taken 84% (fallthrough)
 branch  1 taken 16%
-      457:  579:      CheckTransition(name, spring, posix.dst_offset, true, posix.dst_abbr);
+      234:  579:      CheckTransition(name, spring, posix.dst_offset, true, posix.dst_abbr);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      457:  580:      CheckTransition(name, autumn, posix.std_offset, false, posix.std_abbr);
+      234:  580:      CheckTransition(name, autumn, posix.std_offset, false, posix.std_abbr);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      914:  581:      last_year_ = LocalTime(tr0.unix_time, tt0).year;
+      468:  581:      last_year_ = LocalTime(tr0.unix_time, tt0).year;
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      914:  582:      if (LocalTime(tr1.unix_time, tt1).year != last_year_) {
+      468:  582:      if (LocalTime(tr1.unix_time, tt1).year != last_year_) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -917,76 +917,76 @@ branch  2 never executed
         -:  584:      }
         -:  585:
         -:  586:      // Add the transitions to tr1 and back to tr0 for each extra year.
-      457:  587:      const PosixTransition& pt1(tt0.is_dst ? posix.dst_end : posix.dst_start);
+      234:  587:      const PosixTransition& pt1(tt0.is_dst ? posix.dst_end : posix.dst_start);
 branch  0 taken 84% (fallthrough)
 branch  1 taken 16%
-      457:  588:      const PosixTransition& pt0(tt0.is_dst ? posix.dst_start : posix.dst_end);
+      234:  588:      const PosixTransition& pt0(tt0.is_dst ? posix.dst_start : posix.dst_end);
 branch  0 taken 84% (fallthrough)
 branch  1 taken 16%
-      457:  589:      Transition* tr = &transitions_[hdr.timecnt];  // next trans to fill
-      457:  590:      const int64_t jan1_ord = DayOrdinal(last_year_, 1, 1);
+      234:  589:      Transition* tr = &transitions_[hdr.timecnt];  // next trans to fill
+      234:  590:      const int64_t jan1_ord = DayOrdinal(last_year_, 1, 1);
 call    0 returned 100%
-      457:  591:      int64_t jan1_time = jan1_ord * SECSPERDAY;
-      457:  592:      int jan1_weekday = (EPOCH_WDAY + jan1_ord) % DAYSPERWEEK;
-      457:  593:      if (jan1_weekday < 0) jan1_weekday += DAYSPERWEEK;
+      234:  591:      int64_t jan1_time = jan1_ord * SECSPERDAY;
+      234:  592:      int jan1_weekday = (EPOCH_WDAY + jan1_ord) % DAYSPERWEEK;
+      234:  593:      if (jan1_weekday < 0) jan1_weekday += DAYSPERWEEK;
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  594:      bool leap_year = IsLeap(last_year_);
-   183714:  595:      for (const int64_t limit = last_year_ + 400; last_year_ < limit;) {
+    94068:  595:      for (const int64_t limit = last_year_ + 400; last_year_ < limit;) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-   182800:  596:        last_year_ += 1;  // an additional year of generated transitions
-   182800:  597:        jan1_time += kSecPerYear[leap_year];
-   182800:  598:        jan1_weekday = (jan1_weekday + kDaysPerYear[leap_year]) % DAYSPERWEEK;
-   321271:  599:        leap_year = !leap_year && IsLeap(last_year_);
+    93600:  596:        last_year_ += 1;  // an additional year of generated transitions
+    93600:  597:        jan1_time += kSecPerYear[leap_year];
+    93600:  598:        jan1_weekday = (jan1_weekday + kDaysPerYear[leap_year]) % DAYSPERWEEK;
+   164502:  599:        leap_year = !leap_year && IsLeap(last_year_);
 branch  0 taken 76% (fallthrough)
 branch  1 taken 24%
 branch  2 taken 68% (fallthrough)
 branch  3 taken 32%
-   182800:  600:        const int64_t tr1_offset = TransOffset(leap_year, jan1_weekday, pt1);
+    93600:  600:        const int64_t tr1_offset = TransOffset(leap_year, jan1_weekday, pt1);
 call    0 returned 100%
-   182800:  601:        tr->unix_time = jan1_time + tr1_offset - tt0.utc_offset;
-   182800:  602:        tr++->type_index = tr1.type_index;
-   182800:  603:        const int64_t tr0_offset = TransOffset(leap_year, jan1_weekday, pt0);
+    93600:  601:        tr->unix_time = jan1_time + tr1_offset - tt0.utc_offset;
+    93600:  602:        tr++->type_index = tr1.type_index;
+    93600:  603:        const int64_t tr0_offset = TransOffset(leap_year, jan1_weekday, pt0);
 call    0 returned 100%
-   182800:  604:        tr->unix_time = jan1_time + tr0_offset - tt1.utc_offset;
-   182800:  605:        tr++->type_index = tr0.type_index;
+    93600:  604:        tr->unix_time = jan1_time + tr0_offset - tt1.utc_offset;
+    93600:  605:        tr++->type_index = tr0.type_index;
         -:  606:      }
-     1180:  607:    }
+      599:  607:    }
 call    0 returned 100%
 call    1 never executed
         -:  608:  }
         -:  609:
         -:  610:  // Compute the local civil time for each transition and the preceeding
         -:  611:  // second. These will be used for reverse conversions in MakeTimeInfo().
-     1180:  612:  const TransitionType* ttp = &transition_types_[default_transition_type_];
-   894580:  613:  for (size_t i = 0; i != transitions_.size(); ++i) {
+      599:  612:  const TransitionType* ttp = &transition_types_[default_transition_type_];
+   458106:  613:  for (size_t i = 0; i != transitions_.size(); ++i) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
         -:  614:    Transition& tr(transitions_[i]);
-   892220:  615:    tr.prev_date_time.Assign(LocalTime(tr.unix_time, *ttp));
+   456908:  615:    tr.prev_date_time.Assign(LocalTime(tr.unix_time, *ttp));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
 call    3 returned 100%
 branch  4 taken 100% (fallthrough)
 branch  5 taken 0% (throw)
-   446110:  616:    tr.prev_date_time.offset -= 1;
-   446110:  617:    ttp = &transition_types_[tr.type_index];
-   892220:  618:    tr.date_time.Assign(LocalTime(tr.unix_time, *ttp));
+   228454:  616:    tr.prev_date_time.offset -= 1;
+   228454:  617:    ttp = &transition_types_[tr.type_index];
+   456908:  618:    tr.date_time.Assign(LocalTime(tr.unix_time, *ttp));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
 call    3 returned 100%
 branch  4 taken 100% (fallthrough)
 branch  5 taken 0% (throw)
-   446110:  619:    if (i != 0) {
+   228454:  619:    if (i != 0) {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
         -:  620:      // Check that the transitions are ordered by date/time. Essentially
         -:  621:      // this means that an offset change cannot cross another such change.
         -:  622:      // No one does this in practice, and we depend on it in MakeTimeInfo().
-   890048:  623:      if (!Transition::ByDateTime()(transitions_[i - 1], tr))
+   455806:  623:      if (!Transition::ByDateTime()(transitions_[i - 1], tr))
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
         -:  624:        return false;  // out of order
@@ -999,26 +999,26 @@ branch  1 taken 0%
         -:  631:  local_time_hint_ = 0;
         -:  632:  time_local_hint_ = 0;
         -:  633:
-     1180:  634:  return true;
+      599:  634:  return true;
         -:  635:}
         -:  636:
-function _ZN4cctz12TimeZoneInfo4LoadERKSs called 1212 returned 100% blocks executed 81%
-     1212:  637:bool TimeZoneInfo::Load(const std::string& name) {
+function _ZN4cctz12TimeZoneInfo4LoadERKSs called 627 returned 100% blocks executed 81%
+      627:  637:bool TimeZoneInfo::Load(const std::string& name) {
         -:  638:  // We can ensure that the loading of UTC or any other fixed-offset
         -:  639:  // zone never fails because the simple, no-transition state can be
         -:  640:  // internally generated. Note that this depends on our choice to not
         -:  641:  // accept leap-second encoded ("right") zoneinfo.
-     1212:  642:  if (name == "UTC") {
-branch  0 taken 2% (fallthrough)
-branch  1 taken 98%
-       26:  643:    ResetToBuiltinUTC(0);
+      627:  642:  if (name == "UTC") {
+branch  0 taken 4% (fallthrough)
+branch  1 taken 96%
+       25:  643:    ResetToBuiltinUTC(0);
 call    0 returned 100%
         -:  644:    return true;
         -:  645:  }
         -:  646:
         -:  647:  // Map time-zone name to its machine-specific path.
         -:  648:  std::string path;
-     1186:  649:  if (name == "localtime") {
+      602:  649:  if (name == "localtime") {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  650:#if defined(_WIN32) || defined(_WIN64)
@@ -1033,7 +1033,7 @@ call    0 never executed
 branch  0 never executed
 branch  1 never executed
         -:  658:#endif
-     1186:  659:  } else if (!name.empty() && name[0] == '/') {
+      602:  659:  } else if (!name.empty() && name[0] == '/') {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
 branch  2 taken 100% (fallthrough)
@@ -1048,9 +1048,9 @@ branch  5 taken 100%
         -:  665:    path = tzdir ? tzdir : "/usr/share/zoneinfo";
         -:  666:    free(tzdir);
         -:  667:#else
-     1186:  668:    const char* tzdir = std::getenv("TZDIR");
+      602:  668:    const char* tzdir = std::getenv("TZDIR");
 call    0 returned 100%
-     1186:  669:    path = tzdir ? tzdir : "/usr/share/zoneinfo";
+      602:  669:    path = tzdir ? tzdir : "/usr/share/zoneinfo";
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  670:#endif
@@ -1064,25 +1064,25 @@ branch  1 taken 100%
         -:  678:  FILE* fp;
         -:  679:  if (fopen_s(&fp, path.c_str(), "rb") != 0) fp = nullptr;
         -:  680:#else
-     1186:  681:  FILE* fp = fopen(path.c_str(), "rb");
+      602:  681:  FILE* fp = fopen(path.c_str(), "rb");
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  682:#endif
-     1186:  683:  if (fp != nullptr) {
+      602:  683:  if (fp != nullptr) {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
-     1182:  684:    loaded = Load(name, fp);
+      600:  684:    loaded = Load(name, fp);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-     1182:  685:    fclose(fp);
+      600:  685:    fclose(fp);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  686:  } else {
         -:  687:    char ebuf[64];
-        8:  688:    std::clog << path << ": " << errmsg(errno, ebuf, sizeof ebuf) << "\n";
+        4:  688:    std::clog << path << ": " << errmsg(errno, ebuf, sizeof ebuf) << "\n";
 call    0 returned 100%
 call    1 returned 100%
 call    2 returned 100%
@@ -1099,31 +1099,31 @@ branch 10 taken 0% (throw)
         -:  691:}
         -:  692:
         -:  693:// BreakTime() translation for a particular transition type.
-function _ZNK4cctz12TimeZoneInfo9LocalTimeElRKNS_14TransitionTypeE called 893330 returned 100% blocks executed 90%
-   893330:  694:Breakdown TimeZoneInfo::LocalTime(int64_t unix_time,
+function _ZNK4cctz12TimeZoneInfo9LocalTimeElRKNS_14TransitionTypeE called 457486 returned 100% blocks executed 90%
+   457486:  694:Breakdown TimeZoneInfo::LocalTime(int64_t unix_time,
         -:  695:                                  const TransitionType& tt) const {
         -:  696:  Breakdown bd;
         -:  697:
-   893330:  698:  bd.year = EPOCH_YEAR;
+   457486:  698:  bd.year = EPOCH_YEAR;
         -:  699:  int64_t seconds = unix_time;
         -:  700:
         -:  701:  // Shift to a base year that is 400-year aligned.
         -:  702:  static_assert(EPOCH_YEAR == 1970, "Unexpected value for EPOCH_YEAR");
-   893330:  703:  if (seconds >= 0) {
+   457486:  703:  if (seconds >= 0) {
 branch  0 taken 96% (fallthrough)
 branch  1 taken 4%
-   856350:  704:    seconds -= 10957LL * SECSPERDAY;
-   856350:  705:    bd.year += 30;  // == 2000
+   438464:  704:    seconds -= 10957LL * SECSPERDAY;
+   438464:  705:    bd.year += 30;  // == 2000
         -:  706:  } else {
-    36980:  707:    seconds += (146097LL - 10957LL) * SECSPERDAY;
-    36980:  708:    bd.year -= 370;  // == 1600
+    19022:  707:    seconds += (146097LL - 10957LL) * SECSPERDAY;
+    19022:  708:    bd.year -= 370;  // == 1600
         -:  709:  }
         -:  710:
         -:  711:  // A civil time in "+offset" looks like (time+offset) in UTC.
-   893330:  712:  if (seconds >= 0) {
+   457486:  712:  if (seconds >= 0) {
 branch  0 taken 94% (fallthrough)
 branch  1 taken 6%
-   841876:  713:    if (tt.utc_offset > 0 && seconds > INT64_MAX - tt.utc_offset) {
+   431113:  713:    if (tt.utc_offset > 0 && seconds > INT64_MAX - tt.utc_offset) {
 branch  0 taken 46% (fallthrough)
 branch  1 taken 54%
 branch  2 taken 0% (fallthrough)
@@ -1132,7 +1132,7 @@ branch  3 taken 100%
     #####:  715:      bd.year += 400;
         -:  716:    }
         -:  717:  } else {
-    51454:  718:    if (tt.utc_offset < 0 && seconds < INT64_MIN - tt.utc_offset) {
+    26373:  718:    if (tt.utc_offset < 0 && seconds < INT64_MIN - tt.utc_offset) {
 branch  0 taken 45% (fallthrough)
 branch  1 taken 55%
 branch  2 taken 0% (fallthrough)
@@ -1141,75 +1141,75 @@ branch  3 taken 100%
     #####:  720:      bd.year -= 400;
         -:  721:    }
         -:  722:  }
-   893330:  723:  seconds += tt.utc_offset;
+   457486:  723:  seconds += tt.utc_offset;
         -:  724:
         -:  725:  // Handle years in chunks of 400/100/4/1.
-   893330:  726:  bd.year += 400 * (seconds / kSecPer400Years);
-   893330:  727:  seconds %= kSecPer400Years;
-   893330:  728:  if (seconds < 0) {
+   457486:  726:  bd.year += 400 * (seconds / kSecPer400Years);
+   457486:  727:  seconds %= kSecPer400Years;
+   457486:  728:  if (seconds < 0) {
 branch  0 taken 6% (fallthrough)
 branch  1 taken 94%
-    51440:  729:    seconds += kSecPer400Years;
-    51440:  730:    bd.year -= 400;
+    26366:  729:    seconds += kSecPer400Years;
+    26366:  730:    bd.year -= 400;
         -:  731:  }
         -:  732:  bool leap_year = true;  // 4-century aligned
         -:  733:  int64_t sec_per_100years = kSecPer100Years[leap_year];
-  2254178:  734:  while (seconds >= sec_per_100years) {
+  1154595:  734:  while (seconds >= sec_per_100years) {
 branch  0 taken 60%
 branch  1 taken 40% (fallthrough)
-  1360848:  735:    seconds -= sec_per_100years;
-  1360848:  736:    bd.year += 100;
+   697109:  735:    seconds -= sec_per_100years;
+   697109:  736:    bd.year += 100;
         -:  737:    leap_year = false;  // 1-century, non 4-century aligned
         -:  738:    sec_per_100years = kSecPer100Years[leap_year];
         -:  739:  }
-   893330:  740:  int32_t sec_per_4years = kSecPer4Years[leap_year];
- 12365728:  741:  while (seconds >= sec_per_4years) {
+   457486:  740:  int32_t sec_per_4years = kSecPer4Years[leap_year];
+  6333177:  741:  while (seconds >= sec_per_4years) {
 branch  0 taken 92%
 branch  1 taken 8% (fallthrough)
- 10579068:  742:    seconds -= sec_per_4years;
- 10579068:  743:    bd.year += 4;
+  5418205:  742:    seconds -= sec_per_4years;
+  5418205:  743:    bd.year += 4;
         -:  744:    leap_year = true;  // 4-year, non century aligned
         -:  745:    sec_per_4years = kSecPer4Years[leap_year];
         -:  746:  }
-   893330:  747:  int32_t sec_per_year = kSecPerYear[leap_year];
-  3124865:  748:  while (seconds >= sec_per_year) {
+   457486:  747:  int32_t sec_per_year = kSecPerYear[leap_year];
+  1600329:  748:  while (seconds >= sec_per_year) {
 branch  0 taken 60%
 branch  1 taken 40% (fallthrough)
-  1338205:  749:    seconds -= sec_per_year;
-  1338205:  750:    bd.year += 1;
+   685357:  749:    seconds -= sec_per_year;
+   685357:  750:    bd.year += 1;
         -:  751:    leap_year = false;  // non 4-year aligned
         -:  752:    sec_per_year = kSecPerYear[leap_year];
         -:  753:  }
         -:  754:
         -:  755:  // Handle months and days.
-   893330:  756:  bd.month = TM_DECEMBER + 1;
-   893330:  757:  bd.day = static_cast<int>(seconds / SECSPERDAY) + 1;
-   893330:  758:  seconds %= SECSPERDAY;
-  6508192:  759:  while (bd.month != TM_JANUARY + 1) {
+   457486:  756:  bd.month = TM_DECEMBER + 1;
+   457486:  757:  bd.day = static_cast<int>(seconds / SECSPERDAY) + 1;
+   457486:  758:  seconds %= SECSPERDAY;
+  3331471:  759:  while (bd.month != TM_JANUARY + 1) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-  5610649:  760:    int month_offset = kMonthOffsets[leap_year][bd.month];
-  5610649:  761:    if (bd.day > month_offset) {
+  2871859:  760:    int month_offset = kMonthOffsets[leap_year][bd.month];
+  2871859:  761:    if (bd.day > month_offset) {
 branch  0 taken 16% (fallthrough)
 branch  1 taken 84%
-   889117:  762:      bd.day -= month_offset;
-   889117:  763:      break;
+   455360:  762:      bd.day -= month_offset;
+   455360:  763:      break;
         -:  764:    }
-  4721532:  765:    bd.month -= 1;
+  2416499:  765:    bd.month -= 1;
         -:  766:  }
         -:  767:
         -:  768:  // Handle hours, minutes, and seconds.
-   893330:  769:  bd.hour = static_cast<int>(seconds / SECSPERHOUR);
-   893330:  770:  seconds %= SECSPERHOUR;
-   893330:  771:  bd.minute = static_cast<int>(seconds / SECSPERMIN);
-   893330:  772:  bd.second = seconds % SECSPERMIN;
+   457486:  769:  bd.hour = static_cast<int>(seconds / SECSPERHOUR);
+   457486:  770:  seconds %= SECSPERHOUR;
+   457486:  771:  bd.minute = static_cast<int>(seconds / SECSPERMIN);
+   457486:  772:  bd.second = seconds % SECSPERMIN;
         -:  773:
         -:  774:  // Handle offset, is_dst, and abbreviation.
-   893330:  775:  bd.offset = tt.utc_offset;
-   893330:  776:  bd.is_dst = tt.is_dst;
-  1786660:  777:  bd.abbr = &abbreviations_[tt.abbr_index];
+   457486:  775:  bd.offset = tt.utc_offset;
+   457486:  776:  bd.is_dst = tt.is_dst;
+   914972:  777:  bd.abbr = &abbreviations_[tt.abbr_index];
         -:  778:
-   893330:  779:  return bd;
+   457486:  779:  return bd;
         -:  780:}
         -:  781:
         -:  782:// MakeTimeInfo() translation with a conversion-preserving offset.
@@ -1224,28 +1224,28 @@ call    0 never executed
     #####:  789:  return ti;
         -:  790:}
         -:  791:
-function _ZNK4cctz12TimeZoneInfo9BreakTimeERKNSt6chrono10time_pointINS1_3_V212system_clockENS1_8durationIlSt5ratioILl1ELl1EEEEEE called 170 returned 100% blocks executed 83%
-      170:  792:Breakdown TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const {
+function _ZNK4cctz12TimeZoneInfo9BreakTimeERKNSt6chrono10time_pointINS1_3_V212system_clockENS1_8durationIlSt5ratioILl1ELl1EEEEEE called 85 returned 100% blocks executed 83%
+       85:  792:Breakdown TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const {
         -:  793:  int64_t unix_time = ToUnixSeconds(tp);
         -:  794:  const size_t timecnt = transitions_.size();
-      170:  795:  if (timecnt == 0 || unix_time < transitions_[0].unix_time) {
+       85:  795:  if (timecnt == 0 || unix_time < transitions_[0].unix_time) {
 branch  0 taken 98% (fallthrough)
 branch  1 taken 2%
 branch  2 taken 92% (fallthrough)
 branch  3 taken 8%
 branch  4 taken 11% (fallthrough)
 branch  5 taken 89%
-       18:  796:    const int type_index = default_transition_type_;
-       36:  797:    return LocalTime(unix_time, transition_types_[type_index]);
+        9:  796:    const int type_index = default_transition_type_;
+       18:  797:    return LocalTime(unix_time, transition_types_[type_index]);
 call    0 returned 100%
         -:  798:  }
-      304:  799:  if (unix_time >= transitions_[timecnt - 1].unix_time) {
+      152:  799:  if (unix_time >= transitions_[timecnt - 1].unix_time) {
 branch  0 taken 49% (fallthrough)
 branch  1 taken 51%
         -:  800:    // After the last transition. If we extended the transitions using
         -:  801:    // future_spec_, shift back to a supported year using the 400-year
         -:  802:    // cycle of calendaric equivalence and then compensate accordingly.
-       74:  803:    if (extended_) {
+       37:  803:    if (extended_) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  804:      const int64_t diff = unix_time - transitions_[timecnt - 1].unix_time;
@@ -1256,116 +1256,116 @@ call    0 never executed
     #####:  808:      bd.year += shift * 400;
         -:  809:      return bd;
         -:  810:    }
-       74:  811:    const int type_index = transitions_[timecnt - 1].type_index;
-      148:  812:    return LocalTime(unix_time, transition_types_[type_index]);
+       37:  811:    const int type_index = transitions_[timecnt - 1].type_index;
+       74:  812:    return LocalTime(unix_time, transition_types_[type_index]);
 call    0 returned 100%
         -:  813:  }
         -:  814:
         -:  815:  const size_t hint = local_time_hint_.load(std::memory_order_relaxed);
-       78:  816:  if (0 < hint && hint < timecnt) {
-branch  0 taken 69% (fallthrough)
-branch  1 taken 31%
-       54:  817:    if (unix_time < transitions_[hint].unix_time) {
+       39:  816:  if (0 < hint && hint < timecnt) {
+branch  0 taken 67% (fallthrough)
+branch  1 taken 33%
+       26:  817:    if (unix_time < transitions_[hint].unix_time) {
 branch  0 taken 54% (fallthrough)
 branch  1 taken 46%
-       58:  818:      if (!(unix_time < transitions_[hint - 1].unix_time)) {
-branch  0 taken 90% (fallthrough)
-branch  1 taken 10%
-       26:  819:        const int type_index = transitions_[hint - 1].type_index;
-       52:  820:        return LocalTime(unix_time, transition_types_[type_index]);
+       28:  818:      if (!(unix_time < transitions_[hint - 1].unix_time)) {
+branch  0 taken 93% (fallthrough)
+branch  1 taken 7%
+       13:  819:        const int type_index = transitions_[hint - 1].type_index;
+       26:  820:        return LocalTime(unix_time, transition_types_[type_index]);
 call    0 returned 100%
         -:  821:      }
         -:  822:    }
         -:  823:  }
         -:  824:
-       52:  825:  const Transition target = {unix_time, 0, {0}, {0}};
+       26:  825:  const Transition target = {unix_time, 0, {0}, {0}};
         -:  826:  const Transition* begin = &transitions_[0];
         -:  827:  const Transition* tr = std::upper_bound(begin, begin + timecnt, target,
-       52:  828:                                          Transition::ByUnixTime());
-       52:  829:  local_time_hint_.store(tr - begin, std::memory_order_relaxed);
-       52:  830:  const int type_index = (--tr)->type_index;
-      104:  831:  return LocalTime(unix_time, transition_types_[type_index]);
+       26:  828:                                          Transition::ByUnixTime());
+       26:  829:  local_time_hint_.store(tr - begin, std::memory_order_relaxed);
+       26:  830:  const int type_index = (--tr)->type_index;
+       52:  831:  return LocalTime(unix_time, transition_types_[type_index]);
 call    0 returned 100%
         -:  832:}
         -:  833:
-function _ZNK4cctz12TimeZoneInfo12MakeTimeInfoEliiiii called 86 returned 100% blocks executed 93%
-       86:  834:TimeInfo TimeZoneInfo::MakeTimeInfo(int64_t year, int mon, int day,
+function _ZNK4cctz12TimeZoneInfo12MakeTimeInfoEliiiii called 43 returned 100% blocks executed 93%
+       43:  834:TimeInfo TimeZoneInfo::MakeTimeInfo(int64_t year, int mon, int day,
         -:  835:                                    int hour, int min, int sec) const {
         -:  836:  Transition target;
         -:  837:  DateTime& dt(target.date_time);
-       86:  838:  const bool normalized = dt.Normalize(year, mon, day, hour, min, sec);
+       43:  838:  const bool normalized = dt.Normalize(year, mon, day, hour, min, sec);
 call    0 returned 100%
         -:  839:
         -:  840:  const size_t timecnt = transitions_.size();
-       86:  841:  if (timecnt == 0) {
+       43:  841:  if (timecnt == 0) {
 branch  0 taken 5% (fallthrough)
 branch  1 taken 95%
         -:  842:    // Use the default offset.
-        8:  843:    int32_t offset = transition_types_[default_transition_type_].utc_offset;
-        4:  844:    int64_t unix_time = (dt - DateTime{0}) - offset;
+        4:  843:    int32_t offset = transition_types_[default_transition_type_].utc_offset;
+        2:  844:    int64_t unix_time = (dt - DateTime{0}) - offset;
         -:  845:    return MakeUnique(unix_time, normalized);
         -:  846:  }
         -:  847:
         -:  848:  // Find the first transition after our target date/time.
         -:  849:  const Transition* tr = nullptr;
         -:  850:  const Transition* begin = &transitions_[0];
-       82:  851:  const Transition* end = begin + timecnt;
-       82:  852:  if (dt < begin->date_time) {
+       41:  851:  const Transition* end = begin + timecnt;
+       41:  852:  if (dt < begin->date_time) {
 branch  0 taken 88% (fallthrough)
 branch  1 taken 12%
         -:  853:    tr = begin;
-      144:  854:  } else if (!(dt < transitions_[timecnt - 1].date_time)) {
+       72:  854:  } else if (!(dt < transitions_[timecnt - 1].date_time)) {
 branch  0 taken 53% (fallthrough)
 branch  1 taken 47%
         -:  855:    tr = end;
         -:  856:  } else {
         -:  857:    const size_t hint = time_local_hint_.load(std::memory_order_relaxed);
-       38:  858:    if (0 < hint && hint < timecnt) {
-branch  0 taken 50% (fallthrough)
-branch  1 taken 50%
-       19:  859:      if (dt < transitions_[hint].date_time) {
-branch  0 taken 74% (fallthrough)
-branch  1 taken 26%
-       28:  860:        if (!(dt < transitions_[hint - 1].date_time)) {
+       19:  858:    if (0 < hint && hint < timecnt) {
+branch  0 taken 47% (fallthrough)
+branch  1 taken 53%
+        9:  859:      if (dt < transitions_[hint].date_time) {
+branch  0 taken 78% (fallthrough)
+branch  1 taken 22%
+       14:  860:        if (!(dt < transitions_[hint - 1].date_time)) {
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
-       14:  861:          tr = begin + hint;
+        7:  861:          tr = begin + hint;
         -:  862:        }
         -:  863:      }
         -:  864:    }
-       38:  865:    if (tr == nullptr) {
+       19:  865:    if (tr == nullptr) {
 branch  0 taken 63% (fallthrough)
 branch  1 taken 37%
         -:  866:      tr = std::upper_bound(begin, end, target, Transition::ByDateTime());
-       24:  867:      time_local_hint_.store(tr - begin, std::memory_order_relaxed);
+       12:  867:      time_local_hint_.store(tr - begin, std::memory_order_relaxed);
         -:  868:    }
         -:  869:  }
         -:  870:
-       82:  871:  if (tr == begin) {
+       41:  871:  if (tr == begin) {
 branch  0 taken 12% (fallthrough)
 branch  1 taken 88%
-       10:  872:    if (!(tr->prev_date_time < dt)) {
+        5:  872:    if (!(tr->prev_date_time < dt)) {
 branch  0 taken 80% (fallthrough)
 branch  1 taken 20%
         -:  873:      // Before first transition, so use the default offset.
-       16:  874:      int offset = transition_types_[default_transition_type_].utc_offset;
-        8:  875:      int64_t unix_time = (dt - DateTime{0}) - offset;
+        8:  874:      int offset = transition_types_[default_transition_type_].utc_offset;
+        4:  875:      int64_t unix_time = (dt - DateTime{0}) - offset;
         -:  876:      return MakeUnique(unix_time, normalized);
         -:  877:    }
         -:  878:    // tr->prev_date_time < dt < tr->date_time
         -:  879:    return MakeSkipped(*tr, dt, normalized);
         -:  880:  }
         -:  881:
-       72:  882:  if (tr == end) {
+       36:  882:  if (tr == end) {
 branch  0 taken 47% (fallthrough)
 branch  1 taken 53%
-       34:  883:    if ((--tr)->prev_date_time < dt) {
+       17:  883:    if ((--tr)->prev_date_time < dt) {
 branch  0 taken 94% (fallthrough)
 branch  1 taken 6%
         -:  884:      // After the last transition. If we extended the transitions using
         -:  885:      // future_spec_, shift back to a supported year using the 400-year
         -:  886:      // cycle of calendaric equivalence and then compensate accordingly.
-       32:  887:      if (extended_ && year > last_year_) {
+       16:  887:      if (extended_ && year > last_year_) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 never executed
@@ -1375,21 +1375,21 @@ branch  3 never executed
     #####:  890:                         shift * kSecPer400Years);
 call    0 never executed
         -:  891:      }
-       64:  892:      int64_t unix_time = tr->unix_time + (dt - tr->date_time);
+       32:  892:      int64_t unix_time = tr->unix_time + (dt - tr->date_time);
         -:  893:      return MakeUnique(unix_time, normalized);
         -:  894:    }
         -:  895:    // tr->date_time <= dt <= tr->prev_date_time
         -:  896:    return MakeRepeated(*tr, dt, normalized);
         -:  897:  }
         -:  898:
-       38:  899:  if (tr->prev_date_time < dt) {
+       19:  899:  if (tr->prev_date_time < dt) {
 branch  0 taken 5% (fallthrough)
 branch  1 taken 95%
         -:  900:    // tr->prev_date_time < dt < tr->date_time
         -:  901:    return MakeSkipped(*tr, dt, normalized);
         -:  902:  }
         -:  903:
-       36:  904:  if (!((--tr)->prev_date_time < dt)) {
+       18:  904:  if (!((--tr)->prev_date_time < dt)) {
 branch  0 taken 22% (fallthrough)
 branch  1 taken 78%
         -:  905:    // tr->date_time <= dt <= tr->prev_date_time
@@ -1397,13 +1397,13 @@ branch  1 taken 78%
         -:  907:  }
         -:  908:
         -:  909:  // In between transitions.
-       56:  910:  int64_t unix_time = tr->unix_time + (dt - tr->date_time);
+       28:  910:  int64_t unix_time = tr->unix_time + (dt - tr->date_time);
         -:  911:  return MakeUnique(unix_time, normalized);
         -:  912:}
         -:  913:
-function _GLOBAL__sub_I_time_zone_info.cc called 28 returned 100% blocks executed 100%
-function _Z41__static_initialization_and_destruction_0ii called 28 returned 100% blocks executed 100%
-       84:  914:}  // namespace cctz
+function _GLOBAL__sub_I_time_zone_info.cc called 27 returned 100% blocks executed 100%
+function _Z41__static_initialization_and_destruction_0ii called 27 returned 100% blocks executed 100%
+       81:  914:}  // namespace cctz
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%

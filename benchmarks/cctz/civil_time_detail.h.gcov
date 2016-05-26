@@ -1,7 +1,7 @@
         -:    0:Source:include/civil_time_detail.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:28
+        -:    0:Runs:27
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -109,43 +109,43 @@ branch  1 never executed
 branch  2 never executed
 branch  3 never executed
         -:   76:}
-function _ZN4cctz6detail4impl14days_per_monthEii called 46 returned 100% blocks executed 38%
-       46:   77:CONSTEXPR_F int days_per_month(int y, int m) noexcept {
+function _ZN4cctz6detail4impl14days_per_monthEii called 23 returned 100% blocks executed 38%
+       23:   77:CONSTEXPR_F int days_per_month(int y, int m) noexcept {
         -:   78:  CONSTEXPR_D signed char k_days_per_month[12] = {
         -:   79:      31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31  // non leap year
-       46:   80:  };
-       46:   81:  return k_days_per_month[m - 1] + (m == 2 && is_leap_year(y));
+       23:   80:  };
+       23:   81:  return k_days_per_month[m - 1] + (m == 2 && is_leap_year(y));
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 never executed
 branch  3 never executed
         -:   82:}
         -:   83:
-function _ZN4cctz6detail4impl5n_dayEiiiiiii called 340 returned 100% blocks executed 20%
-      340:   84:CONSTEXPR_F fields n_day(int y, int m, int d, int cd, int hh, int mm,
+function _ZN4cctz6detail4impl5n_dayEiiiiiii called 170 returned 100% blocks executed 20%
+      170:   84:CONSTEXPR_F fields n_day(int y, int m, int d, int cd, int hh, int mm,
         -:   85:                         int ss) noexcept {
-      340:   86:  y += (cd / 146097) * 400;
-      340:   87:  cd %= 146097;
-      340:   88:  if (cd < 0) {
+      170:   86:  y += (cd / 146097) * 400;
+      170:   87:  cd %= 146097;
+      170:   88:  if (cd < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:   89:    y -= 400;
     #####:   90:    cd += 146097;
         -:   91:  }
-      340:   92:  y += (d / 146097) * 400;
-      340:   93:  d = d % 146097 + cd;
-      340:   94:  if (d <= 0) {
+      170:   92:  y += (d / 146097) * 400;
+      170:   93:  d = d % 146097 + cd;
+      170:   94:  if (d <= 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:   95:    y -= 400;
     #####:   96:    d += 146097;
-      340:   97:  } else if (d > 146097) {
+      170:   97:  } else if (d > 146097) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:   98:    y += 400;
     #####:   99:    d -= 146097;
         -:  100:  }
-      340:  101:  if (d > 365) {
+      170:  101:  if (d > 365) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  102:    for (int n = days_per_century(y, m); d > n; n = days_per_century(y, m)) {
@@ -167,10 +167,10 @@ branch  1 never executed
     #####:  112:      ++y;
         -:  113:    }
         -:  114:  }
-      340:  115:  if (d > 28) {
+      170:  115:  if (d > 28) {
 branch  0 taken 14% (fallthrough)
 branch  1 taken 86%
-       46:  116:    for (int n = days_per_month(y, m); d > n; n = days_per_month(y, m)) {
+       23:  116:    for (int n = days_per_month(y, m); d > n; n = days_per_month(y, m)) {
 call    0 returned 100%
 call    1 never executed
 branch  2 taken 0%
@@ -184,61 +184,61 @@ branch  1 never executed
         -:  121:      }
         -:  122:    }
         -:  123:  }
-      340:  124:  return fields{y, m, d, hh, mm, ss};
+      170:  124:  return fields{y, m, d, hh, mm, ss};
         -:  125:}
-function _ZN4cctz6detail4impl5n_monEiiiiiii called 340 returned 100% blocks executed 100%
-      340:  126:CONSTEXPR_F fields n_mon(int y, int m, int d, int cd, int hh, int mm,
+function _ZN4cctz6detail4impl5n_monEiiiiiii called 170 returned 100% blocks executed 100%
+      170:  126:CONSTEXPR_F fields n_mon(int y, int m, int d, int cd, int hh, int mm,
         -:  127:                         int ss) noexcept {
-      340:  128:  y += m / 12;
-      340:  129:  m %= 12;
-      340:  130:  if (m <= 0) {
+      170:  128:  y += m / 12;
+      170:  129:  m %= 12;
+      170:  130:  if (m <= 0) {
 branch  0 taken 11% (fallthrough)
 branch  1 taken 89%
-       36:  131:    y -= 1;
-       36:  132:    m += 12;
+       18:  131:    y -= 1;
+       18:  132:    m += 12;
         -:  133:  }
-      340:  134:  return n_day(y, m, d, cd, hh, mm, ss);
+      170:  134:  return n_day(y, m, d, cd, hh, mm, ss);
 call    0 returned 100%
         -:  135:}
-function _ZN4cctz6detail4impl6n_hourEiiiiiii called 340 returned 100% blocks executed 75%
-      340:  136:CONSTEXPR_F fields n_hour(int y, int m, int d, int cd, int hh, int mm,
+function _ZN4cctz6detail4impl6n_hourEiiiiiii called 170 returned 100% blocks executed 75%
+      170:  136:CONSTEXPR_F fields n_hour(int y, int m, int d, int cd, int hh, int mm,
         -:  137:                          int ss) noexcept {
-      340:  138:  cd += hh / 24;
-      340:  139:  hh %= 24;
-      340:  140:  if (hh < 0) {
+      170:  138:  cd += hh / 24;
+      170:  139:  hh %= 24;
+      170:  140:  if (hh < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  141:    cd -= 1;
     #####:  142:    hh += 24;
         -:  143:  }
-      340:  144:  return n_mon(y, m, d, cd, hh, mm, ss);
+      170:  144:  return n_mon(y, m, d, cd, hh, mm, ss);
 call    0 returned 100%
         -:  145:}
-function _ZN4cctz6detail4impl5n_minEiiiiiii called 340 returned 100% blocks executed 75%
-      340:  146:CONSTEXPR_F fields n_min(int y, int m, int d, int hh, int ch, int mm,
+function _ZN4cctz6detail4impl5n_minEiiiiiii called 170 returned 100% blocks executed 75%
+      170:  146:CONSTEXPR_F fields n_min(int y, int m, int d, int hh, int ch, int mm,
         -:  147:                         int ss) noexcept {
-      340:  148:  ch += mm / 60;
-      340:  149:  mm %= 60;
-      340:  150:  if (mm < 0) {
+      170:  148:  ch += mm / 60;
+      170:  149:  mm %= 60;
+      170:  150:  if (mm < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  151:    ch -= 1;
     #####:  152:    mm += 60;
         -:  153:  }
-      340:  154:  return n_hour(y, m, d, hh / 24 + ch / 24, hh % 24 + ch % 24, mm, ss);
+      170:  154:  return n_hour(y, m, d, hh / 24 + ch / 24, hh % 24 + ch % 24, mm, ss);
 call    0 returned 100%
         -:  155:}
-function _ZN4cctz6detail4impl5n_secEiiiiii called 340 returned 100% blocks executed 75%
-      340:  156:CONSTEXPR_F fields n_sec(int y, int m, int d, int hh, int mm, int ss) noexcept {
-      340:  157:  int cm = ss / 60;
-      340:  158:  ss %= 60;
-      340:  159:  if (ss < 0) {
+function _ZN4cctz6detail4impl5n_secEiiiiii called 170 returned 100% blocks executed 75%
+      170:  156:CONSTEXPR_F fields n_sec(int y, int m, int d, int hh, int mm, int ss) noexcept {
+      170:  157:  int cm = ss / 60;
+      170:  158:  ss %= 60;
+      170:  159:  if (ss < 0) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
     #####:  160:    cm -= 1;
     #####:  161:    ss += 60;
         -:  162:  }
-      340:  163:  return n_min(y, m, d, hh, mm / 60 + cm / 60, mm % 60 + cm % 60, ss);
+      170:  163:  return n_min(y, m, d, hh, mm / 60 + cm / 60, mm % 60 + cm % 60, ss);
 call    0 returned 100%
         -:  164:}
         -:  165:
@@ -270,7 +270,7 @@ call    0 returned 100%
         -:  191:
         -:  192:// Aligns the (normalized) fields struct to the indicated field.
         -:  193:CONSTEXPR_F fields align(second_tag, fields f) noexcept {
-      340:  194:  return f;
+      170:  194:  return f;
         -:  195:}
         -:  196:CONSTEXPR_F fields align(minute_tag, fields f) noexcept {
         -:  197:  return fields{f.y, f.m, f.d, f.hh, f.mm, 0};
@@ -330,14 +330,14 @@ call    0 returned 100%
         -:  251:template <typename T>
         -:  252:class civil_time {
         -:  253: public:
-function _ZN4cctz6detail10civil_timeINS0_10second_tagEEC2Eiiiiii called 340 returned 100% blocks executed 100%
-      340:  254:  explicit CONSTEXPR_M civil_time(int y, int m = 1, int d = 1, int hh = 0,
+function _ZN4cctz6detail10civil_timeINS0_10second_tagEEC2Eiiiiii called 170 returned 100% blocks executed 100%
+      170:  254:  explicit CONSTEXPR_M civil_time(int y, int m = 1, int d = 1, int hh = 0,
         -:  255:                                  int mm = 0, int ss = 0) noexcept
-      680:  256:      : civil_time(impl::n_sec(y, m, d, hh, mm, ss)) {}
+      340:  256:      : civil_time(impl::n_sec(y, m, d, hh, mm, ss)) {}
 call    0 returned 100%
         -:  257:
-function _ZN4cctz6detail10civil_timeINS0_10second_tagEEC2Ev called 170 returned 100% blocks executed 100%
-      170:  258:  CONSTEXPR_M civil_time() noexcept : civil_time(1970) {}
+function _ZN4cctz6detail10civil_timeINS0_10second_tagEEC2Ev called 85 returned 100% blocks executed 100%
+       85:  258:  CONSTEXPR_M civil_time() noexcept : civil_time(1970) {}
 call    0 returned 100%
         -:  259:  civil_time(const civil_time&) = default;
         -:  260:  civil_time& operator=(const civil_time&) = default;
@@ -367,12 +367,12 @@ call    0 returned 100%
         -:  284:  }
         -:  285:
         -:  286:  // Field accessors.
-       86:  287:  CONSTEXPR_M int year() const noexcept { return f_.y; }
-       86:  288:  CONSTEXPR_M int month() const noexcept { return f_.m; }
-       86:  289:  CONSTEXPR_M int day() const noexcept { return f_.d; }
-       86:  290:  CONSTEXPR_M int hour() const noexcept { return f_.hh; }
-       86:  291:  CONSTEXPR_M int minute() const noexcept { return f_.mm; }
-       86:  292:  CONSTEXPR_M int second() const noexcept { return f_.ss; }
+       43:  287:  CONSTEXPR_M int year() const noexcept { return f_.y; }
+       43:  288:  CONSTEXPR_M int month() const noexcept { return f_.m; }
+       43:  289:  CONSTEXPR_M int day() const noexcept { return f_.d; }
+       43:  290:  CONSTEXPR_M int hour() const noexcept { return f_.hh; }
+       43:  291:  CONSTEXPR_M int minute() const noexcept { return f_.mm; }
+       43:  292:  CONSTEXPR_M int second() const noexcept { return f_.ss; }
         -:  293:
         -:  294:  // Assigning arithmetic.
         -:  295:  CONSTEXPR_M civil_time& operator+=(int n) noexcept {

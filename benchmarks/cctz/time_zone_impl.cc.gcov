@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_impl.cc
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:28
+        -:    0:Runs:27
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -39,33 +39,33 @@
         -:   34:// utc_zone should only be referenced in a thread that has just done
         -:   35:// a LoadUTCTimeZone().
         -:   36:std::once_flag load_utc_once;
-function _ZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEv called 1221 returned 99% blocks executed 100%
-     1221:   37:void LoadUTCTimeZone() {
-     1240:   38:  std::call_once(load_utc_once, []() { utc_time_zone(); });
+function _ZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEv called 607 returned 100% blocks executed 100%
+      607:   37:void LoadUTCTimeZone() {
+      625:   38:  std::call_once(load_utc_once, []() { utc_time_zone(); });
 call    0 returned 100%
-call    1 returned 99%
-     1220:   39:}
+call    1 returned 100%
+      607:   39:}
         -:   40:
         -:   41:}  // namespace
         -:   42:
-function _ZN4cctz9time_zone4Impl12LoadTimeZoneERKSsPS0_ called 289282 returned 99% blocks executed 82%
-   289282:   43:bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {
-   289282:   44:  const bool is_utc = (name.compare("UTC") == 0);
+function _ZN4cctz9time_zone4Impl12LoadTimeZoneERKSsPS0_ called 144423 returned 99% blocks executed 82%
+   144423:   43:bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {
+   144423:   44:  const bool is_utc = (name.compare("UTC") == 0);
 call    0 returned 99%
         -:   45:
         -:   46:  // First check, under a shared lock, whether the time zone has already
         -:   47:  // been loaded. This is the common path. TODO: Move to shared_mutex.
         -:   48:  {
         -:   49:    std::lock_guard<std::mutex> lock(time_zone_mutex);
-   298073:   50:    if (time_zone_map != nullptr) {
+   149045:   50:    if (time_zone_map != nullptr) {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
         -:   51:      TimeZoneImplByName::const_iterator itr = time_zone_map->find(name);
-   596052:   52:      if (itr != time_zone_map->end()) {
+   298002:   52:      if (itr != time_zone_map->end()) {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
-   296826:   53:        *tz = time_zone(itr->second);
-   296826:   54:        return is_utc || itr->second != utc_zone;
+   148413:   53:        *tz = time_zone(itr->second);
+   148413:   54:        return is_utc || itr->second != utc_zone;
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
 branch  2 taken 1% (fallthrough)
@@ -74,32 +74,32 @@ branch  3 taken 99%
         -:   56:    }
         -:   57:  }
         -:   58:
-     1247:   59:  if (!is_utc) {
-branch  0 taken 98% (fallthrough)
-branch  1 taken 2%
+      632:   59:  if (!is_utc) {
+branch  0 taken 96% (fallthrough)
+branch  1 taken 4%
         -:   60:    // Ensure that UTC is loaded before any other time zones.
-     1221:   61:    LoadUTCTimeZone();
-call    0 returned 99%
+      607:   61:    LoadUTCTimeZone();
+call    0 returned 100%
         -:   62:  }
         -:   63:
         -:   64:  // Now check again, under an exclusive lock.
         -:   65:  std::lock_guard<std::mutex> lock(time_zone_mutex);
-     1273:   66:  if (time_zone_map == nullptr) time_zone_map = new TimeZoneImplByName;
-branch  0 taken 2% (fallthrough)
-branch  1 taken 98%
+      657:   66:  if (time_zone_map == nullptr) time_zone_map = new TimeZoneImplByName;
+branch  0 taken 4% (fallthrough)
+branch  1 taken 96%
 call    2 returned 100%
 branch  3 taken 100% (fallthrough)
 branch  4 taken 0% (throw)
-     1247:   67:  const time_zone::Impl*& impl = (*time_zone_map)[name];
+      632:   67:  const time_zone::Impl*& impl = (*time_zone_map)[name];
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:   68:  bool fallback_utc = false;
-     1247:   69:  if (impl == nullptr) {
-branch  0 taken 97% (fallthrough)
-branch  1 taken 3%
+      632:   69:  if (impl == nullptr) {
+branch  0 taken 99% (fallthrough)
+branch  1 taken 1%
         -:   70:    // The first thread in loads the new time zone.
-     1212:   71:    time_zone::Impl* new_impl = new time_zone::Impl(name);
+      627:   71:    time_zone::Impl* new_impl = new time_zone::Impl(name);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -107,37 +107,37 @@ call    3 returned 100%
 branch  4 taken 100% (fallthrough)
 branch  5 taken 0% (throw)
 call    6 never executed
-     2424:   72:    new_impl->zone_ = TimeZoneIf::Load(new_impl->name_);
+     1254:   72:    new_impl->zone_ = TimeZoneIf::Load(new_impl->name_);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-     1212:   73:    if (new_impl->zone_ == nullptr) {
+      627:   73:    if (new_impl->zone_ == nullptr) {
 branch  0 taken 1% (fallthrough)
 branch  1 taken 99%
-        6:   74:      delete new_impl;  // free the nascent time_zone::Impl
+        3:   74:      delete new_impl;  // free the nascent time_zone::Impl
 branch  0 taken 100% (fallthrough)
 branch  1 taken 0%
 call    2 returned 100%
 call    3 returned 100%
-        6:   75:      impl = utc_zone;  // and fallback to UTC
+        3:   75:      impl = utc_zone;  // and fallback to UTC
         -:   76:      fallback_utc = true;
         -:   77:    } else {
-     1206:   78:      if (is_utc) {
-branch  0 taken 2% (fallthrough)
-branch  1 taken 98%
+      624:   78:      if (is_utc) {
+branch  0 taken 4% (fallthrough)
+branch  1 taken 96%
         -:   79:        // Happens before any reference to utc_zone.
-       26:   80:        utc_zone = new_impl;
+       25:   80:        utc_zone = new_impl;
         -:   81:      }
-     1206:   82:      impl = new_impl;  // install new time zone
+      624:   82:      impl = new_impl;  // install new time zone
         -:   83:    }
         -:   84:  }
-     1247:   85:  *tz = time_zone(impl);
-     1247:   86:  return !fallback_utc;
+      632:   85:  *tz = time_zone(impl);
+      632:   86:  return !fallback_utc;
         -:   87:}
         -:   88:
-function _ZN4cctz9time_zone4Impl3getERKS0_ called 256 returned 100% blocks executed 50%
-      256:   89:const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {
-      256:   90:  if (tz.impl_ == nullptr) {
+function _ZN4cctz9time_zone4Impl3getERKS0_ called 128 returned 100% blocks executed 50%
+      128:   89:const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {
+      128:   90:  if (tz.impl_ == nullptr) {
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:   91:    // Dereferencing an implicit-UTC time_zone is expected to be
@@ -149,40 +149,40 @@ call    0 never executed
         -:   96:  return *tz.impl_;
         -:   97:}
         -:   98:
-function _ZN4cctz9time_zone4ImplC2ERKSs called 1212 returned 100% blocks executed 100%
-     2424:   99:time_zone::Impl::Impl(const std::string& name) : name_(name) {}
+function _ZN4cctz9time_zone4ImplC2ERKSs called 627 returned 100% blocks executed 100%
+     1254:   99:time_zone::Impl::Impl(const std::string& name) : name_(name) {}
 call    0 returned 100%
         -:  100:
-function _ZNK4cctz9time_zone4Impl9BreakTimeERKNSt6chrono10time_pointINS2_3_V212system_clockENS2_8durationIlSt5ratioILl1ELl1EEEEEE called 170 returned 100% blocks executed 70%
-      170:  101:time_zone::absolute_lookup time_zone::Impl::BreakTime(
+function _ZNK4cctz9time_zone4Impl9BreakTimeERKNSt6chrono10time_pointINS2_3_V212system_clockENS2_8durationIlSt5ratioILl1ELl1EEEEEE called 85 returned 100% blocks executed 70%
+       85:  101:time_zone::absolute_lookup time_zone::Impl::BreakTime(
         -:  102:    const time_point<sys_seconds>& tp) const {
         -:  103:  time_zone::absolute_lookup res;
-      170:  104:  Breakdown bd = zone_->BreakTime(tp);
+       85:  104:  Breakdown bd = zone_->BreakTime(tp);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  105:  // TODO: Eliminate extra normalization.
         -:  106:  res.cs = civil_second(static_cast<int>(bd.year), bd.month, bd.day,
-      170:  107:                        bd.hour, bd.minute, bd.second);
+       85:  107:                        bd.hour, bd.minute, bd.second);
 call    0 returned 100%
-      170:  108:  res.offset = bd.offset;
-      170:  109:  res.is_dst = bd.is_dst;
-      170:  110:  res.abbr = bd.abbr;
-      170:  111:  return res;
+       85:  108:  res.offset = bd.offset;
+       85:  109:  res.is_dst = bd.is_dst;
+       85:  110:  res.abbr = bd.abbr;
+       85:  111:  return res;
         -:  112:}
         -:  113:
-function _ZNK4cctz9time_zone4Impl12MakeTimeInfoENS_6detail10civil_timeINS2_10second_tagEEE called 86 returned 100% blocks executed 100%
-       86:  114:time_zone::civil_lookup time_zone::Impl::MakeTimeInfo(civil_second cs) const {
+function _ZNK4cctz9time_zone4Impl12MakeTimeInfoENS_6detail10civil_timeINS2_10second_tagEEE called 43 returned 100% blocks executed 100%
+       43:  114:time_zone::civil_lookup time_zone::Impl::MakeTimeInfo(civil_second cs) const {
         -:  115:  time_zone::civil_lookup res;
         -:  116:  // TODO: Eliminate extra normalization.
         -:  117:  TimeInfo t = zone_->MakeTimeInfo(cs.year(), cs.month(), cs.day(),
-      172:  118:                                   cs.hour(), cs.minute(), cs.second());
+       86:  118:                                   cs.hour(), cs.minute(), cs.second());
 call    0 returned 100%
-       86:  119:  res.kind = t.kind;
-       86:  120:  res.pre = t.pre;
-       86:  121:  res.trans = t.trans;
-       86:  122:  res.post = t.post;
-       86:  123:  return res;
+       43:  119:  res.kind = t.kind;
+       43:  120:  res.pre = t.pre;
+       43:  121:  res.trans = t.trans;
+       43:  122:  res.post = t.post;
+       43:  123:  return res;
         -:  124:}
         -:  125:
         -:  126:}  // namespace cctz

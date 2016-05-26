@@ -1,7 +1,7 @@
         -:    0:Source:/usr/include/c++/4.9/bits/unique_ptr.h
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_impl.gcda
-        -:    0:Runs:28
+        -:    0:Runs:27
         -:    0:Programs:1
         -:    1:// unique_ptr implementation -*- C++ -*-
         -:    2:
@@ -246,14 +246,14 @@ call    8 never executed
         -:  232:      ~unique_ptr() noexcept
         -:  233:      {
         -:  234:	auto& __ptr = std::get<0>(_M_t);
-     1218:  235:	if (__ptr != nullptr)
+      630:  235:	if (__ptr != nullptr)
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 branch  2 taken 0% (fallthrough)
 branch  3 taken 100%
         -:  236:	  get_deleter()(__ptr);
-     1218:  237:	__ptr = pointer();
-     1218:  238:      }
+      630:  237:	__ptr = pointer();
+      630:  238:      }
         -:  239:
         -:  240:      // Assignment.
         -:  241:
@@ -320,7 +320,7 @@ branch  3 taken 100%
         -:  302:      /// Return the stored pointer.
         -:  303:      pointer
         -:  304:      get() const noexcept
-     2680:  305:      { return std::get<0>(_M_t); }
+     1382:  305:      { return std::get<0>(_M_t); }
         -:  306:
         -:  307:      /// Return a reference to the stored deleter.
         -:  308:      deleter_type&
@@ -343,7 +343,7 @@ branch  3 taken 100%
         -:  325:      release() noexcept
         -:  326:      {
         -:  327:	pointer __p = get();
-     1212:  328:	std::get<0>(_M_t) = pointer();
+      627:  328:	std::get<0>(_M_t) = pointer();
         -:  329:	return __p;
         -:  330:      }
         -:  331:
@@ -358,7 +358,7 @@ branch  3 taken 100%
         -:  340:      {
         -:  341:	using std::swap;
         -:  342:	swap(std::get<0>(_M_t), __p);
-     1212:  343:	if (__p != pointer())
+      627:  343:	if (__p != pointer())
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
         -:  344:	  get_deleter()(__p);

@@ -1,7 +1,7 @@
         -:    0:Source:src/time_zone_lookup_test.cc
         -:    0:Graph:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcno
         -:    0:Data:/home/yfy/iut/benchmarks/cctz/time_zone_lookup_test.gcda
-        -:    0:Runs:28
+        -:    0:Runs:27
         -:    0:Programs:1
         -:    1:// Copyright 2016 Google Inc. All Rights Reserved.
         -:    2://
@@ -622,12 +622,12 @@
         -:  617:};
         -:  618:
         -:  619:// Helper to return a loaded time zone by value (UTC on error).
-function _ZN4cctz12_GLOBAL__N_18LoadZoneERKSs called 40 returned 100% blocks executed 100%
-       40:  620:time_zone LoadZone(const std::string& name) {
-       40:  621:  time_zone tz;
-       40:  622:  load_time_zone(name, &tz);
+function _ZN4cctz12_GLOBAL__N_18LoadZoneERKSs called 20 returned 100% blocks executed 100%
+       20:  620:time_zone LoadZone(const std::string& name) {
+       20:  621:  time_zone tz;
+       20:  622:  load_time_zone(name, &tz);
 call    0 returned 100%
-       40:  623:  return tz;
+       20:  623:  return tz;
         -:  624:}
         -:  625:
         -:  626:// This helper is a macro so that failed expectations show up with the
@@ -648,10 +648,10 @@ call    0 returned 100%
         -:  641:
         -:  642:}  // namespace
         -:  643:
-function _ZN4cctz36TimeZones_LoadZonesConcurrently_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz36TimeZones_LoadZonesConcurrently_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz36TimeZones_LoadZonesConcurrently_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEv called 2 returned 100% blocks executed 67%
-       62:  644:TEST(TimeZones, LoadZonesConcurrently) {
+function _ZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEv called 1 returned 100% blocks executed 67%
+       57:  644:TEST(TimeZones, LoadZonesConcurrently) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -661,20 +661,20 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  645:  std::promise<void> ready_promise;
+        1:  645:  std::promise<void> ready_promise;
 call    0 returned 100%
-        2:  646:  std::shared_future<void> ready_future(ready_promise.get_future());
-function _ZZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvENKUlPSt7promiseIvEE_clES3_ called 512 returned 100% blocks executed 43%
-     1538:  647:  auto load_zones = [ready_future](std::promise<void>* started) {
-      512:  648:    started->set_value();
+        1:  646:  std::shared_future<void> ready_future(ready_promise.get_future());
+function _ZZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvENKUlPSt7promiseIvEE_clES3_ called 256 returned 100% blocks executed 43%
+      769:  647:  auto load_zones = [ready_future](std::promise<void>* started) {
+      256:  648:    started->set_value();
 call    0 returned 100%
-      512:  649:    ready_future.wait();
+      256:  649:    ready_future.wait();
 call    0 returned 99%
-      837:  650:    time_zone tz;
-   296286:  651:    for (const char* const* np = kTimeZoneNames; *np != nullptr; ++np) {
+      418:  650:    time_zone tz;
+   148142:  651:    for (const char* const* np = kTimeZoneNames; *np != nullptr; ++np) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-  1182568:  652:      EXPECT_TRUE(load_time_zone(*np, &tz));
+   590878:  652:      EXPECT_TRUE(load_time_zone(*np, &tz));
 call    0 returned 99%
 call    1 returned 99%
 branch  2 taken 99% (fallthrough)
@@ -697,51 +697,51 @@ call   18 never executed
 call   19 never executed
 call   20 never executed
         -:  653:    }
-      512:  654:  };
+      256:  654:  };
         -:  655:
-        2:  656:  std::vector<std::thread> threads;
+        1:  656:  std::vector<std::thread> threads;
 call    0 returned 100%
 call    1 never executed
-      514:  657:  for (size_t i = 0; i != 256; ++i) {
+      257:  657:  for (size_t i = 0; i != 256; ++i) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-      512:  658:    std::promise<void> started;
+      256:  658:    std::promise<void> started;
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      512:  659:    threads.emplace_back(load_zones, &started);
+      256:  659:    threads.emplace_back(load_zones, &started);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-     1024:  660:    started.get_future().wait();
+      512:  660:    started.get_future().wait();
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-      512:  661:  }
+      256:  661:  }
 call    0 returned 100%
 call    1 never executed
         -:  662:
-        2:  663:  ready_promise.set_value();
+        1:  663:  ready_promise.set_value();
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:  664:
-      516:  665:  for (auto& thread : threads) {
+      258:  665:  for (auto& thread : threads) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-      512:  666:    thread.join();
+      256:  666:    thread.join();
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
-        2:  667:  }
+        1:  667:  }
 call    0 returned 100%
 call    1 never executed
-        2:  668:}
+        1:  668:}
         -:  669:
-function _ZN4cctz22TimeZone_Failures_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz22TimeZone_Failures_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz22TimeZone_Failures_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz22TimeZone_Failures_Test8TestBodyEv called 2 returned 100% blocks executed 28%
-       62:  670:TEST(TimeZone, Failures) {
+function _ZN4cctz22TimeZone_Failures_Test8TestBodyEv called 1 returned 100% blocks executed 28%
+       57:  670:TEST(TimeZone, Failures) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -751,8 +751,8 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  671:  time_zone tz;
-        8:  672:  EXPECT_FALSE(load_time_zone(":America/Los_Angeles", &tz));
+        1:  671:  time_zone tz;
+        4:  672:  EXPECT_FALSE(load_time_zone(":America/Los_Angeles", &tz));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -775,13 +775,13 @@ call   18 never executed
 call   19 never executed
 call   20 never executed
         -:  673:
-        6:  674:  tz = LoadZone("America/Los_Angeles");
+        3:  674:  tz = LoadZone("America/Los_Angeles");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        8:  675:  EXPECT_FALSE(load_time_zone("Invalid/TimeZone", &tz));
+        4:  675:  EXPECT_FALSE(load_time_zone("Invalid/TimeZone", &tz));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -803,7 +803,7 @@ branch 17 never executed
 call   18 never executed
 call   19 never executed
 call   20 never executed
-        6:  676:  EXPECT_EQ(system_clock::from_time_t(0),
+        3:  676:  EXPECT_EQ(system_clock::from_time_t(0),
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -822,13 +822,13 @@ branch  1 never executed
 branch  2 never executed
         -:  678:
         -:  679:  // Ensures that the load still fails on a subsequent attempt.
-        6:  680:  tz = LoadZone("America/Los_Angeles");
+        3:  680:  tz = LoadZone("America/Los_Angeles");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        8:  681:  EXPECT_FALSE(load_time_zone("Invalid/TimeZone", &tz));
+        4:  681:  EXPECT_FALSE(load_time_zone("Invalid/TimeZone", &tz));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -850,7 +850,7 @@ branch 17 never executed
 call   18 never executed
 call   19 never executed
 call   20 never executed
-        6:  682:  EXPECT_EQ(system_clock::from_time_t(0),
+        3:  682:  EXPECT_EQ(system_clock::from_time_t(0),
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -869,13 +869,13 @@ branch  1 never executed
 branch  2 never executed
         -:  684:
         -:  685:  // Loading an empty string timezone should fail.
-        6:  686:  tz = LoadZone("America/Los_Angeles");
+        3:  686:  tz = LoadZone("America/Los_Angeles");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        8:  687:  EXPECT_FALSE(load_time_zone("", &tz));
+        4:  687:  EXPECT_FALSE(load_time_zone("", &tz));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -897,7 +897,7 @@ branch 17 never executed
 call   18 never executed
 call   19 never executed
 call   20 never executed
-        6:  688:  EXPECT_EQ(system_clock::from_time_t(0),
+        3:  688:  EXPECT_EQ(system_clock::from_time_t(0),
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -914,12 +914,12 @@ call   11 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        2:  690:}
+        1:  690:}
         -:  691:
-function _ZN4cctz38StdChronoTimePoint_TimeTAlignment_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz38StdChronoTimePoint_TimeTAlignment_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz38StdChronoTimePoint_TimeTAlignment_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz38StdChronoTimePoint_TimeTAlignment_Test8TestBodyEv called 2 returned 100% blocks executed 28%
-       62:  692:TEST(StdChronoTimePoint, TimeTAlignment) {
+function _ZN4cctz38StdChronoTimePoint_TimeTAlignment_Test8TestBodyEv called 1 returned 100% blocks executed 28%
+       57:  692:TEST(StdChronoTimePoint, TimeTAlignment) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -933,7 +933,7 @@ call    8 never executed
         -:  694:  // number of seconds apart. This simplifies conversions to/from time_t.
         -:  695:  using TP = std::chrono::system_clock::time_point;
         -:  696:  auto diff = TP() - std::chrono::system_clock::from_time_t(0);
-        6:  697:  EXPECT_EQ(TP::duration::zero(), diff % std::chrono::seconds(1));
+        3:  697:  EXPECT_EQ(TP::duration::zero(), diff % std::chrono::seconds(1));
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -947,12 +947,12 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2:  698:}
+        1:  698:}
         -:  699:
-function _ZN4cctz34BreakTime_TimePointResolution_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz34BreakTime_TimePointResolution_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz34BreakTime_TimePointResolution_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz34BreakTime_TimePointResolution_Test8TestBodyEv called 2 returned 100% blocks executed 18%
-       62:  700:TEST(BreakTime, TimePointResolution) {
+function _ZN4cctz34BreakTime_TimePointResolution_Test8TestBodyEv called 1 returned 100% blocks executed 18%
+       57:  700:TEST(BreakTime, TimePointResolution) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -963,11 +963,11 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  701:  using std::chrono::time_point_cast;
-        2:  702:  const time_zone utc = utc_time_zone();
+        1:  702:  const time_zone utc = utc_time_zone();
 call    0 returned 100%
         -:  703:  const auto t0 = system_clock::from_time_t(0);
         -:  704:
-       48:  705:  ExpectTime(time_point_cast<std::chrono::nanoseconds>(t0), utc,
+       24:  705:  ExpectTime(time_point_cast<std::chrono::nanoseconds>(t0), utc,
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1089,7 +1089,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
         -:  706:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-       48:  707:  ExpectTime(time_point_cast<std::chrono::microseconds>(t0), utc,
+       24:  707:  ExpectTime(time_point_cast<std::chrono::microseconds>(t0), utc,
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1211,7 +1211,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
         -:  708:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-       48:  709:  ExpectTime(time_point_cast<std::chrono::milliseconds>(t0), utc,
+       24:  709:  ExpectTime(time_point_cast<std::chrono::milliseconds>(t0), utc,
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1333,7 +1333,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
         -:  710:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-       50:  711:  ExpectTime(time_point_cast<std::chrono::seconds>(t0), utc,
+       25:  711:  ExpectTime(time_point_cast<std::chrono::seconds>(t0), utc,
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1456,7 +1456,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  712:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-       50:  713:  ExpectTime(time_point_cast<sys_seconds>(t0), utc,
+       25:  713:  ExpectTime(time_point_cast<sys_seconds>(t0), utc,
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -1579,7 +1579,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  714:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-       48:  715:  ExpectTime(time_point_cast<std::chrono::minutes>(t0), utc,
+       24:  715:  ExpectTime(time_point_cast<std::chrono::minutes>(t0), utc,
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1701,7 +1701,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
         -:  716:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-       48:  717:  ExpectTime(time_point_cast<std::chrono::hours>(t0), utc,
+       24:  717:  ExpectTime(time_point_cast<std::chrono::hours>(t0), utc,
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -1823,12 +1823,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
         -:  718:             1970, 1, 1, 0, 0, 0, 0, false, "UTC");
-        2:  719:}
+        1:  719:}
         -:  720:
-function _ZN4cctz29BreakTime_LocalTimeInUTC_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz29BreakTime_LocalTimeInUTC_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz29BreakTime_LocalTimeInUTC_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz29BreakTime_LocalTimeInUTC_Test8TestBodyEv called 2 returned 100% blocks executed 22%
-       62:  721:TEST(BreakTime, LocalTimeInUTC) {
+function _ZN4cctz29BreakTime_LocalTimeInUTC_Test8TestBodyEv called 1 returned 100% blocks executed 22%
+       57:  721:TEST(BreakTime, LocalTimeInUTC) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1838,10 +1838,10 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  722:  const auto tp = system_clock::from_time_t(0);
-        4:  723:  const time_zone::absolute_lookup al = utc_time_zone().lookup(tp);
+        1:  722:  const auto tp = system_clock::from_time_t(0);
+        2:  723:  const time_zone::absolute_lookup al = utc_time_zone().lookup(tp);
 call    0 returned 100%
-       52:  724:  ExpectTime(tp, utc_time_zone(), 1970, 1, 1, 0, 0, 0, 0, false, "UTC");
+       26:  724:  ExpectTime(tp, utc_time_zone(), 1970, 1, 1, 0, 0, 0, 0, false, "UTC");
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1965,7 +1965,7 @@ call   119 never executed
 call   120 never executed
 call   121 never executed
 call   122 never executed
-        8:  725:  EXPECT_EQ(weekday::thursday,
+        4:  725:  EXPECT_EQ(weekday::thursday,
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -1987,12 +1987,12 @@ call   16 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        2:  727:}
+        1:  727:}
         -:  728:
-function _ZN4cctz29BreakTime_LocalTimePosix_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz29BreakTime_LocalTimePosix_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz29BreakTime_LocalTimePosix_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz29BreakTime_LocalTimePosix_Test8TestBodyEv called 2 returned 100% blocks executed 22%
-       62:  729:TEST(BreakTime, LocalTimePosix) {
+function _ZN4cctz29BreakTime_LocalTimePosix_Test8TestBodyEv called 1 returned 100% blocks executed 22%
+       57:  729:TEST(BreakTime, LocalTimePosix) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2003,10 +2003,10 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  730:  // See IEEE Std 1003.1-1988 B.2.3 General Terms, Epoch.
-        2:  731:  const auto tp = system_clock::from_time_t(536457599);
-        4:  732:  const time_zone::absolute_lookup al = utc_time_zone().lookup(tp);
+        1:  731:  const auto tp = system_clock::from_time_t(536457599);
+        2:  732:  const time_zone::absolute_lookup al = utc_time_zone().lookup(tp);
 call    0 returned 100%
-       52:  733:  ExpectTime(tp, utc_time_zone(), 1986, 12, 31, 23, 59, 59, 0, false, "UTC");
+       26:  733:  ExpectTime(tp, utc_time_zone(), 1986, 12, 31, 23, 59, 59, 0, false, "UTC");
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2130,7 +2130,7 @@ call   119 never executed
 call   120 never executed
 call   121 never executed
 call   122 never executed
-        8:  734:  EXPECT_EQ(weekday::wednesday,
+        4:  734:  EXPECT_EQ(weekday::wednesday,
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2152,12 +2152,12 @@ call   16 never executed
 call    0 never executed
 branch  1 never executed
 branch  2 never executed
-        2:  736:}
+        1:  736:}
         -:  737:
-function _ZN4cctz33BreakTime_LocalTimeInNewYork_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz33BreakTime_LocalTimeInNewYork_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz33BreakTime_LocalTimeInNewYork_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz33BreakTime_LocalTimeInNewYork_Test8TestBodyEv called 2 returned 100% blocks executed 21%
-       62:  738:TEST(BreakTime, LocalTimeInNewYork) {
+function _ZN4cctz33BreakTime_LocalTimeInNewYork_Test8TestBodyEv called 1 returned 100% blocks executed 21%
+       57:  738:TEST(BreakTime, LocalTimeInNewYork) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2167,14 +2167,14 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  739:  const time_zone tz = LoadZone("America/New_York");
+        3:  739:  const time_zone tz = LoadZone("America/New_York");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        2:  740:  const auto tp = system_clock::from_time_t(45);
-       48:  741:  ExpectTime(tp, tz, 1969, 12, 31, 19, 0, 45, -5 * 60 * 60, false, "EST");
+        1:  740:  const auto tp = system_clock::from_time_t(45);
+       24:  741:  ExpectTime(tp, tz, 1969, 12, 31, 19, 0, 45, -5 * 60 * 60, false, "EST");
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2295,7 +2295,7 @@ call   116 never executed
 call   117 never executed
 call   118 never executed
 call   119 never executed
-        8:  742:  EXPECT_EQ(weekday::wednesday, get_weekday(civil_day(convert(tp, tz))));
+        4:  742:  EXPECT_EQ(weekday::wednesday, get_weekday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2311,12 +2311,12 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        2:  743:}
+        1:  743:}
         -:  744:
-function _ZN4cctz29BreakTime_LocalTimeInMTV_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz29BreakTime_LocalTimeInMTV_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz29BreakTime_LocalTimeInMTV_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz29BreakTime_LocalTimeInMTV_Test8TestBodyEv called 2 returned 100% blocks executed 21%
-       62:  745:TEST(BreakTime, LocalTimeInMTV) {
+function _ZN4cctz29BreakTime_LocalTimeInMTV_Test8TestBodyEv called 1 returned 100% blocks executed 21%
+       57:  745:TEST(BreakTime, LocalTimeInMTV) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2326,14 +2326,14 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  746:  const time_zone tz = LoadZone("America/Los_Angeles");
+        3:  746:  const time_zone tz = LoadZone("America/Los_Angeles");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        2:  747:  const auto tp = system_clock::from_time_t(1380855729);
-       48:  748:  ExpectTime(tp, tz, 2013, 10, 3, 20, 2, 9, -7 * 60 * 60, true, "PDT");
+        1:  747:  const auto tp = system_clock::from_time_t(1380855729);
+       24:  748:  ExpectTime(tp, tz, 2013, 10, 3, 20, 2, 9, -7 * 60 * 60, true, "PDT");
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2454,7 +2454,7 @@ call   116 never executed
 call   117 never executed
 call   118 never executed
 call   119 never executed
-        8:  749:  EXPECT_EQ(weekday::thursday, get_weekday(civil_day(convert(tp, tz))));
+        4:  749:  EXPECT_EQ(weekday::thursday, get_weekday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2470,12 +2470,12 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        2:  750:}
+        1:  750:}
         -:  751:
-function _ZN4cctz32BreakTime_LocalTimeInSydney_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz32BreakTime_LocalTimeInSydney_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz32BreakTime_LocalTimeInSydney_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz32BreakTime_LocalTimeInSydney_Test8TestBodyEv called 2 returned 100% blocks executed 21%
-       62:  752:TEST(BreakTime, LocalTimeInSydney) {
+function _ZN4cctz32BreakTime_LocalTimeInSydney_Test8TestBodyEv called 1 returned 100% blocks executed 21%
+       57:  752:TEST(BreakTime, LocalTimeInSydney) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2485,15 +2485,15 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  753:  const time_zone tz = LoadZone("Australia/Sydney");
+        3:  753:  const time_zone tz = LoadZone("Australia/Sydney");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        2:  754:  const auto tp = system_clock::from_time_t(90);
+        1:  754:  const auto tp = system_clock::from_time_t(90);
         -:  755:  const time_zone::absolute_lookup al = tz.lookup(tp);
-       48:  756:  ExpectTime(tp, tz, 1970, 1, 1, 10, 1, 30, 10 * 60 * 60, false, "AEST");
+       24:  756:  ExpectTime(tp, tz, 1970, 1, 1, 10, 1, 30, 10 * 60 * 60, false, "AEST");
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2614,7 +2614,7 @@ call   116 never executed
 call   117 never executed
 call   118 never executed
 call   119 never executed
-        8:  757:  EXPECT_EQ(weekday::thursday, get_weekday(civil_day(convert(tp, tz))));
+        4:  757:  EXPECT_EQ(weekday::thursday, get_weekday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2632,12 +2632,12 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        2:  758:}
+        1:  758:}
         -:  759:
-function _ZN4cctz33MakeTime_TimePointResolution_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz33MakeTime_TimePointResolution_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz33MakeTime_TimePointResolution_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz33MakeTime_TimePointResolution_Test8TestBodyEv called 2 returned 100% blocks executed 35%
-       62:  760:TEST(MakeTime, TimePointResolution) {
+function _ZN4cctz33MakeTime_TimePointResolution_Test8TestBodyEv called 1 returned 100% blocks executed 35%
+       57:  760:TEST(MakeTime, TimePointResolution) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2647,13 +2647,13 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2:  761:  const time_zone utc = utc_time_zone();
+        1:  761:  const time_zone utc = utc_time_zone();
 call    0 returned 100%
         -:  762:  const time_point<std::chrono::nanoseconds> tp_ns =
-        4:  763:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
+        2:  763:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
 call    0 returned 100%
 call    1 returned 100%
-       10:  764:  EXPECT_EQ("04:05", format("%M:%E*S", tp_ns, utc));
+        5:  764:  EXPECT_EQ("04:05", format("%M:%E*S", tp_ns, utc));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -2673,10 +2673,10 @@ call   15 never executed
 call   16 never executed
 call   17 never executed
         -:  765:  const time_point<std::chrono::microseconds> tp_us =
-        4:  766:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
+        2:  766:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
 call    0 returned 100%
 call    1 returned 100%
-       10:  767:  EXPECT_EQ("04:05", format("%M:%E*S", tp_us, utc));
+        5:  767:  EXPECT_EQ("04:05", format("%M:%E*S", tp_us, utc));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -2696,10 +2696,10 @@ call   15 never executed
 call   16 never executed
 call   17 never executed
         -:  768:  const time_point<std::chrono::milliseconds> tp_ms =
-        4:  769:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
+        2:  769:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
 call    0 returned 100%
 call    1 returned 100%
-       10:  770:  EXPECT_EQ("04:05", format("%M:%E*S", tp_ms, utc));
+        5:  770:  EXPECT_EQ("04:05", format("%M:%E*S", tp_ms, utc));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -2719,10 +2719,10 @@ call   15 never executed
 call   16 never executed
 call   17 never executed
         -:  771:  const time_point<std::chrono::seconds> tp_s =
-        2:  772:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
+        1:  772:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
 call    0 returned 100%
 call    1 returned 100%
-       10:  773:  EXPECT_EQ("04:05", format("%M:%E*S", tp_s, utc));
+        5:  773:  EXPECT_EQ("04:05", format("%M:%E*S", tp_s, utc));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -2739,10 +2739,10 @@ call   12 never executed
 call   13 never executed
 call   14 never executed
         -:  774:  const time_point<sys_seconds> tp_s64 =
-        2:  775:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
+        1:  775:      convert(civil_second(2015, 1, 2, 3, 4, 5), utc);
 call    0 returned 100%
 call    1 returned 100%
-       10:  776:  EXPECT_EQ("04:05", format("%M:%E*S", tp_s64, utc));
+        5:  776:  EXPECT_EQ("04:05", format("%M:%E*S", tp_s64, utc));
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -2765,10 +2765,10 @@ call   14 never executed
         -:  781:  using std::chrono::time_point_cast;
         -:  782:  const time_point<std::chrono::minutes> tp_m =
         -:  783:      time_point_cast<std::chrono::minutes>(
-        4:  784:          convert(civil_second(2015, 1, 2, 3, 4, 5), utc));
+        2:  784:          convert(civil_second(2015, 1, 2, 3, 4, 5), utc));
 call    0 returned 100%
 call    1 returned 100%
-       10:  785:  EXPECT_EQ("04:00", format("%M:%E*S", tp_m, utc));
+        5:  785:  EXPECT_EQ("04:00", format("%M:%E*S", tp_m, utc));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -2789,10 +2789,10 @@ call   16 never executed
 call   17 never executed
         -:  786:  const time_point<std::chrono::hours> tp_h =
         -:  787:      time_point_cast<std::chrono::hours>(
-        4:  788:          convert(civil_second(2015, 1, 2, 3, 4, 5), utc));
+        2:  788:          convert(civil_second(2015, 1, 2, 3, 4, 5), utc));
 call    0 returned 100%
 call    1 returned 100%
-       10:  789:  EXPECT_EQ("00:00", format("%M:%E*S", tp_h, utc));
+        5:  789:  EXPECT_EQ("00:00", format("%M:%E*S", tp_h, utc));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -2811,12 +2811,12 @@ branch 14 never executed
 call   15 never executed
 call   16 never executed
 call   17 never executed
-        2:  790:}
+        1:  790:}
         -:  791:
-function _ZN4cctz27MakeTime_Normalization_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz27MakeTime_Normalization_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz27MakeTime_Normalization_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz27MakeTime_Normalization_Test8TestBodyEv called 2 returned 100% blocks executed 29%
-       62:  792:TEST(MakeTime, Normalization) {
+function _ZN4cctz27MakeTime_Normalization_Test8TestBodyEv called 1 returned 100% blocks executed 29%
+       57:  792:TEST(MakeTime, Normalization) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2826,16 +2826,16 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  793:  const time_zone tz = LoadZone("America/New_York");
+        3:  793:  const time_zone tz = LoadZone("America/New_York");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        2:  794:  const auto tp = convert(civil_second(2009, 2, 13, 18, 31, 30), tz);
+        1:  794:  const auto tp = convert(civil_second(2009, 2, 13, 18, 31, 30), tz);
 call    0 returned 100%
 call    1 returned 100%
-        6:  795:  EXPECT_EQ(system_clock::from_time_t(1234567890), tp);
+        3:  795:  EXPECT_EQ(system_clock::from_time_t(1234567890), tp);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -2851,7 +2851,7 @@ call   11 never executed
 call   12 never executed
         -:  796:
         -:  797:  // Now requests for the same time_point but with out-of-range fields.
-        6:  798:  EXPECT_EQ(tp, convert(civil_second(2008, 14, 13, 18, 31, 30), tz));  // month
+        3:  798:  EXPECT_EQ(tp, convert(civil_second(2008, 14, 13, 18, 31, 30), tz));  // month
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2867,7 +2867,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  799:  EXPECT_EQ(tp, convert(civil_second(2009, 1, 44, 18, 31, 30), tz));   // day
+        3:  799:  EXPECT_EQ(tp, convert(civil_second(2009, 1, 44, 18, 31, 30), tz));   // day
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2883,7 +2883,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  800:  EXPECT_EQ(tp, convert(civil_second(2009, 2, 12, 42, 31, 30), tz));   // hour
+        3:  800:  EXPECT_EQ(tp, convert(civil_second(2009, 2, 12, 42, 31, 30), tz));   // hour
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2899,7 +2899,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  801:  EXPECT_EQ(tp, convert(civil_second(2009, 2, 13, 17, 91, 30), tz));   // minute
+        3:  801:  EXPECT_EQ(tp, convert(civil_second(2009, 2, 13, 17, 91, 30), tz));   // minute
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2915,7 +2915,7 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        6:  802:  EXPECT_EQ(tp, convert(civil_second(2009, 2, 13, 18, 30, 90), tz));   // second
+        3:  802:  EXPECT_EQ(tp, convert(civil_second(2009, 2, 13, 18, 30, 90), tz));   // second
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -2931,12 +2931,12 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        2:  803:}
+        1:  803:}
         -:  804:
-function _ZN4cctz36TimeZoneEdgeCase_AmericaNewYork_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz36TimeZoneEdgeCase_AmericaNewYork_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz36TimeZoneEdgeCase_AmericaNewYork_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz36TimeZoneEdgeCase_AmericaNewYork_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  805:TEST(TimeZoneEdgeCase, AmericaNewYork) {
+function _ZN4cctz36TimeZoneEdgeCase_AmericaNewYork_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  805:TEST(TimeZoneEdgeCase, AmericaNewYork) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -2946,7 +2946,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  806:  const time_zone tz = LoadZone("America/New_York");
+        3:  806:  const time_zone tz = LoadZone("America/New_York");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -2954,10 +2954,10 @@ branch  3 taken 0% (throw)
 call    4 never executed
         -:  807:
         -:  808:  // Spring 1:59:59 -> 3:00:00
-        2:  809:  auto tp = convert(civil_second(2013, 3, 10, 1, 59, 59), tz);
+        1:  809:  auto tp = convert(civil_second(2013, 3, 10, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  810:  ExpectTime(tp, tz, 2013, 3, 10, 1, 59, 59, -5 * 3600, false, "EST");
+       25:  810:  ExpectTime(tp, tz, 2013, 3, 10, 1, 59, 59, -5 * 3600, false, "EST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3080,7 +3080,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  811:  tp += std::chrono::seconds(1);
-       50:  812:  ExpectTime(tp, tz, 2013, 3, 10, 3, 0, 0, -4 * 3600, true, "EDT");
+       25:  812:  ExpectTime(tp, tz, 2013, 3, 10, 3, 0, 0, -4 * 3600, true, "EDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3204,10 +3204,10 @@ call   119 never executed
 call   120 never executed
         -:  813:
         -:  814:  // Fall 1:59:59 -> 1:00:00
-        2:  815:  tp = convert(civil_second(2013, 11, 3, 1, 59, 59), tz);
+        1:  815:  tp = convert(civil_second(2013, 11, 3, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  816:  ExpectTime(tp, tz, 2013, 11, 3, 1, 59, 59, -4 * 3600, true, "EDT");
+       25:  816:  ExpectTime(tp, tz, 2013, 11, 3, 1, 59, 59, -4 * 3600, true, "EDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3330,7 +3330,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  817:  tp += std::chrono::seconds(1);
-       50:  818:  ExpectTime(tp, tz, 2013, 11, 3, 1, 0, 0, -5 * 3600, false, "EST");
+       25:  818:  ExpectTime(tp, tz, 2013, 11, 3, 1, 0, 0, -5 * 3600, false, "EST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3452,12 +3452,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  819:}
+        1:  819:}
         -:  820:
-function _ZN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  821:TEST(TimeZoneEdgeCase, AmericaLosAngeles) {
+function _ZN4cctz39TimeZoneEdgeCase_AmericaLosAngeles_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  821:TEST(TimeZoneEdgeCase, AmericaLosAngeles) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -3467,7 +3467,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  822:  const time_zone tz = LoadZone("America/Los_Angeles");
+        3:  822:  const time_zone tz = LoadZone("America/Los_Angeles");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -3475,10 +3475,10 @@ branch  3 taken 0% (throw)
 call    4 never executed
         -:  823:
         -:  824:  // Spring 1:59:59 -> 3:00:00
-        2:  825:  auto tp = convert(civil_second(2013, 3, 10, 1, 59, 59), tz);
+        1:  825:  auto tp = convert(civil_second(2013, 3, 10, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  826:  ExpectTime(tp, tz, 2013, 3, 10, 1, 59, 59, -8 * 3600, false, "PST");
+       25:  826:  ExpectTime(tp, tz, 2013, 3, 10, 1, 59, 59, -8 * 3600, false, "PST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3601,7 +3601,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  827:  tp += std::chrono::seconds(1);
-       50:  828:  ExpectTime(tp, tz, 2013, 3, 10, 3, 0, 0, -7 * 3600, true, "PDT");
+       25:  828:  ExpectTime(tp, tz, 2013, 3, 10, 3, 0, 0, -7 * 3600, true, "PDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3725,10 +3725,10 @@ call   119 never executed
 call   120 never executed
         -:  829:
         -:  830:  // Fall 1:59:59 -> 1:00:00
-        2:  831:  tp = convert(civil_second(2013, 11, 3, 1, 59, 59), tz);
+        1:  831:  tp = convert(civil_second(2013, 11, 3, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  832:  ExpectTime(tp, tz, 2013, 11, 3, 1, 59, 59, -7 * 3600, true, "PDT");
+       25:  832:  ExpectTime(tp, tz, 2013, 11, 3, 1, 59, 59, -7 * 3600, true, "PDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3851,7 +3851,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  833:  tp += std::chrono::seconds(1);
-       50:  834:  ExpectTime(tp, tz, 2013, 11, 3, 1, 0, 0, -8 * 3600, false, "PST");
+       25:  834:  ExpectTime(tp, tz, 2013, 11, 3, 1, 0, 0, -8 * 3600, false, "PST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -3973,12 +3973,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  835:}
+        1:  835:}
         -:  836:
-function _ZN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  837:TEST(TimeZoneEdgeCase, ArizonaNoTransition) {
+function _ZN4cctz41TimeZoneEdgeCase_ArizonaNoTransition_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  837:TEST(TimeZoneEdgeCase, ArizonaNoTransition) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -3988,7 +3988,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  838:  const time_zone tz = LoadZone("America/Phoenix");
+        3:  838:  const time_zone tz = LoadZone("America/Phoenix");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -3996,10 +3996,10 @@ branch  3 taken 0% (throw)
 call    4 never executed
         -:  839:
         -:  840:  // No transition in Spring.
-        2:  841:  auto tp = convert(civil_second(2013, 3, 10, 1, 59, 59), tz);
+        1:  841:  auto tp = convert(civil_second(2013, 3, 10, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  842:  ExpectTime(tp, tz, 2013, 3, 10, 1, 59, 59, -7 * 3600, false, "MST");
+       25:  842:  ExpectTime(tp, tz, 2013, 3, 10, 1, 59, 59, -7 * 3600, false, "MST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4122,7 +4122,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  843:  tp += std::chrono::seconds(1);
-       50:  844:  ExpectTime(tp, tz, 2013, 3, 10, 2, 0, 0, -7 * 3600, false, "MST");
+       25:  844:  ExpectTime(tp, tz, 2013, 3, 10, 2, 0, 0, -7 * 3600, false, "MST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4246,10 +4246,10 @@ call   119 never executed
 call   120 never executed
         -:  845:
         -:  846:  // No transition in Fall.
-        2:  847:  tp = convert(civil_second(2013, 11, 3, 1, 59, 59), tz);
+        1:  847:  tp = convert(civil_second(2013, 11, 3, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  848:  ExpectTime(tp, tz, 2013, 11, 3, 1, 59, 59, -7 * 3600, false, "MST");
+       25:  848:  ExpectTime(tp, tz, 2013, 11, 3, 1, 59, 59, -7 * 3600, false, "MST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4372,7 +4372,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  849:  tp += std::chrono::seconds(1);
-       50:  850:  ExpectTime(tp, tz, 2013, 11, 3, 2, 0, 0, -7 * 3600, false, "MST");
+       25:  850:  ExpectTime(tp, tz, 2013, 11, 3, 2, 0, 0, -7 * 3600, false, "MST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4494,12 +4494,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  851:}
+        1:  851:}
         -:  852:
-function _ZN4cctz35TimeZoneEdgeCase_AsiaKathmandu_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz35TimeZoneEdgeCase_AsiaKathmandu_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz35TimeZoneEdgeCase_AsiaKathmandu_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz35TimeZoneEdgeCase_AsiaKathmandu_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  853:TEST(TimeZoneEdgeCase, AsiaKathmandu) {
+function _ZN4cctz35TimeZoneEdgeCase_AsiaKathmandu_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  853:TEST(TimeZoneEdgeCase, AsiaKathmandu) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -4509,7 +4509,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  854:  const time_zone tz = LoadZone("Asia/Kathmandu");
+        3:  854:  const time_zone tz = LoadZone("Asia/Kathmandu");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -4520,10 +4520,10 @@ call    4 never executed
         -:  857:  //
         -:  858:  //   504901799 == Tue, 31 Dec 1985 23:59:59 +0530 (IST)
         -:  859:  //   504901800 == Wed,  1 Jan 1986 00:15:00 +0545 (NPT)
-        2:  860:  auto tp = convert(civil_second(1985, 12, 31, 23, 59, 59), tz);
+        1:  860:  auto tp = convert(civil_second(1985, 12, 31, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  861:  ExpectTime(tp, tz, 1985, 12, 31, 23, 59, 59, 5.5 * 3600, false, "IST");
+       25:  861:  ExpectTime(tp, tz, 1985, 12, 31, 23, 59, 59, 5.5 * 3600, false, "IST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4646,7 +4646,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  862:  tp += std::chrono::seconds(1);
-       50:  863:  ExpectTime(tp, tz, 1986, 1, 1, 0, 15, 0, 5.75 * 3600, false, "NPT");
+       25:  863:  ExpectTime(tp, tz, 1986, 1, 1, 0, 15, 0, 5.75 * 3600, false, "NPT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4768,12 +4768,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  864:}
+        1:  864:}
         -:  865:
-function _ZN4cctz36TimeZoneEdgeCase_PacificChatham_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz36TimeZoneEdgeCase_PacificChatham_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz36TimeZoneEdgeCase_PacificChatham_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz36TimeZoneEdgeCase_PacificChatham_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  866:TEST(TimeZoneEdgeCase, PacificChatham) {
+function _ZN4cctz36TimeZoneEdgeCase_PacificChatham_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  866:TEST(TimeZoneEdgeCase, PacificChatham) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -4783,7 +4783,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  867:  const time_zone tz = LoadZone("Pacific/Chatham");
+        3:  867:  const time_zone tz = LoadZone("Pacific/Chatham");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -4794,10 +4794,10 @@ call    4 never executed
         -:  870:  //
         -:  871:  //   1365256799 == Sun,  7 Apr 2013 03:44:59 +1345 (CHADT)
         -:  872:  //   1365256800 == Sun,  7 Apr 2013 02:45:00 +1245 (CHAST)
-        2:  873:  auto tp = convert(civil_second(2013, 4, 7, 3, 44, 59), tz);
+        1:  873:  auto tp = convert(civil_second(2013, 4, 7, 3, 44, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  874:  ExpectTime(tp, tz, 2013, 4, 7, 3, 44, 59, 13.75 * 3600, true, "CHADT");
+       25:  874:  ExpectTime(tp, tz, 2013, 4, 7, 3, 44, 59, 13.75 * 3600, true, "CHADT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -4920,7 +4920,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  875:  tp += std::chrono::seconds(1);
-       50:  876:  ExpectTime(tp, tz, 2013, 4, 7, 2, 45, 0, 12.75 * 3600, false, "CHAST");
+       25:  876:  ExpectTime(tp, tz, 2013, 4, 7, 2, 45, 0, 12.75 * 3600, false, "CHAST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5045,10 +5045,10 @@ call   120 never executed
         -:  877:
         -:  878:  //   1380376799 == Sun, 29 Sep 2013 02:44:59 +1245 (CHAST)
         -:  879:  //   1380376800 == Sun, 29 Sep 2013 03:45:00 +1345 (CHADT)
-        2:  880:  tp = convert(civil_second(2013, 9, 29, 2, 44, 59), tz);
+        1:  880:  tp = convert(civil_second(2013, 9, 29, 2, 44, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  881:  ExpectTime(tp, tz, 2013, 9, 29, 2, 44, 59, 12.75 * 3600, false,
+       25:  881:  ExpectTime(tp, tz, 2013, 9, 29, 2, 44, 59, 12.75 * 3600, false,
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5172,7 +5172,7 @@ call   119 never executed
 call   120 never executed
         -:  882:             "CHAST");
         -:  883:  tp += std::chrono::seconds(1);
-       50:  884:  ExpectTime(tp, tz, 2013, 9, 29, 3, 45, 0, 13.75 * 3600, true, "CHADT");
+       25:  884:  ExpectTime(tp, tz, 2013, 9, 29, 3, 45, 0, 13.75 * 3600, true, "CHADT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5294,12 +5294,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  885:}
+        1:  885:}
         -:  886:
-function _ZN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  887:TEST(TimeZoneEdgeCase, AustraliaLordHowe) {
+function _ZN4cctz39TimeZoneEdgeCase_AustraliaLordHowe_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  887:TEST(TimeZoneEdgeCase, AustraliaLordHowe) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -5309,7 +5309,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  888:  const time_zone tz = LoadZone("Australia/Lord_Howe");
+        3:  888:  const time_zone tz = LoadZone("Australia/Lord_Howe");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -5320,10 +5320,10 @@ call    4 never executed
         -:  891:  //
         -:  892:  //   1365260399 == Sun,  7 Apr 2013 01:59:59 +1100 (LHDT)
         -:  893:  //   1365260400 == Sun,  7 Apr 2013 01:30:00 +1030 (LHST)
-        2:  894:  auto tp = convert(civil_second(2013, 4, 7, 1, 59, 59), tz);
+        1:  894:  auto tp = convert(civil_second(2013, 4, 7, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  895:  ExpectTime(tp, tz, 2013, 4, 7, 1, 59, 59, 11 * 3600, true, "LHDT");
+       25:  895:  ExpectTime(tp, tz, 2013, 4, 7, 1, 59, 59, 11 * 3600, true, "LHDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5447,7 +5447,7 @@ call   119 never executed
 call   120 never executed
 call   121 never executed
         -:  896:  tp += std::chrono::seconds(1);
-       50:  897:  ExpectTime(tp, tz, 2013, 4, 7, 1, 30, 0, 10.5 * 3600, false, "LHST");
+       25:  897:  ExpectTime(tp, tz, 2013, 4, 7, 1, 30, 0, 10.5 * 3600, false, "LHST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5572,10 +5572,10 @@ call   120 never executed
         -:  898:
         -:  899:  //   1380986999 == Sun,  6 Oct 2013 01:59:59 +1030 (LHST)
         -:  900:  //   1380987000 == Sun,  6 Oct 2013 02:30:00 +1100 (LHDT)
-        2:  901:  tp = convert(civil_second(2013, 10, 6, 1, 59, 59), tz);
+        1:  901:  tp = convert(civil_second(2013, 10, 6, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  902:  ExpectTime(tp, tz, 2013, 10, 6, 1, 59, 59, 10.5 * 3600, false, "LHST");
+       25:  902:  ExpectTime(tp, tz, 2013, 10, 6, 1, 59, 59, 10.5 * 3600, false, "LHST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5698,7 +5698,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  903:  tp += std::chrono::seconds(1);
-       50:  904:  ExpectTime(tp, tz, 2013, 10, 6, 2, 30, 0, 11 * 3600, true, "LHDT");
+       25:  904:  ExpectTime(tp, tz, 2013, 10, 6, 2, 30, 0, 11 * 3600, true, "LHDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5820,12 +5820,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  905:}
+        1:  905:}
         -:  906:
-function _ZN4cctz33TimeZoneEdgeCase_PacificApia_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz33TimeZoneEdgeCase_PacificApia_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz33TimeZoneEdgeCase_PacificApia_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz33TimeZoneEdgeCase_PacificApia_Test8TestBodyEv called 2 returned 100% blocks executed 20%
-       62:  907:TEST(TimeZoneEdgeCase, PacificApia) {
+function _ZN4cctz33TimeZoneEdgeCase_PacificApia_Test8TestBodyEv called 1 returned 100% blocks executed 20%
+       57:  907:TEST(TimeZoneEdgeCase, PacificApia) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -5835,7 +5835,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  908:  const time_zone tz = LoadZone("Pacific/Apia");
+        3:  908:  const time_zone tz = LoadZone("Pacific/Apia");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -5850,10 +5850,10 @@ call    4 never executed
         -:  915:  //
         -:  916:  //   1325239199 == Thu, 29 Dec 2011 23:59:59 -1000 (SDT)
         -:  917:  //   1325239200 == Sat, 31 Dec 2011 00:00:00 +1400 (WSDT)
-        2:  918:  auto tp = convert(civil_second(2011, 12, 29, 23, 59, 59), tz);
+        1:  918:  auto tp = convert(civil_second(2011, 12, 29, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  919:  ExpectTime(tp, tz, 2011, 12, 29, 23, 59, 59, -10 * 3600, true, "SDT");
+       25:  919:  ExpectTime(tp, tz, 2011, 12, 29, 23, 59, 59, -10 * 3600, true, "SDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -5975,7 +5975,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        8:  920:  EXPECT_EQ(363, get_yearday(civil_day(convert(tp, tz))));
+        4:  920:  EXPECT_EQ(363, get_yearday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -5992,7 +5992,7 @@ branch 12 never executed
 call   13 never executed
 call   14 never executed
         -:  921:  tp += std::chrono::seconds(1);
-       50:  922:  ExpectTime(tp, tz, 2011, 12, 31, 0, 0, 0, 14 * 3600, true, "WSDT");
+       25:  922:  ExpectTime(tp, tz, 2011, 12, 31, 0, 0, 0, 14 * 3600, true, "WSDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6114,7 +6114,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        8:  923:  EXPECT_EQ(365, get_yearday(civil_day(convert(tp, tz))));
+        4:  923:  EXPECT_EQ(365, get_yearday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 0% (fallthrough)
@@ -6130,12 +6130,12 @@ branch 11 never executed
 branch 12 never executed
 call   13 never executed
 call   14 never executed
-        2:  924:}
+        1:  924:}
         -:  925:
-function _ZN4cctz33TimeZoneEdgeCase_AfricaCairo_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz33TimeZoneEdgeCase_AfricaCairo_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz33TimeZoneEdgeCase_AfricaCairo_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz33TimeZoneEdgeCase_AfricaCairo_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  926:TEST(TimeZoneEdgeCase, AfricaCairo) {
+function _ZN4cctz33TimeZoneEdgeCase_AfricaCairo_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  926:TEST(TimeZoneEdgeCase, AfricaCairo) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -6145,7 +6145,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  927:  const time_zone tz = LoadZone("Africa/Cairo");
+        3:  927:  const time_zone tz = LoadZone("Africa/Cairo");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -6156,10 +6156,10 @@ call    4 never executed
         -:  930:  //
         -:  931:  //   1400191199 == Thu, 15 May 2014 23:59:59 +0200 (EET)
         -:  932:  //   1400191200 == Fri, 16 May 2014 01:00:00 +0300 (EEST)
-        2:  933:  auto tp = convert(civil_second(2014, 5, 15, 23, 59, 59), tz);
+        1:  933:  auto tp = convert(civil_second(2014, 5, 15, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  934:  ExpectTime(tp, tz, 2014, 5, 15, 23, 59, 59, 2 * 3600, false, "EET");
+       25:  934:  ExpectTime(tp, tz, 2014, 5, 15, 23, 59, 59, 2 * 3600, false, "EET");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6282,7 +6282,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  935:  tp += std::chrono::seconds(1);
-       50:  936:  ExpectTime(tp, tz, 2014, 5, 16, 1, 0, 0, 3 * 3600, true, "EEST");
+       25:  936:  ExpectTime(tp, tz, 2014, 5, 16, 1, 0, 0, 3 * 3600, true, "EEST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6404,12 +6404,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  937:}
+        1:  937:}
         -:  938:
-function _ZN4cctz36TimeZoneEdgeCase_AfricaMonrovia_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz36TimeZoneEdgeCase_AfricaMonrovia_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz36TimeZoneEdgeCase_AfricaMonrovia_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz36TimeZoneEdgeCase_AfricaMonrovia_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  939:TEST(TimeZoneEdgeCase, AfricaMonrovia) {
+function _ZN4cctz36TimeZoneEdgeCase_AfricaMonrovia_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  939:TEST(TimeZoneEdgeCase, AfricaMonrovia) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -6419,7 +6419,7 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6:  940:  const time_zone tz = LoadZone("Africa/Monrovia");
+        3:  940:  const time_zone tz = LoadZone("Africa/Monrovia");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -6430,10 +6430,10 @@ call    4 never executed
         -:  943:  //
         -:  944:  //   73529069 == Sun, 30 Apr 1972 23:59:59 -0044 (LRT)
         -:  945:  //   73529070 == Mon,  1 May 1972 00:44:30 +0000 (GMT)
-        2:  946:  auto tp = convert(civil_second(1972, 4, 30, 23, 59, 59), tz);
+        1:  946:  auto tp = convert(civil_second(1972, 4, 30, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  947:  ExpectTime(tp, tz, 1972, 4, 30, 23, 59, 59, -44.5 * 60, false, "LRT");
+       25:  947:  ExpectTime(tp, tz, 1972, 4, 30, 23, 59, 59, -44.5 * 60, false, "LRT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6556,7 +6556,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  948:  tp += std::chrono::seconds(1);
-       50:  949:  ExpectTime(tp, tz, 1972, 5, 1, 0, 44, 30, 0 * 60, false, "GMT");
+       25:  949:  ExpectTime(tp, tz, 1972, 5, 1, 0, 44, 30, 0 * 60, false, "GMT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6678,12 +6678,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  950:}
+        1:  950:}
         -:  951:
-function _ZN4cctz36TimeZoneEdgeCase_AmericaJamaica_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz36TimeZoneEdgeCase_AmericaJamaica_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz36TimeZoneEdgeCase_AmericaJamaica_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz36TimeZoneEdgeCase_AmericaJamaica_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62:  952:TEST(TimeZoneEdgeCase, AmericaJamaica) {
+function _ZN4cctz36TimeZoneEdgeCase_AmericaJamaica_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57:  952:TEST(TimeZoneEdgeCase, AmericaJamaica) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -6698,7 +6698,7 @@ call    8 never executed
         -:  955:  // Note that the 32-bit times used in a (tzh_version == 0) zoneinfo
         -:  956:  // file cannot represent the abbreviation-only transition of 1890,
         -:  957:  // so we ignore the abbreviation by expecting what we received.
-        6:  958:  const time_zone tz = LoadZone("America/Jamaica");
+        3:  958:  const time_zone tz = LoadZone("America/Jamaica");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -6706,10 +6706,10 @@ branch  3 taken 0% (throw)
 call    4 never executed
         -:  959:
         -:  960:  // Before the first transition.
-        2:  961:  auto tp = convert(civil_second(1889, 12, 31, 0, 0, 0), tz);
+        1:  961:  auto tp = convert(civil_second(1889, 12, 31, 0, 0, 0), tz);
 call    0 returned 100%
 call    1 returned 100%
-       54:  962:  ExpectTime(tp, tz, 1889, 12, 31, 0, 0, 0, -18431, false,
+       27:  962:  ExpectTime(tp, tz, 1889, 12, 31, 0, 0, 0, -18431, false,
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6839,10 +6839,10 @@ call   123 never executed
         -:  965:  // Over the first (abbreviation-change only) transition.
         -:  966:  //   -2524503170 == Tue, 31 Dec 1889 23:59:59 -0507 (LMT)
         -:  967:  //   -2524503169 == Wed,  1 Jan 1890 00:00:00 -0507 (KMT)
-        2:  968:  tp = convert(civil_second(1889, 12, 31, 23, 59, 59), tz);
+        1:  968:  tp = convert(civil_second(1889, 12, 31, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       54:  969:  ExpectTime(tp, tz, 1889, 12, 31, 23, 59, 59, -18431, false,
+       27:  969:  ExpectTime(tp, tz, 1889, 12, 31, 23, 59, 59, -18431, false,
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -6969,7 +6969,7 @@ call   122 never executed
 call   123 never executed
         -:  970:             tz.lookup(tp).abbr);
         -:  971:  tp += std::chrono::seconds(1);
-       50:  972:  ExpectTime(tp, tz, 1890, 1, 1, 0, 0, 0, -18431, false, "KMT");
+       25:  972:  ExpectTime(tp, tz, 1890, 1, 1, 0, 0, 0, -18431, false, "KMT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7095,10 +7095,10 @@ call   120 never executed
         -:  974:  // Over the last (DST) transition.
         -:  975:  //     436341599 == Sun, 30 Oct 1983 01:59:59 -0400 (EDT)
         -:  976:  //     436341600 == Sun, 30 Oct 1983 01:00:00 -0500 (EST)
-        2:  977:  tp = convert(civil_second(1983, 10, 30, 1, 59, 59), tz);
+        1:  977:  tp = convert(civil_second(1983, 10, 30, 1, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  978:  ExpectTime(tp, tz, 1983, 10, 30, 1, 59, 59, -4 * 3600, true, "EDT");
+       25:  978:  ExpectTime(tp, tz, 1983, 10, 30, 1, 59, 59, -4 * 3600, true, "EDT");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7221,7 +7221,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -:  979:  tp += std::chrono::seconds(1);
-       50:  980:  ExpectTime(tp, tz, 1983, 10, 30, 1, 0, 0, -5 * 3600, false, "EST");
+       25:  980:  ExpectTime(tp, tz, 1983, 10, 30, 1, 0, 0, -5 * 3600, false, "EST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7345,10 +7345,10 @@ call   119 never executed
 call   120 never executed
         -:  981:
         -:  982:  // After the last transition.
-        2:  983:  tp = convert(civil_second(1983, 12, 31, 23, 59, 59), tz);
+        1:  983:  tp = convert(civil_second(1983, 12, 31, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  984:  ExpectTime(tp, tz, 1983, 12, 31, 23, 59, 59, -5 * 3600, false, "EST");
+       25:  984:  ExpectTime(tp, tz, 1983, 12, 31, 23, 59, 59, -5 * 3600, false, "EST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7470,12 +7470,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2:  985:}
+        1:  985:}
         -:  986:
-function _ZN4cctz25TimeZoneEdgeCase_WET_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz25TimeZoneEdgeCase_WET_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz25TimeZoneEdgeCase_WET_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz25TimeZoneEdgeCase_WET_Test8TestBodyEv called 2 returned 100% blocks executed 18%
-       62:  987:TEST(TimeZoneEdgeCase, WET) {
+function _ZN4cctz25TimeZoneEdgeCase_WET_Test8TestBodyEv called 1 returned 100% blocks executed 18%
+       57:  987:TEST(TimeZoneEdgeCase, WET) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -7486,7 +7486,7 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -:  988:  // Cover some non-existent times within forward transitions.
-        6:  989:  const time_zone tz = LoadZone("WET");
+        3:  989:  const time_zone tz = LoadZone("WET");
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
@@ -7494,10 +7494,10 @@ branch  3 taken 0% (throw)
 call    4 never executed
         -:  990:
         -:  991:  // Before the first transition.
-        2:  992:  auto tp = convert(civil_second(1977, 1, 1, 0, 0, 0), tz);
+        1:  992:  auto tp = convert(civil_second(1977, 1, 1, 0, 0, 0), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  993:  ExpectTime(tp, tz, 1977, 1, 1, 0, 0, 0, 0, false, "WET");
+       25:  993:  ExpectTime(tp, tz, 1977, 1, 1, 0, 0, 0, 0, false, "WET");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7623,10 +7623,10 @@ call   120 never executed
         -:  995:  // Over the first transition.
         -:  996:  //     228877199 == Sun,  3 Apr 1977 00:59:59 +0000 (WET)
         -:  997:  //     228877200 == Sun,  3 Apr 1977 02:00:00 +0100 (WEST)
-        2:  998:  tp = convert(civil_second(1977, 4, 3, 0, 59, 59), tz);
+        1:  998:  tp = convert(civil_second(1977, 4, 3, 0, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50:  999:  ExpectTime(tp, tz, 1977, 4, 3, 0, 59, 59, 0, false, "WET");
+       25:  999:  ExpectTime(tp, tz, 1977, 4, 3, 0, 59, 59, 0, false, "WET");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7749,7 +7749,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -: 1000:  tp += std::chrono::seconds(1);
-       50: 1001:  ExpectTime(tp, tz, 1977, 4, 3, 2, 0, 0, 1 * 3600, true, "WEST");
+       25: 1001:  ExpectTime(tp, tz, 1977, 4, 3, 2, 0, 0, 1 * 3600, true, "WEST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -7873,10 +7873,10 @@ call   119 never executed
 call   120 never executed
         -: 1002:
         -: 1003:  // A non-existent time within the first transition.
-        2: 1004:  time_zone::civil_lookup cl1 = tz.lookup(civil_second(1977, 4, 3, 1, 15, 0));
+        1: 1004:  time_zone::civil_lookup cl1 = tz.lookup(civil_second(1977, 4, 3, 1, 15, 0));
 call    0 returned 100%
 call    1 returned 100%
-        6: 1005:  EXPECT_EQ(time_zone::civil_lookup::SKIPPED, cl1.kind);
+        3: 1005:  EXPECT_EQ(time_zone::civil_lookup::SKIPPED, cl1.kind);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -7890,7 +7890,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-       50: 1006:  ExpectTime(cl1.pre, tz, 1977, 4, 3, 2, 15, 0, 1 * 3600, true, "WEST");
+       25: 1006:  ExpectTime(cl1.pre, tz, 1977, 4, 3, 2, 15, 0, 1 * 3600, true, "WEST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8012,7 +8012,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-       50: 1007:  ExpectTime(cl1.trans, tz, 1977, 4, 3, 2, 0, 0, 1 * 3600, true, "WEST");
+       25: 1007:  ExpectTime(cl1.trans, tz, 1977, 4, 3, 2, 0, 0, 1 * 3600, true, "WEST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8134,7 +8134,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-       50: 1008:  ExpectTime(cl1.post, tz, 1977, 4, 3, 0, 15, 0, 0 * 3600, false, "WET");
+       25: 1008:  ExpectTime(cl1.post, tz, 1977, 4, 3, 0, 15, 0, 0 * 3600, false, "WET");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8258,10 +8258,10 @@ call   119 never executed
 call   120 never executed
         -: 1009:
         -: 1010:  // A non-existent time within the second forward transition.
-        2: 1011:  time_zone::civil_lookup cl2 = tz.lookup(civil_second(1978, 4, 2, 1, 15, 0));
+        1: 1011:  time_zone::civil_lookup cl2 = tz.lookup(civil_second(1978, 4, 2, 1, 15, 0));
 call    0 returned 100%
 call    1 returned 100%
-        6: 1012:  EXPECT_EQ(time_zone::civil_lookup::SKIPPED, cl2.kind);
+        3: 1012:  EXPECT_EQ(time_zone::civil_lookup::SKIPPED, cl2.kind);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -8275,7 +8275,7 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-       50: 1013:  ExpectTime(cl2.pre, tz, 1978, 4, 2, 2, 15, 0, 1 * 3600, true, "WEST");
+       25: 1013:  ExpectTime(cl2.pre, tz, 1978, 4, 2, 2, 15, 0, 1 * 3600, true, "WEST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8397,7 +8397,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-       50: 1014:  ExpectTime(cl2.trans, tz, 1978, 4, 2, 2, 0, 0, 1 * 3600, true, "WEST");
+       25: 1014:  ExpectTime(cl2.trans, tz, 1978, 4, 2, 2, 0, 0, 1 * 3600, true, "WEST");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8519,7 +8519,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-       50: 1015:  ExpectTime(cl2.post, tz, 1978, 4, 2, 0, 15, 0, 0 * 3600, false, "WET");
+       25: 1015:  ExpectTime(cl2.post, tz, 1978, 4, 2, 0, 15, 0, 0 * 3600, false, "WET");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8641,12 +8641,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2: 1016:}
+        1: 1016:}
         -: 1017:
-function _ZN4cctz34TimeZoneEdgeCase_FixedOffsets_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz34TimeZoneEdgeCase_FixedOffsets_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz34TimeZoneEdgeCase_FixedOffsets_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz34TimeZoneEdgeCase_FixedOffsets_Test8TestBodyEv called 2 returned 100% blocks executed 20%
-       62: 1018:TEST(TimeZoneEdgeCase, FixedOffsets) {
+function _ZN4cctz34TimeZoneEdgeCase_FixedOffsets_Test8TestBodyEv called 1 returned 100% blocks executed 20%
+       57: 1018:TEST(TimeZoneEdgeCase, FixedOffsets) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -8656,16 +8656,16 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        6: 1019:  const time_zone gmtm5 = LoadZone("Etc/GMT+5");  // -0500
+        3: 1019:  const time_zone gmtm5 = LoadZone("Etc/GMT+5");  // -0500
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        2: 1020:  auto tp = convert(civil_second(1970, 1, 1, 0, 0, 0), gmtm5);
+        1: 1020:  auto tp = convert(civil_second(1970, 1, 1, 0, 0, 0), gmtm5);
 call    0 returned 100%
 call    1 returned 100%
-       50: 1021:  ExpectTime(tp, gmtm5, 1970, 1, 1, 0, 0, 0, -5 * 3600, false, "GMT+5");
+       25: 1021:  ExpectTime(tp, gmtm5, 1970, 1, 1, 0, 0, 0, -5 * 3600, false, "GMT+5");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8787,7 +8787,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        6: 1022:  EXPECT_EQ(system_clock::from_time_t(5 * 3600), tp);
+        3: 1022:  EXPECT_EQ(system_clock::from_time_t(5 * 3600), tp);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -8802,16 +8802,16 @@ branch 10 never executed
 call   11 never executed
 call   12 never executed
         -: 1023:
-        6: 1024:  const time_zone gmtp5 = LoadZone("Etc/GMT-5");  // +0500
+        3: 1024:  const time_zone gmtp5 = LoadZone("Etc/GMT-5");  // +0500
 call    0 returned 100%
 call    1 returned 100%
 branch  2 taken 100% (fallthrough)
 branch  3 taken 0% (throw)
 call    4 never executed
-        2: 1025:  tp = convert(civil_second(1970, 1, 1, 0, 0, 0), gmtp5);
+        1: 1025:  tp = convert(civil_second(1970, 1, 1, 0, 0, 0), gmtp5);
 call    0 returned 100%
 call    1 returned 100%
-       50: 1026:  ExpectTime(tp, gmtp5, 1970, 1, 1, 0, 0, 0, 5 * 3600, false, "GMT-5");
+       25: 1026:  ExpectTime(tp, gmtp5, 1970, 1, 1, 0, 0, 0, 5 * 3600, false, "GMT-5");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -8933,7 +8933,7 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        6: 1027:  EXPECT_EQ(system_clock::from_time_t(-5 * 3600), tp);
+        3: 1027:  EXPECT_EQ(system_clock::from_time_t(-5 * 3600), tp);
 branch  0 taken 0% (fallthrough)
 branch  1 taken 100%
 call    2 never executed
@@ -8947,12 +8947,12 @@ branch  9 never executed
 branch 10 never executed
 call   11 never executed
 call   12 never executed
-        2: 1028:}
+        1: 1028:}
         -: 1029:
-function _ZN4cctz34TimeZoneEdgeCase_NegativeYear_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz34TimeZoneEdgeCase_NegativeYear_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz34TimeZoneEdgeCase_NegativeYear_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz34TimeZoneEdgeCase_NegativeYear_Test8TestBodyEv called 2 returned 100% blocks executed 20%
-       62: 1030:TEST(TimeZoneEdgeCase, NegativeYear) {
+function _ZN4cctz34TimeZoneEdgeCase_NegativeYear_Test8TestBodyEv called 1 returned 100% blocks executed 20%
+       57: 1030:TEST(TimeZoneEdgeCase, NegativeYear) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -8963,14 +8963,14 @@ call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
         -: 1031:  // Tests transition from year 0 (aka 1BCE) to year -1.
-        2: 1032:  const time_zone tz = utc_time_zone();
+        1: 1032:  const time_zone tz = utc_time_zone();
 call    0 returned 100%
-        2: 1033:  auto tp = convert(civil_second(0, 1, 1, 0, 0, 0), tz);
+        1: 1033:  auto tp = convert(civil_second(0, 1, 1, 0, 0, 0), tz);
 call    0 returned 100%
 call    1 returned 100%
-        2: 1034:  time_zone::absolute_lookup al = tz.lookup(tp);
+        1: 1034:  time_zone::absolute_lookup al = tz.lookup(tp);
 call    0 returned 100%
-       50: 1035:  ExpectTime(tp, tz, 0, 1, 1, 0, 0, 0, 0 * 3600, false, "UTC");
+       25: 1035:  ExpectTime(tp, tz, 0, 1, 1, 0, 0, 0, 0 * 3600, false, "UTC");
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -9094,7 +9094,7 @@ call   119 never executed
 call   120 never executed
 call   121 never executed
 call   122 never executed
-        8: 1036:  EXPECT_EQ(weekday::saturday, get_weekday(civil_day(convert(tp, tz))));
+        4: 1036:  EXPECT_EQ(weekday::saturday, get_weekday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -9113,7 +9113,7 @@ branch 14 never executed
 call   15 never executed
 call   16 never executed
         -: 1037:  tp -= std::chrono::seconds(1);
-       50: 1038:  ExpectTime(tp, tz, -1, 12, 31, 23, 59, 59, 0 * 3600, false, "UTC");
+       25: 1038:  ExpectTime(tp, tz, -1, 12, 31, 23, 59, 59, 0 * 3600, false, "UTC");
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -9237,7 +9237,7 @@ call   119 never executed
 call   120 never executed
 call   121 never executed
 call   122 never executed
-        8: 1039:  EXPECT_EQ(weekday::friday, get_weekday(civil_day(convert(tp, tz))));
+        4: 1039:  EXPECT_EQ(weekday::friday, get_weekday(civil_day(convert(tp, tz))));
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -9255,12 +9255,12 @@ branch 13 never executed
 branch 14 never executed
 call   15 never executed
 call   16 never executed
-        2: 1040:}
+        1: 1040:}
         -: 1041:
-function _ZN4cctz35TimeZoneEdgeCase_UTC32bitLimit_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz35TimeZoneEdgeCase_UTC32bitLimit_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz35TimeZoneEdgeCase_UTC32bitLimit_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz35TimeZoneEdgeCase_UTC32bitLimit_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62: 1042:TEST(TimeZoneEdgeCase, UTC32bitLimit) {
+function _ZN4cctz35TimeZoneEdgeCase_UTC32bitLimit_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57: 1042:TEST(TimeZoneEdgeCase, UTC32bitLimit) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -9270,17 +9270,17 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2: 1043:  const time_zone tz = utc_time_zone();
+        1: 1043:  const time_zone tz = utc_time_zone();
 call    0 returned 100%
         -: 1044:
         -: 1045:  // Limits of signed 32-bit time_t
         -: 1046:  //
         -: 1047:  //   2147483647 == Tue, 19 Jan 2038 03:14:07 +0000 (UTC)
         -: 1048:  //   2147483648 == Tue, 19 Jan 2038 03:14:08 +0000 (UTC)
-        2: 1049:  auto tp = convert(civil_second(2038, 1, 19, 3, 14, 7), tz);
+        1: 1049:  auto tp = convert(civil_second(2038, 1, 19, 3, 14, 7), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50: 1050:  ExpectTime(tp, tz, 2038, 1, 19, 3, 14, 7, 0 * 3600, false, "UTC");
+       25: 1050:  ExpectTime(tp, tz, 2038, 1, 19, 3, 14, 7, 0 * 3600, false, "UTC");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -9403,7 +9403,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -: 1051:  tp += std::chrono::seconds(1);
-       50: 1052:  ExpectTime(tp, tz, 2038, 1, 19, 3, 14, 8, 0 * 3600, false, "UTC");
+       25: 1052:  ExpectTime(tp, tz, 2038, 1, 19, 3, 14, 8, 0 * 3600, false, "UTC");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -9525,12 +9525,12 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2: 1053:}
+        1: 1053:}
         -: 1054:
-function _ZN4cctz35TimeZoneEdgeCase_UTC5DigitYear_TestD0Ev called 2 returned 100% blocks executed 100%
+function _ZN4cctz35TimeZoneEdgeCase_UTC5DigitYear_TestD0Ev called 1 returned 100% blocks executed 100%
 function _ZN4cctz35TimeZoneEdgeCase_UTC5DigitYear_TestD2Ev called 0 returned 0% blocks executed 0%
-function _ZN4cctz35TimeZoneEdgeCase_UTC5DigitYear_Test8TestBodyEv called 2 returned 100% blocks executed 19%
-       62: 1055:TEST(TimeZoneEdgeCase, UTC5DigitYear) {
+function _ZN4cctz35TimeZoneEdgeCase_UTC5DigitYear_Test8TestBodyEv called 1 returned 100% blocks executed 19%
+       57: 1055:TEST(TimeZoneEdgeCase, UTC5DigitYear) {
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
@@ -9540,17 +9540,17 @@ call    5 returned 100%
 call    6 returned 100%
 call    7 returned 100%
 call    8 never executed
-        2: 1056:  const time_zone tz = utc_time_zone();
+        1: 1056:  const time_zone tz = utc_time_zone();
 call    0 returned 100%
         -: 1057:
         -: 1058:  // Rollover to 5-digit year
         -: 1059:  //
         -: 1060:  //   253402300799 == Fri, 31 Dec 9999 23:59:59 +0000 (UTC)
         -: 1061:  //   253402300800 == Sat,  1 Jan 1000 00:00:00 +0000 (UTC)
-        2: 1062:  auto tp = convert(civil_second(9999, 12, 31, 23, 59, 59), tz);
+        1: 1062:  auto tp = convert(civil_second(9999, 12, 31, 23, 59, 59), tz);
 call    0 returned 100%
 call    1 returned 100%
-       50: 1063:  ExpectTime(tp, tz, 9999, 12, 31, 23, 59, 59, 0 * 3600, false, "UTC");
+       25: 1063:  ExpectTime(tp, tz, 9999, 12, 31, 23, 59, 59, 0 * 3600, false, "UTC");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -9673,7 +9673,7 @@ call   118 never executed
 call   119 never executed
 call   120 never executed
         -: 1064:  tp += std::chrono::seconds(1);
-       50: 1065:  ExpectTime(tp, tz, 10000, 1, 1, 0, 0, 0, 0 * 3600, false, "UTC");
+       25: 1065:  ExpectTime(tp, tz, 10000, 1, 1, 0, 0, 0, 0 * 3600, false, "UTC");
 call    0 returned 100%
 branch  1 taken 0% (fallthrough)
 branch  2 taken 100%
@@ -9795,11 +9795,11 @@ call   117 never executed
 call   118 never executed
 call   119 never executed
 call   120 never executed
-        2: 1066:}
+        1: 1066:}
         -: 1067:
-function _GLOBAL__sub_I_time_zone_lookup_test.cc called 28 returned 100% blocks executed 100%
-function _Z41__static_initialization_and_destruction_0ii called 28 returned 100% blocks executed 100%
-       84: 1068:}  // namespace cctz
+function _GLOBAL__sub_I_time_zone_lookup_test.cc called 27 returned 100% blocks executed 100%
+function _Z41__static_initialization_and_destruction_0ii called 27 returned 100% blocks executed 100%
+       81: 1068:}  // namespace cctz
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0%
