@@ -9,7 +9,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 
 public class FileDiffer {
-	//TODO: current File/Dir being compaired -- easy to record File/Dir name
+	//TODO: add a field to denote current File/Dir being compaired -- easy to record File/Dir name
 	private CPPFileFilter cppFileFilter;
 	private DifferResult differResult;
 	
@@ -59,21 +59,22 @@ public class FileDiffer {
 					File dirInNew = dirMap.get(file.getName());
 					if (dirInNew == null){//dir deleted
 //						sb.append("\nDir Deleted: "+file.getName());
-						System.out.println("\nDir Deleted: "+file.getName());
+						System.out.println("\nDir Deleted: "+file.getName());//TODO
 						differResult.appendfileDeleted(file.getName());
 					}else{
 //						System.out.println("filename: "+oldDir+file.getName());
 						//Fixed: BUG: oldDir should be oldFolder's path, new* too
 //						sb.append(this.diff(oldDir, newDir, base+file.getName()+"/"));//diff this dir
-						this.diff(oldDir, newDir, base+file.getName()+"/");
+						this.diff(oldDir, newDir, base+file.getName()+"/");//TODO: keep this "getName()"
 						dirMap.remove(file.getName());
 					}
 				}
 			}
 
 			for(File file : dirMap.values()){
-//				sb.append("\nDir Added: "+file.getName());//dir added
-				System.out.println("\nDir Added: "+file.getName());//dir added
+//				sb.append("\nDir Added: "+file.getName());
+				//dir added
+				System.out.println("\nDir Added: "+file.getName());//TODO
 				differResult.appendfileAdded(file.getName());
 			}
 
@@ -116,7 +117,7 @@ public class FileDiffer {
 			if(fileInNew == null){
 				//file deleted
 //				sb.append("/n/tFile Deleted: "+filename);
-				System.out.println("\n\tFile Deleted: "+filename);
+				System.out.println("\n\tFile Deleted: "+filename);//TODO
 				differResult.appendfileDeleted(filename);
 			}else{
 //				if(file.lastModified() != fileInNew.lastModified()
@@ -128,7 +129,7 @@ public class FileDiffer {
 					if(!contentOld.equals(contentNew)){
 						ASTDiffer astDiffer = new ASTDiffer(contentOld, contentNew);
 //						sb.append("\nIn File: "+filename+"\n"+astDiffer.diff(contentOld, contentNew, true));
-						System.out.println("\n\tFile Modified: "+filename);
+						System.out.println("\n\tFile Modified: "+filename);//TODO
 						differResult.appendfileModified(filename, astDiffer);
 					}
 //				}
@@ -140,7 +141,7 @@ public class FileDiffer {
 		for(String filename : newMap.keySet()){
 			//file added
 //			sb.append("\nFile Added: "+filename);
-			System.out.println("\n\tFile Added: "+filename);
+			System.out.println("\n\tFile Added: "+filename);//TODO
 			differResult.appendfileAdded(filename);
 		}
 
