@@ -110,8 +110,8 @@
         -:  105:
         -:  106:    template<typename _Callable>
 function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEED0Ev called 0 returned 0% blocks executed 0%
-function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEED2Ev called 511 returned 99% blocks executed 80%
-     1023:  107:      struct _Impl : public _Impl_base
+function _ZNSt6thread5_ImplISt12_Bind_simpleIFZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvEUlPSt7promiseIvEE_S6_EEED2Ev called 512 returned 100% blocks executed 80%
+     1024:  107:      struct _Impl : public _Impl_base
 call    0 never executed
 call    1 never executed
         -:  108:      {

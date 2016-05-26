@@ -670,11 +670,11 @@ function _ZZN4cctz36TimeZones_LoadZonesConcurrently_Test8TestBodyEvENKUlPSt7prom
 call    0 returned 100%
       512:  649:    ready_future.wait();
 call    0 returned 99%
-      844:  650:    time_zone tz;
-   296086:  651:    for (const char* const* np = kTimeZoneNames; *np != nullptr; ++np) {
+      837:  650:    time_zone tz;
+   296286:  651:    for (const char* const* np = kTimeZoneNames; *np != nullptr; ++np) {
 branch  0 taken 99%
 branch  1 taken 1% (fallthrough)
-  1181873:  652:      EXPECT_TRUE(load_time_zone(*np, &tz));
+  1182568:  652:      EXPECT_TRUE(load_time_zone(*np, &tz));
 call    0 returned 99%
 call    1 returned 99%
 branch  2 taken 99% (fallthrough)

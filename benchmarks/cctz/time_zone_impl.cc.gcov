@@ -39,18 +39,18 @@
         -:   34:// utc_zone should only be referenced in a thread that has just done
         -:   35:// a LoadUTCTimeZone().
         -:   36:std::once_flag load_utc_once;
-function _ZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEv called 1197 returned 100% blocks executed 100%
-     1197:   37:void LoadUTCTimeZone() {
-     1216:   38:  std::call_once(load_utc_once, []() { utc_time_zone(); });
+function _ZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEv called 1221 returned 99% blocks executed 100%
+     1221:   37:void LoadUTCTimeZone() {
+     1240:   38:  std::call_once(load_utc_once, []() { utc_time_zone(); });
 call    0 returned 100%
-call    1 returned 100%
-     1197:   39:}
+call    1 returned 99%
+     1220:   39:}
         -:   40:
         -:   41:}  // namespace
         -:   42:
-function _ZN4cctz9time_zone4Impl12LoadTimeZoneERKSsPS0_ called 288262 returned 99% blocks executed 82%
-   288262:   43:bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {
-   288262:   44:  const bool is_utc = (name.compare("UTC") == 0);
+function _ZN4cctz9time_zone4Impl12LoadTimeZoneERKSsPS0_ called 289282 returned 99% blocks executed 82%
+   289282:   43:bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {
+   289282:   44:  const bool is_utc = (name.compare("UTC") == 0);
 call    0 returned 99%
         -:   45:
         -:   46:  // First check, under a shared lock, whether the time zone has already
@@ -64,8 +64,8 @@ branch  1 taken 1%
    596052:   52:      if (itr != time_zone_map->end()) {
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
-   296850:   53:        *tz = time_zone(itr->second);
-   296850:   54:        return is_utc || itr->second != utc_zone;
+   296826:   53:        *tz = time_zone(itr->second);
+   296826:   54:        return is_utc || itr->second != utc_zone;
 branch  0 taken 99% (fallthrough)
 branch  1 taken 1%
 branch  2 taken 1% (fallthrough)
@@ -74,30 +74,30 @@ branch  3 taken 99%
         -:   56:    }
         -:   57:  }
         -:   58:
-     1223:   59:  if (!is_utc) {
+     1247:   59:  if (!is_utc) {
 branch  0 taken 98% (fallthrough)
 branch  1 taken 2%
         -:   60:    // Ensure that UTC is loaded before any other time zones.
-     1197:   61:    LoadUTCTimeZone();
-call    0 returned 100%
+     1221:   61:    LoadUTCTimeZone();
+call    0 returned 99%
         -:   62:  }
         -:   63:
         -:   64:  // Now check again, under an exclusive lock.
         -:   65:  std::lock_guard<std::mutex> lock(time_zone_mutex);
-     1249:   66:  if (time_zone_map == nullptr) time_zone_map = new TimeZoneImplByName;
+     1273:   66:  if (time_zone_map == nullptr) time_zone_map = new TimeZoneImplByName;
 branch  0 taken 2% (fallthrough)
 branch  1 taken 98%
 call    2 returned 100%
 branch  3 taken 100% (fallthrough)
 branch  4 taken 0% (throw)
-     1223:   67:  const time_zone::Impl*& impl = (*time_zone_map)[name];
+     1247:   67:  const time_zone::Impl*& impl = (*time_zone_map)[name];
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)
         -:   68:  bool fallback_utc = false;
-     1223:   69:  if (impl == nullptr) {
-branch  0 taken 99% (fallthrough)
-branch  1 taken 1%
+     1247:   69:  if (impl == nullptr) {
+branch  0 taken 97% (fallthrough)
+branch  1 taken 3%
         -:   70:    // The first thread in loads the new time zone.
      1212:   71:    time_zone::Impl* new_impl = new time_zone::Impl(name);
 call    0 returned 100%
@@ -131,8 +131,8 @@ branch  1 taken 98%
      1206:   82:      impl = new_impl;  // install new time zone
         -:   83:    }
         -:   84:  }
-     1223:   85:  *tz = time_zone(impl);
-     1223:   86:  return !fallback_utc;
+     1247:   85:  *tz = time_zone(impl);
+     1247:   86:  return !fallback_utc;
         -:   87:}
         -:   88:
 function _ZN4cctz9time_zone4Impl3getERKS0_ called 256 returned 100% blocks executed 50%

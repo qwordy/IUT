@@ -99,10 +99,10 @@
         -:   94:      void
         -:   95:      wait(unique_lock<mutex>& __lock, _Predicate __p)
         -:   96:      {
-     2048:   97:	while (!__p())
+     2047:   97:	while (!__p())
 branch  0 taken 50%
 branch  1 taken 50% (fallthrough)
-     1024:   98:	  wait(__lock);
+     1023:   98:	  wait(__lock);
 call    0 returned 100%
 branch  1 taken 100% (fallthrough)
 branch  2 taken 0% (throw)

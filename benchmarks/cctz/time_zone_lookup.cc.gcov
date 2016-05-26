@@ -78,9 +78,9 @@ branch  3 never executed
     #####:   49:  return tz;
         -:   50:}
         -:   51:
-function _ZN4cctz14load_time_zoneERKSsPNS_9time_zoneE called 291853 returned 99% blocks executed 100%
-   291853:   52:bool load_time_zone(const std::string& name, time_zone* tz) {
-   291853:   53:  return time_zone::Impl::LoadTimeZone(name, tz);
+function _ZN4cctz14load_time_zoneERKSsPNS_9time_zoneE called 293239 returned 99% blocks executed 100%
+   293239:   52:bool load_time_zone(const std::string& name, time_zone* tz) {
+   293239:   53:  return time_zone::Impl::LoadTimeZone(name, tz);
 call    0 returned 99%
         -:   54:}
         -:   55:

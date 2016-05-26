@@ -31,7 +31,7 @@ void parse(char *file) {
   FILE *f;
   int times, line;
 
-  printf("%s\n", file);
+  printf("  %s\n", file);
   //printf("line No. | function name | called times\n");
   f = fopen(file, "r");
   result = fgets(buf, MAXLEN, f);
@@ -44,7 +44,7 @@ void parse(char *file) {
         line = 0;
       }
       if (times > 0) {
-        if (line == 0) printf("  ? "); else printf("  %d ", line);
+        if (line == 0) printf("    ? "); else printf("    %d ", line);
         printf("%s\n", funcname);
       }
     } else {

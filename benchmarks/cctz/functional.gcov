@@ -1722,15 +1722,15 @@
         -: 1717:  // unbound arguments, placeholders or nested bind expressions.
         -: 1718:  template<typename _Callable, typename... _Args>
         -: 1719:    typename _Bind_simple_helper<_Callable, _Args...>::__type
-function _ZSt13__bind_simpleIZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEvEUlvE_IEENSt19_Bind_simple_helperIT_IDpT0_EE6__typeEOS4_DpOS5_ called 1197 returned 100% blocks executed 100%
-     1197: 1720:    __bind_simple(_Callable&& __callable, _Args&&... __args)
+function _ZSt13__bind_simpleIZN4cctz12_GLOBAL__N_115LoadUTCTimeZoneEvEUlvE_IEENSt19_Bind_simple_helperIT_IDpT0_EE6__typeEOS4_DpOS5_ called 1221 returned 100% blocks executed 100%
+     1221: 1720:    __bind_simple(_Callable&& __callable, _Args&&... __args)
         -: 1721:    {
         -: 1722:      typedef _Bind_simple_helper<_Callable, _Args...> __helper_type;
         -: 1723:      typedef typename __helper_type::__maybe_type __maybe_type;
         -: 1724:      typedef typename __helper_type::__type __result_type;
         -: 1725:      return __result_type(
         -: 1726:          __maybe_type::__do_wrap( std::forward<_Callable>(__callable)),
-     1197: 1727:          std::forward<_Args>(__args)...);
+     1221: 1727:          std::forward<_Args>(__args)...);
         -: 1728:    }
         -: 1729:
         -: 1730:  /**
