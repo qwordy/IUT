@@ -3,6 +3,7 @@ package com.yfy;
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yfy on 5/26/16.
@@ -12,11 +13,16 @@ public class Inst {
   private ExecutorService executor;
 
   public Inst() {
-    //executor = Executors.newCachedThreadPool();
-    executor = Executors.newFixedThreadPool(
-        Runtime.getRuntime().availableProcessors() * 2);
+    executor = Executors.newCachedThreadPool();
+    //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+    //executor = Executors.newFixedThreadPool(1);
     ls(new File(Config.srcdir));
     executor.shutdown();
+    try {
+      executor.awaitTermination(1, TimeUnit.DAYS);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   private void ls(File dir) {
@@ -32,7 +38,6 @@ public class Inst {
   }
 
   private void inst(File file) {
-    System.out.println(file);
     executor.execute(new ThreadInst(file));
   }
 
