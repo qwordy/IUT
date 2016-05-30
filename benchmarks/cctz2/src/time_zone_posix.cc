@@ -8,12 +8,6 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,7 +34,7 @@ namespace {
 
 const char kDigits[] = "0123456789";
 
-const char* ParseInt(const char* p, int min, int max, int* vp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseInt(const char* p, int min, int max, int* vp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   int value = 0;
   const char* op = p;
   const int kMaxInt = std::numeric_limits<int>::max();
@@ -58,7 +52,7 @@ const char* ParseInt(const char* p, int min, int max, int* vp) {puts("heihei");p
 }
 
 // abbr = <.*?> | [^-+,\d]{3,}
-const char* ParseAbbr(const char* p, std::string* abbr) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseAbbr(const char* p, std::string* abbr) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   const char* op = p;
   if (*p == '<') {  // special zoneinfo <...> form
     while (*++p != '>') {
@@ -79,7 +73,7 @@ const char* ParseAbbr(const char* p, std::string* abbr) {puts("heihei");puts("he
 
 // offset = [+|-]hh[:mm[:ss]] (aggregated into single seconds value)
 const char* ParseOffset(const char* p, int min_hour, int max_hour, int sign,
-                        int* offset) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                        int* offset) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (p == nullptr) return nullptr;
   if (*p == '+' || *p == '-') {
     if (*p++ == '-') sign = -sign;
@@ -102,7 +96,7 @@ const char* ParseOffset(const char* p, int min_hour, int max_hour, int sign,
 }
 
 // datetime = ( Jn | n | Mm.w.d ) [ / offset ]
-const char* ParseDateTime(const char* p, PosixTransition* res) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseDateTime(const char* p, PosixTransition* res) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (p != nullptr && *p == ',') {
     if (*++p == 'M') {
       int month = 0;
@@ -142,7 +136,7 @@ const char* ParseDateTime(const char* p, PosixTransition* res) {puts("heihei");p
 }  // namespace
 
 // spec = std offset [ dst [ offset ] , datetime , datetime ]
-bool ParsePosixSpec(const std::string& spec, PosixTimeZone* res) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+bool ParsePosixSpec(const std::string& spec, PosixTimeZone* res) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   const char* p = spec.c_str();
   if (*p == ':') return false;
 

@@ -8,12 +8,6 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -56,7 +50,7 @@ namespace {
 
 #if !HAS_STRPTIME
 // Build a strptime() using C++11's std::get_time().
-char* strptime(const char* s, const char* fmt, std::tm* tm) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+char* strptime(const char* s, const char* fmt, std::tm* tm) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   std::istringstream input(s);
   input >> std::get_time(tm, fmt);
   if (input.fail()) return nullptr;
@@ -64,7 +58,7 @@ char* strptime(const char* s, const char* fmt, std::tm* tm) {puts("heihei");puts
 }
 #endif
 
-std::tm ToTM(const time_zone::absolute_lookup& al) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+std::tm ToTM(const time_zone::absolute_lookup& al) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   std::tm tm{};
   tm.tm_sec = al.cs.second();
   tm.tm_min = al.cs.minute();
@@ -114,7 +108,7 @@ const char kDigits[] = "0123456789";
 // Formats a 64-bit integer in the given field width.  Note that it is up
 // to the caller of Format64() [and Format02d()/FormatOffset()] to ensure
 // that there is sufficient space before ep to hold the conversion.
-char* Format64(char* ep, int width, int64_t v) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+char* Format64(char* ep, int width, int64_t v) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   bool neg = false;
   if (v < 0) {
     --width;
@@ -142,14 +136,14 @@ char* Format64(char* ep, int width, int64_t v) {puts("heihei");puts("heihei");pu
 }
 
 // Formats [0 .. 99] as %02d.
-char* Format02d(char* ep, int v) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+char* Format02d(char* ep, int v) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   *--ep = kDigits[v % 10];
   *--ep = kDigits[(v / 10) % 10];
   return ep;
 }
 
 // Formats a UTC offset, like +00:00.
-char* FormatOffset(char* ep, int minutes, char sep) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+char* FormatOffset(char* ep, int minutes, char sep) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   char sign = '+';
   if (minutes < 0) {
     minutes = -minutes;
@@ -163,7 +157,7 @@ char* FormatOffset(char* ep, int minutes, char sep) {puts("heihei");puts("heihei
 }
 
 // Formats a std::tm using strftime(3).
-void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   // strftime(3) returns the number of characters placed in the output
   // array (which may be 0 characters).  It also returns 0 to indicate
   // an error, like the array wasn't large enough.  To accomodate this,
@@ -181,7 +175,7 @@ void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {puts
 
 // Used for %E#S/%E#f specifiers and for data values in parse().
 template <typename T>
-const char* ParseInt(const char* dp, int width, T min, T max, T* vp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseInt(const char* dp, int width, T min, T max, T* vp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (dp != nullptr) {
     const T kmin = std::numeric_limits<T>::min();
     bool erange = false;
@@ -277,7 +271,7 @@ const int64_t kExp10[kDigits10_64 + 1] = {
 // We also handle the %z and %Z specifiers to accommodate platforms that do
 // not support the tm_gmtoff and tm_zone extensions to std::tm.
 std::string format(const std::string& format, const time_point<sys_seconds>& tp,
-                   const std::chrono::nanoseconds& ns, const time_zone& tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                   const std::chrono::nanoseconds& ns, const time_zone& tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   std::string result;
   const time_zone::absolute_lookup al = tz.lookup(tp);
   const std::tm tm = ToTM(al);
@@ -450,7 +444,7 @@ std::string format(const std::string& format, const time_point<sys_seconds>& tp,
 
 namespace {
 
-const char* ParseOffset(const char* dp, char sep, int* offset) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseOffset(const char* dp, char sep, int* offset) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (dp != nullptr) {
     const char sign = *dp++;
     if (sign == '+' || sign == '-') {
@@ -474,7 +468,7 @@ const char* ParseOffset(const char* dp, char sep, int* offset) {puts("heihei");p
   return dp;
 }
 
-const char* ParseZone(const char* dp, std::string* zone) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseZone(const char* dp, std::string* zone) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   zone->clear();
   if (dp != nullptr) {
     while (*dp != '\0' && !std::isspace(*dp)) zone->push_back(*dp++);
@@ -484,7 +478,7 @@ const char* ParseZone(const char* dp, std::string* zone) {puts("heihei");puts("h
 }
 
 const char* ParseSubSeconds(const char* dp,
-                            std::chrono::nanoseconds* subseconds) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                            std::chrono::nanoseconds* subseconds) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (dp != nullptr) {
     int64_t v = 0;
     int64_t exp = 0;
@@ -510,7 +504,7 @@ const char* ParseSubSeconds(const char* dp,
 }
 
 // Parses a string into a std::tm using strptime(3).
-const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (dp != nullptr) {
     dp = strptime(dp, fmt, tm);
   }
@@ -534,7 +528,7 @@ const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {puts("heihei"
 // support the tm_gmtoff extension to std::tm.  %Z is parsed but ignored.
 bool parse(const std::string& format, const std::string& input,
            const time_zone& tz, time_point<sys_seconds>* tpp,
-           std::chrono::nanoseconds* ns) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+           std::chrono::nanoseconds* ns) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   // The unparsed input.
   const char* data = input.c_str();  // NUL terminated
 

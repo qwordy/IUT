@@ -8,12 +8,6 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,13 +30,13 @@
 
 namespace cctz {
 
-time_zone utc_time_zone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+time_zone utc_time_zone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   time_zone tz;
   load_time_zone("UTC", &tz);
   return tz;
 }
 
-time_zone local_time_zone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+time_zone local_time_zone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
 #if defined(_WIN32) || defined(_WIN64)
   char* tz_env = nullptr;
   _dupenv_s(&tz_env, nullptr, "TZ");
@@ -65,7 +59,7 @@ time_zone local_time_zone() {puts("heihei");puts("heihei");puts("heihei");puts("
   return tz;
 }
 
-bool load_time_zone(const std::string& name, time_zone* tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+bool load_time_zone(const std::string& name, time_zone* tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   return time_zone::Impl::LoadTimeZone(name, tz);
 }
 
