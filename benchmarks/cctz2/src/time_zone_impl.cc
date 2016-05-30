@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,13 +45,13 @@ const time_zone::Impl* utc_zone = nullptr;
 // utc_zone should only be referenced in a thread that has just done
 // a LoadUTCTimeZone().
 std::once_flag load_utc_once;
-void LoadUTCTimeZone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+void LoadUTCTimeZone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   std::call_once(load_utc_once, []() { utc_time_zone(); });
 }
 
 }  // namespace
 
-bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   const bool is_utc = (name.compare("UTC") == 0);
 
   // First check, under a shared lock, whether the time zone has already
@@ -96,7 +97,7 @@ bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {puts
   return !fallback_utc;
 }
 
-const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   if (tz.impl_ == nullptr) {
     // Dereferencing an implicit-UTC time_zone is expected to be
     // rare, so we don't mind paying a small synchronization cost.

@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +61,7 @@ namespace {
 
 // Convert errnum to a message, using buf[buflen] if necessary.
 // buf must be non-null, and buflen non-zero.
-char* errmsg(int errnum, char* buf, size_t buflen) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+char* errmsg(int errnum, char* buf, size_t buflen) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
 #if defined(_WIN32) || defined(_WIN64)
   strerror_s(buf, buflen, errnum);
   return buf;
@@ -77,7 +78,7 @@ char* errmsg(int errnum, char* buf, size_t buflen) {puts("heihei");puts("heihei"
 
 // Wrap the tzfile.h isleap() macro with an inline function, which will
 // then have normal argument-passing semantics (i.e., single evaluation).
-inline bool IsLeap(int64_t year) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei"); return isleap(year); }
+inline bool IsLeap(int64_t year) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei"); return isleap(year); }
 
 // The month lengths in non-leap and leap years respectively.
 const int8_t kDaysPerMonth[2][1 + MONSPERYEAR] = {
@@ -138,7 +139,7 @@ const int8_t kDaysPer100Years[401] = {
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-inline int DaysPer100Years(int eyear) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+inline int DaysPer100Years(int eyear) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   return 36524 + kDaysPer100Years[eyear];
 }
 
@@ -164,16 +165,16 @@ const int8_t kDaysPer4Years[401] = {
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-inline int DaysPer4Years(int eyear) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei"); return 1460 + kDaysPer4Years[eyear]; }
+inline int DaysPer4Years(int eyear) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei"); return 1460 + kDaysPer4Years[eyear]; }
 
 // Like kSecPerYear[] but scaled down by a factor of SECSPERDAY.
 const int32_t kDaysPerYear[2] = {DAYSPERNYEAR, DAYSPERLYEAR};
 
-inline int DaysPerYear(int year) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei"); return kDaysPerYear[IsLeap(year)]; }
+inline int DaysPerYear(int year) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei"); return kDaysPerYear[IsLeap(year)]; }
 
 // Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
 // See http://howardhinnant.github.io/date_algorithms.html#days_from_civil.
-int64_t DayOrdinal(int64_t year, int month, int day) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+int64_t DayOrdinal(int64_t year, int month, int day) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   year -= (month <= 2 ? 1 : 0);
   const int64_t era = (year >= 0 ? year : year - 399) / 400;
   const int yoe = static_cast<int>(year - era * 400);
@@ -186,7 +187,7 @@ int64_t DayOrdinal(int64_t year, int month, int day) {puts("heihei");puts("heihe
 // returning multiples of base to carry out. "zero" must be >= 0, and
 // base must be sufficiently large to avoid overflowing the return value.
 // Inlining admits significant gains as base and zero are literals.
-inline int NormalizeField(int base, int zero, int* valp, int carry_in) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+inline int NormalizeField(int base, int zero, int* valp, int carry_in) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   int carry_out = 0;
   int val = *valp;
   if (zero != 0 && val < 0) {
@@ -218,7 +219,7 @@ inline int NormalizeField(int base, int zero, int* valp, int carry_in) {puts("he
 // Multi-byte, numeric values are encoded using a MSB first,
 // twos-complement representation. These helpers decode, from
 // the given address, 4-byte and 8-byte values respectively.
-int32_t Decode32(const char* cp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+int32_t Decode32(const char* cp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   uint32_t v = 0;
   for (int i = 0; i != (32 / 8); ++i)
     v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
@@ -226,7 +227,7 @@ int32_t Decode32(const char* cp) {puts("heihei");puts("heihei");puts("heihei");p
   return -static_cast<int32_t>(~v) - 1;
 }
 
-int64_t Decode64(const char* cp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+int64_t Decode64(const char* cp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   uint64_t v = 0;
   for (int i = 0; i != (64 / 8); ++i)
     v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
@@ -236,7 +237,7 @@ int64_t Decode64(const char* cp) {puts("heihei");puts("heihei");puts("heihei");p
 
 // Generate a year-relative offset for a PosixTransition.
 int64_t TransOffset(bool leap_year, int jan1_weekday,
-                    const PosixTransition& pt) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                    const PosixTransition& pt) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   int days = 0;
   switch (pt.date.fmt) {
     case PosixTransition::J: {
@@ -265,7 +266,7 @@ int64_t TransOffset(bool leap_year, int jan1_weekday,
   return (days * SECSPERDAY) + pt.time.offset;
 }
 
-inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   TimeInfo ti;
   ti.pre = ti.trans = ti.post = FromUnixSeconds(unix_time);
   ti.kind = time_zone::civil_lookup::UNIQUE;
@@ -274,7 +275,7 @@ inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {puts("heihei");p
 }
 
 inline TimeInfo MakeSkipped(const Transition& tr, const DateTime& dt,
-                            bool normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                            bool normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   TimeInfo ti;
   ti.pre = FromUnixSeconds(tr.unix_time - 1 + (dt - tr.prev_date_time));
   ti.trans = FromUnixSeconds(tr.unix_time);
@@ -285,7 +286,7 @@ inline TimeInfo MakeSkipped(const Transition& tr, const DateTime& dt,
 }
 
 inline TimeInfo MakeRepeated(const Transition& tr, const DateTime& dt,
-                             bool normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                             bool normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   TimeInfo ti;
   ti.pre = FromUnixSeconds(tr.unix_time - 1 - (tr.prev_date_time - dt));
   ti.trans = FromUnixSeconds(tr.unix_time);
@@ -299,7 +300,7 @@ inline TimeInfo MakeRepeated(const Transition& tr, const DateTime& dt,
 
 // Normalize from individual date/time fields.
 bool DateTime::Normalize(int64_t year, int mon, int day,
-                         int hour, int min, int sec) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+                         int hour, int min, int sec) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   int min_carry = NormalizeField(SECSPERMIN, 0, &sec, 0);
   int hour_carry = NormalizeField(MINSPERHOUR, 0, &min, min_carry);
   int day_carry = NormalizeField(HOURSPERDAY, 0, &hour, hour_carry);
@@ -370,12 +371,12 @@ bool DateTime::Normalize(int64_t year, int mon, int day,
 }
 
 // Assign from a Breakdown, created using a TimeZoneInfo timestamp.
-inline void DateTime::Assign(const Breakdown& bd) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+inline void DateTime::Assign(const Breakdown& bd) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   Normalize(bd.year, bd.month, bd.day, bd.hour, bd.minute, bd.second);
 }
 
 // What (no leap-seconds) UTC+seconds zoneinfo would look like.
-void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   transition_types_.resize(1);
   transition_types_[0].utc_offset = seconds;
   transition_types_[0].is_dst = false;
@@ -395,7 +396,7 @@ void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {puts("heihei");puts("heihei")
 }
 
 // Builds the in-memory header using the raw bytes from the file.
-void TimeZoneInfo::Header::Build(const tzhead& tzh) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+void TimeZoneInfo::Header::Build(const tzhead& tzh) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   timecnt = Decode32(tzh.tzh_timecnt);
   typecnt = Decode32(tzh.tzh_typecnt);
   charcnt = Decode32(tzh.tzh_charcnt);
@@ -430,7 +431,7 @@ size_t TimeZoneInfo::Header::DataLength(size_t time_len) const {
   return len;
 }
 
-bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   // Read and validate the header.
   tzhead tzh;
   if (fread(&tzh, 1, sizeof tzh, fp) != sizeof tzh)
@@ -644,7 +645,7 @@ bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {puts("heihei");puts(
   return true;
 }
 
-bool TimeZoneInfo::Load(const std::string& name) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+bool TimeZoneInfo::Load(const std::string& name) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   // We can ensure that the loading of UTC or any other fixed-offset
   // zone never fails because the simple, no-transition state can be
   // internally generated. Note that this depends on our choice to not

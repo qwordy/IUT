@@ -1,5 +1,6 @@
 package edu.sjtu.stap.inst;
 
+import edu.sjtu.stap.config.Config;
 import javafx.util.Pair;
 import java.io.*;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ThreadInst implements Runnable {
   }
 
   private String inst(String buf) {
-    Pattern pattern = Pattern.compile(Config.functionDefPattern());
+    Pattern pattern = Pattern.compile(Inst.functionDefPattern());
     //String test = "int a(const bool a){};";
     Matcher matcher = pattern.matcher(buf);
     ArrayList<Pair<Integer, Integer>> list = new ArrayList<>();

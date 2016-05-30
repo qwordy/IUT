@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +38,7 @@ namespace cctz {
 namespace {
 
 template <typename T>
-std::string Format(const T& t) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+std::string Format(const T& t) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   std::stringstream ss;
   ss << t;
   return ss.str();

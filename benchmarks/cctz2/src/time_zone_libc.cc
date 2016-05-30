@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -45,12 +46,12 @@
 # define OFFSET(tm) ((tm).tm_isdst > 0 ? altzone : timezone)
 # define ABBR(tm)   (tzname[(tm).tm_isdst > 0])
 #elif defined(_WIN32) || defined(_WIN64)
-static long get_timezone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+static long get_timezone() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   long seconds;
   _get_timezone(&seconds);
   return seconds;
 }
-static std::string get_tzname(int index) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+static std::string get_tzname(int index) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   char time_zone_name[32] = {0};
   size_t size_in_bytes = sizeof time_zone_name;
   _get_tzname(&size_in_bytes, time_zone_name, size_in_bytes, index);
@@ -65,7 +66,7 @@ static std::string get_tzname(int index) {puts("heihei");puts("heihei");puts("he
 
 namespace cctz {
 
-TimeZoneLibC::TimeZoneLibC(const std::string& name) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+TimeZoneLibC::TimeZoneLibC(const std::string& name) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   local_ = (name == "localtime");
   if (!local_) {
     // TODO: Support "UTC-05:00", for example.
@@ -108,7 +109,7 @@ Breakdown TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const {
 namespace {
 
 // Normalize *val so that 0 <= *val < base, returning any carry.
-int NormalizeField(int base, int* val, bool* normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+int NormalizeField(int base, int* val, bool* normalized) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   int carry = *val / base;
   *val %= base;
   if (*val < 0) {
@@ -119,7 +120,7 @@ int NormalizeField(int base, int* val, bool* normalized) {puts("heihei");puts("h
   return carry;
 }
 
-bool IsLeap(int64_t year) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+bool IsLeap(int64_t year) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
 }
 
@@ -134,7 +135,7 @@ const int kDaysPerYear[2] = {365, 366};
 
 // Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
 // See http://howardhinnant.github.io/date_algorithms.html#days_from_civil.
-std::time_t DayOrdinal(int64_t year, int month, int day) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+std::time_t DayOrdinal(int64_t year, int month, int day) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   year -= (month <= 2 ? 1 : 0);
   const std::time_t era = (year >= 0 ? year : year - 399) / 400;
   const int yoe = static_cast<int>(year - era * 400);

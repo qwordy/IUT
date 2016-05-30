@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2015 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -628,7 +629,7 @@ const char* const kTimeZoneNames[] = {
 };
 
 // Helper to return a loaded time zone by value (UTC on error).
-TimeZone LoadZone(const std::string& name) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+TimeZone LoadZone(const std::string& name) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
   TimeZone tz;
   LoadTimeZone(name, &tz);
   return tz;

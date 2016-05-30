@@ -1,5 +1,7 @@
 package edu.sjtu.stap.inst;
 
+import edu.sjtu.stap.config.Config;
+
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -49,5 +51,22 @@ public class Inst {
         suffix.equals("cc") ||
         suffix.equals("cpp") ||
         suffix.equals("h");
+  }
+
+  private static volatile String functionDefPattern;
+
+  public static String functionDefPattern() {
+    if (functionDefPattern == null) {
+      synchronized (Config.class) {
+        if (functionDefPattern == null) {
+          String identifier = "[\\w:\\*&\\.\\[\\]<>]+";
+          String funcName = "[\\w\\*&:]+";
+          String varDec = String.format("\\s*(const\\s+)?%s\\s+%s\\s*", identifier, identifier);
+          String varDecList = String.format("(%s(,\\s*%s)*)?", varDec, varDec);
+          functionDefPattern = String.format("(%s\\s+)?%s\\(%s\\)\\s*\\{", identifier, funcName, varDecList);
+        }
+      }
+    }
+    return functionDefPattern;
   }
 }
