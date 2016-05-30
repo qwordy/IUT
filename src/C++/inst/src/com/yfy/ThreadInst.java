@@ -1,6 +1,8 @@
 package com.yfy;
 
+import javafx.util.Pair;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,32 +21,43 @@ public class ThreadInst implements Runnable {
   @Override
   public void run() {
     try {
-      Thread.sleep(1000);
       BufferedReader br = new BufferedReader(new FileReader(file));
       char[] buf = new char[(int)file.length()];
       br.read(buf);
       br.close();
-      inst(new String(buf));
+
+      String instedBuf = inst(new String(buf));
+
+      BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+      bw.write(instedBuf);
+      bw.close();
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private void inst(String buf) {
-//    String identifier = "[\\w:\\*&\\.\\[\\]<>]+";
-//    String funcName = "[\\w\\*&:]+";
-//    String varDec = String.format("\\s*(const\\s+)?%s\\s+%s\\s*", identifier, identifier);
-//    String varDecList = String.format("(%s(,\\s*%s)*)?", varDec, varDec);
-//    String functionDef = String.format("(%s\\s+)?%s\\(%s\\)\\s*\\{", identifier, funcName, varDecList);
-    //System.out.println(functionDef);
-
-    Pattern pattern = Pattern.compile(Config.functionDef());
-    String test = "int a(const bool a){};";
+  private String inst(String buf) {
+    Pattern pattern = Pattern.compile(Config.functionDefPattern());
+    //String test = "int a(const bool a){};";
     Matcher matcher = pattern.matcher(buf);
+    ArrayList<Pair<Integer, Integer>> list = new ArrayList<>();
     while (matcher.find()) {
       int start = matcher.start();
       int end = matcher.end();
+      list.add(new Pair<>(start, end));
       //System.out.printf("%s\n(%d, %d): %s\n", file, start, end, buf.substring(start, end));
     }
+
+    StringBuilder sb = new StringBuilder(buf);
+    sb.insert(0, "#include <stdio.h>\n");
+    int offset = 19;
+
+    String log = "puts(\"heihei\");";
+    for (Pair<Integer, Integer> pair : list) {
+      sb.insert(pair.getValue() + offset, log);
+      offset += log.length();
+    }
+
+    return sb.toString();
   }
 }

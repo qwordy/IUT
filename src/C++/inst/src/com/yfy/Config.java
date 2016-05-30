@@ -5,12 +5,12 @@ package com.yfy;
  * Config
  */
 public class Config {
-  public static String srcdir = "/home/yfy/iut/benchmarks/cctz/src/";
+  public static String srcdir = "/home/yfy/iut/benchmarks/cctz2/src/";
 //  public static String srcdir = "/home/yfy/iut/src/C++/test2/";
 
-  private static String functionDef;
+  private static volatile String functionDef;
 
-  public static String functionDef() {
+  public static String functionDefPattern() {
     if (functionDef == null) {
       synchronized (Config.class) {
         if (functionDef == null) {
