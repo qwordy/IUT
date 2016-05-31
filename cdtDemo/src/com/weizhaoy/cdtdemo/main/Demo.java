@@ -27,7 +27,7 @@ import com.weizhaoy.cdtdemo.diff.FileDiffer;
 
 public class Demo {
 
-	static int FLAG = 3;// only for test
+	static int FLAG = 1;// only for test
 	
 	public static void main(String[] args) {
 		
@@ -84,6 +84,8 @@ public class Demo {
 		
 		if(FLAG == 1){
 			String filePath = "testcode/time_zone_libc.cc";
+//			String filePath = "testcode/main.cpp";
+
 //			String filePath = "testcode/cctz_v1_test.cc";
 			if (args.length != 0)
 				filePath = args[0];
@@ -108,6 +110,7 @@ public class Demo {
 //			astVisitor.shouldVisitTokens = true;
 //			astVisitor.shouldVisitParameterDeclarations = true;
 			astVisitor.shouldVisitDeclarations = true;
+			astVisitor.shouldVisitNamespaces = true;
 //			astVisitor.shouldVisitAmbiguousNodes = true;
 			astTranslationUnit.accept(astVisitor);
 			

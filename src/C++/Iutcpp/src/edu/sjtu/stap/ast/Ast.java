@@ -7,6 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.core.parser.ParserLanguage;
 import org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,8 +55,9 @@ public class Ast {
   /**
    * @return list of class declarations
    */
-  public List<Integer> getClassDecl() throws IOException {
+  public List<CPPASTSimpleDeclaration> getClassDecl() throws IOException {
+    //TODO: may need to create a class like "ClassDeclaration" that extends "CPPASTSimpleDeclaration"
 
-    return null;
+    return myASTVisitor.getClasses();
   }
 }

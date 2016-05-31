@@ -17,10 +17,12 @@ import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.dom.ast.IASTToken;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTDecltypeSpecifier;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.core.model.IFunctionDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.ASTAmbiguousNode;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 import org.w3c.dom.Attr;
 
 public class MultiVisitor extends ASTVisitor{
@@ -105,12 +107,19 @@ public class MultiVisitor extends ASTVisitor{
 			//					}
 			//				}
 			info += "\n\t"+iastFunctionDefinition.getBody().getRawSignature() ;
-			System.out.println(info);
+			//System.out.println(info);
 			//				System.out.println("ASTFunction: "+ ((IASTFunctionDefinition) declaration).getDeclSpecifier().getRawSignature());
 			//				System.out.println("                    "+ ((IASTFunctionDefinition) declaration).getDeclarator().getRawSignature());
 		}else if(declaration instanceof CPPASTProblemDeclaration){
 			CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
 			System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
+		}else if(declaration instanceof CPPASTSimpleDeclaration){
+			CPPASTSimpleDeclaration cppastSimpleDeclaration = (CPPASTSimpleDeclaration) declaration;
+			System.out.println(cppastSimpleDeclaration.getRawSignature().startsWith("class"));
+			if(cppastSimpleDeclaration.getRawSignature().startsWith("class")){
+				System.out.println(cppastSimpleDeclaration.getRawSignature() );
+			}
+			
 		}
 
 
@@ -195,4 +204,10 @@ public class MultiVisitor extends ASTVisitor{
 		return super.visit(tu);
 	}
 
+	@Override
+	public int visit(ICPPASTNamespaceDefinition namespaceDefinition) {
+		// TODO Auto-generated method stub
+		System.out.println("ICPPASTNamespaceDefinition: "+ namespaceDefinition.getName());
+		return super.visit(namespaceDefinition);
+	}
 }
