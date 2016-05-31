@@ -1,14 +1,3 @@
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -72,18 +61,18 @@ class TimeZoneIf {
   // A factory function for TimeZoneIf implementations.
   static std::unique_ptr<TimeZoneIf> Load(const std::string& name);
 
-  virtual ~TimeZoneIf() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");}
+  virtual ~TimeZoneIf() {}
 
   virtual Breakdown BreakTime(const time_point<sys_seconds>& tp) const = 0;
   virtual TimeInfo MakeTimeInfo(int64_t year, int mon, int day,
                                 int hour, int min, int sec) const = 0;
 
  protected:
-  TimeZoneIf() {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");}
+  TimeZoneIf() {}
 };
 
 // Converts tp to a count of seconds since the Unix epoch.
-inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {
   return (tp - std::chrono::time_point_cast<sys_seconds>(
                    std::chrono::system_clock::from_time_t(0)))
       .count();
@@ -91,7 +80,7 @@ inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {puts("heihei");
 
 // Converts a count of seconds since the Unix epoch to a
 // time_point<sys_seconds>.
-inline time_point<sys_seconds> FromUnixSeconds(int64_t t) {puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");puts("heihei");
+inline time_point<sys_seconds> FromUnixSeconds(int64_t t) {
   return std::chrono::time_point_cast<sys_seconds>(
              std::chrono::system_clock::from_time_t(0)) +
          sys_seconds(t);

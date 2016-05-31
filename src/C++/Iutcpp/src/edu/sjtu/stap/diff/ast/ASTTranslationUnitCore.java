@@ -30,13 +30,13 @@ import org.eclipse.cdt.internal.core.parser.scanner.CPreprocessor;
 
 import com.google.common.collect.Maps;
 
-public class ASTTranslationUnitCore implements IASTTranslationUnitCore{
+public class ASTTranslationUnitCore {//implements IASTTranslationUnitCore{
 
 	private final static String TEST_CODE = "<testcode>";
 	private final static IParserLogService NULL_LOG = new NullLogService();
 
 
-	@Override
+	//@Override
 	public IASTTranslationUnit parseFile(
 			String file, 
 			ParserLanguage parserLanguage, 
@@ -58,7 +58,7 @@ public class ASTTranslationUnitCore implements IASTTranslationUnitCore{
 
 
 
-	@Override
+	//@Override
 	public IASTTranslationUnit parseCode(
 			String code, 
 			ParserLanguage parserLanguage, 
@@ -68,6 +68,11 @@ public class ASTTranslationUnitCore implements IASTTranslationUnitCore{
 		return parse(TEST_CODE, code, parserLanguage, useGNUExtensions, skipTrivialInitializers);
 
 	}
+
+	public IASTTranslationUnit parseAll(String file, String code) {
+		return parse(file, code, ParserLanguage.CPP, false, false);
+	}
+
 	private IASTTranslationUnit parse(
 			String file, 
 			String code, 

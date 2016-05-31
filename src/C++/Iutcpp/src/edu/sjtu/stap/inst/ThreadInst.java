@@ -1,5 +1,7 @@
 package edu.sjtu.stap.inst;
 
+import edu.sjtu.stap.ast.Ast;
+import edu.sjtu.stap.ast.AstWarehouse;
 import edu.sjtu.stap.config.Config;
 import javafx.util.Pair;
 import java.io.*;
@@ -22,12 +24,8 @@ public class ThreadInst implements Runnable {
   @Override
   public void run() {
     try {
-      BufferedReader br = new BufferedReader(new FileReader(file));
-      char[] buf = new char[(int)file.length()];
-      br.read(buf);
-      br.close();
-
-      String instedBuf = inst(new String(buf));
+      Ast ast = AstWarehouse.getAst(file);
+      String instedBuf = inst(ast.getFileContent());
 
       BufferedWriter bw = new BufferedWriter(new FileWriter(file));
       bw.write(instedBuf);
@@ -38,6 +36,16 @@ public class ThreadInst implements Runnable {
   }
 
   private String inst(String buf) {
+
+
+    StringBuilder sb = new StringBuilder(buf);
+    //sb.insert(0, "#include <stdio.h>\n");
+    //int offset = 19;
+
+    return sb.toString();
+  }
+
+  private String inst2(String buf) {
     Pattern pattern = Pattern.compile(Inst.functionDefPattern());
     //String test = "int a(const bool a){};";
     Matcher matcher = pattern.matcher(buf);

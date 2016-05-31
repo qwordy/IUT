@@ -9,7 +9,9 @@ import org.eclipse.cdt.core.parser.ParserLanguage;
 import org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -19,20 +21,32 @@ import java.util.List;
  */
 public class Ast {
 
-  IASTTranslationUnit ast;
-  File file;
-  MyASTVisitor myASTVisitor;
+  private MyASTVisitor myASTVisitor;
+  private String fileContent;
 
   /**
-   * Constructor
+   * Constructor. Do not call it directly! Use AstWarehouse.
    * @param file the file to parse
    */
-  public Ast(File file) throws IOException {
-    this.file = file;
+  public Ast(File file) throws Exception {
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    char[] buf = new char[(int)file.length()];
+    br.read(buf);
+    fileContent = new String(buf);
+    br.close();
+
     ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
-    ast = astTranslationUnitCore.parseFile(file.getCanonicalPath(),ParserLanguage.CPP, false, false);
+    IASTTranslationUnit ast = astTranslationUnitCore.parseAll(file.getAbsolutePath(), fileContent);
     myASTVisitor = new MyASTVisitor();
     ast.accept(myASTVisitor);
+  }
+
+  public Ast(String file) throws Exception {
+    this(new File(file));
+  }
+
+  public String getFileContent() {
+    return fileContent;
   }
 
   /**

@@ -10,11 +10,16 @@ import java.util.HashMap;
 public class AstWarehouse {
   private static HashMap<String, Ast> map = new HashMap<>();
 
-  public static Ast getAst(String file) {
-    return map.get(file);
+  public static Ast getAst(String file) throws Exception {
+    Ast ast = map.get(file);
+    if (ast == null) {
+      ast = new Ast(file);
+      map.put(file, ast);
+    }
+    return ast;
   }
 
-  public static Ast getAst(File file) {
+  public static Ast getAst(File file) throws Exception {
     return getAst(file.getAbsolutePath());
   }
 }
