@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Ast {
   int ast;
-  
+
   /**
    * Constructor
    * @param file the file to parse
