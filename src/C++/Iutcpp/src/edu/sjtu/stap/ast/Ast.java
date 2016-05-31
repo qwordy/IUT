@@ -1,6 +1,15 @@
 package edu.sjtu.stap.ast;
 
+import edu.sjtu.stap.diff.ast.ASTTranslationUnitCore;
+import edu.sjtu.stap.diff.ast.MyASTVisitor;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
+import org.eclipse.cdt.core.parser.ParserLanguage;
+import org.eclipse.cdt.internal.core.dom.parser.ASTTranslationUnit;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -8,33 +17,43 @@ import java.util.List;
  * Ast
  */
 public class Ast {
-  int ast;
-  
+  IASTTranslationUnit ast;
+  File file;
+  MyASTVisitor myASTVisitor;
   /**
    * Constructor
    * @param file the file to parse
    */
-  public Ast(File file) {
+  public Ast(File file) throws IOException {
+    this.file = file;
+    ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
+    ast = astTranslationUnitCore.parseFile(file.getCanonicalPath(),ParserLanguage.CPP, false, false);
+    myASTVisitor = new MyASTVisitor();
+    ast.accept(myASTVisitor);
   }
 
   /**
    * @return list of function declarations
    */
-  public List<Integer> getFunctionDecl() {
-    return null;
+  public List<IASTFunctionDefinition> getFunctionDecl() throws IOException {
+
+
+    return myASTVisitor.getFuncs();
   }
 
   /**
    * @return list of namespace declarations
    */
-  public List<Integer> getNamespaceDecl() {
-    return null;
+  public List<ICPPASTNamespaceDefinition> getNamespaceDecl() throws IOException {
+
+    return myASTVisitor.getNamesps();
   }
 
   /**
    * @return list of class declarations
    */
-  public List<Integer> getClassDecl() {
+  public List<Integer> getClassDecl() throws IOException {
+
     return null;
   }
 }
