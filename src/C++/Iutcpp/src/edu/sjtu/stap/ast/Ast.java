@@ -17,9 +17,11 @@ import java.util.List;
  * Ast
  */
 public class Ast {
+
   IASTTranslationUnit ast;
   File file;
   MyASTVisitor myASTVisitor;
+
   /**
    * Constructor
    * @param file the file to parse
