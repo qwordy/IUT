@@ -62,7 +62,12 @@ public class ThreadInst implements Runnable {
       // scope
       IASTNode node = func.getParent();
       while (node != null) {
-        System.out.println(node.getSyntax());
+        IToken token = node.getSyntax();
+        System.out.println(token);
+        if (token.getImage().equals("class")) {
+
+        }
+
         node = node.getParent();
       }
 
