@@ -28,7 +28,7 @@ public class Ast {
    * Constructor. Do not call it directly! Use AstWarehouse.
    * @param file the file to parse
    */
-  public Ast(File file) throws Exception {
+  protected Ast(File file) throws Exception {
     BufferedReader br = new BufferedReader(new FileReader(file));
     char[] buf = new char[(int)file.length()];
     br.read(buf);

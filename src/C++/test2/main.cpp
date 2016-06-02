@@ -10,6 +10,10 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <stdio.h>
+#include <stdio.h>
+#include <stdio.h>
+#include <stdio.h>
+#include <stdio.h>
 #include <iostream>
 #include "fly.h"
 #include "d/hd.h"
@@ -18,14 +22,14 @@ using namespace std;
 
 class Foo {
 public:
-  void foo() {puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");
+  void foo() {puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");
     //cout << __FILE__ << endl;
     //cout << __LINE__ << endl;
     //cout << __FUNCTION__ << endl;
     foo(1);
   }
 
-  inline void foo(int x) {puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");
+  inline void foo(int x) {puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo(int x)");
     //cout << __FILE__ << endl;
     //cout << __LINE__ << endl;
     //cout << __FUNCTION__ << endl;
@@ -34,14 +38,14 @@ public:
 
 class Foo2 {
 public:
-  void foo() {puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");
+  void foo() {puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");puts("/home/yfy/iut/src/C++/test2/main.cpp: foo()");
     //cout << __FILE__ << endl;
     //cout << __LINE__ << endl;
     //cout << __FUNCTION__ << endl;
   }
 };
 
-int main() {puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");
+int main() {puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");puts("/home/yfy/iut/src/C++/test2/main.cpp: main()");
   Foo foo;
   foo.foo();
   foo.foo(1);

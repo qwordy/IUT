@@ -9,6 +9,7 @@ import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IScope;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.core.parser.IToken;
+import org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -65,6 +66,8 @@ public class ThreadInst implements Runnable {
         IToken token = node.getSyntax();
         System.out.println(token);
         if (token.getImage().equals("class")) {
+          System.out.println(token.getNext());
+        } else if (token.getImage().equals("namespace")) {
 
         }
 
