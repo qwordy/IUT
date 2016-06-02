@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,7 +52,7 @@ namespace {
 
 // Convert errnum to a message, using buf[buflen] if necessary.
 // buf must be non-null, and buflen non-zero.
-char* errmsg(int errnum, char* buf, size_t buflen) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::* errmsg(int errnum, char* buf, size_t buflen)");
+char* errmsg(int errnum, char* buf, size_t buflen) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::* errmsg(int errnum, char* buf, size_t buflen)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::* errmsg(int errnum, char* buf, size_t buflen)");
 #if defined(_WIN32) || defined(_WIN64)
   strerror_s(buf, buflen, errnum);
   return buf;
@@ -68,7 +69,7 @@ char* errmsg(int errnum, char* buf, size_t buflen) {puts("/home/yfy/iut/benchmar
 
 // Wrap the tzfile.h isleap() macro with an inline function, which will
 // then have normal argument-passing semantics (i.e., single evaluation).
-inline bool IsLeap(int64_t year) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::IsLeap(int64_t year)"); return isleap(year); }
+inline bool IsLeap(int64_t year) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::IsLeap(int64_t year)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::IsLeap(int64_t year)"); return isleap(year); }
 
 // The month lengths in non-leap and leap years respectively.
 const int8_t kDaysPerMonth[2][1 + MONSPERYEAR] = {
@@ -129,7 +130,7 @@ const int8_t kDaysPer100Years[401] = {
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-inline int DaysPer100Years(int eyear) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPer100Years(int eyear)");
+inline int DaysPer100Years(int eyear) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPer100Years(int eyear)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPer100Years(int eyear)");
   return 36524 + kDaysPer100Years[eyear];
 }
 
@@ -155,16 +156,16 @@ const int8_t kDaysPer4Years[401] = {
   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 };
 
-inline int DaysPer4Years(int eyear) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPer4Years(int eyear)"); return 1460 + kDaysPer4Years[eyear]; }
+inline int DaysPer4Years(int eyear) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPer4Years(int eyear)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPer4Years(int eyear)"); return 1460 + kDaysPer4Years[eyear]; }
 
 // Like kSecPerYear[] but scaled down by a factor of SECSPERDAY.
 const int32_t kDaysPerYear[2] = {DAYSPERNYEAR, DAYSPERLYEAR};
 
-inline int DaysPerYear(int year) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPerYear(int year)"); return kDaysPerYear[IsLeap(year)]; }
+inline int DaysPerYear(int year) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPerYear(int year)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DaysPerYear(int year)"); return kDaysPerYear[IsLeap(year)]; }
 
 // Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
 // See http://howardhinnant.github.io/date_algorithms.html#days_from_civil.
-int64_t DayOrdinal(int64_t year, int month, int day) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DayOrdinal(int64_t year, int month, int day)");
+int64_t DayOrdinal(int64_t year, int month, int day) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DayOrdinal(int64_t year, int month, int day)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::DayOrdinal(int64_t year, int month, int day)");
   year -= (month <= 2 ? 1 : 0);
   const int64_t era = (year >= 0 ? year : year - 399) / 400;
   const int yoe = static_cast<int>(year - era * 400);
@@ -177,7 +178,7 @@ int64_t DayOrdinal(int64_t year, int month, int day) {puts("/home/yfy/iut/benchm
 // returning multiples of base to carry out. "zero" must be >= 0, and
 // base must be sufficiently large to avoid overflowing the return value.
 // Inlining admits significant gains as base and zero are literals.
-inline int NormalizeField(int base, int zero, int* valp, int carry_in) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::NormalizeField(int base, int zero, int* valp, int carry_in)");
+inline int NormalizeField(int base, int zero, int* valp, int carry_in) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::NormalizeField(int base, int zero, int* valp, int carry_in)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::NormalizeField(int base, int zero, int* valp, int carry_in)");
   int carry_out = 0;
   int val = *valp;
   if (zero != 0 && val < 0) {
@@ -209,7 +210,7 @@ inline int NormalizeField(int base, int zero, int* valp, int carry_in) {puts("/h
 // Multi-byte, numeric values are encoded using a MSB first,
 // twos-complement representation. These helpers decode, from
 // the given address, 4-byte and 8-byte values respectively.
-int32_t Decode32(const char* cp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::Decode32(const char* cp)");
+int32_t Decode32(const char* cp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::Decode32(const char* cp)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::Decode32(const char* cp)");
   uint32_t v = 0;
   for (int i = 0; i != (32 / 8); ++i)
     v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
@@ -217,7 +218,7 @@ int32_t Decode32(const char* cp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_
   return -static_cast<int32_t>(~v) - 1;
 }
 
-int64_t Decode64(const char* cp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::Decode64(const char* cp)");
+int64_t Decode64(const char* cp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::Decode64(const char* cp)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::Decode64(const char* cp)");
   uint64_t v = 0;
   for (int i = 0; i != (64 / 8); ++i)
     v = (v << 8) | (static_cast<uint8_t>(*cp++) & 0xff);
@@ -227,7 +228,7 @@ int64_t Decode64(const char* cp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_
 
 // Generate a year-relative offset for a PosixTransition.
 int64_t TransOffset(bool leap_year, int jan1_weekday,
-                    const PosixTransition& pt) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::TransOffset(bool leap_year, int jan1_weekday, const PosixTransition& pt)");
+                    const PosixTransition& pt) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::TransOffset(bool leap_year, int jan1_weekday, const PosixTransition& pt)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::TransOffset(bool leap_year, int jan1_weekday, const PosixTransition& pt)");
   int days = 0;
   switch (pt.date.fmt) {
     case PosixTransition::J: {
@@ -256,7 +257,7 @@ int64_t TransOffset(bool leap_year, int jan1_weekday,
   return (days * SECSPERDAY) + pt.time.offset;
 }
 
-inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeUnique(int64_t unix_time, bool normalized)");
+inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeUnique(int64_t unix_time, bool normalized)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeUnique(int64_t unix_time, bool normalized)");
   TimeInfo ti;
   ti.pre = ti.trans = ti.post = FromUnixSeconds(unix_time);
   ti.kind = time_zone::civil_lookup::UNIQUE;
@@ -265,7 +266,7 @@ inline TimeInfo MakeUnique(int64_t unix_time, bool normalized) {puts("/home/yfy/
 }
 
 inline TimeInfo MakeSkipped(const Transition& tr, const DateTime& dt,
-                            bool normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeSkipped(const Transition& tr, const DateTime& dt, bool normalized)");
+                            bool normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeSkipped(const Transition& tr, const DateTime& dt, bool normalized)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeSkipped(const Transition& tr, const DateTime& dt, bool normalized)");
   TimeInfo ti;
   ti.pre = FromUnixSeconds(tr.unix_time - 1 + (dt - tr.prev_date_time));
   ti.trans = FromUnixSeconds(tr.unix_time);
@@ -276,7 +277,7 @@ inline TimeInfo MakeSkipped(const Transition& tr, const DateTime& dt,
 }
 
 inline TimeInfo MakeRepeated(const Transition& tr, const DateTime& dt,
-                             bool normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeRepeated(const Transition& tr, const DateTime& dt, bool normalized)");
+                             bool normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeRepeated(const Transition& tr, const DateTime& dt, bool normalized)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz:: ::MakeRepeated(const Transition& tr, const DateTime& dt, bool normalized)");
   TimeInfo ti;
   ti.pre = FromUnixSeconds(tr.unix_time - 1 - (tr.prev_date_time - dt));
   ti.trans = FromUnixSeconds(tr.unix_time);
@@ -290,7 +291,7 @@ inline TimeInfo MakeRepeated(const Transition& tr, const DateTime& dt,
 
 // Normalize from individual date/time fields.
 bool DateTime::Normalize(int64_t year, int mon, int day,
-                         int hour, int min, int sec) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::DateTime::Normalize(int64_t year, int mon, int day, int hour, int min, int sec)");
+                         int hour, int min, int sec) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::DateTime::Normalize(int64_t year, int mon, int day, int hour, int min, int sec)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::DateTime::Normalize(int64_t year, int mon, int day, int hour, int min, int sec)");
   int min_carry = NormalizeField(SECSPERMIN, 0, &sec, 0);
   int hour_carry = NormalizeField(MINSPERHOUR, 0, &min, min_carry);
   int day_carry = NormalizeField(HOURSPERDAY, 0, &hour, hour_carry);
@@ -361,12 +362,12 @@ bool DateTime::Normalize(int64_t year, int mon, int day,
 }
 
 // Assign from a Breakdown, created using a TimeZoneInfo timestamp.
-inline void DateTime::Assign(const Breakdown& bd) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::DateTime::Assign(const Breakdown& bd)");
+inline void DateTime::Assign(const Breakdown& bd) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::DateTime::Assign(const Breakdown& bd)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::DateTime::Assign(const Breakdown& bd)");
   Normalize(bd.year, bd.month, bd.day, bd.hour, bd.minute, bd.second);
 }
 
 // What (no leap-seconds) UTC+seconds zoneinfo would look like.
-void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::ResetToBuiltinUTC(int seconds)");
+void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::ResetToBuiltinUTC(int seconds)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::ResetToBuiltinUTC(int seconds)");
   transition_types_.resize(1);
   transition_types_[0].utc_offset = seconds;
   transition_types_[0].is_dst = false;
@@ -386,7 +387,7 @@ void TimeZoneInfo::ResetToBuiltinUTC(int seconds) {puts("/home/yfy/iut/benchmark
 }
 
 // Builds the in-memory header using the raw bytes from the file.
-void TimeZoneInfo::Header::Build(const tzhead& tzh) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Header::Build(const tzhead& tzh)");
+void TimeZoneInfo::Header::Build(const tzhead& tzh) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Header::Build(const tzhead& tzh)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Header::Build(const tzhead& tzh)");
   timecnt = Decode32(tzh.tzh_timecnt);
   typecnt = Decode32(tzh.tzh_typecnt);
   charcnt = Decode32(tzh.tzh_charcnt);
@@ -397,7 +398,7 @@ void TimeZoneInfo::Header::Build(const tzhead& tzh) {puts("/home/yfy/iut/benchma
 
 void TimeZoneInfo::CheckTransition(const std::string& name,
                                    const TransitionType& tt, int32_t offset,
-                                   bool is_dst, const std::string& abbr) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::CheckTransition(const std::string& name, const TransitionType& tt, int32_t offset, bool is_dst, const std::string& abbr) const");
+                                   bool is_dst, const std::string& abbr) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::CheckTransition(const std::string& name, const TransitionType& tt, int32_t offset, bool is_dst, const std::string& abbr) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::CheckTransition(const std::string& name, const TransitionType& tt, int32_t offset, bool is_dst, const std::string& abbr) const");
   if (tt.utc_offset != offset || tt.is_dst != is_dst ||
       &abbreviations_[tt.abbr_index] != abbr) {
     std::clog << name << ": Transition"
@@ -410,7 +411,7 @@ void TimeZoneInfo::CheckTransition(const std::string& name,
 
 // How many bytes of data are associated with this header. The result
 // depends upon whether this is a section with 4-byte or 8-byte times.
-size_t TimeZoneInfo::Header::DataLength(size_t time_len) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Header::DataLength(size_t time_len) const");
+size_t TimeZoneInfo::Header::DataLength(size_t time_len) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Header::DataLength(size_t time_len) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Header::DataLength(size_t time_len) const");
   size_t len = 0;
   len += (time_len + 1) * timecnt;  // unix_time + type_index
   len += (4 + 1 + 1) * typecnt;     // utc_offset + is_dst + abbr_index
@@ -421,7 +422,7 @@ size_t TimeZoneInfo::Header::DataLength(size_t time_len) const {puts("/home/yfy/
   return len;
 }
 
-bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Load(const std::string& name, FILE* fp)");
+bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Load(const std::string& name, FILE* fp)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Load(const std::string& name, FILE* fp)");
   // Read and validate the header.
   tzhead tzh;
   if (fread(&tzh, 1, sizeof tzh, fp) != sizeof tzh)
@@ -635,7 +636,7 @@ bool TimeZoneInfo::Load(const std::string& name, FILE* fp) {puts("/home/yfy/iut/
   return true;
 }
 
-bool TimeZoneInfo::Load(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Load(const std::string& name)");
+bool TimeZoneInfo::Load(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Load(const std::string& name)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::Load(const std::string& name)");
   // We can ensure that the loading of UTC or any other fixed-offset
   // zone never fails because the simple, no-transition state can be
   // internally generated. Note that this depends on our choice to not
@@ -693,7 +694,7 @@ bool TimeZoneInfo::Load(const std::string& name) {puts("/home/yfy/iut/benchmarks
 
 // BreakTime() translation for a particular transition type.
 Breakdown TimeZoneInfo::LocalTime(int64_t unix_time,
-                                  const TransitionType& tt) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::LocalTime(int64_t unix_time, const TransitionType& tt) const");
+                                  const TransitionType& tt) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::LocalTime(int64_t unix_time, const TransitionType& tt) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::LocalTime(int64_t unix_time, const TransitionType& tt) const");
   Breakdown bd;
 
   bd.year = EPOCH_YEAR;
@@ -782,7 +783,7 @@ Breakdown TimeZoneInfo::LocalTime(int64_t unix_time,
 
 // MakeTimeInfo() translation with a conversion-preserving offset.
 TimeInfo TimeZoneInfo::TimeLocal(int64_t year, int mon, int day, int hour,
-                                 int min, int sec, int64_t offset) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::TimeLocal(int64_t year, int mon, int day, int hour, int min, int sec, int64_t offset) const");
+                                 int min, int sec, int64_t offset) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::TimeLocal(int64_t year, int mon, int day, int hour, int min, int sec, int64_t offset) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::TimeLocal(int64_t year, int mon, int day, int hour, int min, int sec, int64_t offset) const");
   TimeInfo ti = MakeTimeInfo(year, mon, day, hour, min, sec);
   ti.pre = FromUnixSeconds(ToUnixSeconds(ti.pre) + offset);
   ti.trans = FromUnixSeconds(ToUnixSeconds(ti.trans) + offset);
@@ -790,7 +791,7 @@ TimeInfo TimeZoneInfo::TimeLocal(int64_t year, int mon, int day, int hour,
   return ti;
 }
 
-Breakdown TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const");
+Breakdown TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const");
   int64_t unix_time = ToUnixSeconds(tp);
   const size_t timecnt = transitions_.size();
   if (timecnt == 0 || unix_time < transitions_[0].unix_time) {
@@ -833,7 +834,7 @@ Breakdown TimeZoneInfo::BreakTime(const time_point<sys_seconds>& tp) const {puts
 }
 
 TimeInfo TimeZoneInfo::MakeTimeInfo(int64_t year, int mon, int day,
-                                    int hour, int min, int sec) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::MakeTimeInfo(int64_t year, int mon, int day, int hour, int min, int sec) const");
+                                    int hour, int min, int sec) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::MakeTimeInfo(int64_t year, int mon, int day, int hour, int min, int sec) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_info.cc: cctz::TimeZoneInfo::MakeTimeInfo(int64_t year, int mon, int day, int hour, int min, int sec) const");
   Transition target;
   DateTime& dt(target.date_time);
   const bool normalized = dt.Normalize(year, mon, day, hour, min, sec);

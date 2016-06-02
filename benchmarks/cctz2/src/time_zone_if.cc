@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +20,7 @@
 
 namespace cctz {
 
-std::unique_ptr<TimeZoneIf> TimeZoneIf::Load(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.cc: cctz::TimeZoneIf::Load(const std::string& name)");
+std::unique_ptr<TimeZoneIf> TimeZoneIf::Load(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.cc: cctz::TimeZoneIf::Load(const std::string& name)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.cc: cctz::TimeZoneIf::Load(const std::string& name)");
   // Support "libc:localtime" and "libc:*" to access the legacy
   // localtime and UTC support respectively from the C library.
   if (name.compare(0, 5, "libc:") == 0) {

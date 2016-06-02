@@ -7,7 +7,7 @@ package edu.sjtu.stap.config;
 public class Config {
   public static String baseDir = "/home/yfy/iut/benchmarks/cctz2";
 
-  public static String srcDir = "src";
+  public static String srcDir = baseDir + "/src";
   //public static String srcDir = "/home/yfy/iut/src/C++/copy of test/";
 
   public static String make = "make";

@@ -4,7 +4,6 @@ import edu.sjtu.stap.config.Config;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
@@ -13,22 +12,21 @@ import java.io.InputStreamReader;
  */
 public class MakeAndRun {
   public MakeAndRun() {
-    execute(Config.make);
-    execute(Config.run);
+    execute(Config.make, null);
+    execute(Config.run, new LogParser());
   }
 
   /**
    * @param cmd
    * @return 0 on success, -1 otherwise
    */
-  private int execute(String cmd) {
+  private int execute(String cmd, ITaskAfterRun task) {
     try {
       Process process = Runtime.getRuntime().exec(cmd, null, new File(Config.baseDir));
-      BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-      String line;
-      while ((line = br.readLine()) != null)
-        System.out.println(line);
+      if (task != null) {
+        BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        task.run(br);
+      }
     } catch (Exception e) {
       e.printStackTrace();
       return -1;

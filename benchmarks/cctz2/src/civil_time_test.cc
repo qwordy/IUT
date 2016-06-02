@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +29,7 @@ namespace cctz {
 namespace {
 
 template <typename T>
-std::string Format(const T& t) {puts("/home/yfy/iut/benchmarks/cctz2/src/civil_time_test.cc: cctz:: ::Format(const T& t)");
+std::string Format(const T& t) {puts("/home/yfy/iut/benchmarks/cctz2/src/civil_time_test.cc: cctz:: ::Format(const T& t)");puts("/home/yfy/iut/benchmarks/cctz2/src/civil_time_test.cc: cctz:: ::Format(const T& t)");
   std::stringstream ss;
   ss << t;
   return ss.str();

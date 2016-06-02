@@ -15,21 +15,22 @@ public class Inst {
   private ExecutorService executor;
 
   public Inst() {
-    executor = Executors.newCachedThreadPool();
-    //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-    //executor = Executors.newFixedThreadPool(1);
-    ls(new File(Config.srcDir));
-    executor.shutdown();
     try {
+      executor = Executors.newCachedThreadPool();
+      //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+      //executor = Executors.newFixedThreadPool(1);
+      ls(new File(Config.srcDir));
+      executor.shutdown();
       executor.awaitTermination(1, TimeUnit.DAYS);
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  private void ls(File dir) {
+  private void ls(File dir) throws Exception {
     File[] files = dir.listFiles();
-    if (files == null) return;
+    if (files == null)
+      throw new Exception(dir.toString() + " does not exist");
     for (File file : files) {
       if (file.isDirectory()) {
         ls(file);
