@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,7 +56,7 @@ static std::string get_tzname(int index) {
 
 namespace cctz {
 
-TimeZoneLibC::TimeZoneLibC(const std::string& name) {
+TimeZoneLibC::TimeZoneLibC(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_libc.cc: cctz::TimeZoneLibC::TimeZoneLibC(const std::string& name)");
   local_ = (name == "localtime");
   if (!local_) {
     // TODO: Support "UTC-05:00", for example.
@@ -64,7 +65,7 @@ TimeZoneLibC::TimeZoneLibC(const std::string& name) {
   }
 }
 
-Breakdown TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const {
+Breakdown TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_libc.cc: cctz::TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const");
   Breakdown bd;
   std::time_t t = ToUnixSeconds(tp);
   std::tm tm;
@@ -98,7 +99,7 @@ Breakdown TimeZoneLibC::BreakTime(const time_point<sys_seconds>& tp) const {
 namespace {
 
 // Normalize *val so that 0 <= *val < base, returning any carry.
-int NormalizeField(int base, int* val, bool* normalized) {
+int NormalizeField(int base, int* val, bool* normalized) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_libc.cc: cctz::{::NormalizeField(int base, int* val, bool* normalized)");
   int carry = *val / base;
   *val %= base;
   if (*val < 0) {
@@ -109,7 +110,7 @@ int NormalizeField(int base, int* val, bool* normalized) {
   return carry;
 }
 
-bool IsLeap(int64_t year) {
+bool IsLeap(int64_t year) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_libc.cc: cctz::{::IsLeap(int64_t year)");
   return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
 }
 
@@ -124,7 +125,7 @@ const int kDaysPerYear[2] = {365, 366};
 
 // Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
 // See http://howardhinnant.github.io/date_algorithms.html#days_from_civil.
-std::time_t DayOrdinal(int64_t year, int month, int day) {
+std::time_t DayOrdinal(int64_t year, int month, int day) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_libc.cc: cctz::{::DayOrdinal(int64_t year, int month, int day)");
   year -= (month <= 2 ? 1 : 0);
   const std::time_t era = (year >= 0 ? year : year - 399) / 400;
   const int yoe = static_cast<int>(year - era * 400);
@@ -136,7 +137,7 @@ std::time_t DayOrdinal(int64_t year, int month, int day) {
 }  // namespace
 
 TimeInfo TimeZoneLibC::MakeTimeInfo(int64_t year, int mon, int day,
-                                    int hour, int min, int sec) const {
+                                    int hour, int min, int sec) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_libc.cc: cctz::TimeZoneLibC::MakeTimeInfo(int64_t year, int mon, int day,                                     int hour, int min, int sec) const");
   bool normalized = false;
   std::time_t t;
   if (local_) {

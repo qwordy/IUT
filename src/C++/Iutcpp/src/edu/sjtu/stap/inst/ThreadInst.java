@@ -31,7 +31,7 @@ public class ThreadInst implements Runnable {
 
   @Override
   public void run() {
-    System.out.println(file);
+    //System.out.println(file);
     try {
       Ast ast = AstWarehouse.getAst(file);
       String instedBuf = inst(ast);
@@ -84,7 +84,7 @@ public class ThreadInst implements Runnable {
       if (buf.charAt(brOffset) != '{') continue;
 
       String decl = funcDeclarator.getRawSignature();
-      System.out.println(decl);
+      //System.out.println(decl);
 
       String log = String.format("puts(\"%s: %s%s\");", fileName, prefix, decl)
           .replaceAll("[\n\r]", " ");
