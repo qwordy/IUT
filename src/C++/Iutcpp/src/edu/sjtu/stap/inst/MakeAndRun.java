@@ -17,7 +17,7 @@ public class MakeAndRun {
   }
 
   /**
-   * @param cmd
+   * @param cmd command
    * @return 0 on success, -1 otherwise
    */
   private int execute(String cmd, ITaskAfterRun task) {
