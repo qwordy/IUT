@@ -14,6 +14,7 @@ import org.eclipse.cdt.internal.core.dom.parser.c.CASTFunctionDefinition;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,7 +52,6 @@ public class ThreadInst implements Runnable {
     sb.insert(0, "#include <stdio.h>\n");
     int offset = 19;
 
-    List<String> scopeList = new ArrayList<>();
     List<IASTFunctionDefinition> funcList = ast.getFunctionDecl();
     for (IASTFunctionDefinition func : funcList) {
       // file
@@ -60,34 +60,25 @@ public class ThreadInst implements Runnable {
       int nodeOffset = fileLocation.getNodeOffset();
       int brOffset = buf.indexOf('{', nodeOffset);
 
-      // scope
+      // prefix
+      String prefix = "";
       IASTNode node = func.getParent();
       while (node != null) {
         IToken token = node.getSyntax();
         System.out.println(token);
-        if (token.getImage().equals("class")) {
+        String image = token.getImage();
+        if (image.equals("class") || image.equals("namespace")) {
           System.out.println(token.getNext());
-        } else if (token.getImage().equals("namespace")) {
-
+          prefix = token.getNext().getImage() + '.' + prefix;
         }
-
         node = node.getParent();
       }
 
-      /*scopeList.clear();
-      IScope scope = func.getScope();
-      System.out.println(scope);
-      System.out.println(scope.getParent());
-      while (scope != null) {
-        System.out.println(scope);
-        //scopeList.add(scope.getScopeName().toString());
-        scope = scope.getParent();
-      }*/
 
       // signature
       String decl = func.getDeclarator().getRawSignature();
 
-      String log = String.format("puts(\"%s: %s\");", fileName, decl);
+      String log = String.format("puts(\"%s: %s%s\");", fileName, prefix, decl);
       sb.insert(brOffset + 1 + offset, log);
       offset += log.length();
     }

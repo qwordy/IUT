@@ -6,6 +6,6 @@ package edu.sjtu.stap.config;
  */
 public class Config {
   //public static String srcdir = "/home/yfy/iut/benchmarks/cctz2/src/";
-  public static String srcdir = "/home/yfy/iut/src/C++/test2/";
+  public static String srcdir = "/home/yfy/iut/src/C++/copy of test/";
 }
 

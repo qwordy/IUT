@@ -1,5 +1,5 @@
 #include "fly.h"
-
+namespace fy {
 int global() {
   return 1;
 }
@@ -15,4 +15,4 @@ void Fly::prepare() {
 
 int Fly::hehe() {
 }
-
+}
