@@ -16,8 +16,8 @@ public class Inst {
 
   public Inst() {
     //executor = Executors.newCachedThreadPool();
-    executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-    //executor = Executors.newFixedThreadPool(1);
+    //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+    executor = Executors.newFixedThreadPool(1);
     ls(new File(Config.srcdir));
     executor.shutdown();
     try {
