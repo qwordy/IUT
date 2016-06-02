@@ -7,14 +7,14 @@ using namespace std;
 
 class Foo {
 public:
-  void foo() {puts("/home/yfy/iut/src/C++/copy of test/main.cpp: Foo.Foo.foo()");
+  void foo() {puts("/home/yfy/iut/src/C++/copy of test/main.cpp: Foo::Foo::foo()");
     //cout << __FILE__ << endl;
     //cout << __LINE__ << endl;
     //cout << __FUNCTION__ << endl;
     foo(1);
   }
 
-  inline void foo(int x) {puts("/home/yfy/iut/src/C++/copy of test/main.cpp: Foo.Foo.foo(int x)");
+  inline void foo(int x) {puts("/home/yfy/iut/src/C++/copy of test/main.cpp: Foo::Foo::foo(int x)");
     //cout << __FILE__ << endl;
     //cout << __LINE__ << endl;
     //cout << __FUNCTION__ << endl;
@@ -23,7 +23,7 @@ public:
 
 class Foo2 {
 public:
-  void foo() {puts("/home/yfy/iut/src/C++/copy of test/main.cpp: Foo2.Foo2.foo()");
+  void foo() {puts("/home/yfy/iut/src/C++/copy of test/main.cpp: Foo2::Foo2::foo()");
     //cout << __FILE__ << endl;
     //cout << __LINE__ << endl;
     //cout << __FUNCTION__ << endl;
