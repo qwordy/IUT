@@ -59,7 +59,7 @@ const char* const kFormats[] = {
 };
 
 bool ParseTimeSpec(const std::string& args, cctz::time_zone zone,
-                   time_point<sys_seconds>* when) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseTimeSpec(const std::string& args, cctz::time_zone zone,                    time_point<sys_seconds>* when)");
+                   time_point<sys_seconds>* when) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseTimeSpec(const std::string& args, cctz::time_zone zone, time_point<sys_seconds>* when)");
   for (const char* const* fmt = kFormats; *fmt != NULL; ++fmt) {
     const std::string format = std::string(*fmt) + " %Ez";
     time_point<sys_seconds> tp;
@@ -100,7 +100,7 @@ const char* WeekDayName(cctz::weekday wd) {puts("/home/yfy/iut/benchmarks/cctz2/
 }
 
 std::string FormatTimeInZone(time_point<sys_seconds> when,
-                             cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: FormatTimeInZone(time_point<sys_seconds> when,                              cctz::time_zone zone)");
+                             cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: FormatTimeInZone(time_point<sys_seconds> when, cctz::time_zone zone)");
   std::ostringstream oss;
   oss << std::setw(33) << std::left << cctz::format(kFormat, when, zone);
   cctz::time_zone::absolute_lookup al = zone.lookup(when);
@@ -114,7 +114,7 @@ std::string FormatTimeInZone(time_point<sys_seconds> when,
 }
 
 void InstantInfo(const std::string& label, time_point<sys_seconds> when,
-                 cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: InstantInfo(const std::string& label, time_point<sys_seconds> when,                  cctz::time_zone zone)");
+                 cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: InstantInfo(const std::string& label, time_point<sys_seconds> when, cctz::time_zone zone)");
   const cctz::time_zone utc = cctz::utc_time_zone();  // might == zone
   const std::string time_label = "time_t";
   const std::string utc_label = "UTC";

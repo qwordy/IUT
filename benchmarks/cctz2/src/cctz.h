@@ -107,7 +107,7 @@ inline Breakdown BreakTime(const time_point<D>& tp, const TimeZone& tz) {puts("/
 
 using seconds64 = std::chrono::duration<int64_t, std::chrono::seconds::period>;
 inline time_point<seconds64> MakeTime(int64_t year, int mon, int day, int hour,
-                                      int min, int sec, const TimeZone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::MakeTime(int64_t year, int mon, int day, int hour,                                       int min, int sec, const TimeZone& tz)");
+                                      int min, int sec, const TimeZone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::MakeTime(int64_t year, int mon, int day, int hour, int min, int sec, const TimeZone& tz)");
   assert(year < std::numeric_limits<int>::max());
   return tz.lookup(civil_second(year, mon, day, hour, min, sec)).pre;
 }
@@ -124,7 +124,7 @@ struct TimeInfo {
   bool normalized;
 };
 inline TimeInfo MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss,
-                             const TimeZone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss,                              const TimeZone& tz)");
+                             const TimeZone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss, const TimeZone& tz)");
   assert(y < std::numeric_limits<decltype(civil_second().year())>::max());
   const civil_second cs(y, m, d, hh, mm, ss);
   const bool norm = cs.year() != y || cs.month() != m || cs.day() != d ||
@@ -147,13 +147,13 @@ inline TimeInfo MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss,
 
 template <typename D>
 inline std::string Format(const std::string& fmt, const time_point<D>& tp,
-                          const TimeZone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::Format(const std::string& fmt, const time_point<D>& tp,                           const TimeZone& tz)");
+                          const TimeZone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::Format(const std::string& fmt, const time_point<D>& tp, const TimeZone& tz)");
   return format(fmt, tp, tz);
 }
 
 template <typename D>
 inline bool Parse(const std::string& fmt, const std::string& input,
-                  const TimeZone& tz, time_point<D>* tpp) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::Parse(const std::string& fmt, const std::string& input,                   const TimeZone& tz, time_point<D>* tpp)");
+                  const TimeZone& tz, time_point<D>* tpp) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz.h: cctz::Parse(const std::string& fmt, const std::string& input, const TimeZone& tz, time_point<D>* tpp)");
   return parse(fmt, input, tz, tpp);
 }
 

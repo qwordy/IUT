@@ -55,7 +55,7 @@ bool load_time_zone(const std::string& name, time_zone* tz) {puts("/home/yfy/iut
 }
 
 time_zone::absolute_lookup time_zone::lookup(
-    const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup(     const time_point<sys_seconds>& tp) const");
+    const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup( const time_point<sys_seconds>& tp) const");
   return time_zone::Impl::get(*this).BreakTime(tp);
 }
 

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by yfy on 5/26/16.
- * Inst
+ * Instrumentation
  */
 public class Inst {
   private ExecutorService executor;
@@ -18,7 +18,7 @@ public class Inst {
     executor = Executors.newCachedThreadPool();
     //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
     //executor = Executors.newFixedThreadPool(1);
-    ls(new File(Config.srcdir));
+    ls(new File(Config.srcDir));
     executor.shutdown();
     try {
       executor.awaitTermination(1, TimeUnit.DAYS);

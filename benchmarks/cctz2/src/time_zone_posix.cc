@@ -25,7 +25,7 @@ namespace {
 
 const char kDigits[] = "0123456789";
 
-const char* ParseInt(const char* p, int min, int max, int* vp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz::{::* ParseInt(const char* p, int min, int max, int* vp)");
+const char* ParseInt(const char* p, int min, int max, int* vp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz:: ::* ParseInt(const char* p, int min, int max, int* vp)");
   int value = 0;
   const char* op = p;
   const int kMaxInt = std::numeric_limits<int>::max();
@@ -43,7 +43,7 @@ const char* ParseInt(const char* p, int min, int max, int* vp) {puts("/home/yfy/
 }
 
 // abbr = <.*?> | [^-+,\d]{3,}
-const char* ParseAbbr(const char* p, std::string* abbr) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz::{::* ParseAbbr(const char* p, std::string* abbr)");
+const char* ParseAbbr(const char* p, std::string* abbr) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz:: ::* ParseAbbr(const char* p, std::string* abbr)");
   const char* op = p;
   if (*p == '<') {  // special zoneinfo <...> form
     while (*++p != '>') {
@@ -64,7 +64,7 @@ const char* ParseAbbr(const char* p, std::string* abbr) {puts("/home/yfy/iut/ben
 
 // offset = [+|-]hh[:mm[:ss]] (aggregated into single seconds value)
 const char* ParseOffset(const char* p, int min_hour, int max_hour, int sign,
-                        int* offset) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz::{::* ParseOffset(const char* p, int min_hour, int max_hour, int sign,                         int* offset)");
+                        int* offset) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz:: ::* ParseOffset(const char* p, int min_hour, int max_hour, int sign, int* offset)");
   if (p == nullptr) return nullptr;
   if (*p == '+' || *p == '-') {
     if (*p++ == '-') sign = -sign;
@@ -87,7 +87,7 @@ const char* ParseOffset(const char* p, int min_hour, int max_hour, int sign,
 }
 
 // datetime = ( Jn | n | Mm.w.d ) [ / offset ]
-const char* ParseDateTime(const char* p, PosixTransition* res) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz::{::* ParseDateTime(const char* p, PosixTransition* res)");
+const char* ParseDateTime(const char* p, PosixTransition* res) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_posix.cc: cctz:: ::* ParseDateTime(const char* p, PosixTransition* res)");
   if (p != nullptr && *p == ',') {
     if (*++p == 'M') {
       int month = 0;

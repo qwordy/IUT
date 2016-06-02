@@ -35,7 +35,7 @@ const time_zone::Impl* utc_zone = nullptr;
 // utc_zone should only be referenced in a thread that has just done
 // a LoadUTCTimeZone().
 std::once_flag load_utc_once;
-void LoadUTCTimeZone() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::{::LoadUTCTimeZone()");
+void LoadUTCTimeZone() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz:: ::LoadUTCTimeZone()");
   std::call_once(load_utc_once, []() { utc_time_zone(); });
 }
 
@@ -100,7 +100,7 @@ const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("/home/yf
 time_zone::Impl::Impl(const std::string& name) : name_(name) {}
 
 time_zone::absolute_lookup time_zone::Impl::BreakTime(
-    const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::BreakTime(     const time_point<sys_seconds>& tp) const");
+    const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::BreakTime( const time_point<sys_seconds>& tp) const");
   time_zone::absolute_lookup res;
   Breakdown bd = zone_->BreakTime(tp);
   // TODO: Eliminate extra normalization.

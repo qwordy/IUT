@@ -619,7 +619,7 @@ const char* const kTimeZoneNames[] = {
 };
 
 // Helper to return a loaded time zone by value (UTC on error).
-TimeZone LoadZone(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz_v1_test.cc: cctz::{::LoadZone(const std::string& name)");
+TimeZone LoadZone(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz_v1_test.cc: cctz:: ::LoadZone(const std::string& name)");
   TimeZone tz;
   LoadTimeZone(name, &tz);
   return tz;

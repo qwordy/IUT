@@ -64,7 +64,7 @@ const char RFC1123_no_wday[] =  "%d %b %Y %H:%M:%S %z";
 // and trailing characters.  For example: TestFormatSpecifier(tp, "%a", "Thu").
 template <typename D>
 void TestFormatSpecifier(time_point<D> tp, time_zone tz, const std::string& fmt,
-                         const std::string& ans) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format_test.cc: cctz::{::TestFormatSpecifier(time_point<D> tp, time_zone tz, const std::string& fmt,                          const std::string& ans)");
+                         const std::string& ans) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format_test.cc: cctz:: ::TestFormatSpecifier(time_point<D> tp, time_zone tz, const std::string& fmt, const std::string& ans)");
   EXPECT_EQ(ans, format(fmt, tp, tz)) << fmt;
   EXPECT_EQ("xxx " + ans, format("xxx " + fmt, tp, tz));
   EXPECT_EQ(ans + " yyy", format(fmt + " yyy", tp, tz));

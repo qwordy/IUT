@@ -49,7 +49,7 @@ char* strptime(const char* s, const char* fmt, std::tm* tm) {
 }
 #endif
 
-std::tm ToTM(const time_zone::absolute_lookup& al) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::ToTM(const time_zone::absolute_lookup& al)");
+std::tm ToTM(const time_zone::absolute_lookup& al) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::ToTM(const time_zone::absolute_lookup& al)");
   std::tm tm{};
   tm.tm_sec = al.cs.second();
   tm.tm_min = al.cs.minute();
@@ -99,7 +99,7 @@ const char kDigits[] = "0123456789";
 // Formats a 64-bit integer in the given field width.  Note that it is up
 // to the caller of Format64() [and Format02d()/FormatOffset()] to ensure
 // that there is sufficient space before ep to hold the conversion.
-char* Format64(char* ep, int width, int64_t v) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* Format64(char* ep, int width, int64_t v)");
+char* Format64(char* ep, int width, int64_t v) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* Format64(char* ep, int width, int64_t v)");
   bool neg = false;
   if (v < 0) {
     --width;
@@ -127,14 +127,14 @@ char* Format64(char* ep, int width, int64_t v) {puts("/home/yfy/iut/benchmarks/c
 }
 
 // Formats [0 .. 99] as %02d.
-char* Format02d(char* ep, int v) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* Format02d(char* ep, int v)");
+char* Format02d(char* ep, int v) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* Format02d(char* ep, int v)");
   *--ep = kDigits[v % 10];
   *--ep = kDigits[(v / 10) % 10];
   return ep;
 }
 
 // Formats a UTC offset, like +00:00.
-char* FormatOffset(char* ep, int minutes, char sep) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* FormatOffset(char* ep, int minutes, char sep)");
+char* FormatOffset(char* ep, int minutes, char sep) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* FormatOffset(char* ep, int minutes, char sep)");
   char sign = '+';
   if (minutes < 0) {
     minutes = -minutes;
@@ -148,7 +148,7 @@ char* FormatOffset(char* ep, int minutes, char sep) {puts("/home/yfy/iut/benchma
 }
 
 // Formats a std::tm using strftime(3).
-void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::FormatTM(std::string* out, const std::string& fmt, const std::tm& tm)");
+void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::FormatTM(std::string* out, const std::string& fmt, const std::tm& tm)");
   // strftime(3) returns the number of characters placed in the output
   // array (which may be 0 characters).  It also returns 0 to indicate
   // an error, like the array wasn't large enough.  To accomodate this,
@@ -166,7 +166,7 @@ void FormatTM(std::string* out, const std::string& fmt, const std::tm& tm) {puts
 
 // Used for %E#S/%E#f specifiers and for data values in parse().
 template <typename T>
-const char* ParseInt(const char* dp, int width, T min, T max, T* vp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* ParseInt(const char* dp, int width, T min, T max, T* vp)");
+const char* ParseInt(const char* dp, int width, T min, T max, T* vp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* ParseInt(const char* dp, int width, T min, T max, T* vp)");
   if (dp != nullptr) {
     const T kmin = std::numeric_limits<T>::min();
     bool erange = false;
@@ -262,7 +262,7 @@ const int64_t kExp10[kDigits10_64 + 1] = {
 // We also handle the %z and %Z specifiers to accommodate platforms that do
 // not support the tm_gmtoff and tm_zone extensions to std::tm.
 std::string format(const std::string& format, const time_point<sys_seconds>& tp,
-                   const std::chrono::nanoseconds& ns, const time_zone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::format(const std::string& format, const time_point<sys_seconds>& tp,                    const std::chrono::nanoseconds& ns, const time_zone& tz)");
+                   const std::chrono::nanoseconds& ns, const time_zone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::format(const std::string& format, const time_point<sys_seconds>& tp, const std::chrono::nanoseconds& ns, const time_zone& tz)");
   std::string result;
   const time_zone::absolute_lookup al = tz.lookup(tp);
   const std::tm tm = ToTM(al);
@@ -435,7 +435,7 @@ std::string format(const std::string& format, const time_point<sys_seconds>& tp,
 
 namespace {
 
-const char* ParseOffset(const char* dp, char sep, int* offset) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* ParseOffset(const char* dp, char sep, int* offset)");
+const char* ParseOffset(const char* dp, char sep, int* offset) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* ParseOffset(const char* dp, char sep, int* offset)");
   if (dp != nullptr) {
     const char sign = *dp++;
     if (sign == '+' || sign == '-') {
@@ -459,7 +459,7 @@ const char* ParseOffset(const char* dp, char sep, int* offset) {puts("/home/yfy/
   return dp;
 }
 
-const char* ParseZone(const char* dp, std::string* zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* ParseZone(const char* dp, std::string* zone)");
+const char* ParseZone(const char* dp, std::string* zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* ParseZone(const char* dp, std::string* zone)");
   zone->clear();
   if (dp != nullptr) {
     while (*dp != '\0' && !std::isspace(*dp)) zone->push_back(*dp++);
@@ -469,7 +469,7 @@ const char* ParseZone(const char* dp, std::string* zone) {puts("/home/yfy/iut/be
 }
 
 const char* ParseSubSeconds(const char* dp,
-                            std::chrono::nanoseconds* subseconds) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* ParseSubSeconds(const char* dp,                             std::chrono::nanoseconds* subseconds)");
+                            std::chrono::nanoseconds* subseconds) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* ParseSubSeconds(const char* dp, std::chrono::nanoseconds* subseconds)");
   if (dp != nullptr) {
     int64_t v = 0;
     int64_t exp = 0;
@@ -495,7 +495,7 @@ const char* ParseSubSeconds(const char* dp,
 }
 
 // Parses a string into a std::tm using strptime(3).
-const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::{::* ParseTM(const char* dp, const char* fmt, std::tm* tm)");
+const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail:: ::* ParseTM(const char* dp, const char* fmt, std::tm* tm)");
   if (dp != nullptr) {
     dp = strptime(dp, fmt, tm);
   }
@@ -519,7 +519,7 @@ const char* ParseTM(const char* dp, const char* fmt, std::tm* tm) {puts("/home/y
 // support the tm_gmtoff extension to std::tm.  %Z is parsed but ignored.
 bool parse(const std::string& format, const std::string& input,
            const time_zone& tz, time_point<sys_seconds>* tpp,
-           std::chrono::nanoseconds* ns) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::parse(const std::string& format, const std::string& input,            const time_zone& tz, time_point<sys_seconds>* tpp,            std::chrono::nanoseconds* ns)");
+           std::chrono::nanoseconds* ns) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_format.cc: cctz::detail::parse(const std::string& format, const std::string& input, const time_zone& tz, time_point<sys_seconds>* tpp, std::chrono::nanoseconds* ns)");
   // The unparsed input.
   const char* data = input.c_str();  // NUL terminated
 

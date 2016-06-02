@@ -45,7 +45,6 @@ public class ThreadInst implements Runnable {
   }
 
   /**
-   *
    * @param ast
    * @return Instrumented code
    * @throws Exception
@@ -67,10 +66,13 @@ public class ThreadInst implements Runnable {
       while (node != null) {
         IToken token = node.getSyntax();
         //System.out.println(token);
-        String image = token.getImage();
-        if (image.equals("class") || image.equals("namespace") || image.equals("struct")) {
+        String keyword = token.getImage();
+        if (keyword.equals("class") || keyword.equals("namespace") || keyword.equals("struct")) {
           //System.out.println(token.getNext());
-          prefix = token.getNext().getImage() + "::" + prefix;
+          String name = token.getNext().getImage();
+          if (name.equals("{"))
+            name = " ";
+          prefix = name + "::" + prefix;
         }
         node = node.getParent();
       }
@@ -87,7 +89,7 @@ public class ThreadInst implements Runnable {
       //System.out.println(decl);
 
       String log = String.format("puts(\"%s: %s%s\");", fileName, prefix, decl)
-          .replaceAll("[\n\r]", " ");
+          .replaceAll("[\n\r]", " ").replaceAll(" {2,}", " ");
       sb.insert(brOffset + 1 + offset, log);
       offset += log.length();
     }

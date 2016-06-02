@@ -28,7 +28,7 @@ namespace cctz {
 namespace {
 
 template <typename T>
-std::string Format(const T& t) {puts("/home/yfy/iut/benchmarks/cctz2/src/civil_time_test.cc: cctz::{::Format(const T& t)");
+std::string Format(const T& t) {puts("/home/yfy/iut/benchmarks/cctz2/src/civil_time_test.cc: cctz:: ::Format(const T& t)");
   std::stringstream ss;
   ss << t;
   return ss.str();
