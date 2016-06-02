@@ -2,10 +2,12 @@ package edu.sjtu.stap.inst;
 
 import edu.sjtu.stap.ast.Ast;
 import edu.sjtu.stap.ast.AstWarehouse;
-import edu.sjtu.stap.config.Config;
 import javafx.util.Pair;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,6 +28,11 @@ public class ThreadInst implements Runnable {
     try {
       Ast ast = AstWarehouse.getAst(file);
       String instedBuf = inst(ast.getFileContent());
+
+      List<IASTFunctionDefinition> list = ast.getFunctionDecl();
+      for (IASTFunctionDefinition func : list) {
+        //System.out.println(func.getRawSignature());
+      }
 
       BufferedWriter bw = new BufferedWriter(new FileWriter(file));
       bw.write(instedBuf);

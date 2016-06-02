@@ -31,9 +31,9 @@ public class MyASTVisitor extends ASTVisitor {
 			funcs.add((IASTFunctionDefinition) declaration);
 		}else if(declaration instanceof CPPASTSimpleDeclaration){
 			CPPASTSimpleDeclaration cppastSimpleDeclaration = (CPPASTSimpleDeclaration) declaration;
-			System.out.println(cppastSimpleDeclaration.getRawSignature().startsWith("class"));
+			//System.out.println(cppastSimpleDeclaration.getRawSignature().startsWith("class"));
 			if(cppastSimpleDeclaration.getRawSignature().startsWith("class")){//TODO: maybe inaccurate
-				System.out.println(cppastSimpleDeclaration.getRawSignature() );
+				//System.out.println(cppastSimpleDeclaration.getRawSignature() );
 				classes.add(cppastSimpleDeclaration);
 			}else {
 				decls.add(declaration);
