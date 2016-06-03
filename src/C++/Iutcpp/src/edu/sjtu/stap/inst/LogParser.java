@@ -10,6 +10,7 @@ public class LogParser implements ITaskAfterRun {
   @Override
   public void run(BufferedReader br) throws Exception {
     String testcase = null, line, func;
+    int count = 0;
     while ((line = br.readLine()) != null) {
       //System.out.println(line);
       if (line.startsWith("[ RUN      ] ")) {
@@ -19,6 +20,8 @@ public class LogParser implements ITaskAfterRun {
         func = line.substring(7);
         //System.out.println("  " + func);
       }
+      count++;
     }
+    System.out.println("Lines: " + count);
   }
 }
