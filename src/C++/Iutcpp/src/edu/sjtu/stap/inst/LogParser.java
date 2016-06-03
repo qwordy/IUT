@@ -9,8 +9,16 @@ import java.io.BufferedReader;
 public class LogParser implements ITaskAfterRun {
   @Override
   public void run(BufferedReader br) throws Exception {
-    String line;
-    while ((line = br.readLine()) != null)
-      System.out.println(line);
+    String testcase = null, line, func;
+    while ((line = br.readLine()) != null) {
+      //System.out.println(line);
+      if (line.startsWith("[ RUN      ] ")) {
+        testcase = line.substring(13);
+        //System.out.println(line.substring(13));
+      } else if (line.startsWith("IUTLOG ") && testcase != null) {
+        func = line.substring(7);
+        //System.out.println("  " + func);
+      }
+    }
   }
 }

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +21,13 @@
 
 namespace cctz {
 
-time_zone utc_time_zone() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::utc_time_zone()");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::utc_time_zone()");
+time_zone utc_time_zone() {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::utc_time_zone()");
   time_zone tz;
   load_time_zone("UTC", &tz);
   return tz;
 }
 
-time_zone local_time_zone() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::local_time_zone()");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::local_time_zone()");
+time_zone local_time_zone() {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::local_time_zone()");
 #if defined(_WIN32) || defined(_WIN64)
   char* tz_env = nullptr;
   _dupenv_s(&tz_env, nullptr, "TZ");
@@ -51,16 +50,16 @@ time_zone local_time_zone() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_
   return tz;
 }
 
-bool load_time_zone(const std::string& name, time_zone* tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::load_time_zone(const std::string& name, time_zone* tz)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::load_time_zone(const std::string& name, time_zone* tz)");
+bool load_time_zone(const std::string& name, time_zone* tz) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::load_time_zone(const std::string& name, time_zone* tz)");
   return time_zone::Impl::LoadTimeZone(name, tz);
 }
 
 time_zone::absolute_lookup time_zone::lookup(
-    const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup( const time_point<sys_seconds>& tp) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup( const time_point<sys_seconds>& tp) const");
+    const time_point<sys_seconds>& tp) const {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup( const time_point<sys_seconds>& tp) const");
   return time_zone::Impl::get(*this).BreakTime(tp);
 }
 
-time_zone::civil_lookup time_zone::lookup(const civil_second& cs) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup(const civil_second& cs) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup(const civil_second& cs) const");
+time_zone::civil_lookup time_zone::lookup(const civil_second& cs) const {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_lookup.cc: cctz::time_zone::lookup(const civil_second& cs) const");
   return time_zone::Impl::get(*this).MakeTimeInfo(cs);
 }
 

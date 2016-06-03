@@ -13,4 +13,7 @@ public class Config {
   public static String make = "make";
 
   public static String run = "./civil_time_test";
+  //public static String run = "./cctz_v1_test";
+  //public static String run = "./time_zone_lookup_test";
+  //public static String run = "./example1";
 }

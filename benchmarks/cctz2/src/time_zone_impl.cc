@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,13 +35,13 @@ const time_zone::Impl* utc_zone = nullptr;
 // utc_zone should only be referenced in a thread that has just done
 // a LoadUTCTimeZone().
 std::once_flag load_utc_once;
-void LoadUTCTimeZone() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz:: ::LoadUTCTimeZone()");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz:: ::LoadUTCTimeZone()");
+void LoadUTCTimeZone() {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz:: ::LoadUTCTimeZone()");
   std::call_once(load_utc_once, []() { utc_time_zone(); });
 }
 
 }  // namespace
 
-bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz)");
+bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz)");
   const bool is_utc = (name.compare("UTC") == 0);
 
   // First check, under a shared lock, whether the time zone has already
@@ -88,7 +87,7 @@ bool time_zone::Impl::LoadTimeZone(const std::string& name, time_zone* tz) {puts
   return !fallback_utc;
 }
 
-const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::& time_zone::Impl::get(const time_zone& tz)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::& time_zone::Impl::get(const time_zone& tz)");
+const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::& time_zone::Impl::get(const time_zone& tz)");
   if (tz.impl_ == nullptr) {
     // Dereferencing an implicit-UTC time_zone is expected to be
     // rare, so we don't mind paying a small synchronization cost.
@@ -101,7 +100,7 @@ const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("/home/yf
 time_zone::Impl::Impl(const std::string& name) : name_(name) {}
 
 time_zone::absolute_lookup time_zone::Impl::BreakTime(
-    const time_point<sys_seconds>& tp) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::BreakTime( const time_point<sys_seconds>& tp) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::BreakTime( const time_point<sys_seconds>& tp) const");
+    const time_point<sys_seconds>& tp) const {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::BreakTime( const time_point<sys_seconds>& tp) const");
   time_zone::absolute_lookup res;
   Breakdown bd = zone_->BreakTime(tp);
   // TODO: Eliminate extra normalization.
@@ -113,7 +112,7 @@ time_zone::absolute_lookup time_zone::Impl::BreakTime(
   return res;
 }
 
-time_zone::civil_lookup time_zone::Impl::MakeTimeInfo(civil_second cs) const {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::MakeTimeInfo(civil_second cs) const");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::MakeTimeInfo(civil_second cs) const");
+time_zone::civil_lookup time_zone::Impl::MakeTimeInfo(civil_second cs) const {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_impl.cc: cctz::time_zone::Impl::MakeTimeInfo(civil_second cs) const");
   time_zone::civil_lookup res;
   // TODO: Eliminate extra normalization.
   TimeInfo t = zone_->MakeTimeInfo(cs.year(), cs.month(), cs.day(),

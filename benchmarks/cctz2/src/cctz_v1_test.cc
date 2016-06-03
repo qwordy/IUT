@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 // Copyright 2015 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-#include "src/cctz.h"
+#include "cctz.h"
 
 #include <chrono>
 #include <future>
@@ -620,7 +619,7 @@ const char* const kTimeZoneNames[] = {
 };
 
 // Helper to return a loaded time zone by value (UTC on error).
-TimeZone LoadZone(const std::string& name) {puts("/home/yfy/iut/benchmarks/cctz2/src/cctz_v1_test.cc: cctz:: ::LoadZone(const std::string& name)");puts("/home/yfy/iut/benchmarks/cctz2/src/cctz_v1_test.cc: cctz:: ::LoadZone(const std::string& name)");
+TimeZone LoadZone(const std::string& name) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/cctz_v1_test.cc: cctz:: ::LoadZone(const std::string& name)");
   TimeZone tz;
   LoadTimeZone(name, &tz);
   return tz;

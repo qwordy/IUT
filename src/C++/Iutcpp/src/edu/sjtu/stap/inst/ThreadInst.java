@@ -88,7 +88,7 @@ public class ThreadInst implements Runnable {
       String decl = funcDeclarator.getRawSignature();
       //System.out.println(decl);
 
-      String log = String.format("puts(\"%s: %s%s\");", fileName, prefix, decl)
+      String log = String.format("puts(\"IUTLOG %s: %s%s\");", fileName, prefix, decl)
           .replaceAll("[\n\r]", " ").replaceAll(" {2,}", " ");
       sb.insert(brOffset + 1 + offset, log);
       offset += log.length();

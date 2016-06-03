@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +59,7 @@ const char* const kFormats[] = {
 };
 
 bool ParseTimeSpec(const std::string& args, cctz::time_zone zone,
-                   time_point<sys_seconds>* when) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseTimeSpec(const std::string& args, cctz::time_zone zone, time_point<sys_seconds>* when)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseTimeSpec(const std::string& args, cctz::time_zone zone, time_point<sys_seconds>* when)");
+                   time_point<sys_seconds>* when) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseTimeSpec(const std::string& args, cctz::time_zone zone, time_point<sys_seconds>* when)");
   for (const char* const* fmt = kFormats; *fmt != NULL; ++fmt) {
     const std::string format = std::string(*fmt) + " %Ez";
     time_point<sys_seconds> tp;
@@ -72,7 +71,7 @@ bool ParseTimeSpec(const std::string& args, cctz::time_zone zone,
   return false;
 }
 
-bool ParseBreakdownSpec(const std::string& args, cctz::civil_second* when) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseBreakdownSpec(const std::string& args, cctz::civil_second* when)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseBreakdownSpec(const std::string& args, cctz::civil_second* when)");
+bool ParseBreakdownSpec(const std::string& args, cctz::civil_second* when) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: ParseBreakdownSpec(const std::string& args, cctz::civil_second* when)");
   const cctz::time_zone utc = cctz::utc_time_zone();
   for (const char* const* fmt = kFormats; *fmt != NULL; ++fmt) {
     time_point<sys_seconds> tp;
@@ -87,7 +86,7 @@ bool ParseBreakdownSpec(const std::string& args, cctz::civil_second* when) {puts
 // The FormatTime() specifier for output.
 const char* const kFormat = "%Y-%m-%d %H:%M:%S %Ez (%Z)";
 
-const char* WeekDayName(cctz::weekday wd) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: * WeekDayName(cctz::weekday wd)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: * WeekDayName(cctz::weekday wd)");
+const char* WeekDayName(cctz::weekday wd) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: * WeekDayName(cctz::weekday wd)");
   switch (wd) {
     case cctz::weekday::monday: return "Mon";
     case cctz::weekday::tuesday: return "Tue";
@@ -101,7 +100,7 @@ const char* WeekDayName(cctz::weekday wd) {puts("/home/yfy/iut/benchmarks/cctz2/
 }
 
 std::string FormatTimeInZone(time_point<sys_seconds> when,
-                             cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: FormatTimeInZone(time_point<sys_seconds> when, cctz::time_zone zone)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: FormatTimeInZone(time_point<sys_seconds> when, cctz::time_zone zone)");
+                             cctz::time_zone zone) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: FormatTimeInZone(time_point<sys_seconds> when, cctz::time_zone zone)");
   std::ostringstream oss;
   oss << std::setw(33) << std::left << cctz::format(kFormat, when, zone);
   cctz::time_zone::absolute_lookup al = zone.lookup(when);
@@ -115,7 +114,7 @@ std::string FormatTimeInZone(time_point<sys_seconds> when,
 }
 
 void InstantInfo(const std::string& label, time_point<sys_seconds> when,
-                 cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: InstantInfo(const std::string& label, time_point<sys_seconds> when, cctz::time_zone zone)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: InstantInfo(const std::string& label, time_point<sys_seconds> when, cctz::time_zone zone)");
+                 cctz::time_zone zone) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: InstantInfo(const std::string& label, time_point<sys_seconds> when, cctz::time_zone zone)");
   const cctz::time_zone utc = cctz::utc_time_zone();  // might == zone
   const std::string time_label = "time_t";
   const std::string utc_label = "UTC";
@@ -135,7 +134,7 @@ void InstantInfo(const std::string& label, time_point<sys_seconds> when,
 }
 
 // Report everything we know about a cctz::civil_second (YMDHMS).
-int BreakdownInfo(const cctz::civil_second& cs, cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: BreakdownInfo(const cctz::civil_second& cs, cctz::time_zone zone)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: BreakdownInfo(const cctz::civil_second& cs, cctz::time_zone zone)");
+int BreakdownInfo(const cctz::civil_second& cs, cctz::time_zone zone) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: BreakdownInfo(const cctz::civil_second& cs, cctz::time_zone zone)");
   cctz::time_zone::civil_lookup cl = zone.lookup(cs);
   switch (cl.kind) {
     case cctz::time_zone::civil_lookup::UNIQUE: {
@@ -164,19 +163,19 @@ int BreakdownInfo(const cctz::civil_second& cs, cctz::time_zone zone) {puts("/ho
 }
 
 // Report everything we know about a time_point<sys_seconds>.
-int TimeInfo(time_point<sys_seconds> when, cctz::time_zone zone) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: TimeInfo(time_point<sys_seconds> when, cctz::time_zone zone)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: TimeInfo(time_point<sys_seconds> when, cctz::time_zone zone)");
+int TimeInfo(time_point<sys_seconds> when, cctz::time_zone zone) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: TimeInfo(time_point<sys_seconds> when, cctz::time_zone zone)");
   std::cout << "kind: UNIQUE\n";
   InstantInfo("when", when, zone);
   return 0;
 }
 
-const char* Basename(const char* p) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: * Basename(const char* p)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: * Basename(const char* p)");
+const char* Basename(const char* p) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: * Basename(const char* p)");
   if (const char* b = strrchr(p, '/')) return ++b;
   return p;
 }
 
 // std::regex doesn't work before gcc 4.9.
-bool LooksLikeNegOffset(const char* s) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: LooksLikeNegOffset(const char* s)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: LooksLikeNegOffset(const char* s)");
+bool LooksLikeNegOffset(const char* s) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: LooksLikeNegOffset(const char* s)");
   if (s[0] == '-' && std::isdigit(s[1]) && std::isdigit(s[2])) {
     int i = (s[3] == ':') ? 4 : 3;
     if (std::isdigit(s[i]) && std::isdigit(s[i + 1])) {
@@ -186,7 +185,7 @@ bool LooksLikeNegOffset(const char* s) {puts("/home/yfy/iut/benchmarks/cctz2/src
   return false;
 }
 
-int main(int argc, char** argv) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: main(int argc, char** argv)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: main(int argc, char** argv)");
+int main(int argc, char** argv) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_tool.cc: main(int argc, char** argv)");
   std::string prog = argv[0] ? Basename(argv[0]) : "time_tool";
 
   // Escape arguments that look like negative offsets so that they

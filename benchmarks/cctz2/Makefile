@@ -26,7 +26,7 @@ OPT = -O
 PREFIX = /usr/local
 
 # possible support for googletest
-TESTS = civil_time_test time_zone_lookup_test #time_zone_format_test
+TESTS = cctz_v1_test civil_time_test time_zone_lookup_test #time_zone_format_test
 ## TEST_FLAGS = ...
 TEST_LIBS = -lgtest -lgtest_main
 

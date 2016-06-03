@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -63,18 +62,18 @@ class TimeZoneIf {
   // A factory function for TimeZoneIf implementations.
   static std::unique_ptr<TimeZoneIf> Load(const std::string& name);
 
-  virtual ~TimeZoneIf() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::TimeZoneIf::TimeZoneIf::~TimeZoneIf()");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::TimeZoneIf::TimeZoneIf::~TimeZoneIf()");}
+  virtual ~TimeZoneIf() {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::TimeZoneIf::TimeZoneIf::~TimeZoneIf()");}
 
   virtual Breakdown BreakTime(const time_point<sys_seconds>& tp) const = 0;
   virtual TimeInfo MakeTimeInfo(int64_t year, int mon, int day,
                                 int hour, int min, int sec) const = 0;
 
  protected:
-  TimeZoneIf() {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::TimeZoneIf::TimeZoneIf::TimeZoneIf()");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::TimeZoneIf::TimeZoneIf::TimeZoneIf()");}
+  TimeZoneIf() {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::TimeZoneIf::TimeZoneIf::TimeZoneIf()");}
 };
 
 // Converts tp to a count of seconds since the Unix epoch.
-inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::ToUnixSeconds(const time_point<sys_seconds>& tp)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::ToUnixSeconds(const time_point<sys_seconds>& tp)");
+inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::ToUnixSeconds(const time_point<sys_seconds>& tp)");
   return (tp - std::chrono::time_point_cast<sys_seconds>(
                    std::chrono::system_clock::from_time_t(0)))
       .count();
@@ -82,7 +81,7 @@ inline int64_t ToUnixSeconds(const time_point<sys_seconds>& tp) {puts("/home/yfy
 
 // Converts a count of seconds since the Unix epoch to a
 // time_point<sys_seconds>.
-inline time_point<sys_seconds> FromUnixSeconds(int64_t t) {puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::FromUnixSeconds(int64_t t)");puts("/home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::FromUnixSeconds(int64_t t)");
+inline time_point<sys_seconds> FromUnixSeconds(int64_t t) {puts("IUTLOG /home/yfy/iut/benchmarks/cctz2/src/time_zone_if.h: cctz::FromUnixSeconds(int64_t t)");
   return std::chrono::time_point_cast<sys_seconds>(
              std::chrono::system_clock::from_time_t(0)) +
          sys_seconds(t);

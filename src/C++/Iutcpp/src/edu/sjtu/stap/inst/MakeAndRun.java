@@ -23,10 +23,12 @@ public class MakeAndRun {
   private int execute(String cmd, ITaskAfterRun task) {
     try {
       Process process = Runtime.getRuntime().exec(cmd, null, new File(Config.baseDir));
-      if (task != null) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+      BufferedReader br =
+          new BufferedReader(new InputStreamReader(process.getInputStream()));
+      if (task == null)
+        while (br.readLine() != null);
+      else
         task.run(br);
-      }
     } catch (Exception e) {
       e.printStackTrace();
       return -1;
