@@ -50,45 +50,17 @@ public class ThreadInst implements Runnable {
    * @throws Exception
    */
   private String inst(Ast ast) throws Exception {
-    String buf = ast.getFileContent();
+    String fileContent = ast.getFileContent();
     StringBuilder sb = new StringBuilder(ast.getFileContent());
     sb.insert(0, "#include <stdio.h>\n");
     int offset = 19;
 
     List<IASTFunctionDefinition> funcList = ast.getFunctionDecl();
     for (IASTFunctionDefinition func : funcList) {
-      // file
-      String fileName = func.getFileLocation().getFileName();
-
-      // prefix
-      String prefix = "";
-      IASTNode node = func.getParent();
-      while (node != null) {
-        IToken token = node.getSyntax();
-        //System.out.println(token);
-        String keyword = token.getImage();
-        if (keyword.equals("class") || keyword.equals("namespace") || keyword.equals("struct")) {
-          //System.out.println(token.getNext());
-          String name = token.getNext().getImage();
-          if (name.equals("{"))
-            name = " ";
-          prefix = name + "::" + prefix;
-        }
-        node = node.getParent();
-      }
-
-      // signature
-      IASTFunctionDeclarator funcDeclarator = func.getDeclarator();
-      IASTFileLocation fileLocation = funcDeclarator.getFileLocation();
-      int brOffset = fileLocation.getNodeOffset() + fileLocation.getNodeLength();
-      while (buf.charAt(brOffset) == ' ')
-        brOffset++;
-      if (buf.charAt(brOffset) != '{') continue;
-
-      String decl = funcDeclarator.getRawSignature();
-      //System.out.println(decl);
-
-      String log = String.format("puts(\"IUTLOG %s: %s%s\");", fileName, prefix, decl)
+      String funcName = funcName(func, fileContent);
+      if (funcName == null)
+        continue;
+      String log = String.format("puts(\"IUTLOG %s\");", funcName)
           .replaceAll("[\n\r]", " ").replaceAll(" {2,}", " ");
       sb.insert(brOffset + 1 + offset, log);
       offset += log.length();
@@ -96,6 +68,49 @@ public class ThreadInst implements Runnable {
 
     return sb.toString();
   }
+
+  /**
+   * @param func
+   * @param fileContent
+   * @return Global unique name. May be null.
+   * @throws Exception
+   */
+  public String funcName(IASTFunctionDefinition func, String fileContent) throws Exception {
+    // file
+    String fileName = func.getFileLocation().getFileName();
+
+    // prefix
+    String prefix = "";
+    IASTNode node = func.getParent();
+    while (node != null) {
+      IToken token = node.getSyntax();
+      //System.out.println(token);
+      String keyword = token.getImage();
+      if (keyword.equals("class") || keyword.equals("namespace") || keyword.equals("struct")) {
+        //System.out.println(token.getNext());
+        String name = token.getNext().getImage();
+        if (name.equals("{"))
+          name = " ";
+        prefix = name + "::" + prefix;
+      }
+      node = node.getParent();
+    }
+
+    // signature
+    IASTFunctionDeclarator funcDeclarator = func.getDeclarator();
+    IASTFileLocation fileLocation = funcDeclarator.getFileLocation();
+    brOffset = fileLocation.getNodeOffset() + fileLocation.getNodeLength();
+    while (fileContent.charAt(brOffset) == ' ')
+      brOffset++;
+    if (fileContent.charAt(brOffset) != '{')
+      return null;
+
+    String decl = funcDeclarator.getRawSignature();
+
+    return String.format("%s: %s%s", fileName, prefix, decl);
+  }
+
+  private int brOffset;
 
   private String inst2(String buf) {
     Pattern pattern = Pattern.compile(Inst.functionDefPattern());

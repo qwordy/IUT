@@ -15,10 +15,10 @@ public class LogParser implements ITaskAfterRun {
       //System.out.println(line);
       if (line.startsWith("[ RUN      ] ")) {
         testcase = line.substring(13);
-        //System.out.println(line.substring(13));
+        System.out.println(line.substring(13));
       } else if (line.startsWith("IUTLOG ") && testcase != null) {
         func = line.substring(7);
-        //System.out.println("  " + func);
+        System.out.println("  " + func);
       }
       count++;
     }
