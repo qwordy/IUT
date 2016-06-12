@@ -1,8 +1,12 @@
 package edu.sjtu.stap.diff.diff;
 
+import org.apache.commons.io.FileUtils;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTParameterDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTStandardFunctionDeclarator;
+
+import java.io.File;
+import java.io.IOException;
 
 public class DiffUtils {
 
@@ -56,4 +60,13 @@ public class DiffUtils {
 		return sb.toString();
 	}
 
+	public static String getFileContent(String filename) {
+		try {
+			return FileUtils.readFileToString(new File(filename));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }

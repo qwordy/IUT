@@ -62,6 +62,9 @@ public class DUFile extends DifferUnit{
 			
 			return sb.toString();
 		}
-		
+
+		public String getFileContent() {
+			return DiffUtils.getFileContent(filename); //FIXME filename maybe invalid
+		}
 	}
 }

@@ -4,4 +4,4 @@
 *.class
 push.sh
 build/
-designdoc.docx.backup
+*.backup

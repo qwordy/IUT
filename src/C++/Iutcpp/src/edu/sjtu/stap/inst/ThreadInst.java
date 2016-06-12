@@ -29,6 +29,10 @@ public class ThreadInst implements Runnable {
     this.file = file;
   }
 
+  public ThreadInst() {
+
+  }
+
   @Override
   public void run() {
     //System.out.println(file);
