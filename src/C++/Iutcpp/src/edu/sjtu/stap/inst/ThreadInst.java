@@ -82,6 +82,8 @@ public class ThreadInst implements Runnable {
   public String funcName(IASTFunctionDefinition func, String fileContent) throws Exception {
     // file
     String fileName = func.getFileLocation().getFileName();
+    int pos = fileName.lastIndexOf(File.separatorChar);
+    fileName = fileName.substring(pos + 1);
 
     // prefix
     String prefix = "";

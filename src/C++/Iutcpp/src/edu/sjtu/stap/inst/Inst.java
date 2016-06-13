@@ -16,10 +16,15 @@ public class Inst {
 
   public Inst() {
     try {
+      // copy dir
+      Execute.exec("rm -rf " + Config.baseDirInst, null, null);
+      Execute.exec("cp -rf " + Config.baseDir + " " + Config.baseDirInst, null, null);
+
+      // inst
       executor = Executors.newCachedThreadPool();
       //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
       //executor = Executors.newFixedThreadPool(1);
-      ls(new File(Config.srcDir));
+      ls(new File(Config.srcDirInst));
       executor.shutdown();
       executor.awaitTermination(1, TimeUnit.DAYS);
     } catch (Exception e) {
