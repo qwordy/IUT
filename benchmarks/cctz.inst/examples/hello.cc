@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +20,7 @@
 #include "civil_time.h"
 #include "time_zone.h"
 
-int main() {
+int main() {puts("IUTLOG hello.cc: main()");
   cctz::time_zone syd;
   if (!cctz::load_time_zone("Australia/Sydney", &syd)) return -1;
 

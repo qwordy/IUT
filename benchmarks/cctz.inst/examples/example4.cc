@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,11 +21,11 @@
 
 template <typename D>
 cctz::time_point<cctz::sys_seconds> FloorDay(cctz::time_point<D> tp,
-                                             cctz::time_zone tz) {
+                                             cctz::time_zone tz) {puts("IUTLOG example4.cc: FloorDay(cctz::time_point<D> tp, cctz::time_zone tz)");
   return cctz::convert(cctz::civil_day(cctz::convert(tp, tz)), tz);
 }
 
-int main() {
+int main() {puts("IUTLOG example4.cc: main()");
   cctz::time_zone lax;
   load_time_zone("America/Los_Angeles", &lax);
   const auto now = std::chrono::system_clock::now();

@@ -1,5 +1,7 @@
 package edu.sjtu.stap.inst;
 
+import edu.sjtu.stap.diff.diff.Diff;
+
 import java.io.BufferedReader;
 
 /**
@@ -10,7 +12,7 @@ public class LogParser implements ITaskAfterRun {
   @Override
   public void run(BufferedReader br) throws Exception {
     String testcase = null, line, func;
-    int count = 0;
+    //int count = 0;
     while ((line = br.readLine()) != null) {
       //System.out.println(line);
       if (line.startsWith("[ RUN      ] ")) {
@@ -19,9 +21,14 @@ public class LogParser implements ITaskAfterRun {
       } else if (line.startsWith("IUTLOG ") && testcase != null) {
         func = line.substring(7);
         System.out.println("  " + func);
+
+        if (Diff.set.contains(func)) {
+          
+        }
+
       }
-      count++;
+      //count++;
     }
-    System.out.println("Lines: " + count);
+    //System.out.println("Lines: " + count);
   }
 }

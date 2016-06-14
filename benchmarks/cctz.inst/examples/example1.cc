@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@
 #include "civil_time.h"
 #include "time_zone.h"
 
-int main() {
+int main() {puts("IUTLOG example1.cc: main()");
   cctz::time_zone lax;
   load_time_zone("America/Los_Angeles", &lax);
 

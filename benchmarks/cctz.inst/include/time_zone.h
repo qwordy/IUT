@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -77,7 +78,7 @@ class time_zone {
   };
   absolute_lookup lookup(const time_point<sys_seconds>& tp) const;
   template <typename D>
-  absolute_lookup lookup(const time_point<D>& tp) const {
+  absolute_lookup lookup(const time_point<D>& tp) const {puts("IUTLOG time_zone.h: cctz::time_zone::time_zone::lookup(const time_point<D>& tp) const");
     return lookup(std::chrono::time_point_cast<sys_seconds>(tp));
   }
 
@@ -135,7 +136,7 @@ class time_zone {
   class Impl;
 
  private:
-  explicit time_zone(const Impl* impl) : impl_(impl) {}
+  explicit time_zone(const Impl* impl) : impl_(impl) {puts("IUTLOG time_zone.h: cctz::time_zone::time_zone::time_zone(const Impl* impl)");}
   const Impl* impl_ = nullptr;
 };
 
@@ -155,7 +156,7 @@ time_zone local_time_zone();
 // by the time_zone::absolute_lookup struct should rarely be needed in modern
 // code, this convert() function is simpler and should be preferred.
 template <typename D>
-inline civil_second convert(const time_point<D>& tp, const time_zone& tz) {
+inline civil_second convert(const time_point<D>& tp, const time_zone& tz) {puts("IUTLOG time_zone.h: cctz::convert(const time_point<D>& tp, const time_zone& tz)");
   return tz.lookup(tp).cs;
 }
 
@@ -165,7 +166,7 @@ inline civil_second convert(const time_point<D>& tp, const time_zone& tz) {
 // the best estimate that preserves relative order. That is, this function
 // guarantees that if cs1 < cs2, then convert(cs1, tz) <= convert(cs2, tz).
 inline time_point<sys_seconds> convert(const civil_second& cs,
-                                       const time_zone& tz) {
+                                       const time_zone& tz) {puts("IUTLOG time_zone.h: cctz::convert(const civil_second& cs, const time_zone& tz)");
   const time_zone::civil_lookup cl = tz.lookup(cs);
   if (cl.kind == time_zone::civil_lookup::SKIPPED) return cl.trans;
   return cl.pre;
@@ -174,7 +175,7 @@ inline time_point<sys_seconds> convert(const civil_second& cs,
 namespace detail {
 template <typename D>
 inline std::pair<time_point<sys_seconds>, D>
-split_seconds(const time_point<D>& tp) {
+split_seconds(const time_point<D>& tp) {puts("IUTLOG time_zone.h: cctz::detail::split_seconds(const time_point<D>& tp)");
   auto sec = std::chrono::time_point_cast<sys_seconds>(tp);
   auto sub = tp - sec;
   if (sub.count() < 0) {
@@ -184,7 +185,7 @@ split_seconds(const time_point<D>& tp) {
   return {sec, std::chrono::duration_cast<D>(sub)};
 }
 inline std::pair<time_point<sys_seconds>, sys_seconds>
-split_seconds(const time_point<sys_seconds>& tp) {
+split_seconds(const time_point<sys_seconds>& tp) {puts("IUTLOG time_zone.h: cctz::detail::split_seconds(const time_point<sys_seconds>& tp)");
   return {tp, sys_seconds(0)};
 }
 std::string format(const std::string&, const time_point<sys_seconds>&,
@@ -222,7 +223,7 @@ bool parse(const std::string&, const std::string&, const time_zone&,
 //   f = cctz::format("%H:%M:%E3S", tp, lax);            // "03:04:05.000"
 template <typename D>
 inline std::string format(const std::string& fmt, const time_point<D>& tp,
-                          const time_zone& tz) {
+                          const time_zone& tz) {puts("IUTLOG time_zone.h: cctz::format(const std::string& fmt, const time_point<D>& tp, const time_zone& tz)");
   const auto p = detail::split_seconds(tp);
   const auto n = std::chrono::duration_cast<std::chrono::nanoseconds>(p.second);
   return detail::format(fmt, p.first, n, tz);
@@ -273,7 +274,7 @@ inline std::string format(const std::string& fmt, const time_point<D>& tp,
 //   }
 template <typename D>
 inline bool parse(const std::string& fmt, const std::string& input,
-                  const time_zone& tz, time_point<D>* tpp) {
+                  const time_zone& tz, time_point<D>* tpp) {puts("IUTLOG time_zone.h: cctz::parse(const std::string& fmt, const std::string& input, const time_zone& tz, time_point<D>* tpp)");
   time_point<sys_seconds> tp{};
   std::chrono::nanoseconds ns{0};
   const bool b = detail::parse(fmt, input, tz, &tp, &ns);

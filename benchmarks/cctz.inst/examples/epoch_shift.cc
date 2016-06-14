@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,18 +18,18 @@
 #include <iomanip>
 #include <iostream>
 
-std::string format(const std::string& fmt, const std::tm& tm) {
+std::string format(const std::string& fmt, const std::tm& tm) {puts("IUTLOG epoch_shift.cc: format(const std::string& fmt, const std::tm& tm)");
   char buf[100];
   std::strftime(buf, sizeof(buf), fmt.c_str(), &tm);
   return buf;
 }
 
-int GetOffset(std::time_t, const std::string& zone) {
+int GetOffset(std::time_t, const std::string& zone) {puts("IUTLOG epoch_shift.cc: GetOffset(std::time_t, const std::string& zone)");
   if (zone == "America/New_York") return -4 * 60 * 60;
   return 0;
 }
 
-int main() {
+int main() {puts("IUTLOG epoch_shift.cc: main()");
   const std::time_t now = std::time(nullptr);
 
   // Shift epoch: UTC to "local time_t"
