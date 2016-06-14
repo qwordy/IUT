@@ -11,11 +11,11 @@ public class Config {
 
   public static String baseDirNew = "/home/yfy/iut/benchmarks/cctz2";
 
-  public static String srcRelativeDir = "/src";
-
-  public static String srcDir = baseDir + srcRelativeDir;
-
-  public static String srcDirInst = baseDirInst + srcRelativeDir;
+//  public static String srcRelativeDir = "/src";
+//
+//  public static String srcDir = baseDir + srcRelativeDir;
+//
+//  public static String srcDirInst = baseDirInst + srcRelativeDir;
 
   //public static String srcDir = "/home/yfy/iut/src/C++/copy of test/";
 

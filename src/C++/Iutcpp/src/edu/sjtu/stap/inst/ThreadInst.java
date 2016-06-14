@@ -3,10 +3,7 @@ package edu.sjtu.stap.inst;
 import edu.sjtu.stap.ast.Ast;
 import edu.sjtu.stap.ast.AstWarehouse;
 import javafx.util.Pair;
-import org.eclipse.cdt.core.dom.ast.IASTFileLocation;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDeclarator;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.parser.IToken;
 
 import java.io.BufferedWriter;
@@ -103,15 +100,11 @@ public class ThreadInst implements Runnable {
     }
 
     // signature
-    IASTFunctionDeclarator funcDeclarator = func.getDeclarator();
-    IASTFileLocation fileLocation = funcDeclarator.getFileLocation();
-    brOffset = fileLocation.getNodeOffset() + fileLocation.getNodeLength();
-    while (fileContent.charAt(brOffset) == ' ')
-      brOffset++;
-    if (fileContent.charAt(brOffset) != '{')
-      return null;
+    IASTStatement sm = func.getBody();
+    if (sm == null) return null;
+    brOffset = sm.getFileLocation().getNodeOffset();
 
-    String decl = funcDeclarator.getRawSignature();
+    String decl = func.getDeclarator().getRawSignature();
 
     return String.format("%s: %s%s", fileName, prefix, decl);
   }

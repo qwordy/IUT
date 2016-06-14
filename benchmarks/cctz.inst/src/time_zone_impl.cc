@@ -97,7 +97,7 @@ const time_zone::Impl& time_zone::Impl::get(const time_zone& tz) {puts("IUTLOG t
   return *tz.impl_;
 }
 
-time_zone::Impl::Impl(const std::string& name) : name_(name) {}
+time_zone::Impl::Impl(const std::string& name) : name_(name) {puts("IUTLOG time_zone_impl.cc: cctz::time_zone::Impl::Impl(const std::string& name)");}
 
 time_zone::absolute_lookup time_zone::Impl::BreakTime(
     const time_point<sys_seconds>& tp) const {puts("IUTLOG time_zone_impl.cc: cctz::time_zone::Impl::BreakTime( const time_point<sys_seconds>& tp) const");

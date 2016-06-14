@@ -14,22 +14,18 @@ import java.util.concurrent.TimeUnit;
 public class Inst {
   private ExecutorService executor;
 
-  public Inst() {
-    try {
-      // copy dir
-      Execute.exec("rm -rf " + Config.baseDirInst, null, null);
-      Execute.exec("cp -rf " + Config.baseDir + " " + Config.baseDirInst, null, null);
+  public Inst() throws Exception {
+    // copy dir
+    Execute.exec("rm -rf " + Config.baseDirInst, null, null);
+    Execute.exec("cp -rf " + Config.baseDir + " " + Config.baseDirInst, null, null);
 
-      // inst
-      executor = Executors.newCachedThreadPool();
-      //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
-      //executor = Executors.newFixedThreadPool(1);
-      ls(new File(Config.srcDirInst));
-      executor.shutdown();
-      executor.awaitTermination(1, TimeUnit.DAYS);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    // inst
+    executor = Executors.newCachedThreadPool();
+    //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
+    //executor = Executors.newFixedThreadPool(1);
+    ls(new File(Config.baseDirInst));
+    executor.shutdown();
+    executor.awaitTermination(1, TimeUnit.DAYS);
   }
 
   private void ls(File dir) throws Exception {
@@ -49,14 +45,15 @@ public class Inst {
     executor.execute(new ThreadInst(file));
   }
 
-  // c, cc, cpp, h
+  // c, cc, cpp, h, hpp
   private boolean isCFile(File file) {
     String name = file.getName();
     String suffix = name.substring(name.lastIndexOf('.') + 1);
     return suffix.equals("c") ||
         suffix.equals("cc") ||
         suffix.equals("cpp") ||
-        suffix.equals("h");
+        suffix.equals("h") ||
+        suffix.equals("hpp");
   }
 
   private static volatile String functionDefPattern;

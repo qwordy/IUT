@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,13 +20,13 @@
 #include <chrono>
 #include <string>
 
-std::string format(const std::string& fmt, const std::tm& tm) {
+std::string format(const std::string& fmt, const std::tm& tm) {puts("IUTLOG classic.cc: format(const std::string& fmt, const std::tm& tm)");
   char buf[100];
   std::strftime(buf, sizeof(buf), fmt.c_str(), &tm);
   return buf;
 }
 
-int main() {
+int main() {puts("IUTLOG classic.cc: main()");
   const std::time_t now = std::time(nullptr);
 
   std::tm tm_utc;

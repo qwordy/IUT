@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +19,7 @@
 
 #include "time_zone.h"
 
-int main() {
+int main() {puts("IUTLOG example2.cc: main()");
   const std::string civil_string = "2015-09-22 09:35:00";
 
   cctz::time_zone lax;
