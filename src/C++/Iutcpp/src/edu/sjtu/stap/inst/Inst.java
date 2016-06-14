@@ -15,6 +15,8 @@ public class Inst {
   private ExecutorService executor;
 
   public Inst() throws Exception {
+    System.out.println("inst");
+
     // copy dir
     Execute.exec("rm -rf " + Config.baseDirInst, null, null);
     Execute.exec("cp -rf " + Config.baseDir + " " + Config.baseDirInst, null, null);

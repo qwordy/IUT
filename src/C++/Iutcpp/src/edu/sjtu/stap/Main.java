@@ -1,15 +1,15 @@
 package edu.sjtu.stap;
 
-import edu.sjtu.stap.diff.diff.Diff;
-import edu.sjtu.stap.inst.MakeRunSelect;
+import edu.sjtu.stap.diff.Diff;
+import edu.sjtu.stap.inst.Inst;
+import edu.sjtu.stap.inst.MRSR;
 
 public class Main {
   public static void main(String[] args) {
     long t0 = System.currentTimeMillis();
     try {
       //new Inst();
-      Diff.diff();
-      new MakeRunSelect();
+      new MRSR(Diff.diff());
     } catch (Exception e) {
       e.printStackTrace();
     }

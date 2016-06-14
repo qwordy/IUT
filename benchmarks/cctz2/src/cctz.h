@@ -124,7 +124,6 @@ struct TimeInfo {
 };
 inline TimeInfo MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss,
                              const TimeZone& tz) {
-  int a = 0;
   assert(y < std::numeric_limits<decltype(civil_second().year())>::max());
   const civil_second cs(y, m, d, hh, mm, ss);
   const bool norm = cs.year() != y || cs.month() != m || cs.day() != d ||

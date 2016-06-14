@@ -99,6 +99,7 @@ const char kDigits[] = "0123456789";
 // to the caller of Format64() [and Format02d()/FormatOffset()] to ensure
 // that there is sufficient space before ep to hold the conversion.
 char* Format64(char* ep, int width, int64_t v) {
+  int aa;
   bool neg = false;
   if (v < 0) {
     --width;
