@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.sjtu.stap.ast.Ast;
+import edu.sjtu.stap.ast.AstWarehouse;
 import edu.sjtu.stap.diff.ast.Parser;
 import edu.sjtu.stap.diff.ast.XFunctionDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
@@ -45,12 +47,15 @@ public class ASTDiffer {
 
 
 	public ASTDiffer(String oldContent, String newContent){
+
 		Parser parserOld, parserNew;
 		parserOld = new Parser(oldContent);
 		parserNew = new Parser(newContent);
 
 		List<XFunctionDeclaration> oldFuncs = parserOld.getFunctionDefinitions();
 		List<XFunctionDeclaration> newFuncs = parserNew.getFunctionDefinitions();
+
+
 
 		HashMap<String, XFunctionDeclaration> mapNew;
 		mapNew = new HashMap<>();
@@ -70,6 +75,48 @@ public class ASTDiffer {
 
 			}
 			mapNew.remove(func.getId());
+			}else{//deleted
+				functionDeleted.add(new DUFunction.Deleted(func));
+			}
+
+		}
+		//TODO high priority for debugging
+		for(XFunctionDeclaration func : mapNew.values()){
+			//added
+			functionAdded.add(new DUFunction.Added(func));
+		}
+	}
+
+
+	public ASTDiffer(File oldFile, File newFile) throws Exception {
+
+		Parser parserOld, parserNew;
+		parserOld = new Parser(oldFile);
+		parserNew = new Parser(newFile);
+
+		List<XFunctionDeclaration> oldFuncs = parserOld.getFunctionDefinitions();
+		List<XFunctionDeclaration> newFuncs = parserNew.getFunctionDefinitions();
+
+
+
+		HashMap<String, XFunctionDeclaration> mapNew;
+		mapNew = new HashMap<>();
+
+		functionAdded = new ArrayList<>();
+		functionModified = new ArrayList<>();
+		functionDeleted = new ArrayList<>();
+
+		for(XFunctionDeclaration func : newFuncs){
+			mapNew.put(func.getId(), func);
+		}
+
+		for(XFunctionDeclaration func : oldFuncs){
+			XFunctionDeclaration funcInNew = mapNew.get(func.getId());
+			if(funcInNew != null){if(!funcInNew.getOrigin().getBody().getRawSignature().equals(func.getOrigin().getBody().getRawSignature()) ){ //modified
+				functionModified.add(new DUFunction.Modified(func));
+
+			}
+				mapNew.remove(func.getId());
 			}else{//deleted
 				functionDeleted.add(new DUFunction.Deleted(func));
 			}

@@ -31,11 +31,10 @@ public class FileDiffer {
 
 	public DifferResult diff(String oldDir, String newDir, String base) throws IOException{
 		System.out.println("FileDiffer.diff( "+oldDir+", "+newDir+", "+base+")");
-//		StringBuilder sb = new StringBuilder();
+
 		File oldFolder = new File(oldDir + base);
 		File newFolder = new File(newDir + base);
-		//TODO: String basePath = oldDir + base;
-		String basePath = oldDir + base;
+
 
 		if(oldFolder.isDirectory() && newFolder.isDirectory()){
 //			System.out.println("good");
@@ -49,9 +48,7 @@ public class FileDiffer {
 				if(cppFileFilter.accept(file)){
 					newFiles.add(file);
 				}else if(file.isDirectory()){
-//					System.out.println("basePath+file.getName() == file.getAbsolutePath():\t"+(basePath+file.getName() == file.getAbsolutePath()));
-//					System.out.println("basePath+file.getName():\t"+basePath+file.getName()
-//							+"\n"+"file.getAbsolutePath():\t"+file.getAbsolutePath());
+
 					dirMap.put(file.getName(), file);//TODO: dir getName()
 				}
 			}
@@ -62,14 +59,15 @@ public class FileDiffer {
 				}else if(file.isDirectory()){
 					File dirInNew = dirMap.get(file.getName());
 					if (dirInNew == null){//dir deleted
-//						sb.append("\nDir Deleted: "+file.getName());
+
 						System.out.println("\nDir Deleted: "+file.getName());//TODO
 						//differResult.appendfileDeleted(file.getName());//to be changed
 						differResult.appendfileDeleted(file.getAbsolutePath());
 					}else{
 //						System.out.println("filename: "+oldDir+file.getName());
 						//Fixed: BUG: oldDir should be oldFolder's path, new* too
-//						sb.append(this.diff(oldDir, newDir, base+file.getName()+"/"));//diff this dir
+
+//diff this dir
 						this.diff(oldDir, newDir, base+file.getName()+"/");//TODO: keep this "getName()"
 						dirMap.remove(file.getName());
 					}
@@ -77,7 +75,6 @@ public class FileDiffer {
 			}
 
 			for(File file : dirMap.values()){
-//				sb.append("\nDir Added: "+file.getName());
 				//dir added
 				System.out.println("\nDir Added: "+file.getName());//TODO
 				//differResult.appendfileAdded(file.getName());//to be changed
@@ -87,29 +84,20 @@ public class FileDiffer {
 			diffFiles(oldFiles, newFiles);
 
 			return differResult;
-			/*
-			String resultOfFileDiffInDir;
-			try {
-				resultOfFileDiffInDir = this.diffFiles(oldFiles, newFiles);
-				sb.append("\nIN Dir: "+oldDir+base+"\n"+resultOfFileDiffInDir);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			*/
+
 
 		}else if(!oldFolder.isDirectory()){
-//			sb.append("\nERROR: At least one of the paths is not a DIRECTORY! "+ oldFolder+" or "+newFolder);
+
 			System.out.println("ERROR:"+oldFolder.getName()+ " is not a DIRECTORY!");
 			return null;//TODO: better to raise an exception
 		}else{
 			System.out.println("ERROR:"+newFolder.getName()+ " is not a DIRECTORY!");
 			return null;//TODO: better to raise an exception
 		}
-//		return sb.toString();
 	}
 
 	private void diffFiles(List<File> oldFiles, List<File> newFiles) throws IOException {
-//		StringBuilder sb = new StringBuilder();
+
 		HashMap<String, File> newMap = new HashMap<>();
 
 		for(File file : newFiles){
@@ -122,7 +110,7 @@ public class FileDiffer {
 
 			if(fileInNew == null){
 				//file deleted
-//				sb.append("/n/tFile Deleted: "+filename);
+
 				System.out.println("\n\tFile Deleted: "+filename);//TODO
 				//differResult.appendfileDeleted(filename);//to be changed
 				differResult.appendfileDeleted(file.getAbsolutePath());
@@ -134,8 +122,13 @@ public class FileDiffer {
 				String contentNew = FileUtils.readFileToString(fileInNew);
 				//TODO		contentOld.replaceAll("*", "");
 				if(!contentOld.equals(contentNew)){
-					ASTDiffer astDiffer = new ASTDiffer(contentOld, contentNew);
-//						sb.append("\nIn File: "+filename+"\n"+astDiffer.diff(contentOld, contentNew, true));
+//					ASTDiffer astDiffer = new ASTDiffer(contentOld, contentNew);
+					ASTDiffer astDiffer = null;
+					try {
+						astDiffer = new ASTDiffer(file, fileInNew);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					System.out.println("\n\tFile Modified: "+filename);//TODO
 					//differResult.appendfileModified(filename, astDiffer); // to be changed
 					differResult.appendfileModified(file.getAbsolutePath(), astDiffer);// to
@@ -148,13 +141,11 @@ public class FileDiffer {
 
 		for(String filename : newMap.keySet()){
 			//file added
-//			sb.append("\nFile Added: "+filename);
 			System.out.println("\n\tFile Added: "+filename);//TODO
 			//differResult.appendfileAdded(filename);// to be changed
 			differResult.appendfileAdded(newMap.get(filename).getAbsolutePath());
 		}
 
-//		return sb.toString();
 	}
 
 
