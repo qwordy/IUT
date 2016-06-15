@@ -60,7 +60,7 @@ public class FileDiffer {
 					File dirInNew = dirMap.get(file.getName());
 					if (dirInNew == null){//dir deleted
 
-						System.out.println("\nDir Deleted: "+file.getName());//TODO
+						System.out.println("\nDir Deleted: "+file.getAbsolutePath());//TODO
 						//differResult.appendfileDeleted(file.getName());//to be changed
 						differResult.appendfileDeleted(file.getAbsolutePath());
 					}else{
@@ -76,7 +76,7 @@ public class FileDiffer {
 
 			for(File file : dirMap.values()){
 				//dir added
-				System.out.println("\nDir Added: "+file.getName());//TODO
+				System.out.println("\nDir Added: "+file.getAbsolutePath());//TODO
 				//differResult.appendfileAdded(file.getName());//to be changed
 				differResult.appendfileAdded(file.getAbsolutePath());
 			}
@@ -111,7 +111,7 @@ public class FileDiffer {
 			if(fileInNew == null){
 				//file deleted
 
-				System.out.println("\n\tFile Deleted: "+filename);//TODO
+				System.out.println("\n\tFile Deleted: "+file.getAbsolutePath());//TODO
 				//differResult.appendfileDeleted(filename);//to be changed
 				differResult.appendfileDeleted(file.getAbsolutePath());
 			}else{
@@ -129,7 +129,7 @@ public class FileDiffer {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					System.out.println("\n\tFile Modified: "+filename);//TODO
+					System.out.println("\n\tFile Modified: "+file.getAbsolutePath());//TODO
 					//differResult.appendfileModified(filename, astDiffer); // to be changed
 					differResult.appendfileModified(file.getAbsolutePath(), astDiffer);// to
 				}
@@ -141,7 +141,7 @@ public class FileDiffer {
 
 		for(String filename : newMap.keySet()){
 			//file added
-			System.out.println("\n\tFile Added: "+filename);//TODO
+			System.out.println("\n\tFile Added: "+newMap.get(filename).getAbsolutePath());//TODO
 			//differResult.appendfileAdded(filename);// to be changed
 			differResult.appendfileAdded(newMap.get(filename).getAbsolutePath());
 		}

@@ -11,6 +11,12 @@ public class Config {
 
   public static String baseDirNew = "/home/yfy/iut/benchmarks/cctz2";
 
+//    public static String baseDir = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz";
+//
+//    public static String baseDirInst = baseDir + ".inst";
+//
+//    public static String baseDirNew = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz2";
+
 //  public static String srcRelativeDir = "/src";
 //
 //  public static String srcDir = baseDir + srcRelativeDir;
@@ -20,6 +26,8 @@ public class Config {
   //public static String srcDir = "/home/yfy/iut/src/C++/copy of test/";
 
   public static String make = "make";
+
+  public static String makeClean = "make clean";
 
   public static String[] tests = {
       "./civil_time_test",
