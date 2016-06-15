@@ -8,7 +8,7 @@ public class Main {
   public static void main(String[] args) {
     long t0 = System.currentTimeMillis();
     try {
-      //new Inst();
+      new Inst();
       new MRSR(Diff.diff());
     } catch (Exception e) {
       e.printStackTrace();

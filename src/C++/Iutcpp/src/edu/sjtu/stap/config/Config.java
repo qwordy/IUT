@@ -5,11 +5,19 @@ package edu.sjtu.stap.config;
  * Config
  */
 public class Config {
-  public static String baseDir = "/home/yfy/iut/benchmarks/cctz";
+//  public static String baseDir = "/home/yfy/iut/benchmarks/cctz";
+//
+//  public static String baseDirInst = baseDir + ".inst";
+//
+//  public static String baseDirNew = "/home/yfy/iut/benchmarks/cctz2";
 
-  public static String baseDirInst = baseDir + ".inst";
 
-  public static String baseDirNew = "/home/yfy/iut/benchmarks/cctz2";
+
+    public static String baseDir = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz";
+
+    public static String baseDirInst = baseDir + ".inst";
+
+    public static String baseDirNew = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz2";
 
 //  public static String srcRelativeDir = "/src";
 //
