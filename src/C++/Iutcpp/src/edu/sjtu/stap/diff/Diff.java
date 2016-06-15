@@ -17,7 +17,7 @@ public class Diff {
    * @throws Exception
    */
   public static Set<String> diff() throws Exception {
-    System.out.println("diff");
+    System.out.println("Diff");
     FileDiffer differ = new FileDiffer();
     DifferResult result = differ.diff(Config.baseDir, Config.baseDirNew);
     List<String> list = result.getModifiedFunctions();

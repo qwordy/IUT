@@ -6,11 +6,11 @@ import java.util.*;
 
 /**
  * Created by yfy on 6/2/16.
- * MRSR. Make, run, select, rerun.
+ * MakeRunSelectRerun. Make, run, select, rerun.
  */
-public class MRSR {
-  public MRSR(Set<String> diffFuncs) {
-    System.out.println("mrsr");
+public class MakeRunSelectRerun {
+  public MakeRunSelectRerun(Set<String> diffFuncs) {
+    System.out.println("MakeRunSelectRerun");
     Execute.exec(Config.make, Config.baseDirInst, null);
     Execute.exec(Config.make, Config.baseDirNew, null);
     List<String> testcases;
