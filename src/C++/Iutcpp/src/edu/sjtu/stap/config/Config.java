@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Created by yfy on 5/26/16.
- * Config
+ * Config from config.iut
  */
 public class Config {
 

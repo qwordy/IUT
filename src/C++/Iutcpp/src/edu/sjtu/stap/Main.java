@@ -10,6 +10,7 @@ public class Main {
     long t0 = System.currentTimeMillis();
     try {
       Config.init();
+      
       new Inst();
       new MakeRunSelectRerun(Diff.diff());
     } catch (Exception e) {
