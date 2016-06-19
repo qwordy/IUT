@@ -19,7 +19,7 @@ public class Diff {
   public static Set<String> diff() throws Exception {
     System.out.println("Diff");
     FileDiffer differ = new FileDiffer();
-    DifferResult result = differ.diff(Config.baseDir, Config.baseDirNew);
+    DifferResult result = differ.diff(Config.getBaseDir(), Config.getBaseDirNew());
     List<String> list = result.getModifiedFunctions();
     //List<String> list = Arrays.asList("civil_time_detail.h: cctz::detail::civil_time::civil_time::day() const");
     Set<String> set = list.stream().collect(Collectors.toSet());

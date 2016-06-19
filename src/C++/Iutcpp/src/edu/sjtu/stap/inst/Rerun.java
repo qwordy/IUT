@@ -34,6 +34,6 @@ public class Rerun implements Runnable {
     for (int i = 1; i < testcases.size(); i++)
       cmd.append(':').append(testcases.get(i));
     System.out.println(cmd);
-    Execute.exec(cmd.toString(), Config.baseDirNew, echoParser);
+    Execute.exec(cmd.toString(), Config.getBaseDirNew(), echoParser);
   }
 }

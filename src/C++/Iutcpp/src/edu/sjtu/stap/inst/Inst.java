@@ -18,14 +18,14 @@ public class Inst {
     System.out.println("Inst");
 
     // copy dir
-    Execute.exec("rm -rf " + Config.baseDirInst, null, null);
-    Execute.exec("cp -rf " + Config.baseDir + " " + Config.baseDirInst, null, null);
+    Execute.exec("rm -rf " + Config.getBaseDirInst(), null, null);
+    Execute.exec("cp -rf " + Config.getBaseDir() + " " + Config.getBaseDirInst(), null, null);
 
     // inst
     executor = Executors.newCachedThreadPool();
     //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
     //executor = Executors.newFixedThreadPool(1);
-    ls(new File(Config.baseDirInst));
+    ls(new File(Config.getBaseDirInst()));
     executor.shutdown();
     executor.awaitTermination(1, TimeUnit.DAYS);
   }
