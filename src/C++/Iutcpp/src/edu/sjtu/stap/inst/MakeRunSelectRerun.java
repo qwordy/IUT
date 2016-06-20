@@ -14,7 +14,7 @@ public class MakeRunSelectRerun {
   public MakeRunSelectRerun(Set<String> diffFuncs) {
     System.out.println("MakeRunSelectRerun");
     Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
-    Execute.exec(Config.getMakeClean(), Config.getBaseDirNew(), null);
+    //Execute.exec(Config.getMakeClean(), Config.getBaseDirNew(), null);
     Execute.exec(Config.getMake(), Config.getBaseDirNew(), null);
     List<String> testcases;
     for (String test : Config.getTestCmd()) {
