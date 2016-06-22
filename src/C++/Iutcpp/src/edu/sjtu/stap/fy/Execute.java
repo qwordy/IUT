@@ -1,6 +1,4 @@
-package edu.sjtu.stap.inst;
-
-import edu.sjtu.stap.config.Config;
+package edu.sjtu.stap.fy;
 
 import java.io.BufferedReader;
 import java.io.File;

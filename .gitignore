@@ -1,6 +1,7 @@
 .*
 *.o
 
+*.iut
 *.class
 push.sh
 build/

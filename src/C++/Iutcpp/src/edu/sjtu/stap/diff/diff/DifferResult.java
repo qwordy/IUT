@@ -1,6 +1,6 @@
 package edu.sjtu.stap.diff.diff;
 
-import edu.sjtu.stap.inst.ThreadInst;
+import edu.sjtu.stap.fy.ThreadInst;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 
 import java.util.ArrayList;
