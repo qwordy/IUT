@@ -1,4 +1,4 @@
-package edu.sjtu.stap.inst;
+package edu.sjtu.stap.fy;
 
 import edu.sjtu.stap.config.Config;
 

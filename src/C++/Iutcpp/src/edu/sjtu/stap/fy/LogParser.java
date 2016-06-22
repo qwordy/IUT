@@ -1,4 +1,4 @@
-package edu.sjtu.stap.inst;
+package edu.sjtu.stap.fy;
 
 import java.io.BufferedReader;
 import java.util.List;
