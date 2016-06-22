@@ -14,8 +14,10 @@ public class Main {
     try {
       Argument argument = new Argument(args);
       switch (argument.type) {
-        case HELP:
-          Help.help();
+        case ALL:
+          Config.init();
+          new Inst();
+          MakeRunSelectRerun.exec(Diff.diff());
           break;
         case INIT:
           Init.init();
@@ -23,11 +25,16 @@ public class Main {
         case COV:
           Config.init();
           break;
+        case SELECT:
+          break;
+        case HELP:
+          Help.help();
+          break;
       }
 
-      Config.init();
-      new Inst();
-      new MakeRunSelectRerun(Diff.diff());
+//      Config.init();
+//      new Inst();
+//      new MakeRunSelectRerun(Diff.diff());
     } catch (Exception e) {
       e.printStackTrace();
     }

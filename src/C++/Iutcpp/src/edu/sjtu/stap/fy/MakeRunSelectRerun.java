@@ -11,7 +11,7 @@ import java.util.Set;
  * MakeRunSelectRerun. Make, run, select, rerun.
  */
 public class MakeRunSelectRerun {
-  public MakeRunSelectRerun(Set<String> diffFuncs) {
+  public static void exec(Set<String> diffFuncs) {
     System.out.println("MakeRunSelectRerun");
     Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
     //Execute.exec(Config.getMakeClean(), Config.getBaseDirNew(), null);

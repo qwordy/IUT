@@ -6,6 +6,14 @@ package edu.sjtu.stap.fy;
  */
 public class Help {
   public static void help() {
-
+    System.out.println(
+        "Usage: cmd [options]\n" +
+        "Options:\n" +
+        "no option  \n" +
+        "-init      \n" +
+        "-cov       \n" +
+        "-select    \n" +
+        "-help      \n"
+    );
   }
 }
