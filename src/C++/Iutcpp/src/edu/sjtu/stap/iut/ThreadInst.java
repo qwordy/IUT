@@ -1,4 +1,4 @@
-package edu.sjtu.stap.fy;
+package edu.sjtu.stap.iut;
 
 import edu.sjtu.stap.ast.Ast;
 import edu.sjtu.stap.ast.AstWarehouse;

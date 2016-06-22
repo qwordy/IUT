@@ -1,10 +1,9 @@
-package edu.sjtu.stap.fy;
+package edu.sjtu.stap.iut;
 
 import edu.sjtu.stap.config.Config;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.OutputStreamWriter;
 
 /**
  * Created by yfy on 6/22/16.

@@ -1,4 +1,4 @@
-package edu.sjtu.stap.fy;
+package edu.sjtu.stap.iut;
 
 import java.io.BufferedReader;
 import java.util.List;
@@ -6,22 +6,28 @@ import java.util.Set;
 
 /**
  * Created by yfy on 6/3/16.
- * LogParser
+ * LogParserSelect
  */
-public class LogParser implements ITaskAfterRun {
+public class LogParserSelect implements ITaskAfterRun {
 
   private Set<String> diffFuncs;
 
-  private List<String> testcases;
+  private List<String> testCases;
 
-  public LogParser(Set<String> diffFuncs, List<String> testcases) {
+  /**
+   * Save selected test cases to testCases in function run.
+   * @param diffFuncs
+   * @param testCases
+   */
+  public LogParserSelect(Set<String> diffFuncs, List<String> testCases) {
     this.diffFuncs = diffFuncs;
-    this.testcases = testcases;
+    this.testCases = testCases;
   }
 
   @Override
   public void run(BufferedReader br) throws Exception {
-    String testcase = null, line, func;
+    String testcase, line, func;
+    testcase = null;
     boolean selected = false;
     //int count = 0;
     while ((line = br.readLine()) != null) {
@@ -29,14 +35,10 @@ public class LogParser implements ITaskAfterRun {
       if (line.startsWith("[ RUN      ] ")) {
         testcase = line.substring(13);
         selected = false;
-        //System.out.println(line.substring(13));
       } else if (line.startsWith("IUTLOG ") && testcase != null && !selected) {
         func = line.substring(7);
-        //System.out.println("  " + func);
-
         if (diffFuncs.contains(func)) {
-          //System.out.println(testcase);
-          testcases.add(testcase);
+          testCases.add(testcase);
           selected = true;
         }
       }

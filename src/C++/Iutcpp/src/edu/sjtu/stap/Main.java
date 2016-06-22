@@ -3,10 +3,10 @@ package edu.sjtu.stap;
 import edu.sjtu.stap.config.Argument;
 import edu.sjtu.stap.config.Config;
 import edu.sjtu.stap.diff.Diff;
-import edu.sjtu.stap.fy.Help;
-import edu.sjtu.stap.fy.Init;
-import edu.sjtu.stap.fy.Inst;
-import edu.sjtu.stap.fy.MakeRunSelectRerun;
+import edu.sjtu.stap.iut.Coverage;
+import edu.sjtu.stap.iut.Help;
+import edu.sjtu.stap.iut.Init;
+import edu.sjtu.stap.iut.Inst;
 
 public class Main {
   public static void main(String[] args) {
@@ -17,24 +17,23 @@ public class Main {
         case ALL:
           Config.init();
           new Inst();
-          MakeRunSelectRerun.exec(Diff.diff());
+          Coverage.covSel(Diff.diff());
           break;
         case INIT:
           Init.init();
           break;
         case COV:
           Config.init();
+          new Inst();
+          Coverage.cov();
           break;
         case SELECT:
+          Config.init();
           break;
         case HELP:
           Help.help();
           break;
       }
-
-//      Config.init();
-//      new Inst();
-//      new MakeRunSelectRerun(Diff.diff());
     } catch (Exception e) {
       e.printStackTrace();
     }
