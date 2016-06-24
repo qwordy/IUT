@@ -18,7 +18,7 @@ public class Config {
 
   public static void init() throws Exception {
     JsonParser parser = new JsonParser();
-    JsonObject object = (JsonObject)parser.parse(new FileReader("config.iut"));
+    JsonObject object = (JsonObject)parser.parse(new FileReader(configFile));
 
     baseDir = object.get("baseDir").getAsString();
     baseDirInst = baseDir + ".inst";
@@ -33,6 +33,8 @@ public class Config {
     for (JsonElement e : array)
       testCmd.add(e.getAsString());
   }
+
+  public final static String configFile = "config.iut";
 
   private static String baseDir;
 
