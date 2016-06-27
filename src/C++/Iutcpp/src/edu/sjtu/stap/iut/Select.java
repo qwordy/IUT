@@ -15,6 +15,7 @@ import java.util.Set;
  */
 public class Select {
   public static void select(Set<String> diffFuncs) throws Exception {
+    System.out.println("Selected test cases:");
     String dbFile = Config.getBaseDirInst() + File.separatorChar + "coverage.db";
     Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
     Statement stmt = conn.createStatement();
@@ -24,14 +25,18 @@ public class Select {
     while (rs.next()) {
       String test = rs.getString("test");
       String testCase = rs.getString("testCase");
-      System.out.println(test + ' ' + testCase);
+      //System.out.println(test + ' ' + testCase);
 
       sql = "select func from cov where test = \"" +
           test + "\" and testCase = \"" + testCase + "\";";
       ResultSet rs2 = stmt2.executeQuery(sql);
       while (rs2.next()) {
         String func = rs2.getString("func");
-        System.out.println("  " + func);
+        //System.out.println("  " + func);
+        if (diffFuncs.contains(func)) {
+          System.out.println(test + '|' + testCase);
+          break;
+        }
       }
 
     }
