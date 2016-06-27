@@ -41,8 +41,10 @@ public class Coverage {
     System.out.println("Coverage");
     Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
     LogParserCoverage task = new LogParserCoverage();
-    for (String test : Config.getTestCmd())
+    for (String test : Config.getTestCmd()) {
+      task.setTest(test);
       Execute.exec(test, Config.getBaseDirInst(), task);
+    }
     task.close();
   }
 }

@@ -14,23 +14,23 @@ public class Main {
     try {
       Argument argument = new Argument(args);
       switch (argument.type) {
-        case ALL:
+        case ALL:  // done
           Config.init();
           new Inst();
           Coverage.covSlt(Diff.diff());
           break;
-        case INIT:
+        case INIT:  // to be tested
           Init.init();
           break;
-        case COV:
+        case COV:  // not done
           Config.init();
           //new Inst();
           Coverage.cov();
           break;
-        case SELECT:
+        case SELECT:  // not done
           Config.init();
           break;
-        case HELP:
+        case HELP:  // not done
           Help.help();
           break;
       }
