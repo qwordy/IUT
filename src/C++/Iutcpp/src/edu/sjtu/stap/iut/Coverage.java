@@ -16,7 +16,7 @@ public class Coverage {
    * Coverage, select.
    * @param diffFuncs different functions
    */
-  public static void covSel(Set<String> diffFuncs) {
+  public static void covSlt(Set<String> diffFuncs) {
     System.out.println("Coverage, select");
 
     Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
@@ -37,11 +37,12 @@ public class Coverage {
   /**
    * Write coverage to database.
    */
-  public static void cov() {
+  public static void cov() throws Exception {
     System.out.println("Coverage");
     Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
-    ITaskAfterRun task = new LogParserCoverage();
+    LogParserCoverage task = new LogParserCoverage();
     for (String test : Config.getTestCmd())
       Execute.exec(test, Config.getBaseDirInst(), task);
+    task.close();
   }
 }

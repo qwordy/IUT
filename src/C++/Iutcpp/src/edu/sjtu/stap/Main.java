@@ -17,14 +17,14 @@ public class Main {
         case ALL:
           Config.init();
           new Inst();
-          Coverage.covSel(Diff.diff());
+          Coverage.covSlt(Diff.diff());
           break;
         case INIT:
           Init.init();
           break;
         case COV:
           Config.init();
-          new Inst();
+          //new Inst();
           Coverage.cov();
           break;
         case SELECT:

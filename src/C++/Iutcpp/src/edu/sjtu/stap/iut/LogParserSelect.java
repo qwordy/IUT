@@ -6,7 +6,8 @@ import java.util.Set;
 
 /**
  * Created by yfy on 6/3/16.
- * LogParserSelect
+ * LogParserSelect.
+ * Select test cases.
  */
 public class LogParserSelect implements ITaskAfterRun {
 
