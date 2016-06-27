@@ -13,7 +13,7 @@ import java.util.Set;
 public class Coverage {
 
   /**
-   * Coverage, select.
+   * Coverage, select, run.
    * @param diffFuncs different functions
    */
   public static void covSlt(Set<String> diffFuncs) {

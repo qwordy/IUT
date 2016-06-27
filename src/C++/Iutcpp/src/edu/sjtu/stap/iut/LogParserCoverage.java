@@ -1,5 +1,7 @@
 package edu.sjtu.stap.iut;
 
+import edu.sjtu.stap.config.Config;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.sql.Connection;
@@ -23,9 +25,10 @@ public class LogParserCoverage implements ITaskAfterRun {
   private String test;
 
   public LogParserCoverage() throws Exception {
-    new File("coverage.db").delete();
+    String dbFile = Config.getBaseDirInst() + File.separatorChar + "coverage.db";
+    new File(dbFile).delete();
 
-    conn = DriverManager.getConnection("jdbc:sqlite:coverage.db");
+    conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
     conn.setAutoCommit(false);
 
     stmt = conn.createStatement();

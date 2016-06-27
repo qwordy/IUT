@@ -3,10 +3,7 @@ package edu.sjtu.stap;
 import edu.sjtu.stap.config.Argument;
 import edu.sjtu.stap.config.Config;
 import edu.sjtu.stap.diff.Diff;
-import edu.sjtu.stap.iut.Coverage;
-import edu.sjtu.stap.iut.Help;
-import edu.sjtu.stap.iut.Init;
-import edu.sjtu.stap.iut.Inst;
+import edu.sjtu.stap.iut.*;
 
 public class Main {
   public static void main(String[] args) {
@@ -29,6 +26,7 @@ public class Main {
           break;
         case SELECT:  // not done
           Config.init();
+          Select.select(Diff.diff());
           break;
         case HELP:  // not done
           Help.help();

@@ -22,7 +22,8 @@ public class Diff {
     DifferResult result = differ.diff(Config.getBaseDir(), Config.getBaseDirNew());
     List<String> list = result.getModifiedFunctions();
     //List<String> list = Arrays.asList("civil_time_detail.h: cctz::detail::civil_time::civil_time::day() const");
-    Set<String> set = list.stream().collect(Collectors.toSet());
+    Set<String> set = new HashSet<>();
+    set.addAll(list);
     return set;
   }
 }
