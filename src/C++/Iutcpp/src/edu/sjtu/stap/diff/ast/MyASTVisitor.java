@@ -6,15 +6,16 @@ import java.util.List;
 import org.eclipse.cdt.core.dom.ast.ASTVisitor;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IBinding;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 
 public class MyASTVisitor extends ASTVisitor {
 
-	private List<IASTDeclaration> decls =  new ArrayList<>();
-	private List<IASTFunctionDefinition> funcs = new ArrayList<>();
-	private List<ICPPASTNamespaceDefinition> namesps = new ArrayList<>();
-	private List<CPPASTSimpleDeclaration> classes = new ArrayList<>();
+	private List<IASTDeclaration> decls =  new ArrayList<>();//other declarations
+	private List<IASTFunctionDefinition> funcs = new ArrayList<>();// functions
+	private List<ICPPASTNamespaceDefinition> namesps = new ArrayList<>();//namespaces
+	private List<CPPASTSimpleDeclaration> classes = new ArrayList<>();//classes
 
 
 	public MyASTVisitor() {
@@ -27,13 +28,14 @@ public class MyASTVisitor extends ASTVisitor {
 	@Override
 	public int visit(IASTDeclaration declaration) {
 		// TODO Auto-generated method stub
-		if(declaration instanceof IASTFunctionDefinition){
+		if(declaration instanceof IASTFunctionDefinition){//cpp function
 			funcs.add((IASTFunctionDefinition) declaration);
 		}else if(declaration instanceof CPPASTSimpleDeclaration){
 			CPPASTSimpleDeclaration cppastSimpleDeclaration = (CPPASTSimpleDeclaration) declaration;
-			//System.out.println(cppastSimpleDeclaration.getRawSignature().startsWith("class"));
+
+
 			if(cppastSimpleDeclaration.getRawSignature().startsWith("class")){//TODO: maybe inaccurate
-				//System.out.println(cppastSimpleDeclaration.getRawSignature() );
+				//class
 				classes.add(cppastSimpleDeclaration);
 			}else {
 				decls.add(declaration);

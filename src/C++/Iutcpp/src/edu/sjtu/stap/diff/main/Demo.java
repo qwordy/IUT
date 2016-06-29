@@ -5,19 +5,13 @@ import java.io.IOException;
 
 import edu.sjtu.stap.diff.ast.ASTTranslationUnitCore;
 import edu.sjtu.stap.diff.ast.MultiVisitor;
+import edu.sjtu.stap.diff.ast.MyASTVisitor;
+import edu.sjtu.stap.diff.ast.MyCPPASTVisitor;
 import edu.sjtu.stap.diff.diff.ASTDifferOld;
+import edu.sjtu.stap.diff.diff.DiffUtils;
 import edu.sjtu.stap.diff.diff.DifferResult;
 import edu.sjtu.stap.diff.diff.FileDiffer;
-import org.eclipse.cdt.core.dom.ast.ExpansionOverlapsBoundaryException;
-import org.eclipse.cdt.core.dom.ast.IASTComment;
-import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
-import org.eclipse.cdt.core.dom.ast.IASTFunctionStyleMacroParameter;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorFunctionStyleMacroDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroDefinition;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorMacroExpansion;
-import org.eclipse.cdt.core.dom.ast.IASTPreprocessorStatement;
-import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
-import org.eclipse.cdt.core.dom.ast.IMacroBinding;
+import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.cdt.core.parser.ParserLanguage;
 
@@ -25,11 +19,11 @@ import org.eclipse.cdt.core.parser.ParserLanguage;
 
 public class Demo {
 
-	static int FLAG = 3;// only for test
+	static int FLAG = 4;// only for test
 	
 	public static void main(String[] args) {
 		
-		if(FLAG == 3){
+		if(FLAG == 3){//diff dir
 			FileDiffer differ = new FileDiffer();
 			String oldDir = "testcode/project.Old";
 			String newDir = "testcode/project.New";
@@ -63,7 +57,7 @@ public class Demo {
 			}
 		}
 		
-		if(FLAG == 2){
+		if(FLAG == 2){//diff file
 //			String oldPath = "testcode/main.cpp"; ///home/weizhaoy/Desktop/cctz-old/src
 //			String newPath="testcode/mainNew.cpp";///home/weizhaoy/Desktop/cctz-new/src
 			
@@ -80,7 +74,7 @@ public class Demo {
 		}
 		
 		
-		if(FLAG == 1){
+		if(FLAG == 1){//print dom
 			String filePath = "testcode/time_zone_libc.cc";
 //			String filePath = "testcode/cctz_v1_test.cc";
 			if (args.length != 0)
@@ -167,6 +161,34 @@ public class Demo {
 				System.out.println("Rawsig: "+declaration.getRawSignature());
 			}
 			*/
+		}
+
+		if(FLAG == 4){//test other elements
+//			String filePath = "testcode/time_zone_libc.cc";
+//			String filePath = "testcode/cctz_v1_test.cc";
+			String filePath = "testcode/mainNew.cpp";
+			if (args.length != 0)
+				filePath = args[0];
+			/*
+			File cppfile = new File(filePath);
+			System.out.println(cppfile.exists());
+			*/
+			ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
+			IASTTranslationUnit astTranslationUnit = astTranslationUnitCore.parseFile(filePath, ParserLanguage.CPP, false, false);
+			System.out.println(astTranslationUnit.getFilePath());
+
+			MyCPPASTVisitor myCPPASTVisitor = new MyCPPASTVisitor();
+			myCPPASTVisitor.shouldVisitDeclarations = true;
+
+			MyASTVisitor visitor = new MyASTVisitor();
+
+			astTranslationUnit.accept(visitor);
+			astTranslationUnit.accept(myCPPASTVisitor);
+
+			for(IASTDeclaration declaration : visitor.getDecls()){
+//				System.out.println("visitor: "+declaration.getRawSignature());
+				System.out.println(DiffUtils.getDeclarationStr(declaration));
+			}
 		}
 		
 		
