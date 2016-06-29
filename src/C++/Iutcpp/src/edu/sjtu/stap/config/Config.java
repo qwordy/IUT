@@ -36,7 +36,6 @@ public class Config {
     testFile = new ArrayList<>(array.size());
     for (JsonElement e : array)
       testFile.add(e.getAsString());
-    {}
   }
 
   public final static String configFile = "config.iut";
