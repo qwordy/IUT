@@ -82,19 +82,4 @@ public class Config {
     return testFile;
   }
 
-  //    public static String baseDir = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz";
-//
-//    public static String baseDirInst = baseDir + ".inst";
-//
-//    public static String baseDirNew = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz2";
-
-
-//  public static String srcRelativeDir = "/src";
-//
-//  public static String srcDir = baseDir + srcRelativeDir;
-//
-//  public static String srcDirInst = baseDirInst + srcRelativeDir;
-
-  //public static String srcDir = "/home/yfy/iut/src/C++/copy of test/";
-
 }
