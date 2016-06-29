@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class Config {
 
-
   public static void init() throws Exception {
     JsonParser parser = new JsonParser();
     JsonObject object = (JsonObject)parser.parse(new FileReader(configFile));
@@ -32,6 +31,12 @@ public class Config {
     testCmd = new ArrayList<>(array.size());
     for (JsonElement e : array)
       testCmd.add(e.getAsString());
+
+    array = object.get("testFile").getAsJsonArray();
+    testFile = new ArrayList<>(array.size());
+    for (JsonElement e : array)
+      testFile.add(e.getAsString());
+    {}
   }
 
   public final static String configFile = "config.iut";
@@ -47,6 +52,8 @@ public class Config {
   private static String makeClean;
 
   private static List<String> testCmd;
+
+  private static List<String> testFile;
 
   public static String getBaseDir() {
     return baseDir;
@@ -70,6 +77,10 @@ public class Config {
 
   public static List<String> getTestCmd() {
     return testCmd;
+  }
+
+  public static List<String> getTestFile() {
+    return testFile;
   }
 
   //    public static String baseDir = "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz";

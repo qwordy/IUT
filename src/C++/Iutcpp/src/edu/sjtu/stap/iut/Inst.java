@@ -25,9 +25,20 @@ public class Inst {
     executor = Executors.newCachedThreadPool();
     //executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() * 2);
     //executor = Executors.newFixedThreadPool(1);
+
+    // inst regular file
     ls(new File(Config.getBaseDirInst()));
+
+    // inst test file
+    instTestFile();
+
     executor.shutdown();
     executor.awaitTermination(1, TimeUnit.DAYS);
+  }
+
+  private void instTestFile() {
+    for (String file : Config.getTestFile())
+      executor.execute(new ThreadInstTestFile(new File(Config.getBaseDir(), file)));
   }
 
   private void ls(File dir) throws Exception {
@@ -38,13 +49,10 @@ public class Inst {
       if (file.isDirectory()) {
         ls(file);
       } else {
-        if (isCFile(file)) inst(file);
+        if (isCFile(file))
+          executor.execute(new ThreadInst(file));
       }
     }
-  }
-
-  private void inst(File file) {
-    executor.execute(new ThreadInst(file));
   }
 
   // c, cc, cpp, h, hpp

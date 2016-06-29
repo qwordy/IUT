@@ -1,14 +1,13 @@
 package edu.sjtu.stap.iut;
 
 import edu.sjtu.stap.ast.Ast;
-import edu.sjtu.stap.ast.AstWarehouse;
 import javafx.util.Pair;
-import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTStatement;
 import org.eclipse.cdt.core.parser.IToken;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,31 +17,12 @@ import java.util.regex.Pattern;
  * Created by yfy on 5/27/16.
  * ThreadInst
  */
-public class ThreadInst implements Runnable {
-  private File file;
+public class ThreadInst extends AbstractThreadInst implements Runnable {
+
+  public ThreadInst() {}
 
   public ThreadInst(File file) {
-    //System.out.println(file);
-    this.file = file;
-  }
-
-  public ThreadInst() {
-
-  }
-
-  @Override
-  public void run() {
-    //System.out.println(file);
-    try {
-      Ast ast = AstWarehouse.getAst(file);
-      String instedBuf = inst(ast);
-
-      BufferedWriter bw = new BufferedWriter(new FileWriter(file));
-      bw.write(instedBuf);
-      bw.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    super(file);
   }
 
   /**
@@ -50,7 +30,8 @@ public class ThreadInst implements Runnable {
    * @return Instrumented code
    * @throws Exception
    */
-  private String inst(Ast ast) throws Exception {
+  @Override
+  protected String inst(Ast ast) throws Exception {
     String fileContent = ast.getFileContent();
     StringBuilder sb = new StringBuilder(ast.getFileContent());
     sb.insert(0, "#include <stdio.h>\n");

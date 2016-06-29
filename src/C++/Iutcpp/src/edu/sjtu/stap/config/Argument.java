@@ -19,15 +19,19 @@ public class Argument {
     } else {
       switch (args[0]) {
         case "-init":
+        case "-i":
           type = Type.INIT;
           break;
         case "-cov":
+        case "-c":
           type = Type.COV;
           break;
         case "-select":
+        case "-s":
           type = Type.SELECT;
           break;
         case "-help":
+        case "-h":
           type = Type.HELP;
           break;
         default:

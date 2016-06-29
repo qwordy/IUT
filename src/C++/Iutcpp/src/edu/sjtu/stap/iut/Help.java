@@ -9,11 +9,11 @@ public class Help {
     System.out.println(
         "Usage: cmd [options]\n" +
         "Options:\n" +
-        "no option  \n" +
-        "-init      \n" +
-        "-cov       \n" +
-        "-select    \n" +
-        "-help      \n"
+        "no option      \n" +
+        "-i, -init      \n" +
+        "-c, -cov       \n" +
+        "-s, -select    \n" +
+        "-h, -help      \n"
     );
   }
 }

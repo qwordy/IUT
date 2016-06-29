@@ -19,16 +19,16 @@ public class Main {
         case INIT:  // to be tested
           Init.init();
           break;
-        case COV:  // not done
+        case COV:
           Config.init();
           //new Inst();
           Coverage.cov();
           break;
-        case SELECT:  // not done
+        case SELECT:
           Config.init();
           Select.select(Diff.diff());
           break;
-        case HELP:  // not done
+        case HELP:
           Help.help();
           break;
       }
