@@ -80,8 +80,8 @@ public class FileDiffer {
 			
 			for (File file : dirMap.values()) {
 				//TODO: maybe 
-//				differResult.appendfileAdded(file.getName());
-				differResult.appendfileDeleted(file.getName());
+				differResult.appendfileAdded(file.getName());
+//				differResult.appendfileDeleted(file.getName());
 			}
 
 			
