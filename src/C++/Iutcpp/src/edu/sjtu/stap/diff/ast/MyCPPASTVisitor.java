@@ -3,6 +3,9 @@ package edu.sjtu.stap.diff.ast;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.ast.cpp.*;
 
+/**
+ * for test purpose
+ */
 public class MyCPPASTVisitor extends ASTVisitor {
 
     public MyCPPASTVisitor(boolean visitNodes) {
