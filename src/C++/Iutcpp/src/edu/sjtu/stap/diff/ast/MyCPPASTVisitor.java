@@ -2,6 +2,8 @@ package edu.sjtu.stap.diff.ast;
 
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.ast.cpp.*;
+import org.eclipse.cdt.core.parser.IProblem;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
 
 /**
  * for test purpose
@@ -19,7 +21,11 @@ public class MyCPPASTVisitor extends ASTVisitor {
     public int visit(IASTDeclaration declaration) {
         if (declaration instanceof IASTSimpleDeclaration) {
             IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
-            System.out.println(simpleDeclaration.getRawSignature());
+//            System.out.println(simpleDeclaration.getRawSignature());
+        }else if(declaration instanceof CPPASTProblemDeclaration){
+            CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
+            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
+            System.out.println(problem.getProblem().isError());
         }
         return super.visit(declaration);
     }
@@ -46,5 +52,26 @@ public class MyCPPASTVisitor extends ASTVisitor {
             System.out.println("IParameter: " + binding.toString());
         }
         return super.visit(declarator);
+    }
+
+    @Override
+    public int visit(IASTTranslationUnit tu) {
+        IASTPreprocessorMacroDefinition[] macroDefinitions = tu.getMacroDefinitions();
+        for (IASTPreprocessorMacroDefinition macroDefinition : macroDefinitions){
+            if(macroDefinition instanceof IASTPreprocessorFunctionStyleMacroDefinition){
+                IASTPreprocessorFunctionStyleMacroDefinition functionStyleMacroDefinition = (IASTPreprocessorFunctionStyleMacroDefinition) macroDefinition;
+//                IASTFunctionStyleMacroParameter[] macroParameters = functionStyleMacroDefinition.getParameters();
+//                for(IASTFunctionStyleMacroParameter mp : macroParameters){
+//						System.out.println("macroprp: "+mp.getParameter());
+//                }
+                //todo function style macro
+                System.out.println("FuncMacro:");
+                System.out.println(functionStyleMacroDefinition.getRawSignature());
+            }
+//				System.out.println(macroDefinition.getName() );
+//				System.out.println(macroDefinition.getExpansion());
+        }
+
+        return super.visit(tu);
     }
 }
