@@ -1,6 +1,7 @@
 package edu.sjtu.stap.diff.ast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.cdt.core.dom.ast.*;
@@ -34,12 +35,31 @@ public class MyASTVisitor extends ASTVisitor {
             //class
             classes.add(cppastSimpleDeclaration);
         }else if(declaration instanceof CPPASTProblemDeclaration){
-            //problem declaration, such as unidentified macro expansion whose macro definition is in a different file
+            //todo: problem declaration, such as unidentified macro expansion whose macro definition is in a different file
             CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
-            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
-            System.out.println(problem.getProblem().isError());
+//            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
+//            System.out.println(problem.getProblem().isError());
+        }else if(declaration instanceof IASTSimpleDeclaration){
+            IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
+
+            if(simpleDeclaration.getDeclarators()[0].getName().resolveBinding() instanceof IField){
+                //todo: the other way to determine whether is a field member of a class
+                System.out.println("IField");
+            }else{
+                //todo: other simpleDeclaration such as global variable etc.
+            }
+            System.out.println("simple: "+simpleDeclaration.getRawSignature());
+//            System.out.println(simpleDeclaration.getDeclSpecifier().getRawSignature());
+            for (IASTDeclarator iastDeclarator : simpleDeclaration.getDeclarators()) {
+                System.out.println(iastDeclarator.getName().getRawSignature());
+                //the way above is preferred to the below one
+//                System.out.println(iastDeclarator.getRawSignature());
+            }
         }
-        else {//other declaration
+        else {//todo: other declaration
+            System.out.println("other:");
+            System.out.println(declaration.toString());
+            System.out.println(declaration.getRawSignature());
             decls.add(declaration);
         }
 

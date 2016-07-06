@@ -165,8 +165,8 @@ public class Demo {
 
 		if(FLAG == 4){//test other elements
 //			String filePath = "testcode/time_zone_libc.cc";
-			String filePath = "testcode/cctz_v1_test.cc";
-//			String filePath = "testcode/mainNew.cpp";
+//			String filePath = "testcode/cctz_v1_test.cc";
+			String filePath = "testcode/mainNew.cpp";
 			if (args.length != 0)
 				filePath = args[0];
 			/*
@@ -177,15 +177,15 @@ public class Demo {
 			IASTTranslationUnit astTranslationUnit = astTranslationUnitCore.parseFile(filePath, ParserLanguage.CPP, false, false);
 			System.out.println(astTranslationUnit.getFilePath());
 
-			MyCPPASTVisitor myCPPASTVisitor = new MyCPPASTVisitor();
+//			MyCPPASTVisitor myCPPASTVisitor = new MyCPPASTVisitor();
+////			myCPPASTVisitor.shouldVisitDeclarations = true;
+//			myCPPASTVisitor.shouldVisitTranslationUnit = true;
 //			myCPPASTVisitor.shouldVisitDeclarations = true;
-			myCPPASTVisitor.shouldVisitTranslationUnit = true;
-			myCPPASTVisitor.shouldVisitDeclarations = true;
-			astTranslationUnit.accept(myCPPASTVisitor);
+//			astTranslationUnit.accept(myCPPASTVisitor);
 
 
-//			MyASTVisitor visitor = new MyASTVisitor();
-//			astTranslationUnit.accept(visitor);
+			MyASTVisitor visitor = new MyASTVisitor();
+			astTranslationUnit.accept(visitor);
 //			for(IASTDeclaration declaration : visitor.getDecls()){
 ////				System.out.println("visitor: "+declaration.getRawSignature());
 //				System.out.println(DiffUtils.getDeclarationStr(declaration));

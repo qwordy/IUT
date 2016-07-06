@@ -4,6 +4,7 @@ import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.ast.cpp.*;
 import org.eclipse.cdt.core.parser.IProblem;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
+import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 
 /**
  * for test purpose
@@ -17,16 +18,41 @@ public class MyCPPASTVisitor extends ASTVisitor {
     public MyCPPASTVisitor() {
     }
 
+//    @Override
+//    public int visit(IASTDeclaration declaration) {
+//        if (declaration instanceof IASTSimpleDeclaration) {
+//            IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
+////            System.out.println(simpleDeclaration.getRawSignature());
+//        }else if(declaration instanceof CPPASTProblemDeclaration){
+//            CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
+//            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
+//            System.out.println(problem.getProblem().isError());
+//        }
+//        return super.visit(declaration);
+//    }
+
+
     @Override
     public int visit(IASTDeclaration declaration) {
-        if (declaration instanceof IASTSimpleDeclaration) {
-            IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
-//            System.out.println(simpleDeclaration.getRawSignature());
+        if (declaration instanceof IASTFunctionDefinition) {
+            //1. cpp function
+
+        } else if (declaration instanceof CPPASTSimpleDeclaration && ((CPPASTSimpleDeclaration) declaration).getRawSignature().startsWith("class")) {
+            CPPASTSimpleDeclaration cppastSimpleDeclaration = (CPPASTSimpleDeclaration) declaration;
+            //TODO: maybe inaccurate
+            //2. class
+
         }else if(declaration instanceof CPPASTProblemDeclaration){
             CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
-            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
-            System.out.println(problem.getProblem().isError());
+            //3. problem declaration, such as unidentified macro expansion whose macro definition is in a different file
+//            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
+//            System.out.println(problem.getProblem().isError());
         }
+        else {//other declaration
+            System.out.println(declaration.toString());
+
+        }
+
         return super.visit(declaration);
     }
 
