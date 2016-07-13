@@ -45,7 +45,7 @@ public class PathResolver {
 		}
 		
 		List<Method> methods = new ArrayList<Method>();
-	
+		//use List to acquire all method
 		int lineNo = 2;
 		
 		while ((line = reader.readLine()) != null) {

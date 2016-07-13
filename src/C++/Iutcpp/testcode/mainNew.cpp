@@ -28,6 +28,14 @@ int bar (int a, int b){
 }
 
 
+TEST(a, b){
+}
+
+inta a;
+int b
+
+
+
 
 
 int AddThreeInt(int iFirst, int iSecond, int iThree)  

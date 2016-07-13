@@ -13,13 +13,14 @@ import org.eclipse.cdt.core.parser.ParserLanguage;
 public class Parser {
 
     List<XFunctionDeclaration> xFunctionDeclarations;
+    MyASTVisitor visitor;
 
     public Parser(String source){
 
 
         ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
         IASTTranslationUnit tu = astTranslationUnitCore.parseCode(source, ParserLanguage.CPP, false, false);
-        MyASTVisitor visitor = new MyASTVisitor();
+        visitor = new MyASTVisitor();
         tu.accept(visitor);
 
         xFunctionDeclarations = new ArrayList<>();
@@ -34,6 +35,7 @@ public class Parser {
     public Parser(File file) throws Exception {
 
         Ast ast = AstWarehouse.getAst(file);
+        visitor = ast.getMyASTVisitor();
 
 
         xFunctionDeclarations = new ArrayList<>();
@@ -46,5 +48,10 @@ public class Parser {
 
     public List<XFunctionDeclaration> getFunctionDefinitions(){
         return this.xFunctionDeclarations;
+    }
+
+
+    public MyASTVisitor getVisitor(){
+        return this.visitor;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import edu.sjtu.stap.ast.Ast;
 import edu.sjtu.stap.ast.AstWarehouse;
+import edu.sjtu.stap.diff.ast.MyASTVisitor;
 import edu.sjtu.stap.diff.ast.Parser;
 import edu.sjtu.stap.diff.ast.XFunctionDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
@@ -28,6 +29,10 @@ public class ASTDiffer {
 	List<DUFunction.Deleted> functionDeleted;
 	List<DUFunction.Modified> functionModified;
 
+	private Parser parserOld;
+	private Parser parserNew;
+
+	private Boolean isOtherChanged = null;
 
 	public List<DUFunction.Added> getFunctionAdded() {
 		return functionAdded;
@@ -41,14 +46,14 @@ public class ASTDiffer {
 		return functionModified;
 	}
 
-	public boolean isModified(){
+	public boolean isFuncChanged(){
 		return this.functionAdded.size() + this.functionDeleted.size() + this.functionModified.size() != 0;
 	}
 
 
 	public ASTDiffer(String oldContent, String newContent){
 
-		Parser parserOld, parserNew;
+//		Parser parserOld, parserNew;
 		parserOld = new Parser(oldContent);
 		parserNew = new Parser(newContent);
 
@@ -90,7 +95,7 @@ public class ASTDiffer {
 
 	public ASTDiffer(File oldFile, File newFile) throws Exception {
 
-		Parser parserOld, parserNew;
+//		Parser parserOld, parserNew;
 		parserOld = new Parser(oldFile);
 		parserNew = new Parser(newFile);
 
@@ -129,19 +134,12 @@ public class ASTDiffer {
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
+	public Boolean getIsOtherChanged() {
+		if(isOtherChanged == null){
+			MyASTVisitor oldAstVisitor = parserOld.getVisitor();
+			MyASTVisitor newAstVisitor = parserNew.getVisitor();
+			isOtherChanged = DiffUtils.whetherOtherChanged(oldAstVisitor, newAstVisitor);
+		}
+		return isOtherChanged;
+	}
 }

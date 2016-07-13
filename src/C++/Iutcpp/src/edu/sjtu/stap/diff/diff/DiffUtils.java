@@ -1,5 +1,6 @@
 package edu.sjtu.stap.diff.diff;
 
+import edu.sjtu.stap.diff.ast.MyASTVisitor;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTUsingDirective;
@@ -141,5 +142,16 @@ public class DiffUtils {
         }
         return (declAdded.size() + declModified.size() + declDeleted.size() != 0);
 
+    }
+
+
+    /**
+     * determine whether Other elements besides functions are Changed
+     * @param oldAstVisitor
+     * @param newAstVisitor
+     * @return
+     */
+    public static Boolean whetherOtherChanged(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
+        return null;
     }
 }

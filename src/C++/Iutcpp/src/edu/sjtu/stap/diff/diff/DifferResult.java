@@ -2,6 +2,7 @@ package edu.sjtu.stap.diff.diff;
 
 import edu.sjtu.stap.iut.ThreadInst;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,9 @@ public class DifferResult {
 	List<DUFile.Added> fileAdded;
 	List<DUFile.Deleted> fileDeleted;
 	List<DUFile.Modified> fileModified;
+
+
+	private Boolean otherChanged = null;
 	
 	public DifferResult(){
 		fileAdded = new ArrayList<>();
@@ -18,15 +22,15 @@ public class DifferResult {
 		fileModified = new ArrayList<>();
 	}
 	
-	public void appendfileAdded (String file){
+	public void appendFileAdded(String file){
 		fileAdded.add(new DUFile.Added(file));
 	}
 	
-	public void appendfileDeleted (String file){
+	public void appendFileDeleted(String file){
 		fileDeleted.add(new DUFile.Deleted(file));
 	}
 	
-	public void appendfileModified (String file, ASTDiffer differ){
+	public void appendFileModified(String file, ASTDiffer differ){
 		fileModified.add(new DUFile.Modified(file, differ));
 	}
 	
@@ -74,4 +78,15 @@ public class DifferResult {
 
 		return result;
 	}
+
+	public Boolean ifOtherChanged(){
+		if(otherChanged == null){
+
+		}
+
+		return otherChanged;
+	}
+
+
+
 }

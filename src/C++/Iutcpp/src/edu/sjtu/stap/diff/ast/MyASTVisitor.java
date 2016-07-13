@@ -21,6 +21,7 @@ public class MyASTVisitor extends ASTVisitor {
 
         super.shouldVisitDeclarations = true;
         super.shouldVisitNamespaces = true;
+        super.shouldVisitTranslationUnit = true;
     }
 
 
@@ -37,21 +38,21 @@ public class MyASTVisitor extends ASTVisitor {
         }else if(declaration instanceof CPPASTProblemDeclaration){
             //todo: problem declaration, such as unidentified macro expansion whose macro definition is in a different file
             CPPASTProblemDeclaration problem = (CPPASTProblemDeclaration) declaration;
-//            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
+            System.out.println("*****CPPASTProblemDeclaration: "+ problem.getRawSignature());
 //            System.out.println(problem.getProblem().isError());
         }else if(declaration instanceof IASTSimpleDeclaration){
             IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
 
             if(simpleDeclaration.getDeclarators()[0].getName().resolveBinding() instanceof IField){
                 //todo: the other way to determine whether is a field member of a class
-                System.out.println("IField");
+//                System.out.println("IField");
             }else{
                 //todo: other simpleDeclaration such as global variable etc.
             }
-            System.out.println("simple: "+simpleDeclaration.getRawSignature());
+//            System.out.println("simple: "+simpleDeclaration.getRawSignature());
 //            System.out.println(simpleDeclaration.getDeclSpecifier().getRawSignature());
             for (IASTDeclarator iastDeclarator : simpleDeclaration.getDeclarators()) {
-                System.out.println(iastDeclarator.getName().getRawSignature());
+//                System.out.println(iastDeclarator.getName().getRawSignature());
                 //the way above is preferred to the below one
 //                System.out.println(iastDeclarator.getRawSignature());
             }

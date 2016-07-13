@@ -74,4 +74,8 @@ public class Ast {
 
     return myASTVisitor.getClasses();
   }
+
+  public MyASTVisitor getMyASTVisitor(){
+    return this.myASTVisitor;
+  }
 }

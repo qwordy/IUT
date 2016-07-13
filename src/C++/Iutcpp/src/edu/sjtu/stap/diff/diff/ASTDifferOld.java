@@ -20,7 +20,7 @@ public class ASTDifferOld {
 	List<String> funcAdded;
 	List<String> funcModified;
 	List<String> funcDeleted;
-//	private boolean isModified = false;
+//	private boolean isFuncChanged = false;
 	String diffResult = "";
 	
 	public String getDiffResult() {

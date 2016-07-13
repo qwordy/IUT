@@ -44,7 +44,7 @@ public class DUFile extends DifferUnit{
 			StringBuilder sb = new StringBuilder();
 			sb.append("* ").append(filename);
 			
-			if(astDiffer.isModified()){
+			if(astDiffer.isFuncChanged()){
 				sb.append('\n');
 			}
 			
