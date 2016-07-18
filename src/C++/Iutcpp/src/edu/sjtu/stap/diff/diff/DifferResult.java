@@ -7,7 +7,7 @@ import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DifferResult {
+public class DifferResult implements  IDifferResult{
 
 	List<DUFile.Added> fileAdded;
 	List<DUFile.Deleted> fileDeleted;
@@ -79,7 +79,7 @@ public class DifferResult {
 		return result;
 	}
 
-	public Boolean ifOtherChanged(){
+	private Boolean ifOtherChanged(){
 		if(otherChanged == null){
 
 		}
@@ -88,5 +88,8 @@ public class DifferResult {
 	}
 
 
-
+	@Override
+	public Boolean ifChoseAll() {
+		return null;
+	}
 }

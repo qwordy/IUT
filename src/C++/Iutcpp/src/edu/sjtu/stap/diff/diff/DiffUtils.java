@@ -152,6 +152,6 @@ public class DiffUtils {
      * @return
      */
     public static Boolean whetherOtherChanged(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
-        return null;
+        return false;//todo return
     }
 }
