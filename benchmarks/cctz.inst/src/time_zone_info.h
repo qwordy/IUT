@@ -1,4 +1,3 @@
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,13 +46,13 @@ struct DateTime {
   void Assign(const Breakdown& bd);
 };
 
-inline bool operator<(const DateTime& lhs, const DateTime& rhs) {puts("IUTLOG time_zone_info.h: cctz::operator<(const DateTime& lhs, const DateTime& rhs)");
+inline bool operator<(const DateTime& lhs, const DateTime& rhs) {
   return lhs.offset < rhs.offset;
 }
 
 // The difference between two DateTimes in seconds. Requires that all
 // intervening DateTimes share the same UTC offset (i.e., no transitions).
-inline int64_t operator-(const DateTime& lhs, const DateTime& rhs) {puts("IUTLOG time_zone_info.h: cctz::operator-(const DateTime& lhs, const DateTime& rhs)");
+inline int64_t operator-(const DateTime& lhs, const DateTime& rhs) {
   return lhs.offset - rhs.offset;
 }
 
@@ -65,12 +64,12 @@ struct Transition {
   DateTime prev_date_time;  // local date/time one second earlier
 
   struct ByUnixTime {
-    inline bool operator()(const Transition& lhs, const Transition& rhs) const {puts("IUTLOG time_zone_info.h: cctz::Transition::Transition::ByUnixTime::ByUnixTime::operator()(const Transition& lhs, const Transition& rhs) const");
+    inline bool operator()(const Transition& lhs, const Transition& rhs) const {
       return lhs.unix_time < rhs.unix_time;
     }
   };
   struct ByDateTime {
-    inline bool operator()(const Transition& lhs, const Transition& rhs) const {puts("IUTLOG time_zone_info.h: cctz::Transition::Transition::ByDateTime::ByDateTime::operator()(const Transition& lhs, const Transition& rhs) const");
+    inline bool operator()(const Transition& lhs, const Transition& rhs) const {
       return lhs.date_time < rhs.date_time;
     }
   };

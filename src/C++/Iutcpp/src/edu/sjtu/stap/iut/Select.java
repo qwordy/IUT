@@ -2,7 +2,9 @@ package edu.sjtu.stap.iut;
 
 import edu.sjtu.stap.config.Config;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,17 +17,30 @@ import java.util.Set;
  */
 public class Select {
   public static void select(Set<String> diffFuncs) throws Exception {
-    System.out.println("Selected test cases:");
+    String runFileStr = Config.getBaseDirNew() + File.separatorChar + "run.sh";
+    File runFile = new File(runFileStr);
+    runFile.setExecutable(true);
+    BufferedWriter bw = new BufferedWriter(new FileWriter(runFile));
+
+    System.out.println("Selecting test cases");
     String dbFile = Config.getBaseDirInst() + File.separatorChar + "coverage.db";
     Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
     Statement stmt = conn.createStatement();
     Statement stmt2 = conn.createStatement();
     String sql = "select test, testCase from cov group by test, testCase;";
     ResultSet rs = stmt.executeQuery(sql);
+    String lastTest = "";
+    StringBuilder cmd = new StringBuilder();
     while (rs.next()) {
       String test = rs.getString("test");
       String testCase = rs.getString("testCase");
       //System.out.println(test + ' ' + testCase);
+
+      if (!test.equals(lastTest)) {
+        bw.write(cmd.toString() + '\n');
+        lastTest = test;
+        cmd = new StringBuilder(test + " --gtest_filter=");
+      }
 
       sql = "select func from cov where test = \"" +
           test + "\" and testCase = \"" + testCase + "\";";
@@ -33,12 +48,16 @@ public class Select {
       while (rs2.next()) {
         String func = rs2.getString("func");
         //System.out.println("  " + func);
-        if (diffFuncs.contains(func)) {
-          System.out.println(test + '|' + testCase);
+        if (diffFuncs == null || diffFuncs.contains(func)) {
+          cmd.append(':').append(testCase);
+          //System.out.println(test + '|' + testCase);
           break;
         }
       }
-
     }
+    bw.write(cmd.toString() + '\n');
+    bw.close();
+    System.out.println("Done\nRunning run.sh");
+    Execute.exec("./run.sh", Config.getBaseDirNew(), new EchoParser());
   }
 }

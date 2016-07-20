@@ -16,9 +16,10 @@ public class Init {
     bw.write(
         "{\n" +
         "  \"baseDir\": \"\",\n" +
+        "  \"baseVersion\": \"\",\n" +
         "  \"baseDirNew\": \"\",\n" +
         "  \"make\": \"\",\n" +
-        "  \"testCmd\": []\n" +
+        "  \"testCmd\": [],\n" +
         "  \"testFile\": []\n" +
         "}\n"
     );
