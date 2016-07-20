@@ -20,8 +20,13 @@ public class Select {
 
   private static Connection conn;
 
-  private static boolean checkVersion() {
-    return true;
+  private static boolean checkVersion() throws Exception {
+    Statement stmt = conn.createStatement();
+    String sql = "select * from version";
+    ResultSet rs = stmt.executeQuery(sql);
+    rs.next();
+    String version = rs.getString("version");
+    return version.equals(Config.getBaseVersion());
   }
 
   public static void select(Set<String> diffFuncs) throws Exception {

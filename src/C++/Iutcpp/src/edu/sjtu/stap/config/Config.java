@@ -22,6 +22,8 @@ public class Config {
     baseDir = object.get("baseDir").getAsString();
     baseDirInst = baseDir + ".inst";
 
+    baseVersion = object.get("baseVersion").getAsString();
+
     baseDirNew = object.get("baseDirNew").getAsString();
 
     make = object.get("make").getAsString();
@@ -42,6 +44,8 @@ public class Config {
 
   private static String baseDir;
 
+  private static String baseVersion;
+
   private static String baseDirInst;
 
   private static String baseDirNew;
@@ -56,6 +60,10 @@ public class Config {
 
   public static String getBaseDir() {
     return baseDir;
+  }
+
+  public static String getBaseVersion() {
+    return baseVersion;
   }
 
   public static String getBaseDirInst() {
