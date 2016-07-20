@@ -157,7 +157,7 @@ public class Demo {
 			
 			
 			/*
-			for (IASTDeclaration declaration : astVisitor.getDecls()){
+			for (IASTDeclaration declaration : astVisitor.getOtherDecls()){
 				System.out.println("Rawsig: "+declaration.getRawSignature());
 			}
 			*/
@@ -186,7 +186,7 @@ public class Demo {
 
 			MyASTVisitor visitor = new MyASTVisitor();
 			astTranslationUnit.accept(visitor);
-//			for(IASTDeclaration declaration : visitor.getDecls()){
+//			for(IASTDeclaration declaration : visitor.getOtherDecls()){
 ////				System.out.println("visitor: "+declaration.getRawSignature());
 //				System.out.println(DiffUtils.getDeclarationStr(declaration));
 //			}
