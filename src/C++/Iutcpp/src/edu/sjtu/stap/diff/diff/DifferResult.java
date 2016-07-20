@@ -51,6 +51,7 @@ public class DifferResult implements  IDifferResult{
 		return sb.toString();
 	}
 
+	@Override
 	public List<String > getModifiedFunctions(){
 
 		ThreadInst threadInst = new ThreadInst();
@@ -79,9 +80,16 @@ public class DifferResult implements  IDifferResult{
 		return result;
 	}
 
+	public  void setOtherChanged(Boolean otherChanged){
+		if (otherChanged == null){
+			this.otherChanged = otherChanged;
+		}
+	}
+
 	private Boolean ifOtherChanged(){
 		if(otherChanged == null){
-
+			System.out.println("DifferResult.otherChanged == null !!! Setting to false!!!");
+			otherChanged = false;
 		}
 
 		return otherChanged;
@@ -89,7 +97,13 @@ public class DifferResult implements  IDifferResult{
 
 
 	@Override
-	public Boolean ifChoseAll() {
-		return null;
+	public Boolean ifChooseAll() {
+		if(fileAdded.size() + fileDeleted.size() != 0){
+			return true;
+		}
+		if(ifOtherChanged()){
+			return true;
+		}
+		return false;
 	}
 }

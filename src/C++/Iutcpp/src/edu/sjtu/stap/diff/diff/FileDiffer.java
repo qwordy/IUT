@@ -117,10 +117,8 @@ public class FileDiffer {
 			}else{
 //				if(file.lastModified() != fileInNew.lastModified()
 //						&& file.hashCode() != fileInNew.hashCode()){
-				//TODO: compare in stream
 				String contentOld = FileUtils.readFileToString(file);
 				String contentNew = FileUtils.readFileToString(fileInNew);
-				//TODO		contentOld.replaceAll("*", "");
 				if(!contentOld.equals(contentNew)){
 //					ASTDiffer astDiffer = new ASTDiffer(contentOld, contentNew);
 					ASTDiffer astDiffer = null;
@@ -131,6 +129,11 @@ public class FileDiffer {
 					}
 					System.out.println("\n\tFile Modified: "+file.getAbsolutePath());
 					//differResult.appendFileModified(filename, astDiffer); // to be changed
+					if(astDiffer.getIsOtherChanged()){
+						System.out.println("OTHER CHANGED! RERUN ALL TEST CASES!");
+						differResult.setOtherChanged(true);
+						return;
+					}
 					differResult.appendFileModified(file.getAbsolutePath(), astDiffer);// to
 				}
 //				}

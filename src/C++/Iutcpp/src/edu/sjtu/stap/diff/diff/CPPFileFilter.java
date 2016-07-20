@@ -19,6 +19,8 @@ public class CPPFileFilter implements FileFilter{
 				return true;
 			}else if(file.getName().endsWith(".h")){
 				return true;
+			}else if(file.getName().endsWith(".hpp")){
+				return true;
 			}else if(file.getName().endsWith(".cc")){
 				return true;
 			}

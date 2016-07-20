@@ -8,5 +8,5 @@ import java.util.List;
 public interface IDifferResult {
 
     List<String > getModifiedFunctions();
-    Boolean ifChoseAll();
+    Boolean ifChooseAll();
 }
