@@ -1,0 +1,184 @@
+package edu.sjtu.stap.diff.diff;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import edu.sjtu.stap.diff.ast.ASTTranslationUnitCore;
+import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
+import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTNode;
+import org.eclipse.cdt.core.dom.ast.IASTPreprocessorFunctionStyleMacroDefinition;
+import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.parser.ParserLanguage;
+
+
+
+public class ASTDifferOld {
+
+	List<String> funcAdded;
+	List<String> funcModified;
+	List<String> funcDeleted;
+//	private boolean isFuncChanged = false;
+	String diffResult = "";
+	
+	public String getDiffResult() {
+		return diffResult;
+	}
+
+	public ASTDifferOld(){
+		//TODO: keep it or cut it?
+	}
+
+	public ASTDifferOld(IASTTranslationUnit oldAST, IASTTranslationUnit newAST){//Diff AST
+		
+		diff(oldAST, newAST);
+
+	}
+
+	public ASTDifferOld(String oldPath, String newPath, boolean isCode){//Diff FilePath
+		diff(oldPath, newPath, isCode);
+	}
+
+	public ASTDifferOld(File oldFile, File newFile)  {
+		try {
+			diff(oldFile.getCanonicalPath(), newFile.getCanonicalPath(), false);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public boolean isModified(){
+		return funcAdded.size()+funcModified.size()+funcDeleted.size() != 0;
+	}
+	
+	
+	public List<String> getFuncAdded() {
+		return funcAdded;
+	}
+
+
+
+	public List<String> getFuncModified() {
+		return funcModified;
+	}
+
+
+
+	public List<String> getFuncDeleted() {
+		return funcDeleted;
+	}
+
+
+
+	
+	
+	public String diff(String oldPath, String newPath, boolean isCode){
+		/**
+		 *Focus on:
+		 *CPPASTFunctionDefinition
+		 *IASTPreprocessorFunctionStyleMacroDefinition
+		 *...
+		 **/
+		
+
+		ASTTranslationUnitCore astTranslationUnitCore = new ASTTranslationUnitCore();
+		IASTTranslationUnit oldAST;
+		IASTTranslationUnit newAST;
+		if(!isCode){
+			 oldAST = astTranslationUnitCore.parseFile(oldPath, ParserLanguage.CPP, false, false);
+			 newAST = astTranslationUnitCore.parseFile(newPath, ParserLanguage.CPP, false, false);
+		}else{
+			 oldAST = astTranslationUnitCore.parseCode(oldPath, ParserLanguage.CPP, false, false);
+			 newAST = astTranslationUnitCore.parseCode(newPath, ParserLanguage.CPP, false, false);
+		}
+		
+
+		
+		return diff(oldAST, newAST);
+	}
+
+	/**
+	 * Core diff method
+	 * @param oldAST
+	 * @param newAST
+	 * @return
+	 */
+	public String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST){
+//		System.out.println("String diff (IASTTranslationUnit oldAST, IASTTranslationUnit newAST): "+oldAST.toString()+"\t"+newAST.toString());
+		funcAdded = new ArrayList<>();
+		funcModified = new ArrayList<>();
+		funcDeleted = new ArrayList<>();
+		String result = "AST Diff Result: "+" \n";//TODO: StringBuilder
+		HashMap<String, IASTFunctionDefinition> newFuncDefsMap = new HashMap<>();
+
+		//get all new
+		IASTDeclaration[] newDecls = newAST.getDeclarations();
+//		for(IASTNode a : newAST.getChildren()){
+//			System.out.println("*--------*"+a.getRawSignature());
+//		}
+		//put into map
+		for(IASTDeclaration nw : newDecls){
+			System.out.println("*--------*"+nw.toString());
+			if(nw instanceof IASTFunctionDefinition){
+				IASTFunctionDefinition iastFunctionDefinition = (IASTFunctionDefinition) nw;
+				newFuncDefsMap.put(DiffUtils.getFunctionId(iastFunctionDefinition), iastFunctionDefinition);
+			}else{
+				//function 的 scope问题
+			}
+		}
+
+
+		//get all old
+		IASTDeclaration[] oldDecls = oldAST.getDeclarations();
+
+		for(IASTDeclaration od : oldDecls){
+			if(od instanceof IASTFunctionDefinition){
+				IASTFunctionDefinition funcInOld = (IASTFunctionDefinition) od;
+				IASTFunctionDefinition funcInNew = newFuncDefsMap.get(DiffUtils.getFunctionId(funcInOld));
+				if(funcInNew != null){
+					if(!funcInNew.getBody().getRawSignature().equals(funcInOld.getBody().getRawSignature()) ){ //modified
+						funcModified.add(DiffUtils.getFunctionId(funcInOld));
+						
+					}
+					newFuncDefsMap.remove(DiffUtils.getFunctionId(funcInNew));
+				}else{//deleted
+					funcDeleted.add(DiffUtils.getFunctionId(funcInOld));
+				}
+				
+			}
+		}
+
+		for(IASTFunctionDefinition func : newFuncDefsMap.values()){//added
+			funcAdded.add(DiffUtils.getFunctionId(func));
+		}
+
+		if(funcAdded.size() != 0){
+			result += "Added: ";
+			for(String str : funcAdded){
+				result += "\n\t"+ str;
+			}
+			result += "\n";
+		}
+		if(funcModified.size() != 0){
+			result += "Modified: ";
+			for(String str : funcModified){
+				result += "\n\t"+ str;
+			}
+			result += "\n";
+		}
+		if(funcDeleted.size() != 0){
+			result += "Deleted: ";
+			for(String str : funcDeleted){
+				result += "\n\t"+ str;
+			}
+			result += "\n";
+		}
+
+		//TODO: add IASTPreprocessorFunctionStyleMacroDefinition
+		diffResult = result;
+		return result;
+	}
+}

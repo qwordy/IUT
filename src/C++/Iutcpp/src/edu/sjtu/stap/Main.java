@@ -36,6 +36,6 @@ public class Main {
       e.printStackTrace();
     }
     long t1 = System.currentTimeMillis();
-    System.out.printf("Time: %d ms", t1 - t0);
+    System.out.printf("Time: %d ms\n", t1 - t0);
   }
 }
