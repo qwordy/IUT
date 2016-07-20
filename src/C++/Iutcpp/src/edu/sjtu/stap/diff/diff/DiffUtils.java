@@ -80,7 +80,7 @@ public class DiffUtils {
      */
     public static String getDeclarationStr(IASTDeclaration declaration) {
         StringBuilder sb = new StringBuilder();
-        sb.append(declaration.getFileLocation().getStartingLineNumber());
+//        sb.append(declaration.getFileLocation().getStartingLineNumber());
         //here can add cases by adding "else if" clause
         if (declaration instanceof IASTSimpleDeclaration) {
 
@@ -109,41 +109,101 @@ public class DiffUtils {
      * @param newDeclarations
      * @return true if there's change, false if there's none
      */
-    public static boolean compareDeclarations(List<IASTDeclaration> oldDeclarations, List<IASTDeclaration> newDeclarations) {
+    private static boolean compareDeclarations(List<IASTDeclaration> oldDeclarations, List<IASTDeclaration> newDeclarations) {
 
+        if(oldDeclarations.size() != newDeclarations.size())
+            return true;
         HashMap<String, IASTDeclaration> mapNew;
         mapNew = new HashMap<>();
 
-        List<IASTDeclaration> declAdded = new ArrayList<>();
-        List<IASTDeclaration> declModified = new ArrayList<>();
-        List<IASTDeclaration> declDeleted = new ArrayList<>();
+//        List<IASTDeclaration> declAdded = new ArrayList<>();
+//        List<IASTDeclaration> declModified = new ArrayList<>();
+//        List<IASTDeclaration> declDeleted = new ArrayList<>();
 
         for (IASTDeclaration decl : newDeclarations) {
-            mapNew.put(DiffUtils.getDeclarationStr(decl), decl);
+            if(DiffUtils.getDeclarationStr(decl) != null){
+                mapNew.put(DiffUtils.getDeclarationStr(decl), decl);
+            }
         }
 
         for (IASTDeclaration decl : oldDeclarations) {
             IASTDeclaration declInNew = mapNew.get(DiffUtils.getDeclarationStr(decl));
             if (declInNew != null) {
                 if (!declInNew.getRawSignature().equals(decl.getRawSignature())) { //modified
-                    declModified.add(decl);
+//                    declModified.add(decl);
+                    return true;
 
                 }
                 mapNew.remove(DiffUtils.getDeclarationStr(decl));
             } else {//deleted
-                declDeleted.add(decl);
+//                declDeleted.add(decl);
+                return true;
             }
 
         }
-        //TODO high priority for debugging
+        //high priority for debugging
         for (IASTDeclaration decl : mapNew.values()) {
             //added
-            declAdded.add(decl);
+//            declAdded.add(decl);
+            return true;
         }
-        return (declAdded.size() + declModified.size() + declDeleted.size() != 0);
+//        return (declAdded.size() + declModified.size() + declDeleted.size() != 0);
+        return false;
 
     }
 
+
+    private static boolean compareMacros(List<IASTPreprocessorFunctionStyleMacroDefinition> oldFuncMacros, List<IASTPreprocessorFunctionStyleMacroDefinition> newFuncMacros) {
+        if (oldFuncMacros.size() != newFuncMacros.size()){
+            return true;
+        }
+
+        HashMap<String, IASTPreprocessorFunctionStyleMacroDefinition> mapNew;
+        mapNew = new HashMap<>();
+
+//        List<IASTDeclaration> declAdded = new ArrayList<>();
+//        List<IASTDeclaration> declModified = new ArrayList<>();
+//        List<IASTDeclaration> declDeleted = new ArrayList<>();
+
+        for (IASTPreprocessorFunctionStyleMacroDefinition macro : newFuncMacros) {
+            if(DiffUtils.getMacroStr(macro) != null){
+                mapNew.put(DiffUtils.getMacroStr(macro), macro);
+            }
+        }
+
+        for (IASTPreprocessorFunctionStyleMacroDefinition macro : oldFuncMacros) {
+            IASTPreprocessorFunctionStyleMacroDefinition macroInNew = mapNew.get(DiffUtils.getMacroStr(macro));
+            if (macroInNew != null) {
+                if (!macroInNew.getRawSignature().equals(macro.getRawSignature())) { //modified
+//                    declModified.add(decl);
+                    return true;
+
+                }
+                mapNew.remove(DiffUtils.getMacroStr(macro));
+            } else {//deleted
+//                declDeleted.add(decl);
+                return true;
+            }
+
+        }
+        //high priority for debugging
+        for (IASTPreprocessorFunctionStyleMacroDefinition macro : mapNew.values()) {
+            //added
+//            declAdded.add(decl);
+            return true;
+        }
+
+        return false;
+    }
+
+    private static String getMacroStr(IASTPreprocessorFunctionStyleMacroDefinition macro) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(macro.getRawSignature());
+
+
+        return sb.toString();
+    }
 
     /**
      * determine whether Other elements besides functions are Changed
@@ -152,6 +212,29 @@ public class DiffUtils {
      * @return
      */
     public static Boolean whetherOtherChanged(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
-        return false;//todo return
+        //otherDecls
+        List<IASTDeclaration> oldOtherDecls = oldAstVisitor.getOtherDecls();
+        List<IASTDeclaration> newOtherDecls = newAstVisitor.getOtherDecls();
+        if(compareDeclarations(oldOtherDecls,newOtherDecls)){
+            System.out.println("Global variable changed.");
+            return true;
+        }
+        //field members
+        List<IASTDeclaration> oldFieldMembers = oldAstVisitor.getFields();
+        List<IASTDeclaration> newFieldMembers = newAstVisitor.getFields();
+        if(compareDeclarations(oldFieldMembers,newFieldMembers)){
+            System.out.println("Field Member changed.");
+            return true;
+        }
+        //function style macros
+        List<IASTPreprocessorFunctionStyleMacroDefinition> oldFuncMacros = oldAstVisitor.getFunctionMacros();
+        List<IASTPreprocessorFunctionStyleMacroDefinition> newFuncMacros = newAstVisitor.getFunctionMacros();
+        if(compareMacros(oldFuncMacros, newFuncMacros)){
+            System.out.println("Function style macro changed.");
+            return true;
+        }
+        return false;
     }
+
+
 }

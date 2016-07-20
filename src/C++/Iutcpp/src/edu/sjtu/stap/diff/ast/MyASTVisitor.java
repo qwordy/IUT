@@ -17,7 +17,7 @@ public class MyASTVisitor extends ASTVisitor {
     private List<ICPPASTNamespaceDefinition> namesps = new ArrayList<>();//namespaces
     private List<IASTDeclaration> fields = new ArrayList<>();//fields members
     private List<IASTDeclaration> otherDecls = new ArrayList<>();//other declarations
-    private List<IASTPreprocessorFunctionStyleMacroDefinition> IASTPreprocessorFunctionStyleMacroDefinition = new ArrayList<>();//other declarations
+    private List<IASTPreprocessorFunctionStyleMacroDefinition> functionMacros = new ArrayList<>();//function style Macros
 
 
     public MyASTVisitor() {
@@ -49,26 +49,32 @@ public class MyASTVisitor extends ASTVisitor {
 
 
             if(simpleDeclaration.getDeclarators().length > 0 && simpleDeclaration.getDeclarators()[0].getName().resolveBinding() instanceof IField){
-                //todo: the other way to determine whether is a fields member of a class
+                //whether is a fields member of a class
 //                System.out.println("IField");
+//                System.out.println("parent  "+simpleDeclaration.getParent());
                 fields.add(simpleDeclaration);
             }else{
-                //todo: other simpleDeclaration such as global variable etc.
-                otherDecls.add(simpleDeclaration);
+                //other simpleDeclaration such as global variable etc.
+//                System.out.println("parent: "+simpleDeclaration.getParent());
+                if(simpleDeclaration.getParent() instanceof IASTTranslationUnit){//this means it's scope is global
+//                    System.out.println("other: \n"+simpleDeclaration.getRawSignature());
+                    otherDecls.add(simpleDeclaration);
+                }
+
             }
 //            System.out.println("simple: "+simpleDeclaration.getRawSignature());
 //            System.out.println(simpleDeclaration.getDeclSpecifier().getRawSignature());
-            for (IASTDeclarator iastDeclarator : simpleDeclaration.getDeclarators()) {
-//                System.out.println(iastDeclarator.getName().getRawSignature());
-                //the way above is preferred to the below one
-//                System.out.println(iastDeclarator.getRawSignature());
-            }
+//            for (IASTDeclarator iastDeclarator : simpleDeclaration.getDeclarators()) {
+////                System.out.println(iastDeclarator.getName().getRawSignature());
+//                //the way above is preferred to the below one
+////                System.out.println(iastDeclarator.getRawSignature());
+//            }
         }
-        else {//todo: other declaration
-            System.out.println("other:");
-            System.out.println(declaration.toString());
-            System.out.println(declaration.getRawSignature());
-            otherDecls.add(declaration);
+        else {//other declaration we don't care
+//            System.out.println("don't care:");
+//            System.out.println(declaration.toString());
+//            System.out.println(declaration.getRawSignature());
+//            otherDecls.add(declaration);
         }
 
         return super.visit(declaration);
@@ -90,8 +96,9 @@ public class MyASTVisitor extends ASTVisitor {
 //                for(IASTFunctionStyleMacroParameter mp : macroParameters){
 //						System.out.println("macroprp: "+mp.getParameter());
 //                }
-                //todo function style macro
-                System.out.println(functionStyleMacroDefinition.getRawSignature());
+                // function style macro
+                functionMacros.add(functionStyleMacroDefinition);
+//                System.out.println(functionStyleMacroDefinition.getRawSignature());
             }
 //				System.out.println(macroDefinition.getName() );
 //				System.out.println(macroDefinition.getExpansion());
@@ -126,5 +133,9 @@ public class MyASTVisitor extends ASTVisitor {
 
     public List<IASTDeclaration> getFields() {
         return fields;
+    }
+
+    public List<IASTPreprocessorFunctionStyleMacroDefinition> getFunctionMacros() {
+        return functionMacros;
     }
 }
