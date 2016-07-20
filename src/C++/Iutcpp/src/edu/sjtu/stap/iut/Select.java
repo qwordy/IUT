@@ -1,6 +1,7 @@
 package edu.sjtu.stap.iut;
 
 import edu.sjtu.stap.config.Config;
+import org.eclipse.cdt.utils.coff.Exe;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,15 +17,27 @@ import java.util.Set;
  * Select test cases.
  */
 public class Select {
+
+  private static Connection conn;
+
+  private static boolean checkVersion() {
+    return true;
+  }
+
   public static void select(Set<String> diffFuncs) throws Exception {
+    String dbFile = Config.getBaseDirInst() + File.separatorChar + "coverage.db";
+    conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+
+    if (!checkVersion())
+      throw new Exception("Project version unmatch");
+
     String runFileStr = Config.getBaseDirNew() + File.separatorChar + "run.sh";
     File runFile = new File(runFileStr);
     runFile.setExecutable(true);
     BufferedWriter bw = new BufferedWriter(new FileWriter(runFile));
 
     System.out.println("Selecting test cases");
-    String dbFile = Config.getBaseDirInst() + File.separatorChar + "coverage.db";
-    Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbFile);
+
     Statement stmt = conn.createStatement();
     Statement stmt2 = conn.createStatement();
     String sql = "select test, testCase from cov group by test, testCase;";
