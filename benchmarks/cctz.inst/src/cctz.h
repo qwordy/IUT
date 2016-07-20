@@ -1,4 +1,3 @@
-#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -40,9 +39,9 @@ inline namespace deprecated_v1_api {
 #endif
 
 using TimeZone = ::cctz::time_zone;
-inline TimeZone UTCTimeZone() {puts("IUTLOG cctz.h: cctz::UTCTimeZone()"); return utc_time_zone(); }
-inline TimeZone LocalTimeZone() {puts("IUTLOG cctz.h: cctz::LocalTimeZone()"); return local_time_zone(); }
-inline bool LoadTimeZone(const std::string& s, TimeZone* tz) {puts("IUTLOG cctz.h: cctz::LoadTimeZone(const std::string& s, TimeZone* tz)");
+inline TimeZone UTCTimeZone() { return utc_time_zone(); }
+inline TimeZone LocalTimeZone() { return local_time_zone(); }
+inline bool LoadTimeZone(const std::string& s, TimeZone* tz) {
   return load_time_zone(s, tz);
 }
 
@@ -60,7 +59,7 @@ struct Breakdown {
   std::string abbr;
 };
 template <typename D>
-inline Breakdown BreakTime(const time_point<D>& tp, const TimeZone& tz) {puts("IUTLOG cctz.h: cctz::BreakTime(const time_point<D>& tp, const TimeZone& tz)");
+inline Breakdown BreakTime(const time_point<D>& tp, const TimeZone& tz) {
   // Assert that the time point does not require a civil year beyond
   // the limits of a signed 32-bit value, as dictated by the v2 API.
   // -67768100567884800 == -2147483648-01-02 00:00:00 +00:00
@@ -107,7 +106,7 @@ inline Breakdown BreakTime(const time_point<D>& tp, const TimeZone& tz) {puts("I
 
 using seconds64 = std::chrono::duration<int64_t, std::chrono::seconds::period>;
 inline time_point<seconds64> MakeTime(int64_t year, int mon, int day, int hour,
-                                      int min, int sec, const TimeZone& tz) {puts("IUTLOG cctz.h: cctz::MakeTime(int64_t year, int mon, int day, int hour, int min, int sec, const TimeZone& tz)");
+                                      int min, int sec, const TimeZone& tz) {
   assert(year < std::numeric_limits<int>::max());
   return tz.lookup(civil_second(year, mon, day, hour, min, sec)).pre;
 }
@@ -124,7 +123,7 @@ struct TimeInfo {
   bool normalized;
 };
 inline TimeInfo MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss,
-                             const TimeZone& tz) {puts("IUTLOG cctz.h: cctz::MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss, const TimeZone& tz)");
+                             const TimeZone& tz) {
   assert(y < std::numeric_limits<decltype(civil_second().year())>::max());
   const civil_second cs(y, m, d, hh, mm, ss);
   const bool norm = cs.year() != y || cs.month() != m || cs.day() != d ||
@@ -147,13 +146,13 @@ inline TimeInfo MakeTimeInfo(int64_t y, int m, int d, int hh, int mm, int ss,
 
 template <typename D>
 inline std::string Format(const std::string& fmt, const time_point<D>& tp,
-                          const TimeZone& tz) {puts("IUTLOG cctz.h: cctz::Format(const std::string& fmt, const time_point<D>& tp, const TimeZone& tz)");
+                          const TimeZone& tz) {
   return format(fmt, tp, tz);
 }
 
 template <typename D>
 inline bool Parse(const std::string& fmt, const std::string& input,
-                  const TimeZone& tz, time_point<D>* tpp) {puts("IUTLOG cctz.h: cctz::Parse(const std::string& fmt, const std::string& input, const TimeZone& tz, time_point<D>* tpp)");
+                  const TimeZone& tz, time_point<D>* tpp) {
   return parse(fmt, input, tz, tpp);
 }
 

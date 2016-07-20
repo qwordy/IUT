@@ -21,7 +21,7 @@ public class Main {
           break;
         case COV:
           Config.init();
-          //new Inst();
+          new Inst();
           Coverage.cov();
           break;
         case SELECT:

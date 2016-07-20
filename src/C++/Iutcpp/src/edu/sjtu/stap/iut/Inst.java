@@ -30,7 +30,7 @@ public class Inst {
     ls(new File(Config.getBaseDirInst()));
 
     // inst test file
-    instTestFile();
+    //instTestFile();
 
     executor.shutdown();
     executor.awaitTermination(1, TimeUnit.DAYS);
