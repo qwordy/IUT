@@ -1,3 +1,4 @@
+#include <stdio.h>
 // Copyright 2016 Google Inc. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,24 +58,24 @@ struct year_tag : month_tag {};
 
 namespace impl {
 
-CONSTEXPR_F bool is_leap_year(int y) noexcept {
+CONSTEXPR_F bool is_leap_year(int y) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::is_leap_year(int y)");
   return y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
 }
-CONSTEXPR_F int year_index(int y, int m) noexcept {
+CONSTEXPR_F int year_index(int y, int m) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::year_index(int y, int m)");
   return (((y + (m > 2)) % 400) + 400) % 400;
 }
-CONSTEXPR_F int days_per_century(int y, int m) noexcept {
+CONSTEXPR_F int days_per_century(int y, int m) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::days_per_century(int y, int m)");
   const int yi = year_index(y, m);
   return 36524 + (yi == 0 || yi > 300);
 }
-CONSTEXPR_F int days_per_4years(int y, int m) noexcept {
+CONSTEXPR_F int days_per_4years(int y, int m) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::days_per_4years(int y, int m)");
   const int yi = year_index(y, m);
   return 1460 + (yi == 0 || yi > 300 || (yi - 1) % 100 < 96);
 }
-CONSTEXPR_F int days_per_year(int y, int m) noexcept {
+CONSTEXPR_F int days_per_year(int y, int m) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::days_per_year(int y, int m)");
   return is_leap_year(y + (m > 2)) ? 366 : 365;
 }
-CONSTEXPR_F int days_per_month(int y, int m) noexcept {
+CONSTEXPR_F int days_per_month(int y, int m) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::days_per_month(int y, int m)");
   CONSTEXPR_D signed char k_days_per_month[12] = {
       31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31  // non leap year
   };
@@ -82,7 +83,7 @@ CONSTEXPR_F int days_per_month(int y, int m) noexcept {
 }
 
 CONSTEXPR_F fields n_day(int y, int m, int d, int cd, int hh, int mm,
-                         int ss) noexcept {
+                         int ss) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::n_day(int y, int m, int d, int cd, int hh, int mm, int ss)");
   y += (cd / 146097) * 400;
   cd %= 146097;
   if (cd < 0) {
@@ -124,7 +125,7 @@ CONSTEXPR_F fields n_day(int y, int m, int d, int cd, int hh, int mm,
   return fields{y, m, d, hh, mm, ss};
 }
 CONSTEXPR_F fields n_mon(int y, int m, int d, int cd, int hh, int mm,
-                         int ss) noexcept {
+                         int ss) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::n_mon(int y, int m, int d, int cd, int hh, int mm, int ss)");
   y += m / 12;
   m %= 12;
   if (m <= 0) {
@@ -134,7 +135,7 @@ CONSTEXPR_F fields n_mon(int y, int m, int d, int cd, int hh, int mm,
   return n_day(y, m, d, cd, hh, mm, ss);
 }
 CONSTEXPR_F fields n_hour(int y, int m, int d, int cd, int hh, int mm,
-                          int ss) noexcept {
+                          int ss) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::n_hour(int y, int m, int d, int cd, int hh, int mm, int ss)");
   cd += hh / 24;
   hh %= 24;
   if (hh < 0) {
@@ -144,7 +145,7 @@ CONSTEXPR_F fields n_hour(int y, int m, int d, int cd, int hh, int mm,
   return n_mon(y, m, d, cd, hh, mm, ss);
 }
 CONSTEXPR_F fields n_min(int y, int m, int d, int hh, int ch, int mm,
-                         int ss) noexcept {
+                         int ss) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::n_min(int y, int m, int d, int hh, int ch, int mm, int ss)");
   ch += mm / 60;
   mm %= 60;
   if (mm < 0) {
@@ -153,7 +154,7 @@ CONSTEXPR_F fields n_min(int y, int m, int d, int hh, int ch, int mm,
   }
   return n_hour(y, m, d, hh / 24 + ch / 24, hh % 24 + ch % 24, mm, ss);
 }
-CONSTEXPR_F fields n_sec(int y, int m, int d, int hh, int mm, int ss) noexcept {
+CONSTEXPR_F fields n_sec(int y, int m, int d, int hh, int mm, int ss) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::n_sec(int y, int m, int d, int hh, int mm, int ss)");
   int cm = ss / 60;
   ss %= 60;
   if (ss < 0) {
@@ -168,44 +169,44 @@ CONSTEXPR_F fields n_sec(int y, int m, int d, int hh, int mm, int ss) noexcept {
 ////////////////////////////////////////////////////////////////////////
 
 // Increments the indicated (normalized) field by "n".
-CONSTEXPR_F fields step(second_tag, fields f, int n) noexcept {
+CONSTEXPR_F fields step(second_tag, fields f, int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::step(second_tag, fields f, int n)");
   return impl::n_sec(f.y, f.m, f.d, f.hh, f.mm + n / 60, f.ss + n % 60);
 }
-CONSTEXPR_F fields step(minute_tag, fields f, int n) noexcept {
+CONSTEXPR_F fields step(minute_tag, fields f, int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::step(minute_tag, fields f, int n)");
   return impl::n_min(f.y, f.m, f.d, f.hh + n / 60, 0, f.mm + n % 60, f.ss);
 }
-CONSTEXPR_F fields step(hour_tag, fields f, int n) noexcept {
+CONSTEXPR_F fields step(hour_tag, fields f, int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::step(hour_tag, fields f, int n)");
   return impl::n_hour(f.y, f.m, f.d + n / 24, 0, f.hh + n % 24, f.mm, f.ss);
 }
-CONSTEXPR_F fields step(day_tag, fields f, int n) noexcept {
+CONSTEXPR_F fields step(day_tag, fields f, int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::step(day_tag, fields f, int n)");
   return impl::n_day(f.y, f.m, f.d, n, f.hh, f.mm, f.ss);
 }
-CONSTEXPR_F fields step(month_tag, fields f, int n) noexcept {
+CONSTEXPR_F fields step(month_tag, fields f, int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::step(month_tag, fields f, int n)");
   return impl::n_mon(f.y + n / 12, f.m + n % 12, f.d, 0, f.hh, f.mm, f.ss);
 }
-CONSTEXPR_F fields step(year_tag, fields f, int n) noexcept {
+CONSTEXPR_F fields step(year_tag, fields f, int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::step(year_tag, fields f, int n)");
   return fields{f.y + n, f.m, f.d, f.hh, f.mm, f.ss};
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 // Aligns the (normalized) fields struct to the indicated field.
-CONSTEXPR_F fields align(second_tag, fields f) noexcept {
+CONSTEXPR_F fields align(second_tag, fields f) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::align(second_tag, fields f)");
   return f;
 }
-CONSTEXPR_F fields align(minute_tag, fields f) noexcept {
+CONSTEXPR_F fields align(minute_tag, fields f) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::align(minute_tag, fields f)");
   return fields{f.y, f.m, f.d, f.hh, f.mm, 0};
 }
-CONSTEXPR_F fields align(hour_tag, fields f) noexcept {
+CONSTEXPR_F fields align(hour_tag, fields f) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::align(hour_tag, fields f)");
   return fields{f.y, f.m, f.d, f.hh, 0, 0};
 }
-CONSTEXPR_F fields align(day_tag, fields f) noexcept {
+CONSTEXPR_F fields align(day_tag, fields f) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::align(day_tag, fields f)");
   return fields{f.y, f.m, f.d, 0, 0, 0};
 }
-CONSTEXPR_F fields align(month_tag, fields f) noexcept {
+CONSTEXPR_F fields align(month_tag, fields f) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::align(month_tag, fields f)");
   return fields{f.y, f.m, 1, 0, 0, 0};
 }
-CONSTEXPR_F fields align(year_tag, fields f) noexcept {
+CONSTEXPR_F fields align(year_tag, fields f) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::align(year_tag, fields f)");
   return fields{f.y, 1, 1, 0, 0, 0};
 }
 
@@ -215,7 +216,7 @@ namespace impl {
 
 // Map a (normalized) Y/M/D to the number of days before/after 1970-01-01.
 // Will overflow outside of the range [-5877641-06-23 ... 5881580-07-11].
-CONSTEXPR_F int ymd_ord(int y, int m, int d) noexcept {
+CONSTEXPR_F int ymd_ord(int y, int m, int d) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::impl::ymd_ord(int y, int m, int d)");
   const int eyear = (m <= 2) ? y - 1 : y;
   const int era = (eyear >= 0 ? eyear : eyear - 399) / 400;
   const int yoe = eyear - era * 400;
@@ -227,22 +228,22 @@ CONSTEXPR_F int ymd_ord(int y, int m, int d) noexcept {
 }  // namespace impl
 
 // Returns the difference between fields structs using the indicated unit.
-CONSTEXPR_F int difference(year_tag, fields f1, fields f2) noexcept {
+CONSTEXPR_F int difference(year_tag, fields f1, fields f2) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::difference(year_tag, fields f1, fields f2)");
   return f1.y - f2.y;
 }
-CONSTEXPR_F int difference(month_tag, fields f1, fields f2) noexcept {
+CONSTEXPR_F int difference(month_tag, fields f1, fields f2) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::difference(month_tag, fields f1, fields f2)");
   return difference(year_tag{}, f1, f2) * 12 + (f1.m - f2.m);
 }
-CONSTEXPR_F int difference(day_tag, fields f1, fields f2) noexcept {
+CONSTEXPR_F int difference(day_tag, fields f1, fields f2) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::difference(day_tag, fields f1, fields f2)");
   return impl::ymd_ord(f1.y, f1.m, f1.d) - impl::ymd_ord(f2.y, f2.m, f2.d);
 }
-CONSTEXPR_F int difference(hour_tag, fields f1, fields f2) noexcept {
+CONSTEXPR_F int difference(hour_tag, fields f1, fields f2) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::difference(hour_tag, fields f1, fields f2)");
   return difference(day_tag{}, f1, f2) * 24 + (f1.hh - f2.hh);
 }
-CONSTEXPR_F int difference(minute_tag, fields f1, fields f2) noexcept {
+CONSTEXPR_F int difference(minute_tag, fields f1, fields f2) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::difference(minute_tag, fields f1, fields f2)");
   return difference(hour_tag{}, f1, f2) * 60 + (f1.mm - f2.mm);
 }
-CONSTEXPR_F int difference(second_tag, fields f1, fields f2) noexcept {
+CONSTEXPR_F int difference(second_tag, fields f1, fields f2) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::difference(second_tag, fields f1, fields f2)");
   return difference(minute_tag{}, f1, f2) * 60 + (f1.ss - f2.ss);
 }
 
@@ -253,9 +254,9 @@ class civil_time {
  public:
   explicit CONSTEXPR_M civil_time(int y, int m = 1, int d = 1, int hh = 0,
                                   int mm = 0, int ss = 0) noexcept
-      : civil_time(impl::n_sec(y, m, d, hh, mm, ss)) {}
+      : civil_time(impl::n_sec(y, m, d, hh, mm, ss)) {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::civil_time(int y, int m = 1, int d = 1, int hh = 0, int mm = 0, int ss = 0)");}
 
-  CONSTEXPR_M civil_time() noexcept : civil_time(1970) {}
+  CONSTEXPR_M civil_time() noexcept : civil_time(1970) {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::civil_time()");}
   civil_time(const civil_time&) = default;
   civil_time& operator=(const civil_time&) = default;
 
@@ -269,34 +270,34 @@ class civil_time {
   template <typename U>
   CONSTEXPR_M civil_time(const civil_time<U>& ct,
                          preserves_data<T, U>* = nullptr) noexcept
-      : civil_time(ct.f_) {}
+      : civil_time(ct.f_) {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::civil_time(const civil_time<U>& ct, preserves_data<T, U>* = nullptr)");}
   template <typename U>
   explicit CONSTEXPR_M civil_time(const civil_time<U>& ct,
                                   preserves_data<U, T>* = nullptr) noexcept
-      : civil_time(ct.f_) {}
+      : civil_time(ct.f_) {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::civil_time(const civil_time<U>& ct, preserves_data<U, T>* = nullptr)");}
 
   // Factories for the maximum/minimum representable civil_time.
-  static civil_time max() {
+  static civil_time max() {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::max()");
     return civil_time(std::numeric_limits<int>::max(), 12, 31, 23, 59, 59);
   }
-  static civil_time min() {
+  static civil_time min() {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::min()");
     return civil_time(std::numeric_limits<int>::min(), 1, 1, 0, 0, 0);
   }
 
   // Field accessors.
-  CONSTEXPR_M int year() const noexcept { return f_.y; }
-  CONSTEXPR_M int month() const noexcept { return f_.m; }
-  CONSTEXPR_M int day() const noexcept { return f_.d; }
-  CONSTEXPR_M int hour() const noexcept { return f_.hh; }
-  CONSTEXPR_M int minute() const noexcept { return f_.mm; }
-  CONSTEXPR_M int second() const noexcept { return f_.ss; }
+  CONSTEXPR_M int year() const noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::year() const"); return f_.y; }
+  CONSTEXPR_M int month() const noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::month() const"); return f_.m; }
+  CONSTEXPR_M int day() const noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::day() const"); return f_.d; }
+  CONSTEXPR_M int hour() const noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::hour() const"); return f_.hh; }
+  CONSTEXPR_M int minute() const noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::minute() const"); return f_.mm; }
+  CONSTEXPR_M int second() const noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::second() const"); return f_.ss; }
 
   // Assigning arithmetic.
-  CONSTEXPR_M civil_time& operator+=(int n) noexcept {
+  CONSTEXPR_M civil_time& operator+=(int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::& operator+=(int n)");
     f_ = step(T{}, f_, n);
     return *this;
   }
-  CONSTEXPR_M civil_time& operator-=(int n) noexcept {
+  CONSTEXPR_M civil_time& operator-=(int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::& operator-=(int n)");
     if (n != std::numeric_limits<int>::min()) {
       f_ = step(T{}, f_, -n);
     } else {
@@ -304,18 +305,18 @@ class civil_time {
     }
     return *this;
   }
-  CONSTEXPR_M civil_time& operator++() noexcept {
+  CONSTEXPR_M civil_time& operator++() noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::& operator++()");
     return *this += 1;
   }
-  CONSTEXPR_M civil_time operator++(int) noexcept {
+  CONSTEXPR_M civil_time operator++(int) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::operator++(int)");
     const civil_time a = *this;
     ++*this;
     return a;
   }
-  CONSTEXPR_M civil_time& operator--() noexcept {
+  CONSTEXPR_M civil_time& operator--() noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::& operator--()");
     return *this -= 1;
   }
-  CONSTEXPR_M civil_time operator--(int) noexcept {
+  CONSTEXPR_M civil_time operator--(int) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::operator--(int)");
     const civil_time a = *this;
     --*this;
     return a;
@@ -323,19 +324,19 @@ class civil_time {
 
   // Binary arithmetic operators.
   inline friend CONSTEXPR_M civil_time operator+(const civil_time& a,
-                                                 int n) noexcept {
+                                                 int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::operator+(const civil_time& a, int n)");
     return civil_time(step(T{}, a.f_, n));
   }
   inline friend CONSTEXPR_M civil_time operator+(int n,
-                                                 const civil_time& a) noexcept {
+                                                 const civil_time& a) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::operator+(int n, const civil_time& a)");
     return civil_time(step(T{}, a.f_, n));
   }
   inline friend CONSTEXPR_M civil_time operator-(const civil_time& a,
-                                                 int n) noexcept {
+                                                 int n) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::operator-(const civil_time& a, int n)");
     return civil_time(step(T{}, a.f_, -n));
   }
   inline friend CONSTEXPR_M int operator-(const civil_time& lhs,
-                                          const civil_time& rhs) noexcept {
+                                          const civil_time& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::operator-(const civil_time& lhs, const civil_time& rhs)");
     return difference(T{}, lhs.f_, rhs.f_);
   }
 
@@ -346,7 +347,7 @@ class civil_time {
   friend class civil_time;
 
   // The designated constructor that all others eventually call.
-  explicit CONSTEXPR_M civil_time(fields f) noexcept : f_(align(T{}, f)) {}
+  explicit CONSTEXPR_M civil_time(fields f) noexcept : f_(align(T{}, f)) {puts("IUTLOG civil_time_detail.h: cctz::detail::civil_time::civil_time::civil_time(fields f)");}
 
   fields f_;
 };
@@ -364,7 +365,7 @@ using civil_second = civil_time<second_tag>;
 // Always compares all six fields.
 template <typename T1, typename T2>
 CONSTEXPR_T bool operator<(const civil_time<T1>& lhs,
-                           const civil_time<T2>& rhs) noexcept {
+                           const civil_time<T2>& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::operator<(const civil_time<T1>& lhs, const civil_time<T2>& rhs)");
   return (lhs.year() < rhs.year() ||
           (lhs.year() == rhs.year() &&
            (lhs.month() < rhs.month() ||
@@ -379,29 +380,29 @@ CONSTEXPR_T bool operator<(const civil_time<T1>& lhs,
 }
 template <typename T1, typename T2>
 CONSTEXPR_T bool operator<=(const civil_time<T1>& lhs,
-                            const civil_time<T2>& rhs) noexcept {
+                            const civil_time<T2>& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::operator<=(const civil_time<T1>& lhs, const civil_time<T2>& rhs)");
   return !(rhs < lhs);
 }
 template <typename T1, typename T2>
 CONSTEXPR_T bool operator>=(const civil_time<T1>& lhs,
-                            const civil_time<T2>& rhs) noexcept {
+                            const civil_time<T2>& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::operator>=(const civil_time<T1>& lhs, const civil_time<T2>& rhs)");
   return !(lhs < rhs);
 }
 template <typename T1, typename T2>
 CONSTEXPR_T bool operator>(const civil_time<T1>& lhs,
-                           const civil_time<T2>& rhs) noexcept {
+                           const civil_time<T2>& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::operator>(const civil_time<T1>& lhs, const civil_time<T2>& rhs)");
   return rhs < lhs;
 }
 template <typename T1, typename T2>
 CONSTEXPR_T bool operator==(const civil_time<T1>& lhs,
-                            const civil_time<T2>& rhs) noexcept {
+                            const civil_time<T2>& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::operator==(const civil_time<T1>& lhs, const civil_time<T2>& rhs)");
   return lhs.year() == rhs.year() && lhs.month() == rhs.month() &&
          lhs.day() == rhs.day() && lhs.hour() == rhs.hour() &&
          lhs.minute() == rhs.minute() && lhs.second() == rhs.second();
 }
 template <typename T1, typename T2>
 CONSTEXPR_T bool operator!=(const civil_time<T1>& lhs,
-                            const civil_time<T2>& rhs) noexcept {
+                            const civil_time<T2>& rhs) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::operator!=(const civil_time<T1>& lhs, const civil_time<T2>& rhs)");
   return !(lhs == rhs);
 }
 
@@ -410,36 +411,36 @@ CONSTEXPR_T bool operator!=(const civil_time<T1>& lhs,
 // Output stream operators output a format matching YYYY-MM-DDThh:mm:ss,
 // while omitting fields inferior to the type's alignment. For example,
 // civil_day is formatted only as YYYY-MM-DD.
-inline std::ostream& operator<<(std::ostream& os, const civil_year& y) {
+inline std::ostream& operator<<(std::ostream& os, const civil_year& y) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, const civil_year& y)");
   std::stringstream ss;
   ss << y.year();  // No padding.
   return os << ss.str();
 }
-inline std::ostream& operator<<(std::ostream& os, const civil_month& m) {
+inline std::ostream& operator<<(std::ostream& os, const civil_month& m) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, const civil_month& m)");
   std::stringstream ss;
   ss << civil_year(m) << '-';
   ss << std::setfill('0') << std::setw(2) << m.month();
   return os << ss.str();
 }
-inline std::ostream& operator<<(std::ostream& os, const civil_day& d) {
+inline std::ostream& operator<<(std::ostream& os, const civil_day& d) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, const civil_day& d)");
   std::stringstream ss;
   ss << civil_month(d) << '-';
   ss << std::setfill('0') << std::setw(2) << d.day();
   return os << ss.str();
 }
-inline std::ostream& operator<<(std::ostream& os, const civil_hour& h) {
+inline std::ostream& operator<<(std::ostream& os, const civil_hour& h) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, const civil_hour& h)");
   std::stringstream ss;
   ss << civil_day(h) << 'T';
   ss << std::setfill('0') << std::setw(2) << h.hour();
   return os << ss.str();
 }
-inline std::ostream& operator<<(std::ostream& os, const civil_minute& m) {
+inline std::ostream& operator<<(std::ostream& os, const civil_minute& m) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, const civil_minute& m)");
   std::stringstream ss;
   ss << civil_hour(m) << ':';
   ss << std::setfill('0') << std::setw(2) << m.minute();
   return os << ss.str();
 }
-inline std::ostream& operator<<(std::ostream& os, const civil_second& s) {
+inline std::ostream& operator<<(std::ostream& os, const civil_second& s) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, const civil_second& s)");
   std::stringstream ss;
   ss << civil_minute(s) << ':';
   ss << std::setfill('0') << std::setw(2) << s.second();
@@ -458,7 +459,7 @@ enum class weekday {
   sunday,
 };
 
-inline std::ostream& operator<<(std::ostream& os, weekday wd) {
+inline std::ostream& operator<<(std::ostream& os, weekday wd) {puts("IUTLOG civil_time_detail.h: cctz::detail::& operator<<(std::ostream& os, weekday wd)");
   switch (wd) {
     case weekday::monday:
       return os << "Monday";
@@ -477,7 +478,7 @@ inline std::ostream& operator<<(std::ostream& os, weekday wd) {
   }
 }
 
-CONSTEXPR_F weekday get_weekday(const civil_day& cd) noexcept {
+CONSTEXPR_F weekday get_weekday(const civil_day& cd) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::get_weekday(const civil_day& cd)");
   CONSTEXPR_D weekday k_weekday_by_thu_off[] = {
       weekday::thursday,  weekday::friday,  weekday::saturday,
       weekday::sunday,    weekday::monday,  weekday::tuesday,
@@ -488,17 +489,17 @@ CONSTEXPR_F weekday get_weekday(const civil_day& cd) noexcept {
 
 ////////////////////////////////////////////////////////////////////////
 
-CONSTEXPR_F civil_day next_weekday(civil_day cd, weekday wd) noexcept {
+CONSTEXPR_F civil_day next_weekday(civil_day cd, weekday wd) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::next_weekday(civil_day cd, weekday wd)");
   do { cd += 1; } while (get_weekday(cd) != wd);
   return cd;
 }
 
-CONSTEXPR_F civil_day prev_weekday(civil_day cd, weekday wd) noexcept {
+CONSTEXPR_F civil_day prev_weekday(civil_day cd, weekday wd) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::prev_weekday(civil_day cd, weekday wd)");
   do { cd -= 1; } while (get_weekday(cd) != wd);
   return cd;
 }
 
-CONSTEXPR_F int get_yearday(const civil_day& cd) noexcept {
+CONSTEXPR_F int get_yearday(const civil_day& cd) noexcept {puts("IUTLOG civil_time_detail.h: cctz::detail::get_yearday(const civil_day& cd)");
   return cd - civil_day(civil_year(cd)) + 1;
 }
 

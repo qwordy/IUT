@@ -34,6 +34,11 @@ public class LogParserCoverage implements ITaskAfterRun {
     stmt = conn.createStatement();
     String sql = "create table cov (test text, testCase text, func text);";
     stmt.executeUpdate(sql);
+
+    sql = "create table version (version text);";
+    stmt.executeUpdate(sql);
+    sql = "insert into version values(\"" + Config.getBaseVersion() + "\");";
+    stmt.executeUpdate(sql);
 //    sql = "insert into cov values(\"t0\", \"t1\", \"f1\");";
 //    stmt.executeUpdate(sql);
   }
