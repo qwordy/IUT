@@ -27,6 +27,10 @@ public class MyASTVisitor extends ASTVisitor {
         super.shouldVisitTranslationUnit = true;
     }
 
+    public MyASTVisitor(boolean b) {
+        super(b);
+    }
+
 
     @Override
     public int visit(IASTDeclaration declaration) {
@@ -107,6 +111,22 @@ public class MyASTVisitor extends ASTVisitor {
 
         return super.visit(tu);
     }
+
+
+    @Override
+    public int visit(IASTName name) {
+        System.out.println("NAME: "+name.toString());
+        try{
+//            System.out.println("Binding: "+name.resolveBinding());
+        }catch (Exception e){
+            System.out.println("Exception: "+name.getRawSignature());
+        }
+
+        return super.visit(name);
+    }
+
+
+
 
 
 

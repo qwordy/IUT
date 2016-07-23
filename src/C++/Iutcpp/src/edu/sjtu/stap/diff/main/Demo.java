@@ -3,10 +3,7 @@ package edu.sjtu.stap.diff.main;
 import java.io.File;
 import java.io.IOException;
 
-import edu.sjtu.stap.diff.ast.ASTTranslationUnitCore;
-import edu.sjtu.stap.diff.ast.MultiVisitor;
-import edu.sjtu.stap.diff.ast.MyASTVisitor;
-import edu.sjtu.stap.diff.ast.MyCPPASTVisitor;
+import edu.sjtu.stap.diff.ast.*;
 import edu.sjtu.stap.diff.diff.ASTDifferOld;
 import edu.sjtu.stap.diff.diff.DiffUtils;
 import edu.sjtu.stap.diff.diff.DifferResult;
@@ -184,8 +181,12 @@ public class Demo {
 //			astTranslationUnit.accept(myCPPASTVisitor);
 
 
-			MyASTVisitor visitor = new MyASTVisitor();
+			MyASTVisitor visitor = new MyASTVisitor(false);
+//			visitor.shouldVisitNames = true;
 			astTranslationUnit.accept(visitor);
+
+			MyASTGenericVisitor myASTGenericVisitor = new MyASTGenericVisitor(true);
+			astTranslationUnit.accept(myASTGenericVisitor);
 //			for(IASTDeclaration declaration : visitor.getOtherDecls()){
 ////				System.out.println("visitor: "+declaration.getRawSignature());
 //				System.out.println(DiffUtils.getDeclarationStr(declaration));

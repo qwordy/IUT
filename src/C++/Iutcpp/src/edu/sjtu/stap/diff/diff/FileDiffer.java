@@ -130,7 +130,12 @@ public class FileDiffer {
 					System.out.println("\n\tFile Modified: "+file.getAbsolutePath());
 					//differResult.appendFileModified(filename, astDiffer); // to be changed
 					if(astDiffer.getIsOtherChanged()){
-						System.out.println("OTHER CHANGED! RERUN ALL TEST CASES!");
+						System.out.println("Other element Changed! RERUN ALL TEST CASES!");
+						differResult.setOtherChanged(true);
+						return;
+					}
+					if(astDiffer.functionAdded.size() != 0){
+						System.out.println("Function added! RERUN ALL TEST CASES!");
 						differResult.setOtherChanged(true);
 						return;
 					}

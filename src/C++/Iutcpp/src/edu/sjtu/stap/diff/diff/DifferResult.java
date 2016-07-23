@@ -33,6 +33,8 @@ public class DifferResult implements  IDifferResult{
 	public void appendFileModified(String file, ASTDiffer differ){
 		fileModified.add(new DUFile.Modified(file, differ));
 	}
+
+
 	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
@@ -88,7 +90,7 @@ public class DifferResult implements  IDifferResult{
 
 	private Boolean ifOtherChanged(){
 		if(otherChanged == null){
-			System.out.println("DifferResult.otherChanged == null !!! Setting to false!!!");
+//			System.out.println("DifferResult.otherChanged == null. Setting to false.");
 			otherChanged = false;
 		}
 
@@ -98,7 +100,7 @@ public class DifferResult implements  IDifferResult{
 
 	@Override
 	public Boolean ifChooseAll() {
-		if(fileAdded.size() + fileDeleted.size() != 0){
+		if(fileAdded.size()  != 0){
 			return true;
 		}
 		if(ifOtherChanged()){
