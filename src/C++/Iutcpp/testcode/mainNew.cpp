@@ -35,8 +35,11 @@ inta a;
 int b
 
 
+typedef struct {
+     int x;
+ } S;
 
-
+template <class T> class A{ T t; };
 
 int AddThreeInt(int iFirst, int iSecond, int iThree)  
 {  
