@@ -1,4 +1,9 @@
 Manifest-Version: 1.0
-Class-Path: lib
+Class-Path: gson-2.7.jar sqlite-jdbc-3.8.11.2.jar com.google.guava_15.
+ 0.0.v201403281430.jar org.eclipse.text_3.5.400.v20150505-1044.jar org
+ .eclipse.cdt.core_5.11.0.201602051005.jar org.apache.commons.io_2.2.0
+ .v201405211200.jar org.eclipse.cdt.core.source_5.11.0.201602051005.ja
+ r org.eclipse.equinox.common_3.7.0.v20150402-1709.jar org.eclipse.ltk
+ .core.refactoring_3.6.201.v20150819-1034.jar
 Main-Class: edu.sjtu.stap.Main
 

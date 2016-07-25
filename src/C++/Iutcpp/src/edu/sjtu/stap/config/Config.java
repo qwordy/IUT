@@ -26,18 +26,18 @@ public class Config {
 
     baseDirNew = object.get("baseDirNew").getAsString();
 
-    make = object.get("make").getAsString();
-    makeClean = make + " clean";
+    buildCmd = object.get("buildCmd").getAsString();
+    //makeClean = buildCmd + " clean";
 
     JsonArray array = object.get("testCmd").getAsJsonArray();
     testCmd = new ArrayList<>(array.size());
     for (JsonElement e : array)
       testCmd.add(e.getAsString());
 
-    array = object.get("testFile").getAsJsonArray();
-    testFile = new ArrayList<>(array.size());
-    for (JsonElement e : array)
-      testFile.add(e.getAsString());
+//    array = object.get("testFile").getAsJsonArray();
+//    testFile = new ArrayList<>(array.size());
+//    for (JsonElement e : array)
+//      testFile.add(e.getAsString());
   }
 
   public final static String configFile = "config.iut";
@@ -50,13 +50,13 @@ public class Config {
 
   private static String baseDirNew;
 
-  private static String make;
+  private static String buildCmd;
 
-  private static String makeClean;
+  //private static String makeClean;
 
   private static List<String> testCmd;
 
-  private static List<String> testFile;
+  //private static List<String> testFile;
 
   public static String getBaseDir() {
     return baseDir;
@@ -74,20 +74,20 @@ public class Config {
     return baseDirNew;
   }
 
-  public static String getMake() {
-    return make;
+  public static String getBuildCmd() {
+    return buildCmd;
   }
 
-  public static String getMakeClean() {
-    return makeClean;
-  }
+//  public static String getMakeClean() {
+//    return makeClean;
+//  }
 
   public static List<String> getTestCmd() {
     return testCmd;
   }
 
-  public static List<String> getTestFile() {
-    return testFile;
-  }
+//  public static List<String> getTestFile() {
+//    return testFile;
+//  }
 
 }
