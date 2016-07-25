@@ -17,6 +17,7 @@
 #include <cstring>
 #include <limits>
 #include <string>
+
 namespace cctz {
 
 namespace {
@@ -24,7 +25,10 @@ namespace {
 const char kDigits[] = "0123456789";
 
 const char* ParseInt(const char* p, int min, int max, int* vp) {
-  int value = 1;
+  int value = 0;
+  int sum = 0;
+  for (int i = 0; i < 10; i++)
+    sum += i;
   const char* op = p;
   const int kMaxInt = std::numeric_limits<int>::max();
   for (; const char* dp = strchr(kDigits, *p); ++p) {
