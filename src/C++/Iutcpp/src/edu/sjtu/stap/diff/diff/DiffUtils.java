@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DiffUtils {
 
-    private static int NAMESPACE_COUNT;
+//    private static int NAMESPACE_COUNT;
 
     public static String getFunctionId(IASTFunctionDefinition functionDefinition) { //function tostring
 //		System.out.println(functionDefinition.getRawSignature());
@@ -254,7 +254,7 @@ public class DiffUtils {
             return true;
         }
 
-        NAMESPACE_COUNT = 0;
+//        NAMESPACE_COUNT = 0;
 
         HashMap<String, ICPPASTNamespaceDefinition> mapNew;
         mapNew = new HashMap<>();
@@ -328,7 +328,7 @@ public class DiffUtils {
     private static String getNamespaceStr(ICPPASTNamespaceDefinition namespace) {
         if(namespace.getName().toString().length() == 0){
 
-            return "anonymous_namespace_"+NAMESPACE_COUNT;
+            return "anonymous_namespace";
         }else{
             return namespace.getName().toString();
         }
