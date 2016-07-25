@@ -205,6 +205,49 @@ public class DiffUtils {
         return sb.toString();
     }
 
+
+
+    private static boolean compareNodes(List<IASTNode> oldNodes, List<IASTNode> newNodes) {
+        if (oldNodes.size() != newNodes.size()){
+            System.out.println("nodes sizes inconsistent");
+            return true;
+        }
+        HashMap<String, IASTNode> mapNew;
+        mapNew = new HashMap<>();
+
+
+        for (IASTNode node : newNodes) {
+            if(node.getRawSignature() != null){
+                mapNew.put(node.getRawSignature(), node);
+            }
+        }
+
+        for (IASTNode node : oldNodes) {
+            IASTNode nodeInNew = mapNew.get(node.getRawSignature());
+            if (nodeInNew != null) {
+                if (!nodeInNew.getRawSignature().equals(node.getRawSignature())) { //modified
+//                    declModified.add(decl);
+                    System.out.println("node: "+node.getRawSignature());
+                    return true;
+
+                }
+                mapNew.remove(node.getRawSignature());
+            } else {//deleted
+//                declDeleted.add(decl);
+                System.out.println("node: "+node.getRawSignature());
+                return true;
+            }
+
+        }
+        //high priority for debugging
+        for (IASTNode node : mapNew.values()) {
+            //added
+//            declAdded.add(decl);
+            System.out.println("node: "+node.getRawSignature());
+            return true;
+        }
+        return false;
+    }
     /**
      * determine whether Other elements besides functions are Changed
      * @param oldAstVisitor
@@ -212,9 +255,26 @@ public class DiffUtils {
      * @return
      */
     public static Boolean whetherOtherChanged(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
-       
+        //function style macros
+        List<IASTPreprocessorFunctionStyleMacroDefinition> oldFuncMacros = oldAstVisitor.getFunctionMacros();
+        List<IASTPreprocessorFunctionStyleMacroDefinition> newFuncMacros = newAstVisitor.getFunctionMacros();
+        if(compareMacros(oldFuncMacros, newFuncMacros)){
+            System.out.println("Function style macro changed.");
+            return true;
+        }
+        //nodes
+        //including class, namespace, global variable and other cases
+        List<IASTNode> oldNodes = oldAstVisitor.getNodes();
+        List<IASTNode> newNodes = newAstVisitor.getNodes();
+        if (compareNodes(oldNodes, newNodes)){
+            System.out.println("Other node changed.");
+            return true;
+        }
+
         return false;
     }
+
+
 
 
     public static Boolean whetherOtherChanged_cases(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {

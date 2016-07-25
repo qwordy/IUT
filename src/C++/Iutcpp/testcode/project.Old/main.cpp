@@ -5,6 +5,8 @@
 using namespace std;
 
 
+int a = 9;
+
 class Animal{
 
 	public:
@@ -25,6 +27,10 @@ void foo(Animal ani){
 
 int minus (int x, int y){
 	return x-y;
+}
+
+void a(char b){
+
 }
 
 int AddThreeInt(int iFirst, int iSecond, int iThree)  

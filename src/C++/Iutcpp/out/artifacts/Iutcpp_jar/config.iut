@@ -1,0 +1,11 @@
+{
+  "baseDir": "/home/yfy/iut/benchmarks/cctz",
+  "baseVersion": "1001",
+  "baseDirNew": "/home/yfy/iut/benchmarks/cctz2",
+  "buildCmd": "make",
+  "testCmd": [
+    "./cctz_v1_test",
+    "./civil_time_test",
+    "./time_zone_lookup_test"
+  ]
+}

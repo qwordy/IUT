@@ -18,9 +18,8 @@ public class Init {
         "  \"baseDir\": \"\",\n" +
         "  \"baseVersion\": \"\",\n" +
         "  \"baseDirNew\": \"\",\n" +
-        "  \"make\": \"\",\n" +
-        "  \"testCmd\": [],\n" +
-        "  \"testFile\": []\n" +
+        "  \"buildCmd\": \"\",\n" +
+        "  \"testCmd\": []\n" +
         "}\n"
     );
     bw.close();

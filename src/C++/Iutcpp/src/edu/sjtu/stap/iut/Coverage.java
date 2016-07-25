@@ -19,9 +19,9 @@ public class Coverage {
   public static void covSlt(Set<String> diffFuncs) {
     System.out.println("Coverage, select");
 
-    Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
+    Execute.exec(Config.getBuildCmd(), Config.getBaseDirInst(), null);
     //Execute.exec(Config.getMakeClean(), Config.getBaseDirNew(), null);
-    Execute.exec(Config.getMake(), Config.getBaseDirNew(), null);
+    Execute.exec(Config.getBuildCmd(), Config.getBaseDirNew(), null);
 
     List<String> testCases;
     for (String test : Config.getTestCmd()) {
@@ -39,7 +39,7 @@ public class Coverage {
    */
   public static void cov() throws Exception {
     System.out.println("Coverage");
-    Execute.exec(Config.getMake(), Config.getBaseDirInst(), null);
+    Execute.exec(Config.getBuildCmd(), Config.getBaseDirInst(), null);
     LogParserCoverage task = new LogParserCoverage();
     for (String test : Config.getTestCmd()) {
       task.setTest(test);

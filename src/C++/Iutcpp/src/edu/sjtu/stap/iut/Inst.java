@@ -36,10 +36,10 @@ public class Inst {
     executor.awaitTermination(1, TimeUnit.DAYS);
   }
 
-  private void instTestFile() {
-    for (String file : Config.getTestFile())
-      executor.execute(new ThreadInstTestFile(new File(Config.getBaseDir(), file)));
-  }
+//  private void instTestFile() {
+//    for (String file : Config.getTestFile())
+//      executor.execute(new ThreadInstTestFile(new File(Config.getBaseDir(), file)));
+//  }
 
   private void ls(File dir) throws Exception {
     File[] files = dir.listFiles();

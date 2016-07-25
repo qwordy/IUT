@@ -18,6 +18,7 @@ public class MyASTVisitor extends ASTVisitor {
     private List<IASTDeclaration> fields = new ArrayList<>();//fields members
     private List<IASTDeclaration> otherDecls = new ArrayList<>();//other declarations
     private List<IASTPreprocessorFunctionStyleMacroDefinition> functionMacros = new ArrayList<>();//function style Macros
+    private List<IASTNode> nodes = new ArrayList<>();//node that is not function
 
 
     public MyASTVisitor() {
@@ -92,6 +93,10 @@ public class MyASTVisitor extends ASTVisitor {
 
     @Override
     public int visit(IASTTranslationUnit tu) {
+        MyASTGenericVisitor myASTGenericVisitor = new MyASTGenericVisitor(true);
+        tu.accept(myASTGenericVisitor);
+        nodes = myASTGenericVisitor.getNodes();
+
         IASTPreprocessorMacroDefinition[] macroDefinitions = tu.getMacroDefinitions();
         for (IASTPreprocessorMacroDefinition macroDefinition : macroDefinitions){
             if(macroDefinition instanceof IASTPreprocessorFunctionStyleMacroDefinition){
@@ -113,17 +118,7 @@ public class MyASTVisitor extends ASTVisitor {
     }
 
 
-    @Override
-    public int visit(IASTName name) {
-        System.out.println("NAME: "+name.toString());
-        try{
-//            System.out.println("Binding: "+name.resolveBinding());
-        }catch (Exception e){
-            System.out.println("Exception: "+name.getRawSignature());
-        }
 
-        return super.visit(name);
-    }
 
 
 
@@ -157,5 +152,9 @@ public class MyASTVisitor extends ASTVisitor {
 
     public List<IASTPreprocessorFunctionStyleMacroDefinition> getFunctionMacros() {
         return functionMacros;
+    }
+
+    public List<IASTNode> getNodes() {
+        return nodes;
     }
 }

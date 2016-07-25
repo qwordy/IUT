@@ -15,7 +15,7 @@ public class Argument {
     if (args.length > 1)
       throw new Exception(err);
     if (args.length == 0) {
-      type = Type.ALL;
+      type = Type.HELP;
     } else {
       switch (args[0]) {
         case "-init":
