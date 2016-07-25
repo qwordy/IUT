@@ -1,12 +1,15 @@
-73 test cases in total
+project directory size: 440K
+lines: 6576
+test cases: 73
 
 modify cctz.h
 select 71 test cases
 modify time_zone_posix.cc
 select 2 test cases
 
-0-10 config.iut
-10-50 iutc -c
+video content:
+0:00-0:10 config.iut
+0:10-0:50 iutc -c
 1:00-1:26 check database
 1:37-1:55 modify cctz.h
 1:55-2:16 make
