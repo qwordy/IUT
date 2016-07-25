@@ -83,9 +83,9 @@ public class DifferResult implements  IDifferResult{
 	}
 
 	public  void setOtherChanged(Boolean otherChanged){
-		if (otherChanged == null){
+
 			this.otherChanged = otherChanged;
-		}
+
 	}
 
 	private Boolean ifOtherChanged(){
@@ -100,7 +100,7 @@ public class DifferResult implements  IDifferResult{
 
 	@Override
 	public Boolean ifChooseAll() {
-		if(fileAdded.size()  != 0){
+		if(fileAdded.size() + fileDeleted.size() != 0){
 			return true;
 		}
 		if(ifOtherChanged()){

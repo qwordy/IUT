@@ -212,6 +212,12 @@ public class DiffUtils {
      * @return
      */
     public static Boolean whetherOtherChanged(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
+       
+        return false;
+    }
+
+
+    public static Boolean whetherOtherChanged_cases(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
         //otherDecls
         List<IASTDeclaration> oldOtherDecls = oldAstVisitor.getOtherDecls();
         List<IASTDeclaration> newOtherDecls = newAstVisitor.getOtherDecls();
