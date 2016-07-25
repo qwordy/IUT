@@ -5,6 +5,8 @@
 using namespace std;
 
 
+int a = 10;
+
 class Animal{
 
 	public:

@@ -16,7 +16,7 @@ import org.eclipse.cdt.core.parser.ParserLanguage;
 
 public class Demo {
 
-	static int FLAG = 4;// only for test
+	static int FLAG = 3;// only for test
 	
 	public static void main(String[] args) {
 		

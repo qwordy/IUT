@@ -26,7 +26,7 @@ void foo(Animal ani){
 int bar (int a, int b){
 	return a+b;
 }
-
+//comment
 
 TEST(a, b){
 }

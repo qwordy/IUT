@@ -209,6 +209,7 @@ public class DiffUtils {
 
     private static boolean compareNodes(List<IASTNode> oldNodes, List<IASTNode> newNodes) {
         if (oldNodes.size() != newNodes.size()){
+            System.out.println("nodes sizes inconsistent");
             return true;
         }
         HashMap<String, IASTNode> mapNew;
@@ -226,12 +227,14 @@ public class DiffUtils {
             if (nodeInNew != null) {
                 if (!nodeInNew.getRawSignature().equals(node.getRawSignature())) { //modified
 //                    declModified.add(decl);
+                    System.out.println("node: "+node.getRawSignature());
                     return true;
 
                 }
                 mapNew.remove(node.getRawSignature());
             } else {//deleted
 //                declDeleted.add(decl);
+                System.out.println("node: "+node.getRawSignature());
                 return true;
             }
 
@@ -240,6 +243,7 @@ public class DiffUtils {
         for (IASTNode node : mapNew.values()) {
             //added
 //            declAdded.add(decl);
+            System.out.println("node: "+node.getRawSignature());
             return true;
         }
         return false;
