@@ -1,1 +1,0 @@
-classic: examples/classic.cc

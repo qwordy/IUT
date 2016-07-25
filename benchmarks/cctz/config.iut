@@ -1,11 +1,7 @@
 {
-  "baseDir": "/home/yfy/iut/benchmarks/cctz",
-  "baseVersion": "1001",
-  "baseDirNew": "/home/yfy/iut/benchmarks/cctz2",
+  "baseDir": "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz",
+  "baseVersion": "v1",
+  "baseDirNew": "/Users/weizhaoy/Documents/workspace/iut/benchmarks/cctz_new",
   "buildCmd": "make",
-  "testCmd": [
-    "./cctz_v1_test",
-    "./civil_time_test",
-    "./time_zone_lookup_test"
-  ]
+  "testCmd": ["./cctz_v1_test","./civil_time_test","./time_zone_lookup_test"]
 }
