@@ -230,11 +230,16 @@ EOF
     
     -h) #help
     echo "Usage: 
-    iutj -i
-    iutj -c
-    iutj -s
-    iutj -h
-    iutj -r
+    iutj -i <projectName>
+        Initialize configuration file and make several settings.
+    iutj -c <projectName>
+        Instrumentation -> Run testcases -> Update database.
+    iutj -s <projectName> <oldVersionPath> <newVersionPath>
+        Diff to find changed methods -> Query database for affected testcases -> Run affected testcases.
+    iutj -r <projectName>
+        Remove all the data and files related to the given project.
+    iutj -h 
+        Print help information.
     "
     ;;
     *)
