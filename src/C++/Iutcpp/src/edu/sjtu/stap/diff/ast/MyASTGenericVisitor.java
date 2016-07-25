@@ -4,6 +4,7 @@ import org.eclipse.cdt.core.dom.ast.ASTGenericVisitor;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTUsingDirective;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class MyASTGenericVisitor extends ASTGenericVisitor {
 //                System.out.println(node.getFileLocation().getStartingLineNumber()+" "+node.toString()+" :"+node.getRawSignature());
 //                System.out.println("Parent: "+node.getParent());
 
-                if((!(node instanceof ICPPASTUsingDirective)) && (!(node instanceof IASTFunctionDefinition))){
+                if((!(node instanceof ICPPASTUsingDirective)) && (!(node instanceof IASTFunctionDefinition)) && (!(node instanceof ICPPASTNamespaceDefinition))){
                     //not ICPPASTUsingDirective or IASTFunctionDefinition
 //                    System.out.println(node.getFileLocation().getStartingLineNumber()+" "+node.toString()+" :"+node.getRawSignature());
                     nodes.add(node);
