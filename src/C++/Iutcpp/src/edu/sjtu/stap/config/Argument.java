@@ -12,8 +12,6 @@ public class Argument {
 
   public Argument(String[] args) throws Exception {
     final String err = "Invalid arguments. Use -help for help.";
-    if (args.length > 1)
-      throw new Exception(err);
     if (args.length == 0) {
       type = Type.HELP;
     } else {

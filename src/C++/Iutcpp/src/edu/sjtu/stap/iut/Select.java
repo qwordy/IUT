@@ -38,8 +38,8 @@ public class Select {
 
     String runFileStr = Config.getBaseDirNew() + File.separatorChar + "run.sh";
     File runFile = new File(runFileStr);
-    runFile.setExecutable(true);
     BufferedWriter bw = new BufferedWriter(new FileWriter(runFile));
+    runFile.setExecutable(true);
 
     System.out.println("Selecting test cases");
 

@@ -21,7 +21,7 @@
 
 #include "civil_time.h"
 #include "time_zone.h"
-int aaa = 0;
+
 namespace cctz {
 inline namespace deprecated_v1_api {
 // DEPRECATED: Will be deleted on 2016-10-01.

@@ -177,7 +177,6 @@ int64_t DayOrdinal(int64_t year, int month, int day) {
 // base must be sufficiently large to avoid overflowing the return value.
 // Inlining admits significant gains as base and zero are literals.
 inline int NormalizeField(int base, int zero, int* valp, int carry_in) {
-  int ywz = 8;
   int carry_out = 0;
   int val = *valp;
   if (zero != 0 && val < 0) {
