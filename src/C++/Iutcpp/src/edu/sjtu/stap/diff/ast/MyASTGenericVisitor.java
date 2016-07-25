@@ -32,7 +32,7 @@ public class MyASTGenericVisitor extends ASTGenericVisitor {
 //                System.out.println("Parent: "+node.getParent());
 
                 if((!(node instanceof ICPPASTUsingDirective)) && (!(node instanceof IASTFunctionDefinition)) && (!(node instanceof ICPPASTNamespaceDefinition))){
-                    //not ICPPASTUsingDirective or IASTFunctionDefinition
+                    //not ICPPASTUsingDirective or IASTFunctionDefinition or Namespace
 //                    System.out.println(node.getFileLocation().getStartingLineNumber()+" "+node.toString()+" :"+node.getRawSignature());
                     nodes.add(node);
                 }

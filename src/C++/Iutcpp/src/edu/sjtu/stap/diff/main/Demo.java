@@ -9,6 +9,7 @@ import edu.sjtu.stap.diff.diff.DiffUtils;
 import edu.sjtu.stap.diff.diff.DifferResult;
 import edu.sjtu.stap.diff.diff.FileDiffer;
 import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.cdt.core.parser.ParserLanguage;
 
@@ -16,7 +17,7 @@ import org.eclipse.cdt.core.parser.ParserLanguage;
 
 public class Demo {
 
-	static int FLAG = 3;// only for test
+	static int FLAG = 4;// only for test
 	
 	public static void main(String[] args) {
 		
@@ -181,9 +182,24 @@ public class Demo {
 //			astTranslationUnit.accept(myCPPASTVisitor);
 
 
-			MyASTVisitor visitor = new MyASTVisitor(false);
+
+			MyASTVisitor visitor = new MyASTVisitor(true);
 //			visitor.shouldVisitNames = true;
 			astTranslationUnit.accept(visitor);
+
+			for(ICPPASTNamespaceDefinition namespace : visitor.getNamesps()){
+				if(namespace.getName().toString().length() == 0){
+					System.out.println("Namespace: *"+ namespace.getName());
+				}else{
+					System.out.println("Namespace: "+ namespace.getName());
+				}
+
+				IASTDeclaration[] declarations = namespace.getDeclarations();
+				for (IASTDeclaration declaration : declarations) {
+					System.out.println(declaration.getRawSignature());
+				}
+
+			}
 
 			MyASTGenericVisitor myASTGenericVisitor = new MyASTGenericVisitor(true);
 			astTranslationUnit.accept(myASTGenericVisitor);

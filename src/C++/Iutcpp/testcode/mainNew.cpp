@@ -35,6 +35,22 @@ inta a;
 int b
 
 
+namespace {
+	int a;
+	string b;
+	char c;
+}
+
+namespace FooNamespace{
+	int d;
+	string e;
+	char f;
+	bool biggerThan (int a, int b = 0){
+    		return a > b;
+    	}
+
+}
+
 typedef struct {
      int x;
  } S;

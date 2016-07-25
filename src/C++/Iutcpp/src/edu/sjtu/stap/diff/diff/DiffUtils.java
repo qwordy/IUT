@@ -3,6 +3,7 @@ package edu.sjtu.stap.diff.diff;
 import edu.sjtu.stap.diff.ast.MyASTVisitor;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.cdt.core.dom.ast.*;
+import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTUsingDirective;
 
 import java.io.File;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class DiffUtils {
 
+    private static int NAMESPACE_COUNT;
 
     public static String getFunctionId(IASTFunctionDefinition functionDefinition) { //function tostring
 //		System.out.println(functionDefinition.getRawSignature());
@@ -79,27 +81,28 @@ public class DiffUtils {
      * @return
      */
     public static String getDeclarationStr(IASTDeclaration declaration) {
-        StringBuilder sb = new StringBuilder();
-//        sb.append(declaration.getFileLocation().getStartingLineNumber());
-        //here can add cases by adding "else if" clause
-        if (declaration instanceof IASTSimpleDeclaration) {
-
-            IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
-            sb.append(simpleDeclaration.getDeclSpecifier().getRawSignature());
-            IASTDeclarator[] declarators = simpleDeclaration.getDeclarators();
-            for (IASTDeclarator declarator : declarators) {
-                sb.append(declarator.getName());
-            }
-
-        } else if (declaration instanceof CPPASTUsingDirective) {
-//            CPPASTUsingDirective usingDirective = (CPPASTUsingDirective) declaration;
-//            sb.append(usingDirective.getQualifiedName());
-            return null;
-        } else {
-            System.out.println(declaration.toString());
-            return null;
-        }
-        return sb.toString();
+//        StringBuilder sb = new StringBuilder();
+////        sb.append(declaration.getFileLocation().getStartingLineNumber());
+//        //here can add cases by adding "else if" clause
+//        if (declaration instanceof IASTSimpleDeclaration) {
+//
+//            IASTSimpleDeclaration simpleDeclaration = (IASTSimpleDeclaration) declaration;
+//            sb.append(simpleDeclaration.getDeclSpecifier().getRawSignature());
+//            IASTDeclarator[] declarators = simpleDeclaration.getDeclarators();
+//            for (IASTDeclarator declarator : declarators) {
+//                sb.append(declarator.getName());
+//            }
+//
+//        } else if (declaration instanceof CPPASTUsingDirective) {
+////            CPPASTUsingDirective usingDirective = (CPPASTUsingDirective) declaration;
+////            sb.append(usingDirective.getQualifiedName());
+//            return null;
+//        } else {
+//            System.out.println(declaration.toString());
+//            return null;
+//        }
+//        return sb.toString();
+        return declaration.getRawSignature();
     }
 
 
@@ -116,9 +119,6 @@ public class DiffUtils {
         HashMap<String, IASTDeclaration> mapNew;
         mapNew = new HashMap<>();
 
-//        List<IASTDeclaration> declAdded = new ArrayList<>();
-//        List<IASTDeclaration> declModified = new ArrayList<>();
-//        List<IASTDeclaration> declDeleted = new ArrayList<>();
 
         for (IASTDeclaration decl : newDeclarations) {
             if(DiffUtils.getDeclarationStr(decl) != null){
@@ -130,13 +130,13 @@ public class DiffUtils {
             IASTDeclaration declInNew = mapNew.get(DiffUtils.getDeclarationStr(decl));
             if (declInNew != null) {
                 if (!declInNew.getRawSignature().equals(decl.getRawSignature())) { //modified
-//                    declModified.add(decl);
+                    System.out.println("decl: "+decl.getRawSignature());
                     return true;
 
                 }
                 mapNew.remove(DiffUtils.getDeclarationStr(decl));
             } else {//deleted
-//                declDeleted.add(decl);
+                System.out.println("decl: "+decl.getRawSignature());
                 return true;
             }
 
@@ -144,10 +144,9 @@ public class DiffUtils {
         //high priority for debugging
         for (IASTDeclaration decl : mapNew.values()) {
             //added
-//            declAdded.add(decl);
+            System.out.println("decl: "+decl.getRawSignature());
             return true;
         }
-//        return (declAdded.size() + declModified.size() + declDeleted.size() != 0);
         return false;
 
     }
@@ -155,6 +154,7 @@ public class DiffUtils {
 
     private static boolean compareMacros(List<IASTPreprocessorFunctionStyleMacroDefinition> oldFuncMacros, List<IASTPreprocessorFunctionStyleMacroDefinition> newFuncMacros) {
         if (oldFuncMacros.size() != newFuncMacros.size()){
+            System.out.println("FuncMacros sizes inconsistent");
             return true;
         }
 
@@ -226,14 +226,12 @@ public class DiffUtils {
             IASTNode nodeInNew = mapNew.get(node.getRawSignature());
             if (nodeInNew != null) {
                 if (!nodeInNew.getRawSignature().equals(node.getRawSignature())) { //modified
-//                    declModified.add(decl);
                     System.out.println("node: "+node.getRawSignature());
                     return true;
 
                 }
                 mapNew.remove(node.getRawSignature());
             } else {//deleted
-//                declDeleted.add(decl);
                 System.out.println("node: "+node.getRawSignature());
                 return true;
             }
@@ -242,12 +240,90 @@ public class DiffUtils {
         //high priority for debugging
         for (IASTNode node : mapNew.values()) {
             //added
-//            declAdded.add(decl);
             System.out.println("node: "+node.getRawSignature());
             return true;
         }
         return false;
     }
+
+
+    private static boolean compareNamespaces(List<ICPPASTNamespaceDefinition> oldNamespaces, List<ICPPASTNamespaceDefinition> newNamespaces) {
+
+        if(oldNamespaces.size() != newNamespaces.size()){
+            System.out.println("Namespaces sizes inconsistent");
+            return true;
+        }
+
+        NAMESPACE_COUNT = 0;
+
+        HashMap<String, ICPPASTNamespaceDefinition> mapNew;
+        mapNew = new HashMap<>();
+
+
+        for (ICPPASTNamespaceDefinition namespace : newNamespaces) {
+            if(getNamespaceStr(namespace) != null){
+                mapNew.put(getNamespaceStr(namespace), namespace);
+            }
+        }
+
+        for (ICPPASTNamespaceDefinition namespace : oldNamespaces) {
+            ICPPASTNamespaceDefinition namespaceInNew = mapNew.get(getNamespaceStr(namespace));
+            if (namespaceInNew != null) {
+                if (compareSingleNamespace(namespace, namespaceInNew)) { //modified
+                    System.out.println("namespace: "+namespace.getRawSignature());
+                    return true;
+
+                }
+                mapNew.remove(getNamespaceStr(namespace));
+            } else {//deleted
+                System.out.println("namespace: "+namespace.getRawSignature());
+                return true;
+            }
+
+        }
+        //high priority for debugging
+        for (ICPPASTNamespaceDefinition namespace : mapNew.values()) {
+            //added
+            System.out.println("namespace: "+namespace.getRawSignature());
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean compareSingleNamespace(ICPPASTNamespaceDefinition namespace, ICPPASTNamespaceDefinition namespaceInNew) {
+        List<IASTDeclaration> oldDeclarations = new ArrayList<>();
+        List<IASTDeclaration> newDeclarations = new ArrayList<>();
+        for (IASTDeclaration oldDeclaration : namespace.getDeclarations()) {
+            if(oldDeclaration instanceof IASTFunctionDefinition){
+                //do nothing
+            }else{
+                oldDeclarations.add(oldDeclaration);
+            }
+        }
+
+        for (IASTDeclaration newDeclaration : namespaceInNew.getDeclarations()) {
+            if(newDeclaration instanceof IASTFunctionDefinition){
+                //do nothing
+            }else{
+                newDeclarations.add(newDeclaration);
+            }
+        }
+
+        if(compareDeclarations(oldDeclarations,newDeclarations)){
+            return true;
+        }
+        return false;
+    }
+
+    private static String getNamespaceStr(ICPPASTNamespaceDefinition namespace) {
+        if(namespace.getName().toString().length() == 0){
+            return "anonymous_namespace_"+NAMESPACE_COUNT;
+        }else{
+            return namespace.getName().toString();
+        }
+    }
+
+
     /**
      * determine whether Other elements besides functions are Changed
      * @param oldAstVisitor
@@ -263,11 +339,19 @@ public class DiffUtils {
             return true;
         }
         //nodes
-        //including class, namespace, global variable and other cases
+        //including class, global variable and other cases
         List<IASTNode> oldNodes = oldAstVisitor.getNodes();
         List<IASTNode> newNodes = newAstVisitor.getNodes();
         if (compareNodes(oldNodes, newNodes)){
             System.out.println("Other node changed.");
+            return true;
+        }
+
+        //namespaces
+        List<ICPPASTNamespaceDefinition> oldNamespaces = oldAstVisitor.getNamesps();
+        List<ICPPASTNamespaceDefinition> newNamespaces = newAstVisitor.getNamesps();
+        if(compareNamespaces(oldNamespaces, newNamespaces)){
+            System.out.println("Namespace changed.");
             return true;
         }
 
