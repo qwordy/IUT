@@ -292,10 +292,15 @@ public class DiffUtils {
 
     private static boolean compareSingleNamespace(ICPPASTNamespaceDefinition namespace, ICPPASTNamespaceDefinition namespaceInNew) {
         List<IASTDeclaration> oldDeclarations = new ArrayList<>();
+        List<ICPPASTNamespaceDefinition> oldDelcNamespaces = new ArrayList<>();
         List<IASTDeclaration> newDeclarations = new ArrayList<>();
+        List<ICPPASTNamespaceDefinition> newDelcNamespaces = new ArrayList<>();
+
         for (IASTDeclaration oldDeclaration : namespace.getDeclarations()) {
             if(oldDeclaration instanceof IASTFunctionDefinition){
                 //do nothing
+            }else if(oldDeclaration instanceof ICPPASTNamespaceDefinition){
+                oldDelcNamespaces.add((ICPPASTNamespaceDefinition) oldDeclaration);
             }else{
                 oldDeclarations.add(oldDeclaration);
             }
@@ -304,6 +309,8 @@ public class DiffUtils {
         for (IASTDeclaration newDeclaration : namespaceInNew.getDeclarations()) {
             if(newDeclaration instanceof IASTFunctionDefinition){
                 //do nothing
+            }else if(newDeclaration instanceof ICPPASTNamespaceDefinition){
+                newDelcNamespaces.add((ICPPASTNamespaceDefinition) newDeclaration);
             }else{
                 newDeclarations.add(newDeclaration);
             }
@@ -312,11 +319,15 @@ public class DiffUtils {
         if(compareDeclarations(oldDeclarations,newDeclarations)){
             return true;
         }
+        if(compareNamespaces(oldDelcNamespaces,newDelcNamespaces)){
+            return true;
+        }
         return false;
     }
 
     private static String getNamespaceStr(ICPPASTNamespaceDefinition namespace) {
         if(namespace.getName().toString().length() == 0){
+
             return "anonymous_namespace_"+NAMESPACE_COUNT;
         }else{
             return namespace.getName().toString();
