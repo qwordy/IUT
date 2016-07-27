@@ -21,9 +21,6 @@ import org.eclipse.cdt.core.parser.ParserLanguage;
 
 public class ASTDiffer {
 
-	//	List<String> funcAdded;
-	//	List<String> funcModified;
-	//	List<String> funcDeleted;
 
 	List<DUFunction.Added> functionAdded;
 	List<DUFunction.Deleted> functionDeleted;
@@ -53,7 +50,6 @@ public class ASTDiffer {
 
 	public ASTDiffer(String oldContent, String newContent){
 
-//		Parser parserOld, parserNew;
 		parserOld = new Parser(oldContent);
 		parserNew = new Parser(newContent);
 
@@ -95,7 +91,6 @@ public class ASTDiffer {
 
 	public ASTDiffer(File oldFile, File newFile) throws Exception {
 
-//		Parser parserOld, parserNew;
 		parserOld = new Parser(oldFile);
 		parserNew = new Parser(newFile);
 

@@ -23,6 +23,9 @@ import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTFunctionDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
 import org.w3c.dom.Attr;
 
+/**
+ * only for testing different kinds of AST node
+ */
 public class MultiVisitor extends ASTVisitor{
 
 	public MultiVisitor(){

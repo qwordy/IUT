@@ -6,10 +6,13 @@ import java.util.Properties;
 
 public class CPPFileFilter implements FileFilter{
 
-	
 
-	//TODO: obtain from config file
-	//property.get
+	/**
+	 * decide which kind of source file to diff
+	 * feel free to add cases of extension names of source files
+	 * @param file
+	 * @return
+	 */
 	@Override
 	public boolean accept(File file) {
 		if( (file.isFile() )){
@@ -25,7 +28,6 @@ public class CPPFileFilter implements FileFilter{
 				return true;
 			}
 		}
-//		Properties property=new Properties("");
 		return false;
 	}
 		

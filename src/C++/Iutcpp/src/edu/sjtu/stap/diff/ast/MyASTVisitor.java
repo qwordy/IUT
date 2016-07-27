@@ -8,6 +8,9 @@ import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTProblemDeclaration;
 import org.eclipse.cdt.internal.core.dom.parser.cpp.CPPASTSimpleDeclaration;
 
+/**
+ * this visitor is mainly used to get all functions and specific cases of non-functions
+ */
 public class MyASTVisitor extends ASTVisitor {
 
     private List<IASTFunctionDefinition> funcs = new ArrayList<>();// functions

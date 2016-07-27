@@ -4,17 +4,16 @@ import java.io.File;
 import java.io.IOException;
 
 import edu.sjtu.stap.diff.ast.*;
-import edu.sjtu.stap.diff.diff.ASTDifferOld;
-import edu.sjtu.stap.diff.diff.DiffUtils;
 import edu.sjtu.stap.diff.diff.DifferResult;
 import edu.sjtu.stap.diff.diff.FileDiffer;
 import org.eclipse.cdt.core.dom.ast.*;
 import org.eclipse.cdt.core.dom.ast.cpp.ICPPASTNamespaceDefinition;
-import org.eclipse.cdt.core.dom.rewrite.ASTRewrite;
 import org.eclipse.cdt.core.parser.ParserLanguage;
 
 
-
+/**
+ * only for diff test
+ */
 public class Demo {
 
 	static int FLAG = 4;// only for test
@@ -55,21 +54,7 @@ public class Demo {
 			}
 		}
 		
-		if(FLAG == 2){//diff file
-//			String oldPath = "testcode/main.cpp"; ///home/weizhaoy/Desktop/cctz-old/src
-//			String newPath="testcode/mainNew.cpp";///home/weizhaoy/Desktop/cctz-new/src
-			
-			String oldPath = "testcode/main.cpp"; ///home/weizhaoy/Desktop/cctz-old/src
-			String newPath="testcode/mainNew.cpp";///home/weizhaoy/Desktop/cctz-new/src
-			
-			if(args.length != 0){
-				oldPath = args[0];
-				newPath = args[1];
-			}
-			ASTDifferOld astDiffer = new ASTDifferOld();
-			String result =  astDiffer.diff(oldPath, newPath, false);
-			System.out.println(result);
-		}
+
 		
 		
 		if(FLAG == 1){//print dom
@@ -175,11 +160,7 @@ public class Demo {
 			IASTTranslationUnit astTranslationUnit = astTranslationUnitCore.parseFile(filePath, ParserLanguage.CPP, false, false);
 			System.out.println(astTranslationUnit.getFilePath());
 
-//			MyCPPASTVisitor myCPPASTVisitor = new MyCPPASTVisitor();
-////			myCPPASTVisitor.shouldVisitDeclarations = true;
-//			myCPPASTVisitor.shouldVisitTranslationUnit = true;
-//			myCPPASTVisitor.shouldVisitDeclarations = true;
-//			astTranslationUnit.accept(myCPPASTVisitor);
+
 
 
 

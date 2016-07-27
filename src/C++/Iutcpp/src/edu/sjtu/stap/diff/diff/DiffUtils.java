@@ -370,8 +370,12 @@ public class DiffUtils {
     }
 
 
-
-
+    /**
+     * detect whether specific cases of non-functions have been changed, not being used for now
+     * @param oldAstVisitor
+     * @param newAstVisitor
+     * @return
+     */
     public static Boolean whetherOtherChanged_cases(MyASTVisitor oldAstVisitor, MyASTVisitor newAstVisitor) {
         //otherDecls
         List<IASTDeclaration> oldOtherDecls = oldAstVisitor.getOtherDecls();

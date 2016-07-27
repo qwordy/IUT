@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * this visitor is used to visit IASTNodes
  * Created by weizhaoy on 16/7/23.
  */
 public class MyASTGenericVisitor extends ASTGenericVisitor {
 
-    List<IASTNode> nodes = new ArrayList<IASTNode>();
+    List<IASTNode> nodes = new ArrayList<>();
 
     public MyASTGenericVisitor(boolean visitNodes) {
         super(visitNodes);
@@ -23,15 +24,15 @@ public class MyASTGenericVisitor extends ASTGenericVisitor {
 
     @Override
     protected int genericVisit(IASTNode node) {
-        if( (!(node instanceof IASTTranslationUnit)) && node.toString().contains("org.eclipse.cdt") ){
+        if ((!(node instanceof IASTTranslationUnit)) && node.toString().contains("org.eclipse.cdt")) {
             //not IASTTranslationUnit && is some kind of IASTNODE
-            if(node.getParent() != null && (node.getParent() instanceof IASTTranslationUnit)){
+            if (node.getParent() != null && (node.getParent() instanceof IASTTranslationUnit)) {
                 //is direct leaf of root
 //                (!nodes.contains(node.getParent()))
 //                System.out.println(node.getFileLocation().getStartingLineNumber()+" "+node.toString()+" :"+node.getRawSignature());
 //                System.out.println("Parent: "+node.getParent());
 
-                if((!(node instanceof ICPPASTUsingDirective)) && (!(node instanceof IASTFunctionDefinition)) && (!(node instanceof ICPPASTNamespaceDefinition))){
+                if ((!(node instanceof ICPPASTUsingDirective)) && (!(node instanceof IASTFunctionDefinition)) && (!(node instanceof ICPPASTNamespaceDefinition))) {
                     //not ICPPASTUsingDirective or IASTFunctionDefinition or Namespace
 //                    System.out.println(node.getFileLocation().getStartingLineNumber()+" "+node.toString()+" :"+node.getRawSignature());
                     nodes.add(node);
