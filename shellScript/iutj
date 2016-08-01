@@ -183,7 +183,7 @@ EOF
       fi
 
 			echo "Incremental unit testing $2 : diff to find changed methods -> query for affected testcases -> run affected testcases"
-			cd $1
+			cd $3
 			echo "diff..."
 			$0 diff $3 $4 #diff
 			if [ $? -ne 0 ];then
